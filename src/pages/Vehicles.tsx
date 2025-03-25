@@ -1,14 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { getAllVehicles } from '@/lib/data';
+import { vehicles } from '@/lib/data';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import VehicleCard from '@/components/VehicleCard';
-import { Filter, SlidersHorizontal } from 'lucide-react';
+import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Vehicles = () => {
-  const vehicles = getAllVehicles();
+  // Using vehicles directly from import rather than a non-existent getAllVehicles function
   const [filteredVehicles, setFilteredVehicles] = useState(vehicles);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
@@ -77,7 +77,7 @@ const Vehicles = () => {
     }
     
     setFilteredVehicles(result);
-  }, [filters, vehicles]);
+  }, [filters]);
   
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -222,9 +222,9 @@ const Vehicles = () => {
             
             {/* Vehicle Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredVehicles.length > 0 ? filteredVehicles.map((vehicle) => (
+              {filteredVehicles.length > 0 ? filteredVehicles.map((vehicle, index) => (
                 <div key={vehicle.id} className="animate-on-scroll">
-                  <VehicleCard vehicle={vehicle} />
+                  <VehicleCard vehicle={vehicle} index={index} />
                 </div>
               )) : (
                 <div className="col-span-full text-center py-16">
