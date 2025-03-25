@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = useIsMobile();
   
   const backgrounds = [
     {
@@ -44,7 +46,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Images with Fade Transition */}
+      {/* Background Images with darker overlay for better text readability */}
       {backgrounds.map((bg, idx) => (
         <div
           key={idx}
@@ -52,19 +54,19 @@ const HeroSection = () => {
             idx === activeIndex ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ 
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${bg.image})`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url(${bg.image})`,
           }}
         />
       ))}
       
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-6">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-4 sm:px-6">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="overflow-hidden h-32 md:h-40">
+          <div className="overflow-hidden h-28 md:h-40">
             {backgrounds.map((bg, idx) => (
               <h1 
                 key={idx} 
-                className={`text-5xl md:text-7xl font-playfair font-bold transition-transform duration-1000 ${
+                className={`text-4xl sm:text-5xl md:text-7xl font-playfair font-bold transition-transform duration-1000 text-shadow-lg ${
                   idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                 }`}
               >
@@ -73,11 +75,11 @@ const HeroSection = () => {
             ))}
           </div>
           
-          <div className="overflow-hidden h-24 mt-6">
+          <div className="overflow-hidden h-20 sm:h-24 mt-4 md:mt-6">
             {backgrounds.map((bg, idx) => (
               <p 
                 key={idx} 
-                className={`text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 ${
+                className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 bg-black/10 backdrop-blur-sm p-2 rounded-sm ${
                   idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                 }`}
               >
@@ -86,16 +88,16 @@ const HeroSection = () => {
             ))}
           </div>
           
-          <div className="mt-10">
+          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <Link 
               to="/vehicles" 
-              className="premium-button bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white mx-2"
+              className="premium-button bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white"
             >
               Découvrir la Collection
             </Link>
             <Link 
               to="/contact" 
-              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black mx-2"
+              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
             >
               Rendez-vous Privé
             </Link>
@@ -103,7 +105,7 @@ const HeroSection = () => {
         </div>
         
         {/* Slide Indicators */}
-        <div className="absolute bottom-32 left-0 right-0 flex justify-center">
+        <div className="absolute bottom-28 sm:bottom-32 left-0 right-0 flex justify-center">
           <div className="flex space-x-2">
             {backgrounds.map((_, idx) => (
               <button
@@ -120,7 +122,7 @@ const HeroSection = () => {
         {/* Scroll Down Indicator */}
         <button 
           onClick={scrollToDiscover}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/80 hover:text-white transition-colors"
+          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/80 hover:text-white transition-colors"
         >
           <span className="text-sm font-light mb-2">Découvrir</span>
           <ChevronDown size={24} className="animate-soft-bounce" />

@@ -96,4 +96,8 @@
   .vehicle-highlight {
     @apply bg-gradient-to-r from-luxe-black to-luxe-midnight text-white;
   }
+  
+  .text-shadow-lg {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
 }
