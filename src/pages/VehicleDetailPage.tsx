@@ -61,7 +61,7 @@ const VehicleDetailPage = () => {
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
               <button className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black">
-                Planifier un Essai
+                Achetez maintenant
               </button>
               <button className="premium-button bg-transparent border border-white hover:bg-white/10">
                 Contacter un Conseiller

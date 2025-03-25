@@ -84,7 +84,7 @@ const VehicleCard = ({ vehicle, index }: VehicleCardProps) => {
             to={`/vehicles/${vehicle.id}`}
             className="flex items-center text-luxe-black font-medium hover:text-luxe-gold transition-colors"
           >
-            <span>Explorer en 3D</span>
+            <span>Achetez maintenant</span>
             <ChevronRight size={18} className="ml-1" />
           </Link>
           

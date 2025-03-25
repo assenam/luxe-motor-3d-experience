@@ -133,7 +133,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               
               <div className="space-y-4">
                 <button className="premium-button w-full bg-luxe-gold hover:bg-luxe-gold/90 text-black">
-                  Réserver ce Véhicule
+                  Achetez maintenant
                 </button>
                 <button className="premium-button w-full bg-white border border-luxe-black hover:bg-secondary text-luxe-black">
                   Demander plus d'Informations
