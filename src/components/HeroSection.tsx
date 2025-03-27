@@ -62,7 +62,8 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-4 sm:px-6">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="overflow-hidden h-28 md:h-40">
+          {/* Increased height for title container to avoid cutoff */}
+          <div className="overflow-hidden h-32 md:h-48">
             {backgrounds.map((bg, idx) => (
               <h1 
                 key={idx} 
