@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -43,7 +42,7 @@ const HeroSection = () => {
       discoverSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
+  
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Images with darker overlay for better text readability */}
@@ -54,7 +53,7 @@ const HeroSection = () => {
             idx === activeIndex ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ 
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url(${bg.image})`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url(${bg.image})`,
           }}
         />
       ))}
@@ -62,7 +61,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-4 sm:px-6">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Increased height for title container to avoid cutoff */}
+          {/* Title container with increased height */}
           <div className="overflow-hidden h-32 md:h-48">
             {backgrounds.map((bg, idx) => (
               <h1 
@@ -76,13 +75,13 @@ const HeroSection = () => {
             ))}
           </div>
           
-          {/* Increased height and improved contrast for description text */}
+          {/* Description text with improved visibility */}
           <div className="overflow-hidden h-28 sm:h-32 mt-4 md:mt-6">
             {backgrounds.map((bg, idx) => (
               <p 
                 key={idx} 
                 className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 
-                  bg-black/30 backdrop-blur-sm p-3 rounded-sm shadow-md text-white font-medium ${
+                  bg-black/60 backdrop-blur-md p-4 rounded shadow-xl text-white font-semibold ${
                   idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                 }`}
               >
@@ -91,16 +90,17 @@ const HeroSection = () => {
             ))}
           </div>
           
+          {/* Buttons with improved visibility */}
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <Link 
               to="/vehicles" 
-              className="premium-button bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white"
+              className="premium-button bg-white/20 backdrop-blur-md border-2 border-white hover:bg-white/30 text-white font-bold shadow-lg"
             >
               Découvrir la Collection
             </Link>
             <Link 
               to="/contact" 
-              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black font-bold shadow-lg"
             >
               Rendez-vous Privé
             </Link>
@@ -115,19 +115,19 @@ const HeroSection = () => {
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === activeIndex ? 'bg-luxe-gold w-8' : 'bg-white/50'
+                  idx === activeIndex ? 'bg-luxe-gold w-8' : 'bg-white/70'
                 }`}
               />
             ))}
           </div>
         </div>
         
-        {/* Scroll Down Indicator */}
+        {/* Scroll Down Indicator with improved visibility */}
         <button 
           onClick={scrollToDiscover}
-          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/80 hover:text-white transition-colors"
+          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white hover:text-luxe-gold transition-colors bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
         >
-          <span className="text-sm font-light mb-2">Découvrir</span>
+          <span className="text-sm font-medium mb-1">Découvrir</span>
           <ChevronDown size={24} className="animate-soft-bounce" />
         </button>
       </div>
