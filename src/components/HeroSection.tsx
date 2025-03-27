@@ -76,11 +76,13 @@ const HeroSection = () => {
             ))}
           </div>
           
-          <div className="overflow-hidden h-20 sm:h-24 mt-4 md:mt-6">
+          {/* Increased height and improved contrast for description text */}
+          <div className="overflow-hidden h-28 sm:h-32 mt-4 md:mt-6">
             {backgrounds.map((bg, idx) => (
               <p 
                 key={idx} 
-                className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 bg-black/10 backdrop-blur-sm p-2 rounded-sm ${
+                className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 
+                  bg-black/30 backdrop-blur-sm p-3 rounded-sm shadow-md text-white font-medium ${
                   idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                 }`}
               >
