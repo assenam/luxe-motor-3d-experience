@@ -9,7 +9,7 @@ const FeaturedVehicles = () => {
         <div className="mb-16 text-center">
           <span className="text-sm uppercase tracking-wider text-luxe-lightgray">Notre Sélection</span>
           <h2 className="text-4xl md:text-5xl font-playfair font-semibold mt-2">
-            Véhicules d'<span className="gold-accent">Exception</span>
+            Véhicules d'<span className="gold-accent">Occasion</span>
           </h2>
           <div className="w-24 h-px bg-luxe-gold mx-auto mt-6"></div>
         </div>
