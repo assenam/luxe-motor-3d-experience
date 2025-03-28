@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -45,7 +44,7 @@ const HeroSection = () => {
   };
   
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
       {/* Background Images with darker overlay for better text readability */}
       {backgrounds.map((bg, idx) => (
         <div
@@ -59,40 +58,39 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-4 sm:px-6">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Title container with increased height */}
-          <div className="overflow-hidden h-32 md:h-48">
-            {backgrounds.map((bg, idx) => (
-              <h1 
-                key={idx} 
-                className={`text-4xl sm:text-5xl md:text-7xl font-bold transition-transform duration-1000 text-shadow-lg ${
-                  idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                }`}
-              >
-                {bg.title} <span className="red-accent">{bg.subtitle}</span>
-              </h1>
-            ))}
-          </div>
-          
-          {/* Description text with improved visibility */}
-          <div className="overflow-hidden h-28 sm:h-32 mt-4 md:mt-6">
-            {backgrounds.map((bg, idx) => (
-              <p 
-                key={idx} 
-                className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 
-                  bg-black/60 backdrop-blur-md p-4 rounded shadow-xl text-white font-semibold ${
-                  idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                }`}
-              >
-                {bg.description}
-              </p>
-            ))}
-          </div>
-          
-          {/* Buttons with improved visibility */}
-          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+      {/* Content with improved vertical centering */}
+      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full">
+        {/* Title container with improved height management */}
+        <div className="overflow-hidden h-auto min-h-[120px] md:min-h-[180px]">
+          {backgrounds.map((bg, idx) => (
+            <h1 
+              key={idx} 
+              className={`text-4xl sm:text-5xl md:text-7xl font-bold transition-transform duration-1000 text-shadow-lg ${
+                idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+              }`}
+            >
+              {bg.title} <span className="red-accent">{bg.subtitle}</span>
+            </h1>
+          ))}
+        </div>
+        
+        {/* Description text with improved visibility and positioning */}
+        <div className="overflow-hidden h-auto min-h-[100px] mt-4 md:mt-6">
+          {backgrounds.map((bg, idx) => (
+            <p 
+              key={idx} 
+              className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 
+                bg-black/60 backdrop-blur-md p-4 rounded shadow-xl text-white font-semibold ${
+                idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+              }`}
+            >
+              {bg.description}
+            </p>
+          ))}
+        </div>
+        
+        {/* Buttons with improved spacing */}
+        <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <Link 
               to="/vehicles" 
               className="premium-button bg-white/20 backdrop-blur-md border-2 border-white hover:bg-white/30 text-white font-bold shadow-lg"
@@ -106,7 +104,6 @@ const HeroSection = () => {
               Rendez-vous Privé
             </Link>
           </div>
-        </div>
         
         {/* Slide Indicators */}
         <div className="absolute bottom-28 sm:bottom-32 left-0 right-0 flex justify-center">
@@ -123,7 +120,7 @@ const HeroSection = () => {
           </div>
         </div>
         
-        {/* Scroll Down Indicator with improved visibility */}
+        {/* Scroll Down Indicator */}
         <button 
           onClick={scrollToDiscover}
           className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white hover:text-age-red transition-colors bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
