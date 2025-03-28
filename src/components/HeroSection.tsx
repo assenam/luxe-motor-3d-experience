@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -58,7 +59,7 @@ const HeroSection = () => {
       ))}
       
       {/* Content with adjusted vertical positioning */}
-      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full -mt-16 md:-mt-24">
+      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full -mt-32 md:-mt-40">
         {/* Title container with improved height management */}
         <div className="overflow-hidden h-auto min-h-[120px] md:min-h-[180px]">
           {backgrounds.map((bg, idx) => (
