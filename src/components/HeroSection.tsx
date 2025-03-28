@@ -45,7 +45,6 @@ const HeroSection = () => {
   
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Background Images with darker overlay for better text readability */}
       {backgrounds.map((bg, idx) => (
         <div
           key={idx}
@@ -58,8 +57,8 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Content with improved vertical centering */}
-      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full">
+      {/* Content with adjusted vertical positioning */}
+      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full -mt-16 md:-mt-24">
         {/* Title container with improved height management */}
         <div className="overflow-hidden h-auto min-h-[120px] md:min-h-[180px]">
           {backgrounds.map((bg, idx) => (
