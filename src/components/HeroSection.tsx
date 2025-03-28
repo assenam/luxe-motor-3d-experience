@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,19 +13,19 @@ const HeroSection = () => {
       image: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?q=80&w=2000",
       title: "Expérience d'achat",
       subtitle: "Premium",
-      description: "Découvrez une nouvelle façon d'acheter votre véhicule de luxe avec une expérience immersive en 3D."
+      description: "Découvrez une nouvelle façon d'acheter votre véhicule allemand de qualité avec une expérience personnalisée."
     },
     {
       image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2000",
       title: "Collection",
       subtitle: "Exclusive",
-      description: "Explorez notre sélection de véhicules d'exception soigneusement inspectés et préparés."
+      description: "Explorez notre sélection de véhicules allemands d'exception soigneusement inspectés et préparés."
     },
     {
       image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2000",
       title: "Service",
-      subtitle: "Conciergerie",
-      description: "Bénéficiez d'un accompagnement personnalisé tout au long de votre parcours d'achat."
+      subtitle: "International",
+      description: "Bénéficiez d'un accompagnement personnalisé tout au long de votre parcours d'achat et d'exportation."
     }
   ];
 
@@ -66,11 +67,11 @@ const HeroSection = () => {
             {backgrounds.map((bg, idx) => (
               <h1 
                 key={idx} 
-                className={`text-4xl sm:text-5xl md:text-7xl font-playfair font-bold transition-transform duration-1000 text-shadow-lg ${
+                className={`text-4xl sm:text-5xl md:text-7xl font-bold transition-transform duration-1000 text-shadow-lg ${
                   idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                 }`}
               >
-                {bg.title} <span className="gold-accent">{bg.subtitle}</span>
+                {bg.title} <span className="red-accent">{bg.subtitle}</span>
               </h1>
             ))}
           </div>
@@ -100,7 +101,7 @@ const HeroSection = () => {
             </Link>
             <Link 
               to="/contact" 
-              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black font-bold shadow-lg"
+              className="premium-button bg-age-red hover:bg-age-red/90 text-white font-bold shadow-lg"
             >
               Rendez-vous Privé
             </Link>
@@ -115,7 +116,7 @@ const HeroSection = () => {
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === activeIndex ? 'bg-luxe-gold w-8' : 'bg-white/70'
+                  idx === activeIndex ? 'bg-age-red w-8' : 'bg-white/70'
                 }`}
               />
             ))}
@@ -125,7 +126,7 @@ const HeroSection = () => {
         {/* Scroll Down Indicator with improved visibility */}
         <button 
           onClick={scrollToDiscover}
-          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white hover:text-luxe-gold transition-colors bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
+          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white hover:text-age-red transition-colors bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
         >
           <span className="text-sm font-medium mb-1">Découvrir</span>
           <ChevronDown size={24} className="animate-soft-bounce" />

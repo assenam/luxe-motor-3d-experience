@@ -30,47 +30,54 @@ const Navbar = () => {
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="container-luxe flex items-center justify-between">
+      <div className="container-age flex items-center justify-between">
         <Link 
           to="/" 
-          className="text-2xl md:text-3xl font-playfair font-bold tracking-tight"
+          className="flex items-center space-x-3"
         >
-          <span className="text-luxe-black">LUXE</span>
-          <span className="gold-accent">MOTOR</span>
+          <img 
+            src="/lovable-uploads/247a02f1-6984-4daa-a408-03f1a88c0a4d.png" 
+            alt="Auto Germany Export Logo" 
+            className="h-12 md:h-14" 
+          />
+          <div className="flex flex-col">
+            <span className="text-lg md:text-xl font-bold tracking-tight text-age-black">AUTO GERMANY</span>
+            <span className="text-sm md:text-base tracking-widest text-age-red uppercase">EXPORT</span>
+          </div>
         </Link>
         
         {!isMobile ? (
           <nav className="hidden md:flex items-center space-x-12">
-            <Link to="/" className="text-luxe-black hover:text-luxe-gold transition-colors duration-300">
+            <Link to="/" className="text-age-black hover:text-age-red transition-colors duration-300">
               Accueil
             </Link>
-            <Link to="/vehicles" className="text-luxe-black hover:text-luxe-gold transition-colors duration-300">
+            <Link to="/vehicles" className="text-age-black hover:text-age-red transition-colors duration-300">
               Véhicules
             </Link>
-            <Link to="/about" className="text-luxe-black hover:text-luxe-gold transition-colors duration-300">
+            <Link to="/about" className="text-age-black hover:text-age-red transition-colors duration-300">
               À Propos
             </Link>
-            <Link to="/contact" className="text-luxe-black hover:text-luxe-gold transition-colors duration-300">
+            <Link to="/contact" className="text-age-black hover:text-age-red transition-colors duration-300">
               Contact
             </Link>
           </nav>
         ) : null}
         
         <div className="flex items-center space-x-4">
-          <button className="text-luxe-black hover:text-luxe-gold transition-colors">
+          <button className="text-age-black hover:text-age-red transition-colors">
             <Search size={20} />
           </button>
-          <button className="text-luxe-black hover:text-luxe-gold transition-colors hidden md:block">
+          <button className="text-age-black hover:text-age-red transition-colors hidden md:block">
             <User size={20} />
           </button>
-          <button className="text-luxe-black hover:text-luxe-gold transition-colors hidden md:block">
+          <button className="text-age-black hover:text-age-red transition-colors hidden md:block">
             <ShoppingCart size={20} />
           </button>
           
           {isMobile && (
             <button 
               onClick={toggleMobileMenu} 
-              className="text-luxe-black hover:text-luxe-gold transition-colors"
+              className="text-age-black hover:text-age-red transition-colors"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -84,37 +91,37 @@ const Navbar = () => {
           <nav className="flex flex-col space-y-6">
             <Link 
               to="/" 
-              className="text-luxe-black hover:text-luxe-gold transition-colors font-medium text-lg"
+              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
               onClick={() => setMobileMenuOpen(false)}
             >
               Accueil
             </Link>
             <Link 
               to="/vehicles" 
-              className="text-luxe-black hover:text-luxe-gold transition-colors font-medium text-lg"
+              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
               onClick={() => setMobileMenuOpen(false)}
             >
               Véhicules
             </Link>
             <Link 
               to="/about" 
-              className="text-luxe-black hover:text-luxe-gold transition-colors font-medium text-lg"
+              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
               onClick={() => setMobileMenuOpen(false)}
             >
               À Propos
             </Link>
             <Link 
               to="/contact" 
-              className="text-luxe-black hover:text-luxe-gold transition-colors font-medium text-lg"
+              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
             </Link>
             <div className="flex space-x-6 pt-4">
-              <button className="text-luxe-black hover:text-luxe-gold transition-colors">
+              <button className="text-age-black hover:text-age-red transition-colors">
                 <User size={20} />
               </button>
-              <button className="text-luxe-black hover:text-luxe-gold transition-colors">
+              <button className="text-age-black hover:text-age-red transition-colors">
                 <ShoppingCart size={20} />
               </button>
             </div>

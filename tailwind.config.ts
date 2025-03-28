@@ -63,14 +63,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Luxury theme colors
-				luxe: {
-					black: '#1A1F2C',
-					gray: '#2A303C',
-					lightgray: '#8E9196',
-					gold: '#D4AF37',
-					midnight: '#0F1E2D',
-					marble: '#F5F5F5',
+				// Auto Germany Export theme colors
+				age: {
+					red: '#e4322b',      // Rouge du logo
+					black: '#000000',    // Noir du logo
+					darkgray: '#222222', // Gris foncé pour le texte
+					lightgray: '#8E9196', // Gris clair pour le texte secondaire
+					white: '#FFFFFF',    // Blanc pour les contrastes
 				}
 			},
 			fontFamily: {
