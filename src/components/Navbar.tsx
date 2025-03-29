@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, User, Search, ShoppingCart } from 'lucide-react';
@@ -38,7 +37,7 @@ const Navbar = () => {
           <img 
             src="/lovable-uploads/247a02f1-6984-4daa-a408-03f1a88c0a4d.png" 
             alt="Auto Germany Export Logo" 
-            className="h-12 md:h-14 mix-blend-difference"
+            className="h-12 md:h-14 mix-blend-screen"
           />
           <div className={`flex flex-col ${!scrolled ? 'text-white' : 'text-age-black'}`}>
             <span className="text-lg md:text-xl font-bold tracking-tight">AUTO GERMANY</span>
@@ -84,50 +83,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      
-      {/* Mobile Menu */}
-      {isMobile && mobileMenuOpen && (
-        <div className="glass-panel px-4 py-8 shadow-lg animate-fade-in">
-          <nav className="flex flex-col space-y-6">
-            <Link 
-              to="/" 
-              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Accueil
-            </Link>
-            <Link 
-              to="/vehicles" 
-              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Véhicules
-            </Link>
-            <Link 
-              to="/about" 
-              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              À Propos
-            </Link>
-            <Link 
-              to="/contact" 
-              className="text-age-black hover:text-age-red transition-colors font-medium text-lg"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
-            <div className="flex space-x-6 pt-4">
-              <button className="text-age-black hover:text-age-red transition-colors">
-                <User size={20} />
-              </button>
-              <button className="text-age-black hover:text-age-red transition-colors">
-                <ShoppingCart size={20} />
-              </button>
-            </div>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
