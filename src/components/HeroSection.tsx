@@ -58,52 +58,55 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Centered content container with fixed position */}
-      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full max-w-4xl mx-auto">
-        {/* Title container with improved visibility */}
-        <div className="overflow-hidden h-auto min-h-[120px] md:min-h-[180px] mb-2 md:mb-4">
+      {/* Main content container with centered position */}
+      <div className="relative z-10 text-white px-4 sm:px-6 w-full flex flex-col items-center justify-center">
+        {/* Title container */}
+        <div className="w-full text-center mb-4">
           {backgrounds.map((bg, idx) => (
-            <h1 
+            <div 
               key={idx} 
-              className={`text-4xl sm:text-5xl md:text-7xl font-bold transition-transform duration-1000 text-shadow-lg ${
-                idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+              className={`transition-opacity duration-1000 ${
+                idx === activeIndex ? 'opacity-100' : 'opacity-0 hidden'
               }`}
             >
-              {bg.title} <span className="red-accent">{bg.subtitle}</span>
-            </h1>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-2">
+                {bg.title} <span className="text-age-red">{bg.subtitle}</span>
+              </h1>
+            </div>
           ))}
         </div>
         
-        {/* Description text with enhanced styling for better visibility */}
-        <div className="overflow-hidden h-auto min-h-[100px] mt-4 md:mt-6 mx-auto max-w-2xl">
+        {/* Description text */}
+        <div className="w-full max-w-2xl mx-auto mb-12">
           {backgrounds.map((bg, idx) => (
-            <p 
+            <div 
               key={idx} 
-              className={`text-base sm:text-lg md:text-xl mx-auto transition-transform duration-1000 delay-300 
-                bg-black/70 backdrop-blur-md p-4 md:p-5 rounded-md shadow-xl text-white font-medium ${
-                idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+              className={`transition-opacity duration-1000 delay-300 ${
+                idx === activeIndex ? 'opacity-100' : 'opacity-0 hidden'
               }`}
             >
-              {bg.description}
-            </p>
+              <p className="text-base sm:text-lg md:text-xl text-center p-5 bg-black/70 backdrop-blur-md rounded-md shadow-xl">
+                {bg.description}
+              </p>
+            </div>
           ))}
         </div>
         
-        {/* Buttons with improved spacing */}
-        <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-            <Link 
-              to="/vehicles" 
-              className="premium-button bg-white/20 backdrop-blur-md border-2 border-white hover:bg-white/30 text-white font-bold shadow-lg"
-            >
-              Découvrir la Collection
-            </Link>
-            <Link 
-              to="/contact" 
-              className="premium-button bg-age-red hover:bg-age-red/90 text-white font-bold shadow-lg"
-            >
-              Rendez-vous Privé
-            </Link>
-          </div>
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-8">
+          <Link 
+            to="/vehicles" 
+            className="premium-button bg-white/20 backdrop-blur-md border-2 border-white hover:bg-white/30 text-white font-bold shadow-lg whitespace-nowrap"
+          >
+            Découvrir la Collection
+          </Link>
+          <Link 
+            to="/contact" 
+            className="premium-button bg-age-red hover:bg-age-red/90 text-white font-bold shadow-lg"
+          >
+            Rendez-vous Privé
+          </Link>
+        </div>
         
         {/* Slide Indicators */}
         <div className="absolute bottom-28 sm:bottom-32 left-0 right-0 flex justify-center">
