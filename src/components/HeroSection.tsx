@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -57,10 +58,10 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Content with adjusted vertical positioning */}
-      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full -mt-32 md:-mt-44">
-        {/* Title container with improved height management */}
-        <div className="overflow-hidden h-auto min-h-[120px] md:min-h-[180px]">
+      {/* Centered content container with fixed position */}
+      <div className="relative z-10 text-white px-4 sm:px-6 text-center w-full max-w-4xl mx-auto">
+        {/* Title container with improved visibility */}
+        <div className="overflow-hidden h-auto min-h-[120px] md:min-h-[180px] mb-2 md:mb-4">
           {backgrounds.map((bg, idx) => (
             <h1 
               key={idx} 
@@ -73,13 +74,13 @@ const HeroSection = () => {
           ))}
         </div>
         
-        {/* Description text with improved visibility and positioning */}
-        <div className="overflow-hidden h-auto min-h-[100px] mt-4 md:mt-6">
+        {/* Description text with enhanced styling for better visibility */}
+        <div className="overflow-hidden h-auto min-h-[100px] mt-4 md:mt-6 mx-auto max-w-2xl">
           {backgrounds.map((bg, idx) => (
             <p 
               key={idx} 
-              className={`text-base sm:text-lg md:text-xl max-w-xl mx-auto transition-transform duration-1000 delay-300 
-                bg-black/60 backdrop-blur-md p-4 rounded shadow-xl text-white font-semibold ${
+              className={`text-base sm:text-lg md:text-xl mx-auto transition-transform duration-1000 delay-300 
+                bg-black/70 backdrop-blur-md p-4 md:p-5 rounded-md shadow-xl text-white font-medium ${
                 idx === activeIndex ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
               }`}
             >
