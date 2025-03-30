@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, User, Search, ShoppingCart } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -74,12 +76,64 @@ const Navbar = () => {
           </button>
           
           {isMobile && (
-            <button 
-              onClick={toggleMobileMenu} 
-              className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button 
+                  onClick={toggleMobileMenu} 
+                  className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}
+                  aria-label="Toggle menu"
+                >
+                  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-white/95 backdrop-blur-md border-l border-age-red/20 pt-16">
+                <div className="flex flex-col space-y-6">
+                  <Link 
+                    to="/" 
+                    className="text-xl font-medium hover:text-age-red transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Accueil
+                  </Link>
+                  <Link 
+                    to="/vehicles" 
+                    className="text-xl font-medium hover:text-age-red transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Véhicules
+                  </Link>
+                  <Link 
+                    to="/about" 
+                    className="text-xl font-medium hover:text-age-red transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    À Propos
+                  </Link>
+                  <Link 
+                    to="/contact" 
+                    className="text-xl font-medium hover:text-age-red transition-colors" 
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                  
+                  <div className="pt-6 border-t border-gray-200">
+                    <div className="flex items-center space-x-4 mt-4">
+                      <button className="flex items-center space-x-2 text-base hover:text-age-red transition-colors">
+                        <User size={18} />
+                        <span>Compte</span>
+                      </button>
+                    </div>
+                    <div className="flex items-center space-x-4 mt-4">
+                      <button className="flex items-center space-x-2 text-base hover:text-age-red transition-colors">
+                        <ShoppingCart size={18} />
+                        <span>Panier</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           )}
         </div>
       </div>
