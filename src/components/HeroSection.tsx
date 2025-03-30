@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -58,8 +57,8 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Main content container with centered position */}
-      <div className="relative z-10 text-white px-4 sm:px-6 w-full flex flex-col items-center justify-center">
+      {/* Main content container with centered position and added pt-16 to push content down */}
+      <div className="relative z-10 text-white px-4 sm:px-6 w-full flex flex-col items-center justify-center pt-16">
         {/* Title container */}
         <div className="w-full text-center mb-4">
           {backgrounds.map((bg, idx) => (
