@@ -1,14 +1,24 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, User, Search, ShoppingCart } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from '@/components/ui/command';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +31,15 @@ const Navbar = () => {
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const toggleSearch = () => {
+    setSearchOpen(!searchOpen);
+  };
+
+  const handleSearchSelect = (value: string) => {
+    setSearchOpen(false);
+    navigate(value);
   };
 
   return (
@@ -65,7 +84,10 @@ const Navbar = () => {
         ) : null}
         
         <div className="flex items-center space-x-4">
-          <button className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}>
+          <button 
+            className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}
+            onClick={toggleSearch}
+          >
             <Search size={20} />
           </button>
           <button className={`hover:text-age-red transition-colors hidden md:block ${!scrolled ? 'text-white' : 'text-age-black'}`}>
@@ -137,6 +159,38 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
+      <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
+        <CommandInput placeholder="Rechercher..." />
+        <CommandList>
+          <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
+          <CommandGroup heading="Pages">
+            <CommandItem onSelect={() => handleSearchSelect("/")}>
+              Accueil
+            </CommandItem>
+            <CommandItem onSelect={() => handleSearchSelect("/vehicles")}>
+              Véhicules
+            </CommandItem>
+            <CommandItem onSelect={() => handleSearchSelect("/about")}>
+              À Propos
+            </CommandItem>
+            <CommandItem onSelect={() => handleSearchSelect("/contact")}>
+              Contact
+            </CommandItem>
+          </CommandGroup>
+          <CommandGroup heading="Véhicules populaires">
+            <CommandItem onSelect={() => handleSearchSelect("/vehicles/1")}>
+              Mercedes-Benz S-Class
+            </CommandItem>
+            <CommandItem onSelect={() => handleSearchSelect("/vehicles/2")}>
+              BMW Série 7
+            </CommandItem>
+            <CommandItem onSelect={() => handleSearchSelect("/vehicles/3")}>
+              Audi A8
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </header>
   );
 };
