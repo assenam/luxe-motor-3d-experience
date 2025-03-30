@@ -57,9 +57,7 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Main content container with centered position and added pt-16 to push content down */}
       <div className="relative z-10 text-white px-4 sm:px-6 w-full flex flex-col items-center justify-center pt-16">
-        {/* Title container */}
         <div className="w-full text-center mb-4">
           {backgrounds.map((bg, idx) => (
             <div 
@@ -75,7 +73,6 @@ const HeroSection = () => {
           ))}
         </div>
         
-        {/* Description text */}
         <div className="w-full max-w-2xl mx-auto mb-12">
           {backgrounds.map((bg, idx) => (
             <div 
@@ -91,7 +88,6 @@ const HeroSection = () => {
           ))}
         </div>
         
-        {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-8">
           <Link 
             to="/vehicles" 
@@ -103,11 +99,10 @@ const HeroSection = () => {
             to="/contact" 
             className="premium-button bg-age-red hover:bg-age-red/90 text-white font-bold shadow-lg"
           >
-            Rendez-vous Privé
+            Acheter Maintenant
           </Link>
         </div>
         
-        {/* Slide Indicators */}
         <div className="absolute bottom-28 sm:bottom-32 left-0 right-0 flex justify-center">
           <div className="flex space-x-2">
             {backgrounds.map((_, idx) => (
@@ -122,7 +117,6 @@ const HeroSection = () => {
           </div>
         </div>
         
-        {/* Scroll Down Indicator */}
         <button 
           onClick={scrollToDiscover}
           className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white hover:text-age-red transition-colors bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
