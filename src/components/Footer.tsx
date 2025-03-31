@@ -59,8 +59,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-age-lightgray hover:text-white transition-colors">
-                  Magazine
+                <Link to="/services" className="text-age-lightgray hover:text-white transition-colors">
+                  Services
                 </Link>
               </li>
             </ul>
@@ -70,29 +70,29 @@ const Footer = () => {
             <h4 className="text-lg font-medium mb-6">Services</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-age-lightgray hover:text-white transition-colors">
+                <Link to="/services/importation" className="text-age-lightgray hover:text-white transition-colors">
                   Importation Allemande
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-age-lightgray hover:text-white transition-colors">
+                <Link to="/services/garantie" className="text-age-lightgray hover:text-white transition-colors">
                   Garantie Constructeur
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-age-lightgray hover:text-white transition-colors">
+                <Link to="/services/livraison" className="text-age-lightgray hover:text-white transition-colors">
                   Livraison Internationale
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-age-lightgray hover:text-white transition-colors">
+                <Link to="/services/service-client" className="text-age-lightgray hover:text-white transition-colors">
                   Service Client Premium
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-age-lightgray hover:text-white transition-colors">
+                <Link to="/services/financement" className="text-age-lightgray hover:text-white transition-colors">
                   Financement Personnalisé
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
