@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   return (
@@ -16,22 +17,27 @@ const Services = () => {
             <ServiceCard 
               title="Importation Allemande" 
               description="Nous nous chargeons de toutes les démarches d'importation de votre véhicule depuis l'Allemagne, incluant les formalités administratives et le transport." 
+              link="/services/importation"
             />
             <ServiceCard 
               title="Garantie Constructeur" 
               description="Tous nos véhicules sont couverts par la garantie constructeur d'origine ou par notre garantie étendue, pour une tranquillité d'esprit totale." 
+              link="/services/garantie"
             />
             <ServiceCard 
               title="Livraison Internationale" 
               description="Nous livrons votre véhicule partout dans le monde, avec un service de suivi personnalisé et des options d'expédition adaptées à vos besoins." 
+              link="/services/livraison"
             />
             <ServiceCard 
               title="Service Client Premium" 
               description="Notre équipe dédiée vous accompagne tout au long de votre projet, de la recherche du véhicule parfait jusqu'à sa livraison et au-delà." 
+              link="/services/service-client"
             />
             <ServiceCard 
               title="Financement Personnalisé" 
               description="Des solutions de financement sur mesure adaptées à votre situation, avec des taux compétitifs et des options flexibles pour faciliter votre acquisition." 
+              link="/services/financement"
             />
           </div>
         </div>
@@ -42,15 +48,15 @@ const Services = () => {
   );
 };
 
-const ServiceCard = ({ title, description }: { title: string, description: string }) => {
+const ServiceCard = ({ title, description, link }: { title: string, description: string, link: string }) => {
   return (
     <div className="bg-white p-8 rounded-sm shadow-md hover:shadow-lg transition-shadow">
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
-      <p className="text-gray-600">{description}</p>
-      <div className="mt-6">
-        <span className="inline-block bg-age-red text-white px-4 py-2 text-sm font-medium">
+      <p className="text-gray-600 mb-6">{description}</p>
+      <div className="mt-auto">
+        <Link to={link} className="inline-block bg-age-red text-white px-4 py-2 text-sm font-medium hover:bg-age-darkred transition-colors">
           En savoir plus
-        </span>
+        </Link>
       </div>
     </div>
   );
