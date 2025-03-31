@@ -4,7 +4,6 @@ import HeroSection from '@/components/HeroSection';
 import FeaturedVehicles from '@/components/FeaturedVehicles';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Shield, Gauge, ThumbsUp } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
@@ -33,42 +32,6 @@ const Index = () => {
       
       <main className="flex-grow">
         <HeroSection />
-        
-        <section className="section-padding bg-white">
-          <div className="container-luxe">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="animate-on-scroll luxury-card p-8 text-center flex flex-col items-center">
-                <div className="bg-luxe-gold/10 p-4 rounded-full mb-6">
-                  <Shield className="text-luxe-gold" size={32} />
-                </div>
-                <h3 className="text-xl font-playfair font-semibold mb-3">Qualité Certifiée</h3>
-                <p className="text-luxe-lightgray">
-                  Chaque véhicule est inspecté sur 150 points et certifié par nos experts pour garantir une qualité irréprochable.
-                </p>
-              </div>
-              
-              <div className="animate-on-scroll luxury-card p-8 text-center flex flex-col items-center" style={{ animationDelay: '150ms' }}>
-                <div className="bg-luxe-gold/10 p-4 rounded-full mb-6">
-                  <Gauge className="text-luxe-gold" size={32} />
-                </div>
-                <h3 className="text-xl font-playfair font-semibold mb-3">Performance Garantie</h3>
-                <p className="text-luxe-lightgray">
-                  Des véhicules d'exception sélectionnés pour leur performance, leur fiabilité et leur historique impeccable.
-                </p>
-              </div>
-              
-              <div className="animate-on-scroll luxury-card p-8 text-center flex flex-col items-center" style={{ animationDelay: '300ms' }}>
-                <div className="bg-luxe-gold/10 p-4 rounded-full mb-6">
-                  <ThumbsUp className="text-luxe-gold" size={32} />
-                </div>
-                <h3 className="text-xl font-playfair font-semibold mb-3">Expérience Premium</h3>
-                <p className="text-luxe-lightgray">
-                  Un accompagnement personnalisé de la sélection à la livraison, pour une expérience d'achat sans compromis.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
         
         <FeaturedVehicles />
         
