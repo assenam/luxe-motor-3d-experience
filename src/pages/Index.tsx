@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import FeaturedVehicles from '@/components/FeaturedVehicles';
-import PartnerBrands from '@/components/PartnerBrands';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Shield, Gauge, ThumbsUp } from 'lucide-react';
@@ -70,8 +69,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-        
-        <PartnerBrands />
         
         <FeaturedVehicles />
         
