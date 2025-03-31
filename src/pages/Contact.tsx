@@ -97,8 +97,8 @@ const Contact = () => {
                       <div>
                         <h3 className="text-lg font-medium mb-1">Notre Adresse</h3>
                         <p className="text-luxe-lightgray">
-                          23 Avenue Montaigne<br />
-                          75008 Paris, France
+                          KarolinenstraB 6<br />
+                          96049 Bamberg, Hamburg, Germany
                         </p>
                       </div>
                     </div>
@@ -110,7 +110,7 @@ const Contact = () => {
                       <div>
                         <h3 className="text-lg font-medium mb-1">Téléphone</h3>
                         <p className="text-luxe-lightgray">
-                          +33 (0)1 43 59 78 20
+                          +39 350 999 4001
                         </p>
                       </div>
                     </div>
@@ -122,7 +122,7 @@ const Contact = () => {
                       <div>
                         <h3 className="text-lg font-medium mb-1">Email</h3>
                         <p className="text-luxe-lightgray">
-                          contact@luxemotor.com
+                          birgittscheslog99@gmail.com
                         </p>
                       </div>
                     </div>
@@ -239,7 +239,7 @@ const Contact = () => {
         
         <section className="h-96 mt-12">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.2168180992087!2d2.3003639514486307!3d48.866929907927876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc4eaa80c45%3A0x1aa79e8c366494a2!2sAvenue%20Montaigne%2C%2075008%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1711369578428!5m2!1sen!2sus" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2571.0195553513035!2d10.884829676166125!3d49.89995067149409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a22351e4cb7765%3A0xee96888a3b7fba2!2sKarolinenstra%C3%9Fe%206%2C%2096049%20Bamberg%2C%20Germany!5e0!3m2!1sen!2sus!4v1712744231295!5m2!1sen!2sus" 
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 

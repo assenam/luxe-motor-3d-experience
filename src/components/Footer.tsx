@@ -23,11 +23,11 @@ const Footer = () => {
               L'excellence automobile allemande accessible. Découvrez notre sélection de véhicules soigneusement inspectés et préparés.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-age-red transition-colors">
-                <Instagram size={20} />
+              <a href="https://www.facebook.com/share/1FvsvAzw4b/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-white hover:text-age-red transition-colors">
+                <Facebook size={20} />
               </a>
               <a href="#" className="text-white hover:text-age-red transition-colors">
-                <Facebook size={20} />
+                <Instagram size={20} />
               </a>
               <a href="#" className="text-white hover:text-age-red transition-colors">
                 <Twitter size={20} />
@@ -103,17 +103,17 @@ const Footer = () => {
               <li className="flex items-start">
                 <MapPin size={18} className="text-age-red mr-3 mt-1 flex-shrink-0" />
                 <span className="text-age-lightgray">
-                  123 Avenue des Champs-Élysées<br />
-                  75008 Paris, France
+                  KarolinenstraB 6<br />
+                  96049 Bamberg, Hamburg, Germany
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone size={18} className="text-age-red mr-3 flex-shrink-0" />
-                <span className="text-age-lightgray">+33 1 23 45 67 89</span>
+                <span className="text-age-lightgray">+39 350 999 4001</span>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="text-age-red mr-3 flex-shrink-0" />
-                <span className="text-age-lightgray">contact@autogermany.export</span>
+                <span className="text-age-lightgray">birgittscheslog99@gmail.com</span>
               </li>
             </ul>
           </div>
