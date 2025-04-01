@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const Services = () => {
   return (
@@ -39,6 +40,14 @@ const Services = () => {
               description="Des solutions de financement sur mesure adaptées à votre situation, avec des taux compétitifs et des options flexibles pour faciliter votre acquisition." 
               link="/services/financement"
             />
+          </div>
+          
+          <div className="text-center mt-10">
+            <Link to="/contact">
+              <Button variant="default" className="bg-age-red hover:bg-age-darkred text-white px-8 py-6 text-lg">
+                Contactez-nous pour plus d'informations
+              </Button>
+            </Link>
           </div>
         </div>
       </main>

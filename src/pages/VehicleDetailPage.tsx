@@ -7,11 +7,13 @@ import Footer from '@/components/Footer';
 import VehicleShowcase from '@/components/VehicleShowcase';
 import VehicleDetail from '@/components/VehicleDetail';
 import { ArrowLeft } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 const VehicleDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const vehicle = id ? getVehicleById(id) : undefined;
+  const { toast } = useToast();
   
   useEffect(() => {
     if (!vehicle) {
@@ -28,10 +30,18 @@ const VehicleDetailPage = () => {
   
   const handleBuyNow = () => {
     navigate('/contact', { state: { vehicle: vehicle } });
+    toast({
+      title: "Redirection vers la page de contact",
+      description: "Nous sommes ravis de votre intérêt pour ce véhicule!"
+    });
   };
   
   const handleContactAdvisor = () => {
     navigate('/contact', { state: { vehicle: vehicle, subject: 'conseil' } });
+    toast({
+      title: "Demande de conseil",
+      description: "Un de nos conseillers vous contactera prochainement."
+    });
   };
   
   return (
