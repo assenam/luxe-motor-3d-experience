@@ -16,6 +16,9 @@ import ServiceGarantie from "./pages/ServiceGarantie";
 import ServiceLivraison from "./pages/ServiceLivraison";
 import ServiceClient from "./pages/ServiceClient";
 import ServiceFinancement from "./pages/ServiceFinancement";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import LegalNotices from "./pages/LegalNotices";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +40,9 @@ const App = () => (
           <Route path="/services/livraison" element={<ServiceLivraison />} />
           <Route path="/services/service-client" element={<ServiceClient />} />
           <Route path="/services/financement" element={<ServiceFinancement />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/legal-notices" element={<LegalNotices />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

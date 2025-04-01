@@ -126,15 +126,15 @@ const Footer = () => {
             © 2023 Auto Germany Export. Tous droits réservés.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-age-lightgray hover:text-white text-sm transition-colors">
+            <Link to="/privacy-policy" className="text-age-lightgray hover:text-white text-sm transition-colors">
               Politique de Confidentialité
-            </a>
-            <a href="#" className="text-age-lightgray hover:text-white text-sm transition-colors">
+            </Link>
+            <Link to="/terms-of-service" className="text-age-lightgray hover:text-white text-sm transition-colors">
               Conditions Générales
-            </a>
-            <a href="#" className="text-age-lightgray hover:text-white text-sm transition-colors">
+            </Link>
+            <Link to="/legal-notices" className="text-age-lightgray hover:text-white text-sm transition-colors">
               Mentions Légales
-            </a>
+            </Link>
           </div>
         </div>
       </div>
