@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { FileText, BookOpen, GavelIcon } from 'lucide-react';
+import { FileText, BookOpen } from 'lucide-react';
 
 const TermsOfService = () => {
   return (
@@ -32,8 +32,11 @@ const TermsOfService = () => {
               <p className="text-gray-700 mb-4">
                 Les présentes conditions générales de vente régissent les relations contractuelles entre Auto Germany Export et ses clients. Tout achat effectué auprès d'Auto Germany Export implique l'acceptation préalable des présentes conditions.
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 mb-4">
                 La vente n'est réputée conclue qu'après acceptation expresse de la commande du client par Auto Germany Export et après versement de l'acompte prévu.
+              </p>
+              <p className="text-gray-700">
+                <strong>Condition première de vente :</strong> Le paiement d'un acompte de 20% est requis pour confirmer la commande. Les 80% restants sont payés soit à la livraison, soit par mensualités échelonnées de 3 à 48 mois, selon l'option choisie par le client.
               </p>
             </section>
 
@@ -42,8 +45,18 @@ const TermsOfService = () => {
               <p className="text-gray-700 mb-4">
                 Les prix indiqués sur notre site sont en euros, toutes taxes comprises. Auto Germany Export se réserve le droit de modifier ses prix à tout moment, mais les véhicules seront facturés sur la base des tarifs en vigueur au moment de l'enregistrement des commandes.
               </p>
+              <p className="text-gray-700 mb-4">
+                Le paiement s'effectue par virement bancaire ou tout autre moyen indiqué au moment de l'achat. Un acompte de 20% est exigé à la commande pour la validation du contrat.
+              </p>
+              <p className="text-gray-700 mb-4">
+                Pour le solde (80% restants), deux options s'offrent au client :
+              </p>
+              <ul className="list-disc pl-5 mb-4 text-gray-700">
+                <li>Paiement intégral à la livraison du véhicule</li>
+                <li>Paiement échelonné par mensualités sur une période de 3 à 48 mois, selon les modalités convenues avec notre service financier</li>
+              </ul>
               <p className="text-gray-700">
-                Le paiement s'effectue par virement bancaire ou tout autre moyen indiqué au moment de l'achat. Un acompte peut être demandé à la commande, le solde étant payable à la livraison.
+                Tous les frais bancaires et de transfert sont à la charge du client. La propriété du véhicule ne sera transférée qu'après le paiement complet du prix de vente.
               </p>
             </section>
 
