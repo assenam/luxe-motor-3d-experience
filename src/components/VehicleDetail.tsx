@@ -2,12 +2,28 @@
 import { formatCurrency, formatMileage, Vehicle } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, ShieldCheck, Clock3, Calendar, Gauge, Fuel, Palette, LayoutGrid } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface VehicleDetailProps {
   vehicle: Vehicle;
+  buyNowHandler?: () => void;
 }
 
-const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
+const VehicleDetail = ({ vehicle, buyNowHandler }: VehicleDetailProps) => {
+  const navigate = useNavigate();
+  
+  const handleBuyNow = () => {
+    if (buyNowHandler) {
+      buyNowHandler();
+    } else {
+      navigate('/contact', { state: { vehicle: vehicle } });
+    }
+  };
+  
+  const handleMoreInfo = () => {
+    navigate('/contact', { state: { vehicle: vehicle, subject: 'information' } });
+  };
+
   return (
     <div className="py-12">
       <div className="container-luxe">
@@ -132,10 +148,16 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               <p className="text-luxe-lightgray mb-6">Prix final, incluant service et garantie</p>
               
               <div className="space-y-4">
-                <button className="premium-button w-full bg-luxe-gold hover:bg-luxe-gold/90 text-black">
+                <button 
+                  onClick={handleBuyNow}
+                  className="premium-button w-full bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+                >
                   Achetez maintenant
                 </button>
-                <button className="premium-button w-full bg-white border border-luxe-black hover:bg-secondary text-luxe-black">
+                <button 
+                  onClick={handleMoreInfo}
+                  className="premium-button w-full bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
+                >
                   Demander plus d'Informations
                 </button>
               </div>
@@ -156,7 +178,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
             <div className="luxury-card p-6">
               <div className="flex items-center mb-4">
                 <ShieldCheck size={20} className="text-luxe-gold mr-2" />
-                <h3 className="font-medium">Garantie LuxeMotor</h3>
+                <h3 className="font-medium">Garantie Auto Germany Export</h3>
               </div>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start">

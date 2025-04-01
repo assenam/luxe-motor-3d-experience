@@ -38,7 +38,7 @@ const Index = () => {
         <section className="py-20 bg-secondary">
           <div className="container-luxe text-center">
             <h2 className="text-3xl font-playfair font-semibold mb-8">
-              Rejoignez l'Expérience <span className="gold-accent">LuxeMotor</span>
+              Rejoignez l'Expérience <span className="gold-accent">Auto Germany Export</span>
             </h2>
             <div className="max-w-xl mx-auto">
               <form>

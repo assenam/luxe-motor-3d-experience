@@ -26,6 +26,14 @@ const VehicleDetailPage = () => {
     return null;
   }
   
+  const handleBuyNow = () => {
+    navigate('/contact', { state: { vehicle: vehicle } });
+  };
+  
+  const handleContactAdvisor = () => {
+    navigate('/contact', { state: { vehicle: vehicle, subject: 'conseil' } });
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -49,7 +57,7 @@ const VehicleDetailPage = () => {
         </div>
         
         <VehicleShowcase vehicle={vehicle} />
-        <VehicleDetail vehicle={vehicle} />
+        <VehicleDetail vehicle={vehicle} buyNowHandler={handleBuyNow} />
         
         <section className="py-20 vehicle-highlight">
           <div className="container-luxe text-center">
@@ -60,10 +68,16 @@ const VehicleDetailPage = () => {
               Nos conseillers sont disponibles pour répondre à toutes vos questions et organiser un essai personnalisé.
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-              <button className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black">
+              <button 
+                onClick={handleBuyNow} 
+                className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              >
                 Achetez maintenant
               </button>
-              <button className="premium-button bg-transparent border border-white hover:bg-white/10">
+              <button 
+                onClick={handleContactAdvisor}
+                className="premium-button bg-transparent border border-white hover:bg-white/10"
+              >
                 Contacter un Conseiller
               </button>
             </div>

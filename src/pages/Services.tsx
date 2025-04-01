@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Services = () => {
   return (
@@ -10,7 +10,7 @@ const Services = () => {
       <Navbar />
       
       <main className="flex-grow py-16 bg-gray-50">
-        <div className="container-age">
+        <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-10 text-center">Nos Services</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -49,8 +49,17 @@ const Services = () => {
 };
 
 const ServiceCard = ({ title, description, link }: { title: string, description: string, link: string }) => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    navigate(link);
+  };
+
   return (
-    <div className="bg-white p-8 rounded-sm shadow-md hover:shadow-lg transition-shadow">
+    <div 
+      className="bg-white p-8 rounded-sm shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+      onClick={handleClick}
+    >
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
       <p className="text-gray-600 mb-6">{description}</p>
       <div className="mt-auto">
