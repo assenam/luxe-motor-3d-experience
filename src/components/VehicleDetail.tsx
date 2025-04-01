@@ -1,4 +1,3 @@
-
 import { formatCurrency, formatMileage, Vehicle } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, ShieldCheck, Clock3, Calendar, Gauge, Fuel, Palette, LayoutGrid } from 'lucide-react';
@@ -16,7 +15,7 @@ const VehicleDetail = ({ vehicle, buyNowHandler }: VehicleDetailProps) => {
     if (buyNowHandler) {
       buyNowHandler();
     } else {
-      navigate('/contact', { state: { vehicle: vehicle } });
+      navigate('/payment', { state: { vehicle: vehicle } });
     }
   };
   
