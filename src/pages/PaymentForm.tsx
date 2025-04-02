@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -10,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, BankIcon, ClipboardCopy, FileText, Info } from "lucide-react";
+import { ArrowLeft, Bank, ClipboardCopy, FileText, Info } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
@@ -27,8 +26,8 @@ const formSchema = z.object({
   transferDate: z.string().min(1, { message: "Date de virement requise" }),
   transferReference: z.string().min(1, { message: "Référence de virement requise" }),
   notes: z.string().optional(),
-  termsAccepted: z.literal(true, {
-    errorMap: () => ({ message: "Vous devez accepter les conditions générales" }),
+  termsAccepted: z.boolean().refine(val => val === true, {
+    message: "Vous devez accepter les conditions générales"
   }),
 });
 
@@ -255,7 +254,7 @@ const PaymentForm = () => {
                     
                     <div className="pt-4 border-t border-gray-200">
                       <div className="flex items-center mb-4">
-                        <BankIcon className="text-luxe-gold mr-3" size={24} />
+                        <Bank className="text-luxe-gold mr-3" size={24} />
                         <h2 className="text-xl font-semibold">Informations de paiement</h2>
                       </div>
                       
