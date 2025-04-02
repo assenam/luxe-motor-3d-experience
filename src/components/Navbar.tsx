@@ -12,11 +12,22 @@ import {
   CommandGroup,
   CommandItem,
 } from '@/components/ui/command';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
@@ -37,9 +48,18 @@ const Navbar = () => {
     setSearchOpen(!searchOpen);
   };
 
+  const toggleCart = () => {
+    setCartOpen(!cartOpen);
+  };
+
   const handleSearchSelect = (value: string) => {
     setSearchOpen(false);
     navigate(value);
+  };
+
+  const handleViewCars = () => {
+    setCartOpen(false);
+    navigate('/vehicles');
   };
 
   return (
@@ -93,9 +113,43 @@ const Navbar = () => {
           <button className={`hover:text-age-red transition-colors hidden md:block ${!scrolled ? 'text-white' : 'text-age-black'}`}>
             <User size={20} />
           </button>
-          <button className={`hover:text-age-red transition-colors hidden md:block ${!scrolled ? 'text-white' : 'text-age-black'}`}>
-            <ShoppingCart size={20} />
-          </button>
+          
+          <Drawer open={cartOpen} onOpenChange={setCartOpen}>
+            <DrawerTrigger asChild>
+              <button 
+                className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}
+                onClick={toggleCart}
+              >
+                <ShoppingCart size={20} />
+              </button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <div className="mx-auto w-full max-w-sm">
+                <DrawerHeader>
+                  <DrawerTitle className="text-center">Votre panier</DrawerTitle>
+                </DrawerHeader>
+                <div className="p-4 pb-0">
+                  <div className="flex flex-col items-center justify-center space-y-4 py-8">
+                    <ShoppingCart className="h-12 w-12 text-muted-foreground" />
+                    <div className="text-center">
+                      <h3 className="text-lg font-medium">Votre panier est vide</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Découvrez notre sélection de véhicules premium pour ajouter à votre panier
+                      </p>
+                    </div>
+                    <Button onClick={handleViewCars} className="w-full bg-age-red hover:bg-age-red/90">
+                      Voir les véhicules
+                    </Button>
+                  </div>
+                </div>
+                <DrawerFooter>
+                  <DrawerClose asChild>
+                    <Button variant="outline">Fermer</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </div>
+            </DrawerContent>
+          </Drawer>
           
           {isMobile && (
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -147,7 +201,12 @@ const Navbar = () => {
                       </button>
                     </div>
                     <div className="flex items-center space-x-4 mt-4">
-                      <button className="flex items-center space-x-2 text-base hover:text-age-red transition-colors">
+                      <button 
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          setCartOpen(true);
+                        }}
+                        className="flex items-center space-x-2 text-base hover:text-age-red transition-colors">
                         <ShoppingCart size={18} />
                         <span>Panier</span>
                       </button>
