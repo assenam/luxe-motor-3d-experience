@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Check, Clock, FileText, Home, ArrowRight } from 'lucide-react';
+import { Check, Clock, FileText, Home, ArrowRight, FileCheck } from 'lucide-react';
 import { Vehicle } from '@/lib/data';
 
 type OrderInfo = {
@@ -48,7 +48,7 @@ const PaymentConfirmation = () => {
               Merci pour votre commande !
             </h1>
             <p className="text-center text-gray-600 mb-8 max-w-lg mx-auto">
-              Votre demande d'achat a été enregistrée avec succès. Nous vous contacterons dès réception de votre virement d'acompte.
+              Votre demande d'achat a été enregistrée avec succès. {customerInfo.paymentProofUploaded ? 'Nous avons bien reçu votre preuve de paiement.' : 'Nous vous contacterons dès réception de votre virement d\'acompte.'}
             </p>
             
             <div className="border border-gray-200 rounded-sm p-6 mb-8">
@@ -94,6 +94,12 @@ const PaymentConfirmation = () => {
                       <span className="text-gray-600">Référence</span>
                       <span>{customerInfo.transferReference}</span>
                     </div>
+                    {customerInfo.paymentProofUploaded && (
+                      <div className="flex items-center mt-2 text-green-600">
+                        <FileCheck size={16} className="mr-1" />
+                        <span className="text-sm">Preuve de paiement transmise</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -105,26 +111,28 @@ const PaymentConfirmation = () => {
                 Prochaines étapes
               </h3>
               <ol className="space-y-4">
+                {!customerInfo.paymentProofUploaded && (
+                  <li className="flex">
+                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</div>
+                    <div>
+                      <p className="font-medium">Effectuer le virement bancaire</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        Veuillez effectuer votre virement d'acompte de {depositAmount.toLocaleString('fr-FR')} € en utilisant la référence {customerInfo.transferReference}.
+                      </p>
+                    </div>
+                  </li>
+                )}
                 <li className="flex">
-                  <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</div>
-                  <div>
-                    <p className="font-medium">Effectuer le virement bancaire</p>
-                    <p className="text-sm text-gray-600 mt-1">
-                      Veuillez effectuer votre virement d'acompte de {depositAmount.toLocaleString('fr-FR')} € en utilisant la référence {customerInfo.transferReference}.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex">
-                  <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">2</div>
+                  <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{customerInfo.paymentProofUploaded ? '1' : '2'}</div>
                   <div>
                     <p className="font-medium">Confirmation de réception</p>
                     <p className="text-sm text-gray-600 mt-1">
-                      Nous vous contacterons par email dès réception de votre virement pour confirmer votre commande.
+                      Nous vous contacterons par email dès vérification de votre paiement pour confirmer votre commande.
                     </p>
                   </div>
                 </li>
                 <li className="flex">
-                  <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">3</div>
+                  <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{customerInfo.paymentProofUploaded ? '2' : '3'}</div>
                   <div>
                     <p className="font-medium">Préparation et livraison</p>
                     <p className="text-sm text-gray-600 mt-1">
