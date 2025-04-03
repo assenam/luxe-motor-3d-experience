@@ -1,8 +1,10 @@
 
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Info } from 'lucide-react';
+import { ChevronRight, Info, ShoppingCart, Check } from 'lucide-react';
 import { Vehicle, formatCurrency, formatMileage } from '@/lib/data';
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/contexts/CartContext';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -11,6 +13,8 @@ interface VehicleCardProps {
 
 const VehicleCard = ({ vehicle, index }: VehicleCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const { addToCart, isInCart } = useCart();
+  const alreadyInCart = isInCart(vehicle.id);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -31,6 +35,12 @@ const VehicleCard = ({ vehicle, index }: VehicleCardProps) => {
     
     return () => window.removeEventListener('scroll', animateOnScroll);
   }, []);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(vehicle);
+  };
   
   return (
     <div 
@@ -80,13 +90,30 @@ const VehicleCard = ({ vehicle, index }: VehicleCardProps) => {
         </div>
         
         <div className="flex justify-between items-center mt-5">
-          <Link 
-            to={`/vehicles/${vehicle.id}`}
-            className="flex items-center text-luxe-black font-medium hover:text-luxe-gold transition-colors"
-          >
-            <span>Achetez maintenant</span>
-            <ChevronRight size={18} className="ml-1" />
-          </Link>
+          <div className="flex gap-2">
+            <Link 
+              to={`/vehicles/${vehicle.id}`}
+              className="flex items-center text-luxe-black font-medium hover:text-luxe-gold transition-colors"
+            >
+              <span>Détails</span>
+              <ChevronRight size={18} className="ml-1" />
+            </Link>
+            
+            <Button
+              onClick={handleAddToCart}
+              variant="outline"
+              size="sm"
+              className={`ml-2 ${alreadyInCart ? 'bg-green-100 text-green-700 border-green-200' : ''}`}
+              disabled={alreadyInCart}
+            >
+              {alreadyInCart ? (
+                <Check size={16} className="mr-1" />
+              ) : (
+                <ShoppingCart size={16} className="mr-1" />
+              )}
+              {alreadyInCart ? 'Ajouté' : 'Ajouter'}
+            </Button>
+          </div>
           
           <Link
             to={`/vehicles/${vehicle.id}#details`}

@@ -1,7 +1,10 @@
+
 import { formatCurrency, formatMileage, Vehicle } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Check, ShieldCheck, Clock3, Calendar, Gauge, Fuel, Palette, LayoutGrid } from 'lucide-react';
+import { Check, ShieldCheck, Clock3, Calendar, Gauge, Fuel, Palette, LayoutGrid, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '@/contexts/CartContext';
+import { Button } from '@/components/ui/button';
 
 interface VehicleDetailProps {
   vehicle: Vehicle;
@@ -10,6 +13,8 @@ interface VehicleDetailProps {
 
 const VehicleDetail = ({ vehicle, buyNowHandler }: VehicleDetailProps) => {
   const navigate = useNavigate();
+  const { addToCart, isInCart } = useCart();
+  const alreadyInCart = isInCart(vehicle.id);
   
   const handleBuyNow = () => {
     if (buyNowHandler) {
@@ -21,6 +26,10 @@ const VehicleDetail = ({ vehicle, buyNowHandler }: VehicleDetailProps) => {
   
   const handleMoreInfo = () => {
     navigate('/contact', { state: { vehicle: vehicle, subject: 'information' } });
+  };
+
+  const handleAddToCart = () => {
+    addToCart(vehicle);
   };
 
   return (
@@ -153,12 +162,31 @@ const VehicleDetail = ({ vehicle, buyNowHandler }: VehicleDetailProps) => {
                 >
                   Achetez maintenant
                 </button>
-                <button 
-                  onClick={handleMoreInfo}
-                  className="premium-button w-full bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
-                >
-                  Demander plus d'Informations
-                </button>
+                <div className="flex gap-4">
+                  <button 
+                    onClick={handleMoreInfo}
+                    className="premium-button w-full bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
+                  >
+                    Plus d'Informations
+                  </button>
+                  <Button 
+                    onClick={handleAddToCart}
+                    className={`flex-1 text-white ${alreadyInCart ? 'bg-green-600 hover:bg-green-700' : 'bg-age-red hover:bg-age-darkred'}`}
+                    disabled={alreadyInCart}
+                  >
+                    {alreadyInCart ? (
+                      <>
+                        <Check size={18} className="mr-2" />
+                        Ajouté au panier
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart size={18} className="mr-2" />
+                        Ajouter au panier
+                      </>
+                    )}
+                  </Button>
+                </div>
               </div>
               
               <div className="mt-8 pt-6 border-t border-gray-200">

@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, User, Search, ShoppingCart } from 'lucide-react';
+import { Menu, X, User, Search, ShoppingCart, Trash2 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -22,6 +21,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/contexts/CartContext';
+import { formatCurrency } from '@/lib/data';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -30,6 +31,7 @@ const Navbar = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const { cartItems, removeFromCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,6 +62,20 @@ const Navbar = () => {
   const handleViewCars = () => {
     setCartOpen(false);
     navigate('/vehicles');
+  };
+
+  const handleCheckout = () => {
+    setCartOpen(false);
+    if (cartItems.length === 1) {
+      navigate('/payment', { state: { vehicle: cartItems[0] } });
+    } else {
+      navigate('/payment');
+    }
+  };
+
+  const handleViewVehicle = (id: string) => {
+    setCartOpen(false);
+    navigate(`/vehicles/${id}`);
   };
 
   return (
@@ -117,10 +133,15 @@ const Navbar = () => {
           <Drawer open={cartOpen} onOpenChange={setCartOpen}>
             <DrawerTrigger asChild>
               <button 
-                className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}
+                className={`hover:text-age-red transition-colors relative ${!scrolled ? 'text-white' : 'text-age-black'}`}
                 onClick={toggleCart}
               >
                 <ShoppingCart size={20} />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-age-red text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
+                )}
               </button>
             </DrawerTrigger>
             <DrawerContent>
@@ -128,19 +149,83 @@ const Navbar = () => {
                 <DrawerHeader>
                   <DrawerTitle className="text-center">Votre panier</DrawerTitle>
                 </DrawerHeader>
-                <div className="p-4 pb-0">
-                  <div className="flex flex-col items-center justify-center space-y-4 py-8">
-                    <ShoppingCart className="h-12 w-12 text-muted-foreground" />
-                    <div className="text-center">
-                      <h3 className="text-lg font-medium">Votre panier est vide</h3>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Découvrez notre sélection de véhicules premium pour ajouter à votre panier
-                      </p>
+                <div className="p-4 pb-0 max-h-[70vh] overflow-auto">
+                  {cartItems.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center space-y-4 py-8">
+                      <ShoppingCart className="h-12 w-12 text-muted-foreground" />
+                      <div className="text-center">
+                        <h3 className="text-lg font-medium">Votre panier est vide</h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Découvrez notre sélection de véhicules premium pour ajouter à votre panier
+                        </p>
+                      </div>
+                      <Button onClick={handleViewCars} className="w-full bg-age-red hover:bg-age-darkred text-white">
+                        Voir les véhicules
+                      </Button>
                     </div>
-                    <Button onClick={handleViewCars} className="w-full bg-age-red hover:bg-age-red/90">
-                      Voir les véhicules
-                    </Button>
-                  </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {cartItems.map((item) => (
+                        <div key={item.id} className="flex items-start border-b border-gray-200 pb-4 gap-3">
+                          <img 
+                            src={item.mainImage} 
+                            alt={`${item.brand} ${item.model}`} 
+                            className="w-20 h-16 object-cover rounded-sm"
+                          />
+                          <div className="flex-grow">
+                            <div className="flex justify-between">
+                              <h4 className="font-medium">
+                                {item.brand} {item.model}
+                              </h4>
+                              <button 
+                                onClick={() => removeFromCart(item.id)}
+                                className="text-gray-400 hover:text-age-red transition-colors"
+                                aria-label="Supprimer du panier"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {item.year} • {item.exteriorColor}
+                            </p>
+                            <div className="flex justify-between items-center mt-1">
+                              <span className="font-semibold">{formatCurrency(item.price)}</span>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => handleViewVehicle(item.id)}
+                                className="text-xs h-7 px-2"
+                              >
+                                Voir
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                      
+                      <div className="border-t border-gray-200 pt-4">
+                        <div className="flex justify-between mb-2">
+                          <span>Sous-total</span>
+                          <span className="font-semibold">
+                            {formatCurrency(cartItems.reduce((total, item) => total + item.price, 0))}
+                          </span>
+                        </div>
+                        <Button 
+                          onClick={handleCheckout} 
+                          className="w-full bg-age-red hover:bg-age-darkred text-white"
+                        >
+                          Passer à la caisse
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          onClick={handleViewCars} 
+                          className="w-full mt-2"
+                        >
+                          Continuer vos achats
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <DrawerFooter>
                   <DrawerClose asChild>
