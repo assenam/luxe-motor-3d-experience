@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -65,11 +64,12 @@ export default {
 				},
 				// Auto Germany Export theme colors
 				age: {
-					red: '#e4322b',      // Rouge du logo
-					black: '#000000',    // Noir du logo
-					darkgray: '#222222', // Gris foncé pour le texte
-					lightgray: '#8E9196', // Gris clair pour le texte secondaire
-					white: '#FFFFFF',    // Blanc pour les contrastes
+					red: '#e4322b',      // Bright red for primary actions
+					darkred: '#c1291f',  // Darker red for hover states
+					black: '#000000',
+					darkgray: '#222222',
+					lightgray: '#8E9196',
+					white: '#FFFFFF',
 				}
 			},
 			fontFamily: {
@@ -114,6 +114,10 @@ export default {
 				'fade-in-right': 'fade-in-right 0.7s ease-out forwards',
 				'soft-bounce': 'soft-bounce 3s ease-in-out infinite',
 				'rotate-360': 'rotate-360 20s linear infinite'
+			},
+			textColor: {
+				'button-primary': '#FFFFFF',  // White text on primary buttons
+				'button-secondary': '#000000', // Black text on secondary buttons
 			}
 		}
 	},
