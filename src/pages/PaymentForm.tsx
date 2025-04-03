@@ -35,6 +35,9 @@ const formSchema = z.object({
   }),
 });
 
+// Définir un type pour les noms des champs du formulaire
+type FormFields = keyof z.infer<typeof formSchema>;
+
 const PaymentForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -127,11 +130,11 @@ const PaymentForm = () => {
 
   const nextStep = () => {
     if (currentStep === 1) {
-      const personalInfoFields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'postalCode', 'country'];
+      const personalInfoFields: FormFields[] = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'postalCode', 'country'];
       const isValid = personalInfoFields.every(field => !!form.getValues(field));
       
       if (!isValid) {
-        form.trigger(personalInfoFields as any);
+        form.trigger(personalInfoFields);
         return;
       }
     }
