@@ -52,7 +52,7 @@ const PaymentConfirmation = () => {
               Votre demande d'achat a été enregistrée avec succès. {customerInfo.paymentProofUploaded ? 'Nous avons bien reçu votre preuve de paiement.' : 'Nous vous contacterons dès réception de votre virement d\'acompte.'}
             </p>
             
-            <ScrollArea className="max-h-[70vh] md:max-h-none overflow-auto pr-4">
+            <div className="md:max-h-[600px] overflow-auto pr-4">
               <div className="border border-gray-200 rounded-sm p-5 md:p-6 mb-6 md:mb-8">
                 <div className="flex items-center mb-4">
                   <FileText className="text-luxe-gold mr-3" size={24} />
@@ -144,7 +144,7 @@ const PaymentConfirmation = () => {
                   </li>
                 </ol>
               </div>
-            </ScrollArea>
+            </div>
           </div>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-4">
