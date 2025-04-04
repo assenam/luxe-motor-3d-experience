@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -582,145 +581,23 @@ const PaymentForm = () => {
                       )}
                     </>
                   ) : (
-                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8 max-h-[75vh] overflow-y-auto">
-                      <div className="flex items-center mb-4">
-                        <FileText className="text-luxe-gold mr-3" size={24} />
-                        <h2 className="text-xl font-semibold">Informations personnelles</h2>
-                      </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <FormField
-                          control={form.control}
-                          name="firstName"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Prénom</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Jean" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="lastName"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Nom</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Dupont" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Email</FormLabel>
-                              <FormControl>
-                                <Input type="email" placeholder="jean.dupont@example.com" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="phone"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Téléphone</FormLabel>
-                              <FormControl>
-                                <Input placeholder="+33 6 12 34 56 78" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="address"
-                        render={({ field }) => (
-                          <FormItem className="mt-6">
-                            <FormLabel>Adresse</FormLabel>
-                            <FormControl>
-                              <Input placeholder="123 Rue de Paris" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-                        <FormField
-                          control={form.control}
-                          name="city"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Ville</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Paris" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="postalCode"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Code Postal</FormLabel>
-                              <FormControl>
-                                <Input placeholder="75000" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        
-                        <FormField
-                          control={form.control}
-                          name="country"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Pays</FormLabel>
-                              <FormControl>
-                                <Input placeholder="France" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <div className="pt-6 border-t border-gray-200 mt-6">
+                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8 overflow-visible">
+                      {/* Informations personnelles */}
+                      <div className="mb-8">
                         <div className="flex items-center mb-4">
-                          <Building2 className="text-luxe-gold mr-3" size={24} />
-                          <h2 className="text-xl font-semibold">Informations de paiement</h2>
+                          <FileText className="text-luxe-gold mr-3" size={24} />
+                          <h2 className="text-xl font-semibold">Informations personnelles</h2>
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <FormField
                             control={form.control}
-                            name="transferDate"
+                            name="firstName"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Date prévue du virement</FormLabel>
+                                <FormLabel>Prénom</FormLabel>
                                 <FormControl>
-                                  <Input type="date" {...field} />
+                                  <Input placeholder="Jean" {...field} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -729,15 +606,12 @@ const PaymentForm = () => {
                           
                           <FormField
                             control={form.control}
-                            name="transferReference"
+                            name="lastName"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Référence du virement</FormLabel>
+                                <FormLabel>Nom</FormLabel>
                                 <FormControl>
-                                  <Input 
-                                    placeholder={`AGE-${vehicle.id}-${new Date().getTime().toString().slice(-6)}`} 
-                                    {...field} 
-                                  />
+                                  <Input placeholder="Dupont" {...field} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -745,7 +619,139 @@ const PaymentForm = () => {
                           />
                         </div>
                         
-                        <div className="mt-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                          <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                  <Input type="email" placeholder="jean.dupont@example.com" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <FormField
+                            control={form.control}
+                            name="phone"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Téléphone</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="+33 6 12 34 56 78" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                        
+                        <FormField
+                          control={form.control}
+                          name="address"
+                          render={({ field }) => (
+                            <FormItem className="mt-6">
+                              <FormLabel>Adresse</FormLabel>
+                              <FormControl>
+                                <Input placeholder="123 Rue de Paris" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+                          <FormField
+                            control={form.control}
+                            name="city"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Ville</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Paris" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <FormField
+                            control={form.control}
+                            name="postalCode"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Code Postal</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="75000" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <FormField
+                            control={form.control}
+                            name="country"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Pays</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="France" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* Informations de paiement */}
+                      <div className="mb-8">
+                        <div className="pt-4 border-t border-gray-200 mb-4">
+                          <div className="flex items-center mb-4">
+                            <Building2 className="text-luxe-gold mr-3" size={24} />
+                            <h2 className="text-xl font-semibold">Informations de paiement</h2>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <FormField
+                              control={form.control}
+                              name="transferDate"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Date prévue du virement</FormLabel>
+                                  <FormControl>
+                                    <Input type="date" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="transferReference"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Référence du virement</FormLabel>
+                                  <FormControl>
+                                    <Input 
+                                      placeholder={`AGE-${vehicle.id}-${new Date().getTime().toString().slice(-6)}`} 
+                                      {...field} 
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </div>
+                        
+                        {/* Preuve de paiement */}
+                        <div className="mb-8">
                           <div className="flex items-center mb-4">
                             <Upload className="text-luxe-gold mr-3" size={24} />
                             <h2 className="text-xl font-semibold">Preuve de paiement</h2>
@@ -774,11 +780,12 @@ const PaymentForm = () => {
                           </div>
                         </div>
                         
+                        {/* Notes */}
                         <FormField
                           control={form.control}
                           name="notes"
                           render={({ field }) => (
-                            <FormItem className="mt-6">
+                            <FormItem className="mb-8">
                               <FormLabel>Notes supplémentaires (optionnel)</FormLabel>
                               <FormControl>
                                 <Textarea 
@@ -792,49 +799,52 @@ const PaymentForm = () => {
                         />
                       </div>
                       
-                      <FormField
-                        control={form.control}
-                        name="termsAccepted"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-6">
-                            <FormControl>
-                              <Checkbox 
-                                checked={field.value} 
-                                onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
-                              <FormLabel className="text-sm font-normal">
-                                J'accepte les{" "}
-                                <a 
-                                  href="/terms-of-service" 
-                                  target="_blank" 
-                                  className="text-luxe-gold hover:underline"
-                                >
-                                  conditions générales de vente
-                                </a>
-                                {" "}et la{" "}
-                                <a 
-                                  href="/privacy-policy" 
-                                  target="_blank"
-                                  className="text-luxe-gold hover:underline"
-                                >
-                                  politique de confidentialité
-                                </a>
-                              </FormLabel>
-                              <FormMessage />
-                            </div>
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <div className="pt-6 mt-6 flex justify-end sticky bottom-0 bg-white pb-2">
-                        <button
-                          type="submit"
-                          className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
-                        >
-                          Valider ma commande
-                        </button>
+                      {/* Terms & Submit */}
+                      <div className="border-t border-gray-200 pt-6">
+                        <FormField
+                          control={form.control}
+                          name="termsAccepted"
+                          render={({ field }) => (
+                            <FormItem className="flex flex-row items-start space-x-3 space-y-0 mb-6">
+                              <FormControl>
+                                <Checkbox 
+                                  checked={field.value} 
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <div className="space-y-1 leading-none">
+                                <FormLabel className="text-sm font-normal">
+                                  J'accepte les{" "}
+                                  <a 
+                                    href="/terms-of-service" 
+                                    target="_blank" 
+                                    className="text-luxe-gold hover:underline"
+                                  >
+                                    conditions générales de vente
+                                  </a>
+                                  {" "}et la{" "}
+                                  <a 
+                                    href="/privacy-policy" 
+                                    target="_blank"
+                                    className="text-luxe-gold hover:underline"
+                                  >
+                                    politique de confidentialité
+                                  </a>
+                                </FormLabel>
+                                <FormMessage />
+                              </div>
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <div className="flex justify-end">
+                          <button
+                            type="submit"
+                            className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+                          >
+                            Valider ma commande
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}
