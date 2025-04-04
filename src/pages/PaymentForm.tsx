@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -15,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "Le prénom doit contenir au moins 2 caractères" }),
@@ -248,7 +250,7 @@ const PaymentForm = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-8 md:py-12 bg-gray-50">
+      <main className="flex-grow py-8 md:py-12 bg-gray-50 overflow-auto">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="mb-6 md:mb-8">
             <button 
@@ -581,7 +583,7 @@ const PaymentForm = () => {
                       )}
                     </>
                   ) : (
-                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8 overflow-visible">
+                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8">
                       {/* Informations personnelles */}
                       <div className="mb-8">
                         <div className="flex items-center mb-4">
