@@ -249,18 +249,18 @@ const PaymentForm = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-16">
+      <main className="flex-grow py-8 md:py-12 bg-gray-50">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <button 
               onClick={() => navigate(-1)}
-              className="flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-6"
+              className="flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-4 md:mb-6"
             >
               <ArrowLeft size={18} className="mr-2" />
               <span>Retour</span>
             </button>
             
-            <h1 className="text-3xl font-playfair font-semibold mb-2">
+            <h1 className="text-2xl md:text-3xl font-playfair font-semibold mb-2">
               Paiement par Virement Bancaire
             </h1>
             <p className="text-gray-600">
@@ -270,7 +270,7 @@ const PaymentForm = () => {
 
           {isMobile && renderStepIndicator()}
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div className="md:col-span-2">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -582,7 +582,7 @@ const PaymentForm = () => {
                       )}
                     </>
                   ) : (
-                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8">
+                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8 max-h-[75vh] overflow-y-auto">
                       <div className="flex items-center mb-4">
                         <FileText className="text-luxe-gold mr-3" size={24} />
                         <h2 className="text-xl font-semibold">Informations personnelles</h2>
@@ -828,7 +828,7 @@ const PaymentForm = () => {
                         )}
                       />
                       
-                      <div className="pt-4 flex justify-end">
+                      <div className="pt-6 mt-6 flex justify-end sticky bottom-0 bg-white pb-2">
                         <button
                           type="submit"
                           className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
