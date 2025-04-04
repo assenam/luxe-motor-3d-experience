@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { Vehicle } from '@/lib/data';
 import { useToast } from '@/hooks/use-toast';
 
@@ -13,9 +13,32 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const CART_STORAGE_KEY = 'age-cart-items';
+
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<Vehicle[]>([]);
   const { toast } = useToast();
+
+  // Load cart items from localStorage on initial render
+  useEffect(() => {
+    try {
+      const storedCartItems = localStorage.getItem(CART_STORAGE_KEY);
+      if (storedCartItems) {
+        setCartItems(JSON.parse(storedCartItems));
+      }
+    } catch (error) {
+      console.error('Failed to load cart from localStorage:', error);
+    }
+  }, []);
+
+  // Update localStorage whenever cart items change
+  useEffect(() => {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+    } catch (error) {
+      console.error('Failed to save cart to localStorage:', error);
+    }
+  }, [cartItems]);
 
   const addToCart = (vehicle: Vehicle) => {
     // Check if vehicle is already in cart
@@ -44,6 +67,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem(CART_STORAGE_KEY);
   };
 
   const isInCart = (vehicleId: string) => {
