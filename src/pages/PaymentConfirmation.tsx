@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -87,11 +88,15 @@ const PaymentConfirmation = () => {
                     
                     <div className="border-t border-gray-200 pt-4 mt-4">
                       <div className="flex justify-between mb-2">
-                        <span className="text-gray-600">Acompte (20%)</span>
-                        <span className="font-medium">{depositAmount.toLocaleString('fr-FR')} €</span>
+                        <span className="text-gray-600">Prix total du véhicule</span>
+                        <span>{vehicle.price.toLocaleString('fr-FR')} €</span>
                       </div>
-                      <div className="flex justify-between text-sm text-gray-600">
-                        <span>À payer à la livraison ou en mensualités</span>
+                      <div className="flex justify-between font-medium">
+                        <span className="text-luxe-gold">Acompte de 20% à payer</span>
+                        <span className="text-luxe-gold">{depositAmount.toLocaleString('fr-FR')} €</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-600 mt-2">
+                        <span>Reste à payer</span>
                         <span>{(vehicle.price - depositAmount).toLocaleString('fr-FR')} €</span>
                       </div>
                       <div className="flex justify-between text-sm mt-2">
