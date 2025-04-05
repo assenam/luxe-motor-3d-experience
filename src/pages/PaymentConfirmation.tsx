@@ -91,7 +91,11 @@ const PaymentConfirmation = () => {
                         <span className="text-gray-600">Acompte (20%)</span>
                         <span className="font-medium">{depositAmount.toLocaleString('fr-FR')} €</span>
                       </div>
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm text-gray-600">
+                        <span>À payer à la livraison ou en mensualités</span>
+                        <span>{(vehicle.price - depositAmount).toLocaleString('fr-FR')} €</span>
+                      </div>
+                      <div className="flex justify-between text-sm mt-2">
                         <span className="text-gray-600">Référence</span>
                         <span>{customerInfo.transferReference}</span>
                       </div>
@@ -120,6 +124,9 @@ const PaymentConfirmation = () => {
                         <p className="text-sm text-gray-600 mt-1">
                           Veuillez effectuer votre virement d'acompte de {depositAmount.toLocaleString('fr-FR')} € en utilisant la référence {customerInfo.transferReference}.
                         </p>
+                        <p className="text-sm text-gray-600 mt-1">
+                          Cet acompte couvre la garantie, le transport et les taxes douanières.
+                        </p>
                       </div>
                     </li>
                   )}
@@ -138,6 +145,15 @@ const PaymentConfirmation = () => {
                       <p className="font-medium">Préparation et livraison</p>
                       <p className="text-sm text-gray-600 mt-1">
                         Notre équipe préparera votre véhicule et conviendra avec vous d'une date de livraison.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex">
+                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{customerInfo.paymentProofUploaded ? '3' : '4'}</div>
+                    <div>
+                      <p className="font-medium">Paiement du solde</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        Le reste du montant ({(vehicle.price - depositAmount).toLocaleString('fr-FR')} €) sera à régler soit à la livraison, soit en mensualités selon vos préférences.
                       </p>
                     </div>
                   </li>

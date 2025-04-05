@@ -231,16 +231,19 @@ const PaymentForm = () => {
       
       <div className="border-t border-gray-200 pt-4 mt-4">
         <div className="flex justify-between mb-2">
-          <span className="text-gray-600">Prix du véhicule</span>
+          <span className="text-gray-600">Prix total du véhicule</span>
           <span>{vehicle?.price.toLocaleString('fr-FR')} €</span>
         </div>
         <div className="flex justify-between font-medium text-lg">
-          <span>Acompte (20%)</span>
+          <span>Acompte à payer maintenant (20%)</span>
           <span className="text-luxe-gold">{depositAmount.toLocaleString('fr-FR')} €</span>
         </div>
         <div className="flex justify-between mt-2 text-sm text-gray-600">
-          <span>Reste à payer</span>
+          <span>À payer à la livraison ou en mensualités</span>
           <span>{(vehicle?.price - depositAmount).toLocaleString('fr-FR')} €</span>
+        </div>
+        <div className="mt-3 p-3 bg-gray-50 rounded-sm text-sm">
+          <p>L'acompte de 20% couvre la garantie, le transport et les taxes douanières. Le reste du montant sera à payer lors de la livraison ou en mensualités selon vos préférences.</p>
         </div>
       </div>
     </div>
@@ -262,10 +265,10 @@ const PaymentForm = () => {
             </button>
             
             <h1 className="text-2xl md:text-3xl font-playfair font-semibold mb-2">
-              Paiement par Virement Bancaire
+              Paiement de l'Acompte
             </h1>
             <p className="text-gray-600">
-              Finalisez l'achat de votre {vehicle.brand} {vehicle.model}
+              Versez un acompte de 20% pour réserver votre {vehicle.brand} {vehicle.model}
             </p>
           </div>
 
@@ -871,7 +874,7 @@ const PaymentForm = () => {
           <DialogHeader>
             <DialogTitle>Informations de paiement</DialogTitle>
             <DialogDescription>
-              Utilisez ces coordonnées bancaires pour effectuer votre virement.
+              Utilisez ces coordonnées bancaires pour effectuer votre virement d'acompte.
             </DialogDescription>
           </DialogHeader>
           
@@ -881,8 +884,8 @@ const PaymentForm = () => {
               <ul className="list-disc pl-5 space-y-2 text-sm">
                 <li>Effectuez le virement depuis votre compte bancaire personnel ou professionnel.</li>
                 <li>Utilisez la référence indiquée pour nous permettre d'identifier votre paiement.</li>
-                <li>L'acompte de 20% doit être reçu pour confirmer votre commande.</li>
-                <li>Le reste à payer devra être réglé avant la livraison du véhicule.</li>
+                <li>L'acompte de 20% couvre la garantie, le transport et les taxes douanières.</li>
+                <li>Le reste à payer pourra être réglé à la livraison ou en mensualités selon vos préférences.</li>
               </ul>
             </div>
             
