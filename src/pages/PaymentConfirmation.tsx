@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Check, Clock, FileText, Home, ArrowRight, FileCheck } from 'lucide-react';
 import { Vehicle } from '@/lib/data';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 type OrderInfo = {
   vehicle: Vehicle;
@@ -36,7 +35,7 @@ const PaymentConfirmation = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-10 md:py-16 bg-gray-50">
+      <main className="flex-grow py-10 md:py-16 bg-gray-50 overflow-auto">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-white p-6 md:p-8 rounded-sm shadow-sm mb-8 md:mb-12">
             <div className="flex justify-center mb-6 md:mb-8">
