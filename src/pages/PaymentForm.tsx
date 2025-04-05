@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -253,7 +252,7 @@ const PaymentForm = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-8 md:py-12 bg-gray-50 overflow-auto">
+      <main className="flex-grow py-8 md:py-12 bg-gray-50 overflow-y-auto">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="mb-6 md:mb-8">
             <button 
@@ -420,11 +419,11 @@ const PaymentForm = () => {
                       )}
 
                       {currentStep === 2 && (
-                        <>
+                        <div className="space-y-6 overflow-visible">
                           <OrderSummaryCard />
                           <BankInformationCard />
 
-                          <div className="bg-white p-6 rounded-sm shadow-sm mt-6">
+                          <div className="bg-white p-6 rounded-sm shadow-sm">
                             <div className="flex items-center mb-4">
                               <Building2 className="text-luxe-gold mr-3" size={24} />
                               <h2 className="text-xl font-semibold">Informations de paiement</h2>
@@ -480,7 +479,7 @@ const PaymentForm = () => {
                               Continuer
                             </button>
                           </div>
-                        </>
+                        </div>
                       )}
 
                       {currentStep === 3 && (
@@ -586,7 +585,7 @@ const PaymentForm = () => {
                       )}
                     </>
                   ) : (
-                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8">
+                    <div className="bg-white p-6 rounded-sm shadow-sm mb-8 overflow-visible">
                       {/* Informations personnelles */}
                       <div className="mb-8">
                         <div className="flex items-center mb-4">
@@ -859,10 +858,10 @@ const PaymentForm = () => {
             
             <div className="md:col-span-1">
               {!isMobile && (
-                <>
+                <div className="space-y-6 sticky top-6">
                   <OrderSummaryCard />
                   <BankInformationCard />
-                </>
+                </div>
               )}
             </div>
           </div>
@@ -878,7 +877,7 @@ const PaymentForm = () => {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-[60vh] overflow-y-auto">
             <div>
               <h3 className="font-medium mb-2">Instructions pour le virement bancaire</h3>
               <ul className="list-disc pl-5 space-y-2 text-sm">
@@ -919,18 +918,4 @@ const PaymentForm = () => {
           <DialogFooter>
             <button
               onClick={copyBankDetails}
-              className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
-            >
-              <ClipboardCopy size={16} className="mr-2" />
-              <span>Copier les coordonnées</span>
-            </button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      
-      <Footer />
-    </div>
-  );
-};
-
-export default PaymentForm;
+              className="premium-button bg-white border border-luxe-black hover:bg
