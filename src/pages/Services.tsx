@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,8 +8,7 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
-      <main className="flex-grow py-16 bg-gray-50">
+      <main className="flex-grow page-top-padding bg-gray-50">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-10 text-center">Nos Services</h1>
           
@@ -51,7 +49,6 @@ const Services = () => {
           </div>
         </div>
       </main>
-      
       <Footer />
     </div>
   );
