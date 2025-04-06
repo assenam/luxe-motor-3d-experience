@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -99,9 +98,5 @@
   
   .text-shadow-lg {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  .page-top-padding {
-    @apply pt-24; /* Adjust this value to match the header height */
   }
 }
