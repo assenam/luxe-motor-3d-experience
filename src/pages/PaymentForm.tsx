@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -912,3 +913,26 @@ const PaymentForm = () => {
                 </div>
                 <div className="grid grid-cols-3">
                   <span className="font-medium">Adresse</span>
+                  <span className="col-span-2">1 Rue de la Banque, 75001 Paris</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <button 
+              onClick={() => setBankInfoOpen(false)}
+              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+            >
+              Fermer
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default PaymentForm;
