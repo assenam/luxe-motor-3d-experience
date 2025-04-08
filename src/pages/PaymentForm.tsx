@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -253,7 +252,7 @@ const PaymentForm = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-8 md:py-12 bg-gray-50 overflow-y-auto">
+      <main className="flex-grow page-top-padding bg-gray-50 overflow-y-auto">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="mb-6 md:mb-8">
             <button 
@@ -919,18 +918,4 @@ const PaymentForm = () => {
           <DialogFooter>
             <button
               onClick={copyBankDetails}
-              className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
-            >
-              <ClipboardCopy size={16} className="mr-2" />
-              <span>Copier les coordonnées</span>
-            </button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      
-      <Footer />
-    </div>
-  );
-};
-
-export default PaymentForm;
+              className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-
