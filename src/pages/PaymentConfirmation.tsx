@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -35,7 +34,7 @@ const PaymentConfirmation = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-10 md:py-16 bg-gray-50 overflow-auto">
+      <main className="flex-grow page-top-padding bg-gray-50 overflow-auto">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-white p-6 md:p-8 rounded-sm shadow-sm mb-8 md:mb-12">
             <div className="flex justify-center mb-6 md:mb-8">
