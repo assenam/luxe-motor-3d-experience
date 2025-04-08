@@ -101,6 +101,6 @@
   }
 
   .page-top-padding {
-    @apply pt-24 md:pt-28 lg:pt-32; /* Adjusted padding for different screen sizes */
+    @apply pt-24 md:pt-28 lg:pt-36 xl:pt-40; /* Increased padding for larger screens */
   }
 }
