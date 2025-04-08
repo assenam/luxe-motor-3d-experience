@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -918,4 +919,18 @@ const PaymentForm = () => {
           <DialogFooter>
             <button
               onClick={copyBankDetails}
-              className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-
+              className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
+            >
+              <ClipboardCopy size={16} className="mr-2" />
+              <span>Copier les coordonnées</span>
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default PaymentForm;
