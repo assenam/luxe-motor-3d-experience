@@ -8,11 +8,15 @@ const GoogleTranslateWidget: React.FC = () => {
     style.innerHTML = `
       #google_translate_element {
         position: fixed;
-        top: -50px;
-        left: -50px;
-        z-index: -1;
-        opacity: 0.01;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+        opacity: 0.1;
         pointer-events: none;
+        background: white;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 12px;
       }
       .goog-te-banner-frame {
         display: none !important;
@@ -24,12 +28,10 @@ const GoogleTranslateWidget: React.FC = () => {
         top: 0 !important;
       }
       .goog-te-combo {
-        position: fixed;
-        top: -100px;
-        left: -100px;
-        opacity: 0.01;
-        pointer-events: auto;
-        z-index: 1;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 10000 !important;
+        font-size: 12px !important;
       }
       .skiptranslate {
         display: none !important;
@@ -46,6 +48,9 @@ const GoogleTranslateWidget: React.FC = () => {
       .goog-text-highlight {
         background-color: transparent !important;
         box-shadow: none !important;
+      }
+      .goog-te-spinner-pos {
+        display: none !important;
       }
     `;
     document.head.appendChild(style);
