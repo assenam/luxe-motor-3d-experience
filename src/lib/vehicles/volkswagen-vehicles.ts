@@ -320,5 +320,88 @@ export const volkswagenVehicles: Vehicle[] = [
       engine: [],
       details: []
     }
+  },
+  {
+    id: "volkswagen-tiguan-r-line-ehybrid-2022-001",
+    brand: "Volkswagen",
+    model: "Tiguan R-Line eHybrid",
+    year: 2022,
+    price: 19000,
+    mileage: 17343,
+    engineType: "eHybrid 1.4 TSI 245 ch",
+    transmission: "Automatique DSG",
+    exteriorColor: "Blanc Pur",
+    interiorColor: "Noir Cuir Premium",
+    description: "Volkswagen Tiguan R-Line eHybrid 2022, SUV hybride rechargeable avec finition sportive R-Line. Véhicule récent avec très faible kilométrage certifié de seulement 17 343 km. Motorisation hybride performante de 245 ch combinant efficacité énergétique et dynamisme. Équipements premium avec toit panoramique, sellerie cuir et transmission DSG automatique. Parfait compromis entre écologie et sportivité.",
+    features: [
+      "Finition R-Line sportive",
+      "Motorisation eHybrid rechargeable",
+      "Moteur 1.4 TSI 245 ch",
+      "Transmission automatique DSG",
+      "Toit panoramique",
+      "Sellerie cuir premium",
+      "Kilométrage certifié 17 343 km",
+      "Climatisation automatique tri-zone",
+      "Système de navigation",
+      "Écran tactile multimédia",
+      "Digital Cockpit Pro",
+      "Bluetooth et connectivité",
+      "Jantes alliage R-Line",
+      "Phares LED Matrix",
+      "Feux arrière LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse adaptatif",
+      "Volant sport R-Line multifonctions",
+      "Sièges sport cuir chauffants",
+      "Banquette arrière rabattable",
+      "Coffre modulable",
+      "Système audio premium",
+      "Ordinateur de bord avancé",
+      "Direction assistée progressive",
+      "Kit carrosserie R-Line",
+      "Barres de toit",
+      "Vitres teintées",
+      "Rétroviseurs électriques chauffants",
+      "Verrouillage centralisé",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Contrôle de traction",
+      "Mode de conduite sélectionnable",
+      "Rechargeable hybride",
+      "Consommation réduite",
+      "Freinage régénératif",
+      "Mode 100% électrique"
+    ],
+    mainImage: "/lovable-uploads/01993583-dfef-4f89-b4c9-550b9530fea6.png",
+    images: [
+      "/lovable-uploads/5882ac8f-f3ee-432d-ad67-aa9c30a804ee.png",
+      "/lovable-uploads/fc355e68-0dd0-41b6-b674-2e1568086eb9.png",
+      "/lovable-uploads/932a1c35-8f5c-4c90-996d-31902ce4e75b.png",
+      "/lovable-uploads/87bfb427-17d1-4a9e-968b-f804dbcfe72f.png",
+      "/lovable-uploads/6e05958c-2e6e-494d-a257-9f2f3f62ef12.png",
+      "/lovable-uploads/35322e54-b9fd-488d-aa81-70d74bc86ef1.png",
+      "/lovable-uploads/3e365d97-ad2d-4fde-9f67-231696f1c0a3.png",
+      "/lovable-uploads/220f2b62-15d5-454d-b993-73461f65d388.png",
+      "/lovable-uploads/c2c87e76-4377-4ee1-80ba-680dc4d4f3d0.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/01993583-dfef-4f89-b4c9-550b9530fea6.png",
+        "/lovable-uploads/5882ac8f-f3ee-432d-ad67-aa9c30a804ee.png",
+        "/lovable-uploads/fc355e68-0dd0-41b6-b674-2e1568086eb9.png",
+        "/lovable-uploads/932a1c35-8f5c-4c90-996d-31902ce4e75b.png",
+        "/lovable-uploads/87bfb427-17d1-4a9e-968b-f804dbcfe72f.png"
+      ],
+      interior: [
+        "/lovable-uploads/6e05958c-2e6e-494d-a257-9f2f3f62ef12.png",
+        "/lovable-uploads/35322e54-b9fd-488d-aa81-70d74bc86ef1.png",
+        "/lovable-uploads/3e365d97-ad2d-4fde-9f67-231696f1c0a3.png",
+        "/lovable-uploads/c2c87e76-4377-4ee1-80ba-680dc4d4f3d0.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/220f2b62-15d5-454d-b993-73461f65d388.png"
+      ]
+    }
   }
 ];
