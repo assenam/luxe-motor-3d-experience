@@ -32,58 +32,56 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     setSelectedLang(currentLang);
   }, [currentLang]);
 
-  useEffect(() => {
-    const waitForTranslateCombo = (callback: (combo: HTMLSelectElement) => void) => {
-      const interval = setInterval(() => {
-        const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-        if (combo) {
-          clearInterval(interval);
-          callback(combo);
-        }
-      }, 300);
-    };
-
-    const selector = document.getElementById('languageSelector') as HTMLSelectElement;
+  const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const lang = event.target.value;
+    console.log('Language selector changed to:', lang);
     
-    if (selector) {
-      const handleChange = () => {
-        const lang = selector.value;
-        if (lang) {
-          waitForTranslateCombo((combo) => {
+    if (lang) {
+      setSelectedLang(lang);
+      
+      // Attendre que Google Translate soit chargé
+      const waitForTranslateCombo = () => {
+        const interval = setInterval(() => {
+          const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+          if (combo) {
+            clearInterval(interval);
+            console.log('Google Translate combo found, changing to:', lang);
             combo.value = lang;
             combo.dispatchEvent(new Event('change'));
-
-            // Met à jour l'URL sans recharger
+            
+            // Met à jour l'URL
             const url = new URL(window.location.href);
             url.searchParams.set('lang', lang);
             window.history.replaceState({}, '', url);
-          });
-          
-          setSelectedLang(lang);
-          onLanguageChange(lang);
-        }
+          }
+        }, 100);
+        
+        // Timeout après 5 secondes
+        setTimeout(() => {
+          clearInterval(interval);
+          console.log('Timeout waiting for Google Translate combo');
+        }, 5000);
       };
 
-      selector.addEventListener('change', handleChange);
-      
-      return () => {
-        selector.removeEventListener('change', handleChange);
-      };
+      waitForTranslateCombo();
+      onLanguageChange(lang);
     }
-  }, [onLanguageChange]);
+  };
 
   return (
     <div id="custom-translate" className="flex items-center space-x-2 text-sm">
-      <span>🌐 Langue :</span>
+      <span className="hidden md:inline">🌐 Langue :</span>
+      <span className="md:hidden">🌐</span>
       <select 
         id="languageSelector"
         value={selectedLang}
-        className="bg-transparent border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-age-red"
+        onChange={handleLanguageChange}
+        className="bg-transparent border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-age-red min-w-[120px]"
       >
         <option value="">Sélectionner</option>
         {languages.map((language) => (
           <option key={language.code} value={language.code}>
-            {language.name}
+            {language.flag} {language.name}
           </option>
         ))}
       </select>
