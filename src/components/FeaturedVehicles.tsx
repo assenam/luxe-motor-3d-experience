@@ -46,6 +46,9 @@ const FeaturedVehicles = () => {
     );
   }
 
+  // Afficher seulement les 6 premiers véhicules
+  const featuredVehicles = vehicles.slice(0, 6);
+
   return (
     <section id="discover" className="section-padding bg-white">
       <div className="container-luxe">
@@ -57,17 +60,30 @@ const FeaturedVehicles = () => {
           <div className="w-24 h-px bg-luxe-gold mx-auto mt-6"></div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {vehicles.map((vehicle, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+          {featuredVehicles.map((vehicle, index) => (
             <VehicleCard key={vehicle.id} vehicle={vehicle} index={index} />
           ))}
         </div>
         
-        <div className="mt-16 text-center">
-          <Link to="/vehicles" className="premium-button">
-            Explorer Tous les Véhicules
-          </Link>
-        </div>
+        {vehicles.length > 6 && (
+          <div className="mt-16 text-center">
+            <p className="text-luxe-lightgray mb-4">
+              {vehicles.length - 6} autres véhicules disponibles
+            </p>
+            <Link to="/vehicles" className="premium-button">
+              Explorer Tous les Véhicules
+            </Link>
+          </div>
+        )}
+        
+        {vehicles.length <= 6 && (
+          <div className="mt-16 text-center">
+            <Link to="/vehicles" className="premium-button">
+              Explorer Tous les Véhicules
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
