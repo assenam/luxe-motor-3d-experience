@@ -165,5 +165,72 @@ export const audiVehicles: Vehicle[] = [
       engine: [],
       details: []
     }
+  },
+  {
+    id: "audi-a7-sportback-2018-001",
+    brand: "Audi",
+    model: "A7 Sportback 3.0 TDI Quattro S tronic",
+    year: 2018,
+    price: 16900,
+    mileage: 96772,
+    engineType: "3.0 TDI V6 272 CV",
+    transmission: "S tronic Quattro",
+    exteriorColor: "Noir Brillant",
+    interiorColor: "Noir avec finitions Alcantara",
+    description: "Audi A7 Sportback 3.0 TDI Quattro S tronic 2018, berline coupé d'exception alliant élégance et performance. Moteur V6 TDI de 272 CV avec transmission S tronic et traction intégrale Quattro. Design sophistiqué avec ligne de toit coupé et intérieur premium. Véhicule parfait pour allier confort, technologie et dynamisme de conduite.",
+    features: [
+      "Moteur 3.0 TDI V6 272 CV",
+      "Transmission S tronic 7 rapports",
+      "Traction intégrale Quattro",
+      "Suspension pneumatique adaptative",
+      "Cockpit virtuel Audi",
+      "Système MMI touch",
+      "Navigation plus avec cartes 3D",
+      "Climatisation automatique tri-zone",
+      "Sièges sport avec réglages électriques",
+      "Volant multifonctions cuir",
+      "Système audio premium",
+      "Bluetooth et connectivité smartphone",
+      "Jantes alliage 19 pouces",
+      "Phares LED Matrix",
+      "Feux arrière LED dynamiques",
+      "Aide au stationnement avec caméra",
+      "Régulateur de vitesse adaptatif",
+      "Assistant de changement de voie",
+      "Détection des panneaux de signalisation",
+      "Hayon électrique",
+      "Rétroviseurs rabattables électriquement"
+    ],
+    mainImage: "/lovable-uploads/1ccc842b-da3d-493d-a617-cb79a8a6786f.png",
+    images: [
+      "/lovable-uploads/a1ca0a98-1829-40a3-bcd0-fbdca2de450a.png",
+      "/lovable-uploads/d4efdb92-f7ac-4ae7-9a2e-22e5a41d1acd.png",
+      "/lovable-uploads/7e6089ac-e2ad-4bf9-896d-33b1bbf7ff47.png",
+      "/lovable-uploads/fd6d3906-e2d2-4a37-90e2-00d7424beb66.png",
+      "/lovable-uploads/66a1f6f7-fc8d-4fc9-a262-cf6ea63c7d1b.png",
+      "/lovable-uploads/ee0020ec-d9e4-4e46-a298-30683a9445c0.png",
+      "/lovable-uploads/e7b5e002-0c9e-4867-8838-48da049f706e.png",
+      "/lovable-uploads/d19bf543-f210-4840-b166-2ab02a374b43.png",
+      "/lovable-uploads/2cfc1729-33cc-419e-9a00-179dcaf42de5.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/1ccc842b-da3d-493d-a617-cb79a8a6786f.png",
+        "/lovable-uploads/a1ca0a98-1829-40a3-bcd0-fbdca2de450a.png",
+        "/lovable-uploads/d4efdb92-f7ac-4ae7-9a2e-22e5a41d1acd.png",
+        "/lovable-uploads/7e6089ac-e2ad-4bf9-896d-33b1bbf7ff47.png"
+      ],
+      interior: [
+        "/lovable-uploads/fd6d3906-e2d2-4a37-90e2-00d7424beb66.png",
+        "/lovable-uploads/66a1f6f7-fc8d-4fc9-a262-cf6ea63c7d1b.png",
+        "/lovable-uploads/ee0020ec-d9e4-4e46-a298-30683a9445c0.png",
+        "/lovable-uploads/e7b5e002-0c9e-4867-8838-48da049f706e.png",
+        "/lovable-uploads/d19bf543-f210-4840-b166-2ab02a374b43.png"
+      ],
+      engine: [
+        "/lovable-uploads/2cfc1729-33cc-419e-9a00-179dcaf42de5.png"
+      ],
+      details: []
+    }
   }
 ];
