@@ -1,13 +1,15 @@
+
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Check, Clock, FileText, Home, ArrowRight, FileCheck } from 'lucide-react';
+import { Check, Clock, FileText, Home, ArrowRight, FileCheck, AlertTriangle } from 'lucide-react';
 import { Vehicle } from '@/lib/data';
 
 type OrderInfo = {
   vehicle: Vehicle;
   customerInfo: any;
+  depositAmount: number;
 };
 
 const PaymentConfirmation = () => {
@@ -27,8 +29,8 @@ const PaymentConfirmation = () => {
   
   if (!order) return null;
   
-  const { vehicle, customerInfo } = order;
-  const depositAmount = vehicle.price * 0.2;
+  const { vehicle, customerInfo, depositAmount } = order;
+  const hasPaymentProof = customerInfo.paymentProofUploaded;
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -38,17 +40,40 @@ const PaymentConfirmation = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-white p-6 md:p-8 rounded-sm shadow-sm mb-8 md:mb-12">
             <div className="flex justify-center mb-6 md:mb-8">
-              <div className="h-20 md:h-24 w-20 md:w-24 rounded-full bg-green-100 flex items-center justify-center">
-                <Check className="h-10 md:h-12 w-10 md:w-12 text-green-600" />
+              <div className={`h-20 md:h-24 w-20 md:w-24 rounded-full flex items-center justify-center ${
+                hasPaymentProof ? 'bg-green-100' : 'bg-yellow-100'
+              }`}>
+                {hasPaymentProof ? (
+                  <Check className="h-10 md:h-12 w-10 md:w-12 text-green-600" />
+                ) : (
+                  <AlertTriangle className="h-10 md:h-12 w-10 md:w-12 text-yellow-600" />
+                )}
               </div>
             </div>
             
             <h1 className="text-2xl md:text-3xl font-playfair font-semibold text-center mb-3 md:mb-4">
-              Merci pour votre commande !
+              {hasPaymentProof ? 'Merci pour votre commande !' : 'Commande reçue !'}
             </h1>
             <p className="text-center text-gray-600 mb-6 md:mb-8 max-w-lg mx-auto">
-              Votre demande d'achat a été enregistrée avec succès. {customerInfo.paymentProofUploaded ? 'Nous avons bien reçu votre preuve de paiement.' : 'Nous vous contacterons dès réception de votre virement d\'acompte.'}
+              {hasPaymentProof 
+                ? 'Votre demande d\'achat a été enregistrée avec succès. Nous avons bien reçu votre preuve de paiement et traiterons votre commande dans les plus brefs délais.'
+                : 'Votre demande d\'achat a été enregistrée. Pour finaliser votre commande, veuillez effectuer le virement et nous envoyer la preuve de paiement.'
+              }
             </p>
+
+            {!hasPaymentProof && (
+              <div className="bg-yellow-50 border border-yellow-200 rounded p-4 mb-6">
+                <div className="flex items-start">
+                  <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 mr-3 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-medium text-yellow-800">Action requise</h3>
+                    <p className="text-sm text-yellow-700 mt-1">
+                      Votre commande ne sera pas validée tant que nous n'aurons pas reçu la preuve de votre virement d'acompte.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
             
             <div className="max-h-[60vh] overflow-auto">
               <div className="border border-gray-200 rounded-sm p-5 md:p-6 mb-6 md:mb-8">
@@ -102,7 +127,7 @@ const PaymentConfirmation = () => {
                         <span className="text-gray-600">Référence</span>
                         <span>{customerInfo.transferReference}</span>
                       </div>
-                      {customerInfo.paymentProofUploaded && (
+                      {hasPaymentProof && (
                         <div className="flex items-center mt-2 text-green-600">
                           <FileCheck size={16} className="mr-1" />
                           <span className="text-sm">Preuve de paiement transmise</span>
@@ -119,22 +144,33 @@ const PaymentConfirmation = () => {
                   Prochaines étapes
                 </h3>
                 <ol className="space-y-4">
-                  {!customerInfo.paymentProofUploaded && (
-                    <li className="flex">
-                      <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</div>
-                      <div>
-                        <p className="font-medium">Effectuer le virement bancaire</p>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Veuillez effectuer votre virement d'acompte de {depositAmount.toLocaleString('fr-FR')} € en utilisant la référence {customerInfo.transferReference}.
-                        </p>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Cet acompte couvre la garantie, le transport et les taxes douanières.
-                        </p>
-                      </div>
-                    </li>
+                  {!hasPaymentProof && (
+                    <>
+                      <li className="flex">
+                        <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</div>
+                        <div>
+                          <p className="font-medium">Effectuer le virement bancaire</p>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Veuillez effectuer votre virement d'acompte de {depositAmount.toLocaleString('fr-FR')} € en utilisant la référence {customerInfo.transferReference}.
+                          </p>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Cet acompte couvre la garantie, le transport et les taxes douanières.
+                          </p>
+                        </div>
+                      </li>
+                      <li className="flex">
+                        <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">2</div>
+                        <div>
+                          <p className="font-medium">Envoyer la preuve de paiement</p>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Envoyez-nous une capture d'écran ou photo de votre virement par email pour validation.
+                          </p>
+                        </div>
+                      </li>
+                    </>
                   )}
                   <li className="flex">
-                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{customerInfo.paymentProofUploaded ? '1' : '2'}</div>
+                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{hasPaymentProof ? '1' : '3'}</div>
                     <div>
                       <p className="font-medium">Confirmation de réception</p>
                       <p className="text-sm text-gray-600 mt-1">
@@ -143,7 +179,7 @@ const PaymentConfirmation = () => {
                     </div>
                   </li>
                   <li className="flex">
-                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{customerInfo.paymentProofUploaded ? '2' : '3'}</div>
+                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{hasPaymentProof ? '2' : '4'}</div>
                     <div>
                       <p className="font-medium">Préparation et livraison</p>
                       <p className="text-sm text-gray-600 mt-1">
@@ -152,7 +188,7 @@ const PaymentConfirmation = () => {
                     </div>
                   </li>
                   <li className="flex">
-                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{customerInfo.paymentProofUploaded ? '3' : '4'}</div>
+                    <div className="bg-luxe-gold text-white h-6 w-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">{hasPaymentProof ? '3' : '5'}</div>
                     <div>
                       <p className="font-medium">Paiement du solde</p>
                       <p className="text-sm text-gray-600 mt-1">

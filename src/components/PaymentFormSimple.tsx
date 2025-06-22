@@ -12,6 +12,10 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Upload } from "lucide-react";
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const formSchema = z.object({
   firstName: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
@@ -21,9 +25,21 @@ const formSchema = z.object({
   address: z.string().min(5, "Adresse requise"),
   city: z.string().min(2, "Ville requise"),
   postalCode: z.string().min(5, "Code postal requis"),
+  country: z.string().min(2, "Pays requis"),
   transferReference: z.string().min(1, "Référence de virement requise"),
   notes: z.string().optional(),
   termsAccepted: z.boolean().refine(val => val === true, "Vous devez accepter les conditions"),
+  paymentProof: z
+    .any()
+    .optional()
+    .refine((file) => {
+      if (!file) return true; // Optional field
+      return file?.size <= MAX_FILE_SIZE;
+    }, "La taille du fichier doit être inférieure à 5MB")
+    .refine((file) => {
+      if (!file) return true; // Optional field
+      return ACCEPTED_IMAGE_TYPES.includes(file?.type);
+    }, "Seuls les formats .jpg, .jpeg, .png et .webp sont acceptés"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -36,6 +52,7 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -47,6 +64,7 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
       address: "",
       city: "",
       postalCode: "",
+      country: "France",
       transferReference: `AGE-${vehicle.id}-${Date.now().toString().slice(-6)}`,
       notes: "",
       termsAccepted: false,
@@ -59,6 +77,14 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
 
   const depositAmount = calculateDeposit(vehicle.price);
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      form.setValue('paymentProof', file);
+    }
+  };
+
   const onSubmit = async (values: FormData) => {
     setIsSubmitting(true);
     
@@ -66,16 +92,23 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      const hasPaymentProof = selectedFile !== null;
+      
       toast({
         title: "Commande envoyée avec succès !",
-        description: "Nous avons bien reçu votre commande. Vous recevrez une confirmation par email.",
+        description: hasPaymentProof 
+          ? "Nous avons bien reçu votre commande et votre preuve de paiement. Vous recevrez une confirmation par email."
+          : "Nous avons bien reçu votre commande. N'oubliez pas d'effectuer le virement et de nous envoyer la preuve de paiement.",
       });
 
       navigate('/payment-confirmation', { 
         state: { 
           order: { 
             vehicle, 
-            customerInfo: values,
+            customerInfo: {
+              ...values,
+              paymentProofUploaded: hasPaymentProof
+            },
             depositAmount 
           } 
         } 
@@ -209,8 +242,8 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
                   )}
                 />
 
-                {/* Ville et Code postal */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Ville, Code postal et Pays */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
                     name="city"
@@ -238,6 +271,20 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
                       </FormItem>
                     )}
                   />
+
+                  <FormField
+                    control={form.control}
+                    name="country"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Pays *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="France" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 {/* Référence de virement */}
@@ -249,6 +296,42 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
                       <FormLabel>Référence de virement *</FormLabel>
                       <FormControl>
                         <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload de preuve de paiement */}
+                <FormField
+                  control={form.control}
+                  name="paymentProof"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Preuve de paiement (optionnel)</FormLabel>
+                      <FormControl>
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                          <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                          <div className="space-y-2">
+                            <p className="text-sm text-gray-600">
+                              Cliquez pour télécharger ou glissez-déposez
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              PNG, JPG, JPEG ou WEBP (max. 5MB)
+                            </p>
+                            {selectedFile && (
+                              <p className="text-sm text-green-600 font-medium">
+                                Fichier sélectionné: {selectedFile.name}
+                              </p>
+                            )}
+                          </div>
+                          <input
+                            type="file"
+                            accept={ACCEPTED_IMAGE_TYPES.join(",")}
+                            onChange={handleFileChange}
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                          />
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -322,6 +405,13 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
               <p className="text-sm">Titulaire : AUTO GERMANY EXPORT SARL</p>
               <p className="text-sm">IBAN : FR76 XXXX XXXX XXXX XXXX XXXX XXX</p>
               <p className="text-sm">BIC : XXXXXXXX</p>
+            </div>
+            <div className="bg-blue-50 p-4 rounded mt-4">
+              <h4 className="font-medium text-blue-800 mb-2">Important :</h4>
+              <p className="text-sm text-blue-700">
+                Votre commande ne sera validée qu'après réception et vérification de votre preuve de paiement. 
+                Vous pouvez l'ajouter directement dans le formulaire ci-dessus ou nous l'envoyer par email après votre commande.
+              </p>
             </div>
             <p className="text-sm text-gray-600 mt-4">
               Veuillez effectuer le virement de l'acompte de {depositAmount.toLocaleString()} € en utilisant la référence fournie. 
