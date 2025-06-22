@@ -3,20 +3,11 @@ import React, { useEffect } from 'react';
 
 const GoogleTranslateWidget: React.FC = () => {
   useEffect(() => {
-    // Style the Google Translate widget to be less intrusive but still functional
+    // Style the Google Translate widget to be completely hidden but functional
     const style = document.createElement('style');
     style.innerHTML = `
       #google_translate_element {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 9999;
-        opacity: 0.1;
-        pointer-events: none;
-        background: white;
-        padding: 5px;
-        border-radius: 4px;
-        font-size: 12px;
+        display: none !important;
       }
       .goog-te-banner-frame {
         display: none !important;
@@ -28,10 +19,7 @@ const GoogleTranslateWidget: React.FC = () => {
         top: 0 !important;
       }
       .goog-te-combo {
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        z-index: 10000 !important;
-        font-size: 12px !important;
+        display: none !important;
       }
       .skiptranslate {
         display: none !important;
@@ -62,7 +50,7 @@ const GoogleTranslateWidget: React.FC = () => {
     };
   }, []);
 
-  return <div id="google_translate_element"></div>;
+  return <div id="google_translate_element" style={{ display: 'none' }}></div>;
 };
 
 export default GoogleTranslateWidget;

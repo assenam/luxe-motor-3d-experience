@@ -19,7 +19,7 @@ export const useGoogleTranslate = () => {
     // Extract language from URL
     const pathParts = location.pathname.split('/');
     const langFromUrl = pathParts[1];
-    const supportedLangs = ['fr', 'en', 'de', 'es', 'it', 'pt', 'ar'];
+    const supportedLangs = ['fr', 'en', 'es', 'it', 'de', 'pt', 'nl', 'da', 'sv', 'no', 'ja', 'zh-CN', 'ru'];
     
     if (supportedLangs.includes(langFromUrl)) {
       setCurrentLang(langFromUrl);
@@ -46,7 +46,7 @@ export const useGoogleTranslate = () => {
         
         new window.google.translate.TranslateElement({
           pageLanguage: 'fr',
-          includedLanguages: 'fr,en,de,es,it,pt,ar',
+          includedLanguages: 'fr,en,es,it,de,pt,nl,da,sv,no,ja,zh-CN,ru',
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
           autoDisplay: false,
           multilanguagePage: true
@@ -60,7 +60,7 @@ export const useGoogleTranslate = () => {
     loadGoogleTranslate();
   }, []);
 
-  const waitForSelectElement = (maxAttempts = 20): Promise<HTMLSelectElement | null> => {
+  const waitForSelectElement = (maxAttempts = 30): Promise<HTMLSelectElement | null> => {
     return new Promise((resolve) => {
       let attempts = 0;
       const checkForElement = () => {
@@ -85,7 +85,7 @@ export const useGoogleTranslate = () => {
     
     // Update URL first
     const pathParts = location.pathname.split('/');
-    const supportedLangs = ['fr', 'en', 'de', 'es', 'it', 'pt', 'ar'];
+    const supportedLangs = ['fr', 'en', 'es', 'it', 'de', 'pt', 'nl', 'da', 'sv', 'no', 'ja', 'zh-CN', 'ru'];
     
     let newPath;
     if (supportedLangs.includes(pathParts[1])) {
@@ -106,22 +106,10 @@ export const useGoogleTranslate = () => {
       const selectElement = await waitForSelectElement();
       
       if (selectElement) {
-        // Map language codes for Google Translate
-        const langMap: { [key: string]: string } = {
-          'fr': 'fr',
-          'en': 'en',
-          'de': 'de', 
-          'es': 'es',
-          'it': 'it',
-          'pt': 'pt',
-          'ar': 'ar'
-        };
-        
-        const targetLang = langMap[newLang] || newLang;
-        console.log('Setting Google Translate to:', targetLang);
+        console.log('Setting Google Translate to:', newLang);
         
         // Set the value and trigger change
-        selectElement.value = targetLang;
+        selectElement.value = newLang;
         
         // Try multiple event types to ensure the translation triggers
         const events = ['change', 'input', 'click'];
@@ -130,12 +118,15 @@ export const useGoogleTranslate = () => {
           selectElement.dispatchEvent(event);
         });
         
-        console.log('Language changed to:', targetLang);
+        console.log('Language changed to:', newLang);
       } else {
         console.log('Could not find Google Translate select element, using fallback method');
         // Fallback: try to use Google Translate API directly
         if (window.google?.translate?.TranslateElement) {
-          window.google.translate.TranslateElement.getInstance()?.setLanguagePair('fr', newLang);
+          const instance = window.google.translate.TranslateElement.getInstance();
+          if (instance) {
+            instance.setLanguagePair('fr', newLang);
+          }
         }
       }
     } else {

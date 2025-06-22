@@ -1,29 +1,21 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Globe, ChevronDown } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-declare global {
-  interface Window {
-    google: any;
-    googleTranslateElementInit: () => void;
-  }
-}
 
 const languages = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'pt', name: 'Português', flag: '🇵🇹' },
-  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+  { code: 'da', name: 'Dansk', flag: '🇩🇰' },
+  { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+  { code: 'no', name: 'Norsk', flag: '🇳🇴' },
+  { code: 'ja', name: '日本語', flag: '🇯🇵' },
+  { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳' },
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
 ];
 
 interface LanguageSelectorProps {
@@ -35,43 +27,37 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   currentLang, 
   onLanguageChange 
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  
-  const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
+  const [selectedLang, setSelectedLang] = useState(currentLang);
 
-  const handleLanguageSelect = (langCode: string) => {
-    onLanguageChange(langCode);
-    setIsOpen(false);
+  useEffect(() => {
+    setSelectedLang(currentLang);
+  }, [currentLang]);
+
+  const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newLang = event.target.value;
+    if (newLang && newLang !== selectedLang) {
+      setSelectedLang(newLang);
+      onLanguageChange(newLang);
+    }
   };
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger asChild>
-        <button 
-          className="flex items-center space-x-2 hover:text-age-red transition-colors"
-          aria-label="Sélectionner la langue"
-        >
-          <Globe size={18} />
-          <span className="hidden md:inline text-sm">{currentLanguage.flag} {currentLanguage.name}</span>
-          <span className="md:hidden text-sm">{currentLanguage.flag}</span>
-          <ChevronDown size={14} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[150px]">
+    <div id="custom-translate" className="flex items-center space-x-2 text-sm">
+      <span>🌐 Langue :</span>
+      <select 
+        id="languageSelector"
+        value={selectedLang}
+        onChange={handleLanguageChange}
+        className="bg-transparent border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-age-red"
+      >
+        <option value="">Sélectionner</option>
         {languages.map((language) => (
-          <DropdownMenuItem
-            key={language.code}
-            onClick={() => handleLanguageSelect(language.code)}
-            className={`flex items-center space-x-2 cursor-pointer ${
-              currentLang === language.code ? 'bg-age-red/10' : ''
-            }`}
-          >
-            <span>{language.flag}</span>
-            <span>{language.name}</span>
-          </DropdownMenuItem>
+          <option key={language.code} value={language.code}>
+            {language.name}
+          </option>
         ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </select>
+    </div>
   );
 };
 
