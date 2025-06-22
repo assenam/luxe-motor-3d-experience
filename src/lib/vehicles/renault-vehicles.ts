@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const renaultVehicles: Vehicle[] = [
@@ -119,6 +118,70 @@ export const renaultVehicles: Vehicle[] = [
       details: [
         "/lovable-uploads/5e4359cc-f123-46ea-bc1b-23b9c785adc7.png",
         "/lovable-uploads/63a170f7-3b2d-4ee4-b207-8c228a8d7a30.png"
+      ]
+    }
+  },
+  {
+    id: "renault-clio-5-2022-001",
+    brand: "Renault",
+    model: "Clio 5 1.0 TCe 90 Evolution",
+    year: 2022,
+    price: 11300,
+    mileage: 49120,
+    engineType: "1.0 TCe 90 ch",
+    transmission: "Manuelle",
+    exteriorColor: "Bleu",
+    interiorColor: "Noir/Gris",
+    description: "Renault Clio 5 1.0 TCe 90 Evolution 2022 en parfait état général. Berline moderne très économique avec motorisation essence turbo de 90 ch et transmission manuelle. Véhicule récent mis en circulation en décembre 2022, idéal pour les trajets urbains et routiers. Disponible sur réservation avec livraison assurée par notre équipe.",
+    features: [
+      "Moteur 1.0 TCe 90 ch turbo essence",
+      "Transmission manuelle 5 vitesses",
+      "Berline 5 portes",
+      "Très économique",
+      "Mise en circulation 12/2022",
+      "Véhicule récent",
+      "Parfait état général",
+      "Climatisation",
+      "Système multimédia",
+      "Bluetooth",
+      "USB/AUX",
+      "Direction assistée",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Ordinateur de bord",
+      "Feux LED de jour",
+      "Jantes alliage",
+      "Régulateur de vitesse",
+      "Start & Stop",
+      "Livraison assurée"
+    ],
+    mainImage: "/lovable-uploads/f44da8f7-a953-416d-9d91-8c7a1b2a0e4f.png",
+    images: [
+      "/lovable-uploads/d03ff020-f08e-4471-9630-ff6be225ae36.png",
+      "/lovable-uploads/0dff5c81-41ca-4ae7-9197-ea736ba7887f.png",
+      "/lovable-uploads/05cf959c-c822-4e7f-8e58-6e19da901e42.png",
+      "/lovable-uploads/01565461-ceed-4bce-bbcc-f21799581b93.png",
+      "/lovable-uploads/55bc878a-fda9-4f97-a557-c77dbad554c4.png",
+      "/lovable-uploads/4b79dadc-a0ba-4d39-8f14-0d6ab7caef45.png",
+      "/lovable-uploads/1c0e7d93-ffd1-488c-9c08-cbb68f2aeb19.png",
+      "/lovable-uploads/e01dd411-d574-4f3f-9a09-8f0750bf5e78.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/f44da8f7-a953-416d-9d91-8c7a1b2a0e4f.png",
+        "/lovable-uploads/d03ff020-f08e-4471-9630-ff6be225ae36.png",
+        "/lovable-uploads/55bc878a-fda9-4f97-a557-c77dbad554c4.png",
+        "/lovable-uploads/4b79dadc-a0ba-4d39-8f14-0d6ab7caef45.png",
+        "/lovable-uploads/1c0e7d93-ffd1-488c-9c08-cbb68f2aeb19.png",
+        "/lovable-uploads/e01dd411-d574-4f3f-9a09-8f0750bf5e78.png"
+      ],
+      interior: [
+        "/lovable-uploads/0dff5c81-41ca-4ae7-9197-ea736ba7887f.png",
+        "/lovable-uploads/01565461-ceed-4bce-bbcc-f21799581b93.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/05cf959c-c822-4e7f-8e58-6e19da901e42.png"
       ]
     }
   }
