@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const landRoverVehicles: Vehicle[] = [
@@ -70,6 +69,77 @@ export const landRoverVehicles: Vehicle[] = [
       ],
       engine: [],
       details: []
+    }
+  },
+  {
+    id: "land-rover-range-rover-evoque-p250-2024-001",
+    brand: "Land Rover",
+    model: "Range Rover Evoque P250 Dynamic",
+    year: 2024,
+    price: 14800,
+    mileage: 240000,
+    engineType: "P250 2.0L Turbo 200ch",
+    transmission: "Automatique",
+    exteriorColor: "Bleu Byron",
+    interiorColor: "Intérieur noir cuir",
+    description: "Range Rover Evoque P250 Dynamic 2024 en excellent état. SUV compact premium avec motorisation P250 de 200 ch et design moderne. Véhicule récent avec toutes les technologies de dernière génération et finition Dynamic haut de gamme. Kilométrage de 240 000 km, entretien suivi.",
+    features: [
+      "Finition Dynamic",
+      "Moteur P250 2.0L Turbo 200ch",
+      "Transmission automatique",
+      "Toit panoramique",
+      "Écran tactile InControl Touch Pro",
+      "Système de navigation",
+      "Climatisation automatique bi-zone",
+      "Sièges chauffants",
+      "Système audio premium",
+      "Bluetooth et connectivité",
+      "Jantes alliage 20 pouces",
+      "Feux LED Matrix",
+      "Aide au stationnement",
+      "Caméra de recul 360°",
+      "Régulateur de vitesse adaptatif",
+      "Suspension pneumatique adaptative",
+      "Modes de conduite Terrain Response",
+      "Volant multifonctions chauffant",
+      "Démarrage sans clé",
+      "Rétroviseurs électriques rabattables",
+      "Vitres électriques",
+      "Ordinateur de bord",
+      "Capteurs de stationnement avant/arrière",
+      "Contrôle de stabilité électronique",
+      "Coffre électrique"
+    ],
+    mainImage: "/lovable-uploads/c446061f-6be9-4397-aecf-cb3c8048c168.png",
+    images: [
+      "/lovable-uploads/559da07d-3ab1-499c-80d7-4765cd7768ff.png",
+      "/lovable-uploads/8b7c7a23-f6d2-4903-bbb3-e5ff8ddf59a5.png",
+      "/lovable-uploads/7daf3822-7841-4d66-a4f4-ea956a3f249e.png",
+      "/lovable-uploads/e1098ed6-527d-4426-b5eb-7bdaac37e500.png",
+      "/lovable-uploads/332c1854-2250-41d2-9d98-3793cb246029.png",
+      "/lovable-uploads/7c813d68-ec95-45c4-9f6d-5bd849922f1e.png",
+      "/lovable-uploads/8d2c51ec-c564-43a8-980f-95d87afad5b7.png",
+      "/lovable-uploads/e4e0bd0f-7a94-4c49-af1a-b627aaa5b827.png",
+      "/lovable-uploads/09b7b171-bcd2-4934-b73b-451d01d4c6f1.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/c446061f-6be9-4397-aecf-cb3c8048c168.png",
+        "/lovable-uploads/559da07d-3ab1-499c-80d7-4765cd7768ff.png",
+        "/lovable-uploads/8b7c7a23-f6d2-4903-bbb3-e5ff8ddf59a5.png"
+      ],
+      interior: [
+        "/lovable-uploads/7daf3822-7841-4d66-a4f4-ea956a3f249e.png",
+        "/lovable-uploads/e1098ed6-527d-4426-b5eb-7bdaac37e500.png",
+        "/lovable-uploads/332c1854-2250-41d2-9d98-3793cb246029.png",
+        "/lovable-uploads/7c813d68-ec95-45c4-9f6d-5bd849922f1e.png",
+        "/lovable-uploads/8d2c51ec-c564-43a8-980f-95d87afad5b7.png",
+        "/lovable-uploads/e4e0bd0f-7a94-4c49-af1a-b627aaa5b827.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/09b7b171-bcd2-4934-b73b-451d01d4c6f1.png"
+      ]
     }
   }
 ];
