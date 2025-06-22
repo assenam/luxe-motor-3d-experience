@@ -191,5 +191,77 @@ export const bmwVehicles: Vehicle[] = [
         "/lovable-uploads/4c000993-d0ed-415f-90b3-70f4aca59abb.png"
       ]
     }
+  },
+  {
+    id: "bmw-serie4-430i-m-performance-2019-001",
+    brand: "BMW",
+    model: "Série 4 430i M Performance xDrive Cabriolet",
+    year: 2019,
+    price: 10000,
+    mileage: 71000,
+    engineType: "2.0 430i 252 Ch",
+    transmission: "Automatique",
+    exteriorColor: "Blanc Alpin",
+    interiorColor: "Noir cuir",
+    description: "BMW Série 4 430i M Performance xDrive Cabriolet en excellent état. Véhicule premium avec motorisation diesel de 252 ch et transmission automatique. Équipée de nombreuses options haut de gamme : traction intégrale xDrive, pack M Performance, système Harman Kardon, cuir, navigation, caméra de recul, régulateur adaptatif, phares Xenon et bien plus. Entretien à jour et kilométrage certifié.",
+    features: [
+      "Pack M Performance",
+      "Traction intégrale xDrive",
+      "Cabriolet 4 places",
+      "Moteur diesel 252 ch",
+      "Transmission automatique",
+      "Régulateur adaptatif (ACC)",
+      "Système audio Harman Kardon",
+      "Sièges cuir",
+      "Système de navigation",
+      "Caméra de recul",
+      "Phares Xenon",
+      "Keyless Start/Stop",
+      "Bluetooth et connectivité",
+      "Points d'ancrage Isofix",
+      "Lecteur CD/AUX",
+      "Radio DAB+",
+      "Climatisation automatique",
+      "Cruise control",
+      "Jantes alliage M Performance",
+      "Toit électrique",
+      "Ordinateur de bord",
+      "Direction assistée",
+      "Rétroviseurs électriques chauffants",
+      "Entretien à jour",
+      "Kilométrage certifié",
+      "Homologation EU 26"
+    ],
+    mainImage: "/lovable-uploads/eac438d4-a418-4334-8a09-ef49ff05adc1.png",
+    images: [
+      "/lovable-uploads/f256ffc9-2ae9-428a-8515-4b2b37163d63.png",
+      "/lovable-uploads/e0205b16-7f7b-48bc-9f27-2ae9b85a11f0.png",
+      "/lovable-uploads/cb8ea444-b97d-4161-819a-ed99d4f9e6e9.png",
+      "/lovable-uploads/44a49b72-71a1-4815-88b7-62ce8568766d.png",
+      "/lovable-uploads/f05c1496-c9cf-4854-a8b3-bfcb8d5879da.png",
+      "/lovable-uploads/c28d5ff4-4a10-42e6-81c9-fed00e42f960.png",
+      "/lovable-uploads/bd90beb0-277e-4798-b380-051942b452e8.png",
+      "/lovable-uploads/4ff630b7-e358-428e-b0dc-bace40560e4e.png",
+      "/lovable-uploads/d76d09eb-68f9-454c-8918-db3af0070814.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/eac438d4-a418-4334-8a09-ef49ff05adc1.png",
+        "/lovable-uploads/f256ffc9-2ae9-428a-8515-4b2b37163d63.png",
+        "/lovable-uploads/e0205b16-7f7b-48bc-9f27-2ae9b85a11f0.png",
+        "/lovable-uploads/cb8ea444-b97d-4161-819a-ed99d4f9e6e9.png",
+        "/lovable-uploads/44a49b72-71a1-4815-88b7-62ce8568766d.png"
+      ],
+      interior: [
+        "/lovable-uploads/f05c1496-c9cf-4854-a8b3-bfcb8d5879da.png",
+        "/lovable-uploads/c28d5ff4-4a10-42e6-81c9-fed00e42f960.png",
+        "/lovable-uploads/4ff630b7-e358-428e-b0dc-bace40560e4e.png",
+        "/lovable-uploads/d76d09eb-68f9-454c-8918-db3af0070814.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/bd90beb0-277e-4798-b380-051942b452e8.png"
+      ]
+    }
   }
 ];
