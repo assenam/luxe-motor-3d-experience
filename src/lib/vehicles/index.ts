@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 import { audiVehicles } from './audi-vehicles';
 import { mercedesVehicles } from './mercedes-vehicles';
@@ -13,6 +12,7 @@ import { fordVehicles } from './ford-vehicles';
 import { volvoVehicles } from './volvo-vehicles';
 import { landRoverVehicles } from './land-rover-vehicles';
 import { lexusVehicles } from './lexus-vehicles';
+import { daciaVehicles } from './dacia-vehicles';
 
 // Catalogue complet avec tous les véhicules organisés par marque
 export const vehicles: Vehicle[] = [
@@ -28,7 +28,8 @@ export const vehicles: Vehicle[] = [
   ...fordVehicles,
   ...volvoVehicles,
   ...landRoverVehicles,
-  ...lexusVehicles
+  ...lexusVehicles,
+  ...daciaVehicles
 ];
 
 // Export des véhicules par marque pour un accès direct si nécessaire
@@ -45,5 +46,6 @@ export {
   fordVehicles,
   volvoVehicles,
   landRoverVehicles,
-  lexusVehicles
+  lexusVehicles,
+  daciaVehicles
 };
