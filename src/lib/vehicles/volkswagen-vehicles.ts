@@ -252,5 +252,73 @@ export const volkswagenVehicles: Vehicle[] = [
         "/lovable-uploads/e7cec0da-7b38-45bc-9202-3e55527897f1.png"
       ]
     }
+  },
+  {
+    id: "volkswagen-passat-variant-2016-001",
+    brand: "Volkswagen",
+    model: "Passat Variant Highline R-Line 4Motion",
+    year: 2016,
+    price: 5000,
+    mileage: 98900,
+    engineType: "2.0 TDI 176kW (239 ch)",
+    transmission: "Automatique",
+    exteriorColor: "Noir Deep Black Perlé",
+    interiorColor: "Noir cuir avec surpiqûres",
+    description: "Volkswagen Passat Variant Highline R-Line 4Motion 2016, break familial haut de gamme avec motorisation diesel puissante de 239 ch et transmission intégrale. Finition Highline avec équipements R-Line, toit panoramique et cockpit virtuel. Véhicule spacieux et élégant, idéal pour les longs trajets avec un excellent compromis entre performance et consommation. Kilométrage certifié à 98 900 km.",
+    features: [
+      "Finition Highline R-Line",
+      "Transmission 4Motion intégrale",
+      "Moteur 2.0 TDI 239 ch",
+      "Transmission automatique",
+      "Toit panoramique",
+      "Cockpit virtuel (Virtual Cockpit)",
+      "Kilométrage certifié 98 900 km",
+      "Climatisation automatique tri-zone",
+      "Système de navigation",
+      "Écran tactile multimédia",
+      "Bluetooth et connectivité",
+      "Jantes alliage R-Line",
+      "Phares LED adaptatifs",
+      "Aide au stationnement",
+      "Régulateur de vitesse adaptatif",
+      "Volant sport R-Line multifonctions",
+      "Sièges cuir chauffants",
+      "Banquette arrière rabattable",
+      "Coffre XXL modulable",
+      "Système audio premium",
+      "Ordinateur de bord avancé",
+      "Direction assistée progressive",
+      "Kit carrosserie R-Line",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Contrôle de traction 4Motion",
+      "Économie de carburant optimisée"
+    ],
+    mainImage: "/lovable-uploads/4de1ef26-a482-40a3-8b6a-d16f8d319974.png",
+    images: [
+      "/lovable-uploads/30762766-82e5-4993-bf13-dc8a9673ee0e.png",
+      "/lovable-uploads/cff00117-0c38-49d2-ac0a-82157e67d0b2.png",
+      "/lovable-uploads/66e66c7b-df8a-45d1-96cc-7fafaa69360d.png",
+      "/lovable-uploads/1eec4d0d-2840-45d0-bcb9-df8273ac1a1f.png",
+      "/lovable-uploads/7334b281-cf03-4fa9-bdd8-9a2ef2350496.png",
+      "/lovable-uploads/7cf3d668-f2b3-40ce-8df3-b62c3aaac183.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/4de1ef26-a482-40a3-8b6a-d16f8d319974.png",
+        "/lovable-uploads/30762766-82e5-4993-bf13-dc8a9673ee0e.png",
+        "/lovable-uploads/cff00117-0c38-49d2-ac0a-82157e67d0b2.png",
+        "/lovable-uploads/66e66c7b-df8a-45d1-96cc-7fafaa69360d.png",
+        "/lovable-uploads/1eec4d0d-2840-45d0-bcb9-df8273ac1a1f.png",
+        "/lovable-uploads/7cf3d668-f2b3-40ce-8df3-b62c3aaac183.png"
+      ],
+      interior: [
+        "/lovable-uploads/7334b281-cf03-4fa9-bdd8-9a2ef2350496.png"
+      ],
+      engine: [],
+      details: []
+    }
   }
 ];
