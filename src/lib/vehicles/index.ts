@@ -10,6 +10,7 @@ import { peugeotVehicles } from './peugeot-vehicles';
 import { volkswagenVehicles } from './volkswagen-vehicles';
 import { opelVehicles } from './opel-vehicles';
 import { fordVehicles } from './ford-vehicles';
+import { volvoVehicles } from './volvo-vehicles';
 
 // Catalogue complet avec tous les véhicules organisés par marque
 export const vehicles: Vehicle[] = [
@@ -22,7 +23,8 @@ export const vehicles: Vehicle[] = [
   ...peugeotVehicles,
   ...volkswagenVehicles,
   ...opelVehicles,
-  ...fordVehicles
+  ...fordVehicles,
+  ...volvoVehicles
 ];
 
 // Export des véhicules par marque pour un accès direct si nécessaire
@@ -36,5 +38,6 @@ export {
   peugeotVehicles,
   volkswagenVehicles,
   opelVehicles,
-  fordVehicles
+  fordVehicles,
+  volvoVehicles
 };
