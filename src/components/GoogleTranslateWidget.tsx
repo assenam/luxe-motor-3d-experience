@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 const GoogleTranslateWidget: React.FC = () => {
   useEffect(() => {
-    // Style the Google Translate widget to be completely hidden but functional
+    // Style the Google Translate widget to be hidden but functional
     const style = document.createElement('style');
     style.innerHTML = `
       #google_translate_element {

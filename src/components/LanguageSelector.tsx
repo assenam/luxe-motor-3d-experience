@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 const languages = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
@@ -33,13 +32,45 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     setSelectedLang(currentLang);
   }, [currentLang]);
 
-  const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang = event.target.value;
-    if (newLang && newLang !== selectedLang) {
-      setSelectedLang(newLang);
-      onLanguageChange(newLang);
+  useEffect(() => {
+    const waitForTranslateCombo = (callback: (combo: HTMLSelectElement) => void) => {
+      const interval = setInterval(() => {
+        const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+        if (combo) {
+          clearInterval(interval);
+          callback(combo);
+        }
+      }, 300);
+    };
+
+    const selector = document.getElementById('languageSelector') as HTMLSelectElement;
+    
+    if (selector) {
+      const handleChange = () => {
+        const lang = selector.value;
+        if (lang) {
+          waitForTranslateCombo((combo) => {
+            combo.value = lang;
+            combo.dispatchEvent(new Event('change'));
+
+            // Met à jour l'URL sans recharger
+            const url = new URL(window.location.href);
+            url.searchParams.set('lang', lang);
+            window.history.replaceState({}, '', url);
+          });
+          
+          setSelectedLang(lang);
+          onLanguageChange(lang);
+        }
+      };
+
+      selector.addEventListener('change', handleChange);
+      
+      return () => {
+        selector.removeEventListener('change', handleChange);
+      };
     }
-  };
+  }, [onLanguageChange]);
 
   return (
     <div id="custom-translate" className="flex items-center space-x-2 text-sm">
@@ -47,7 +78,6 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       <select 
         id="languageSelector"
         value={selectedLang}
-        onChange={handleLanguageChange}
         className="bg-transparent border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-age-red"
       >
         <option value="">Sélectionner</option>

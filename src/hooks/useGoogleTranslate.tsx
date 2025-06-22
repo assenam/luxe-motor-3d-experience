@@ -28,6 +28,32 @@ export const useGoogleTranslate = () => {
     }
   }, [location.pathname]);
 
+  const waitForTranslateCombo = (callback: (combo: HTMLSelectElement) => void) => {
+    const interval = setInterval(() => {
+      const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (combo) {
+        clearInterval(interval);
+        callback(combo);
+      }
+    }, 300);
+  };
+
+  const applyTranslationFromURL = () => {
+    const params = new URLSearchParams(window.location.search);
+    const lang = params.get('lang');
+
+    if (lang) {
+      waitForTranslateCombo((combo) => {
+        combo.value = lang;
+        combo.dispatchEvent(new Event('change'));
+
+        // Met à jour le sélecteur personnalisé
+        const customSelect = document.getElementById('languageSelector') as HTMLSelectElement;
+        if (customSelect) customSelect.value = lang;
+      });
+    }
+  };
+
   useEffect(() => {
     // Load Google Translate script
     const loadGoogleTranslate = () => {
@@ -37,7 +63,7 @@ export const useGoogleTranslate = () => {
 
       const script = document.createElement('script');
       script.id = 'google-translate-script';
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
       script.async = true;
       document.head.appendChild(script);
 
@@ -46,39 +72,19 @@ export const useGoogleTranslate = () => {
         
         new window.google.translate.TranslateElement({
           pageLanguage: 'fr',
-          includedLanguages: 'fr,en,es,it,de,pt,nl,da,sv,no,ja,zh-CN,ru',
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false,
-          multilanguagePage: true
+          autoDisplay: false
         }, 'google_translate_element');
         
         setIsLoaded(true);
         console.log('Google Translate initialized');
+
+        // Apply translation from URL after initialization
+        setTimeout(applyTranslationFromURL, 1000);
       };
     };
 
     loadGoogleTranslate();
   }, []);
-
-  const waitForSelectElement = (maxAttempts = 30): Promise<HTMLSelectElement | null> => {
-    return new Promise((resolve) => {
-      let attempts = 0;
-      const checkForElement = () => {
-        const selectElement = document.querySelector('select.goog-te-combo') as HTMLSelectElement;
-        if (selectElement) {
-          console.log('Google Translate select element found after', attempts, 'attempts');
-          resolve(selectElement);
-        } else if (attempts < maxAttempts) {
-          attempts++;
-          setTimeout(checkForElement, 200);
-        } else {
-          console.log('Google Translate select element not found after', maxAttempts, 'attempts');
-          resolve(null);
-        }
-      };
-      checkForElement();
-    });
-  };
 
   const changeLanguage = async (newLang: string) => {
     console.log('Changing language to:', newLang);
@@ -103,32 +109,17 @@ export const useGoogleTranslate = () => {
 
     // Wait for Google Translate to be loaded and then trigger translation
     if (isLoaded && window.google?.translate) {
-      const selectElement = await waitForSelectElement();
-      
-      if (selectElement) {
-        console.log('Setting Google Translate to:', newLang);
-        
-        // Set the value and trigger change
-        selectElement.value = newLang;
-        
-        // Try multiple event types to ensure the translation triggers
-        const events = ['change', 'input', 'click'];
-        events.forEach(eventType => {
-          const event = new Event(eventType, { bubbles: true });
-          selectElement.dispatchEvent(event);
-        });
+      waitForTranslateCombo((combo) => {
+        combo.value = newLang;
+        combo.dispatchEvent(new Event('change'));
+
+        // Met à jour l'URL sans recharger
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', newLang);
+        window.history.replaceState({}, '', url);
         
         console.log('Language changed to:', newLang);
-      } else {
-        console.log('Could not find Google Translate select element, using fallback method');
-        // Fallback: try to use Google Translate API directly
-        if (window.google?.translate?.TranslateElement) {
-          const instance = window.google.translate.TranslateElement.getInstance();
-          if (instance) {
-            instance.setLanguagePair('fr', newLang);
-          }
-        }
-      }
+      });
     } else {
       console.log('Google Translate not loaded yet, isLoaded:', isLoaded);
     }
