@@ -2,6 +2,74 @@ import { Vehicle } from '../types';
 
 export const peugeotVehicles: Vehicle[] = [
   {
+    id: "peugeot-208-gt-2022-001",
+    brand: "Peugeot",
+    model: "208 GT",
+    year: 2022,
+    price: 18500,
+    mileage: 20000,
+    engineType: "1.2 PureTech 130",
+    transmission: "BVA 8 vitesses",
+    exteriorColor: "Blanc Nacré",
+    interiorColor: "Noir avec surpiqûres",
+    description: "Peugeot 208 GT BVA 8 vitesses 100% française de 2022 en excellent état. Véhicule récent avec seulement 20 000 km au compteur. Finition GT avec équipements sportifs et technologiques avancés. Transmission automatique BVA 8 rapports pour un confort de conduite optimal.",
+    features: [
+      "100% Française",
+      "BVA 8 vitesses automatique",
+      "Finition GT",
+      "Moteur 1.2 PureTech 130 ch",
+      "Écran tactile 10 pouces",
+      "Peugeot i-Cockpit 3D",
+      "Climatisation automatique",
+      "Feux LED avant et arrière",
+      "Jantes alliage GT",
+      "Régulateur de vitesse adaptatif",
+      "Aide au stationnement",
+      "Caméra de recul",
+      "Système de navigation 3D",
+      "Bluetooth et connectivité",
+      "Sièges avant chauffants",
+      "Volant multifonctions cuir",
+      "Ordinateur de bord",
+      "Alerte de franchissement involontaire",
+      "Détection d'obstacles",
+      "Système audio premium",
+      "Vitres électriques",
+      "Verrouillage centralisé"
+    ],
+    mainImage: "/lovable-uploads/72a54139-e51d-4eae-8b49-2da9b8ec2171.png",
+    images: [
+      "/lovable-uploads/5772074b-caa1-41d6-8b33-042bd985f952.png",
+      "/lovable-uploads/971c5ccb-09b2-4506-9573-9e1740c2b48c.png",
+      "/lovable-uploads/6d6f308a-6bb9-4ae2-a138-fc4c9b965248.png",
+      "/lovable-uploads/c2d4080c-761f-47a3-a188-8f9b5869407b.png",
+      "/lovable-uploads/c755a25c-5064-418d-8ba3-1750f49f2ea0.png",
+      "/lovable-uploads/87a67489-09b8-4846-9c3d-3c6326fc8b22.png",
+      "/lovable-uploads/d3e626d6-7a8d-4096-8c9b-2d613799e723.png",
+      "/lovable-uploads/734fc14c-5588-4fe9-b05b-ce66dbbd2431.png",
+      "/lovable-uploads/466bc050-5689-4a7d-ae03-7f887987e45a.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/72a54139-e51d-4eae-8b49-2da9b8ec2171.png",
+        "/lovable-uploads/5772074b-caa1-41d6-8b33-042bd985f952.png",
+        "/lovable-uploads/971c5ccb-09b2-4506-9573-9e1740c2b48c.png",
+        "/lovable-uploads/6d6f308a-6bb9-4ae2-a138-fc4c9b965248.png",
+        "/lovable-uploads/c2d4080c-761f-47a3-a188-8f9b5869407b.png"
+      ],
+      interior: [
+        "/lovable-uploads/c755a25c-5064-418d-8ba3-1750f49f2ea0.png",
+        "/lovable-uploads/87a67489-09b8-4846-9c3d-3c6326fc8b22.png",
+        "/lovable-uploads/d3e626d6-7a8d-4096-8c9b-2d613799e723.png",
+        "/lovable-uploads/466bc050-5689-4a7d-ae03-7f887987e45a.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/734fc14c-5588-4fe9-b05b-ce66dbbd2431.png"
+      ]
+    }
+  },
+  {
     id: "peugeot-508-2018-001",
     brand: "Peugeot",
     model: "508",
