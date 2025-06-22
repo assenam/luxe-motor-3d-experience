@@ -23,6 +23,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/lib/data';
+import LanguageSelector from './LanguageSelector';
+import { useGoogleTranslate } from '@/hooks/useGoogleTranslate';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -32,6 +34,7 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useCart();
+  const { currentLang, changeLanguage } = useGoogleTranslate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,6 +123,13 @@ const Navbar = () => {
         ) : null}
         
         <div className="flex items-center space-x-4">
+          <div className={`${!scrolled ? 'text-white' : 'text-age-black'}`}>
+            <LanguageSelector 
+              currentLang={currentLang} 
+              onLanguageChange={changeLanguage} 
+            />
+          </div>
+          
           <button 
             className={`hover:text-age-red transition-colors ${!scrolled ? 'text-white' : 'text-age-black'}`}
             onClick={toggleSearch}
@@ -129,6 +139,7 @@ const Navbar = () => {
           <button className={`hover:text-age-red transition-colors hidden md:block ${!scrolled ? 'text-white' : 'text-age-black'}`}>
             <User size={20} />
           </button>
+          
           
           <Drawer open={cartOpen} onOpenChange={setCartOpen}>
             <DrawerTrigger asChild>
@@ -279,6 +290,12 @@ const Navbar = () => {
                   </Link>
                   
                   <div className="pt-6 border-t border-gray-200">
+                    <div className="mb-4">
+                      <LanguageSelector 
+                        currentLang={currentLang} 
+                        onLanguageChange={changeLanguage} 
+                      />
+                    </div>
                     <div className="flex items-center space-x-4 mt-4">
                       <button className="flex items-center space-x-2 text-base hover:text-age-red transition-colors">
                         <User size={18} />
