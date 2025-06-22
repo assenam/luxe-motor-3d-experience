@@ -232,5 +232,71 @@ export const audiVehicles: Vehicle[] = [
       ],
       details: []
     }
+  },
+  {
+    id: "audi-a3-sportback-2015-001",
+    brand: "Audi",
+    model: "A3 Sportback 1.6 TDI",
+    year: 2015,
+    price: 2000,
+    mileage: 161000,
+    engineType: "1.6 TDI 110 CV",
+    transmission: "Manuelle",
+    exteriorColor: "Noir Brillant",
+    interiorColor: "Noir",
+    description: "Audi A3 Sportback 1.6 TDI de 2015, véhicule compact et économique parfait pour un usage quotidien. Moteur diesel fiable et économe en carburant développant 110 CV avec boîte de vitesses manuelle. Design élégant et intemporel avec intérieur soigné. Excellent rapport qualité-prix pour découvrir la marque Audi.",
+    features: [
+      "Moteur 1.6 TDI 110 CV",
+      "Boîte manuelle 5 rapports",
+      "Climatisation manuelle",
+      "Système audio avec CD/MP3",
+      "Bluetooth",
+      "Ordinateur de bord",
+      "Jantes alliage",
+      "Direction assistée",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Airbags frontaux et latéraux",
+      "ABS et ESP",
+      "Régulateur de vitesse",
+      "Volant multifonctions",
+      "Sièges avant réglables",
+      "Banquette arrière rabattable",
+      "Coffre spacieux",
+      "Rétroviseurs électriques",
+      "Éclairage halogène",
+      "Pare-chocs couleur carrosserie"
+    ],
+    mainImage: "/lovable-uploads/b03c4adc-b6cd-4682-8a07-c7abe7949f69.png",
+    images: [
+      "/lovable-uploads/ce526922-bc47-48c3-8d8d-bcbedba79fde.png",
+      "/lovable-uploads/e20bda94-18b7-40ba-9fde-5e5f88d7268a.png",
+      "/lovable-uploads/961e34d1-64d9-4d4a-bcbf-cee1afe13987.png",
+      "/lovable-uploads/f831c752-6511-422b-a55a-849df8c9d1fc.png",
+      "/lovable-uploads/1547caff-eae1-42e6-b0b1-234617703823.png",
+      "/lovable-uploads/78a6b213-15cf-4748-9281-e48375f3b7e9.png",
+      "/lovable-uploads/3b5b52c6-ed2d-42a1-afa4-4dfb1ca64da2.png",
+      "/lovable-uploads/cb72a4b3-22df-45ba-982c-3a93be7fd18c.png",
+      "/lovable-uploads/800f306c-2a36-4bb2-b087-6d110851a132.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/b03c4adc-b6cd-4682-8a07-c7abe7949f69.png",
+        "/lovable-uploads/ce526922-bc47-48c3-8d8d-bcbedba79fde.png",
+        "/lovable-uploads/e20bda94-18b7-40ba-9fde-5e5f88d7268a.png",
+        "/lovable-uploads/cb72a4b3-22df-45ba-982c-3a93be7fd18c.png"
+      ],
+      interior: [
+        "/lovable-uploads/961e34d1-64d9-4d4a-bcbf-cee1afe13987.png",
+        "/lovable-uploads/f831c752-6511-422b-a55a-849df8c9d1fc.png",
+        "/lovable-uploads/1547caff-eae1-42e6-b0b1-234617703823.png",
+        "/lovable-uploads/78a6b213-15cf-4748-9281-e48375f3b7e9.png",
+        "/lovable-uploads/3b5b52c6-ed2d-42a1-afa4-4dfb1ca64da2.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/800f306c-2a36-4bb2-b087-6d110851a132.png"
+      ]
+    }
   }
 ];
