@@ -107,5 +107,63 @@ export const audiVehicles: Vehicle[] = [
         "/lovable-uploads/5e71b3f8-cc36-4ef2-8614-1c63806348d6.png"
       ]
     }
+  },
+  {
+    id: "audi-rs5-2023-001",
+    brand: "Audi",
+    model: "RS5",
+    year: 2023,
+    price: 26000,
+    mileage: 13000,
+    engineType: "2.9 TFSI V6 450 ch",
+    transmission: "Tiptronic Quattro",
+    exteriorColor: "Noir Mythos Métallisé",
+    interiorColor: "Noir avec surpiqûres contrastantes",
+    description: "Audi RS5 Quattro Tiptronic 2023, coupé sportif d'exception avec moteur V6 biturbo de 450 ch. Véhicule récent avec seulement 13 000 km, transmission Tiptronic et traction intégrale Quattro. Design agressif avec éléments RS spécifiques et finition premium.",
+    features: [
+      "Moteur V6 2.9 TFSI biturbo 450 ch",
+      "Transmission Tiptronic 8 rapports",
+      "Traction intégrale Quattro",
+      "Suspension RS sport adaptative",
+      "Freins RS avec étriers rouges",
+      "Jantes alliage RS 20 pouces",
+      "Échappement RS sport",
+      "Sièges RS sport avec logo",
+      "Cockpit virtuel Audi",
+      "Système de navigation MMI",
+      "Climatisation automatique tri-zone",
+      "Feux LED Matrix",
+      "Aide au stationnement",
+      "Caméra de recul",
+      "Régulateur de vitesse adaptatif",
+      "Système audio Bang & Olufsen",
+      "Volant RS sport multifonctions",
+      "Pédales sport",
+      "Ciel de toit Alcantara"
+    ],
+    mainImage: "/lovable-uploads/968ef343-843a-44e5-bde9-3a34e1027766.png",
+    images: [
+      "/lovable-uploads/862cb8cd-e127-4046-babd-ac98650001db.png",
+      "/lovable-uploads/31db3c08-4dcf-44d9-a4ac-3cc2a1e42475.png",
+      "/lovable-uploads/679b5a18-6e0a-465a-b7fc-acdec84dc55b.png",
+      "/lovable-uploads/cd8257a7-3496-4072-a689-24a2fcf7ebd5.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/968ef343-843a-44e5-bde9-3a34e1027766.png",
+        "/lovable-uploads/862cb8cd-e127-4046-babd-ac98650001db.png",
+        "/lovable-uploads/31db3c08-4dcf-44d9-a4ac-3cc2a1e42475.png",
+        "/lovable-uploads/679b5a18-6e0a-465a-b7fc-acdec84dc55b.png"
+      ],
+      interior: [
+        "/lovable-uploads/cd8257a7-3496-4072-a689-24a2fcf7ebd5.png",
+        "/lovable-uploads/d006efee-e7fc-429a-a8f8-bddd37530584.png",
+        "/lovable-uploads/56ff80eb-1871-4898-a527-2894b8ca9d4a.png",
+        "/lovable-uploads/9607cd3f-92e6-4090-86e7-6856edb25c71.png",
+        "/lovable-uploads/ac9e3e0e-fe29-4d78-a72b-4b74e3cf618f.png"
+      ],
+      engine: [],
+      details: []
+    }
   }
 ];
