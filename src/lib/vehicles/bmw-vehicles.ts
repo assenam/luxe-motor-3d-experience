@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const bmwVehicles: Vehicle[] = [
@@ -127,6 +126,70 @@ export const bmwVehicles: Vehicle[] = [
       ],
       engine: [],
       details: []
+    }
+  },
+  {
+    id: "bmw-x1-xdrive18d-2020-001",
+    brand: "BMW",
+    model: "X1 xDrive18d",
+    year: 2020,
+    price: 13000,
+    mileage: 160000,
+    engineType: "2.0L Diesel 150 CV",
+    transmission: "Automatique",
+    exteriorColor: "Rouge Métallisé",
+    interiorColor: "Noir",
+    description: "BMW X1 xDrive18d 2020, SUV compact intelligent avec traction intégrale xDrive. Moteur diesel 2.0L de 150 CV, transmission automatique pour un confort optimal. Véhicule d'origine allemande bénéficiant d'une garantie européenne de 24 mois. Parfait pour allier practicité urbaine et aventures routières. Chaque véhicule est sélectionné et inspecté par nos experts pour une qualité et une fiabilité complètes.",
+    features: [
+      "Moteur 2.0L Diesel 150 CV",
+      "Transmission automatique",
+      "Traction intégrale xDrive",
+      "SUV compact 5 places",
+      "Origine Allemagne",
+      "Garantie européenne 24 mois",
+      "Système de navigation BMW",
+      "Écran tactile iDrive",
+      "Climatisation automatique",
+      "Sièges réglables électriquement",
+      "Volant multifonctions cuir",
+      "Bluetooth et connectivité",
+      "Jantes alliage BMW",
+      "Phares LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Direction assistée",
+      "Ordinateur de bord",
+      "Rétroviseurs rabattables",
+      "Système audio premium",
+      "USB/AUX",
+      "Financement possible avec apport 20%",
+      "Livraison à domicile 5 jours",
+      "Délai de rétractation 14 jours"
+    ],
+    mainImage: "/lovable-uploads/8d0dc39a-619a-4b90-9b39-5405701c0886.png",
+    images: [
+      "/lovable-uploads/bc1bcd06-ee7f-4b99-91ee-3b7a8eed7324.png",
+      "/lovable-uploads/9a57e419-18f3-4658-9980-e5ff0fa7e903.png",
+      "/lovable-uploads/4473ce63-3709-4ec2-9803-ee3c81ce6e4e.png",
+      "/lovable-uploads/0a0b14d4-99b6-499e-864c-21869b7c1dc6.png",
+      "/lovable-uploads/4c000993-d0ed-415f-90b3-70f4aca59abb.png",
+      "/lovable-uploads/399ba08b-1685-4d2e-92b5-602e0b446419.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/8d0dc39a-619a-4b90-9b39-5405701c0886.png",
+        "/lovable-uploads/bc1bcd06-ee7f-4b99-91ee-3b7a8eed7324.png",
+        "/lovable-uploads/9a57e419-18f3-4658-9980-e5ff0fa7e903.png",
+        "/lovable-uploads/4473ce63-3709-4ec2-9803-ee3c81ce6e4e.png",
+        "/lovable-uploads/399ba08b-1685-4d2e-92b5-602e0b446419.png"
+      ],
+      interior: [
+        "/lovable-uploads/0a0b14d4-99b6-499e-864c-21869b7c1dc6.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/4c000993-d0ed-415f-90b3-70f4aca59abb.png"
+      ]
     }
   }
 ];
