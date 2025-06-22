@@ -115,5 +115,71 @@ export const kiaVehicles: Vehicle[] = [
         "/lovable-uploads/aeef5bd2-52a5-4092-89c9-68f0298d261c.png"
       ]
     }
+  },
+  {
+    id: "kia-sportage-2021-001",
+    brand: "Kia",
+    model: "Sportage 1.5 132CH",
+    year: 2021,
+    price: 5000,
+    mileage: 41093,
+    engineType: "1.5L Essence 132 ch",
+    transmission: "Manuelle",
+    exteriorColor: "Gris",
+    interiorColor: "Noir",
+    description: "Kia Sportage 1.5 132CH 2021 en excellent état. SUV polyvalent et moderne avec motorisation essence 1.5L de 132 ch et transmission manuelle. Véhicule spacieux à 5 places, parfait pour les familles et les longs trajets. Kilométrage de 41 093 km, entretien régulier et performances optimales garanties.",
+    features: [
+      "Moteur 1.5L Essence 132 ch",
+      "Transmission manuelle",
+      "SUV 5 places",
+      "Spacieux et confortable",
+      "Climatisation",
+      "Système multimédia",
+      "Bluetooth",
+      "Direction assistée",
+      "Vitres électriques",
+      "Rétroviseurs électriques",
+      "Verrouillage centralisé",
+      "Jantes alliage",
+      "Ordinateur de bord",
+      "Régulateur de vitesse",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Barres de toit",
+      "Coffre spacieux",
+      "Économique en carburant",
+      "Idéal famille"
+    ],
+    mainImage: "/lovable-uploads/b7544535-61bd-4c3c-8e39-37ca350030e9.png",
+    images: [
+      "/lovable-uploads/33233469-27a9-479d-a33e-a2949ee9ba99.png",
+      "/lovable-uploads/4638466e-bf22-433d-b4ff-844af03883c9.png",
+      "/lovable-uploads/ba97e138-9b47-4ae0-a4b0-8d47e9d84768.png",
+      "/lovable-uploads/26f67175-75b0-440a-84a6-b21f2690c00a.png",
+      "/lovable-uploads/c84c7e36-5f11-439a-8422-f6dde9afbb5d.png",
+      "/lovable-uploads/662dc5ad-8eac-4d0a-aa34-d275c8f98092.png",
+      "/lovable-uploads/8d953a06-55d9-44f4-ae90-404a1b7d6a66.png",
+      "/lovable-uploads/78a6b213-15cf-4748-9281-e48375f3b7e9.png",
+      "/lovable-uploads/aae83367-1d33-4c35-990d-e5be58c96f67.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/b7544535-61bd-4c3c-8e39-37ca350030e9.png",
+        "/lovable-uploads/33233469-27a9-479d-a33e-a2949ee9ba99.png",
+        "/lovable-uploads/4638466e-bf22-433d-b4ff-844af03883c9.png",
+        "/lovable-uploads/ba97e138-9b47-4ae0-a4b0-8d47e9d84768.png",
+        "/lovable-uploads/26f67175-75b0-440a-84a6-b21f2690c00a.png"
+      ],
+      interior: [
+        "/lovable-uploads/c84c7e36-5f11-439a-8422-f6dde9afbb5d.png",
+        "/lovable-uploads/662dc5ad-8eac-4d0a-aa34-d275c8f98092.png",
+        "/lovable-uploads/8d953a06-55d9-44f4-ae90-404a1b7d6a66.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/78a6b213-15cf-4748-9281-e48375f3b7e9.png",
+        "/lovable-uploads/aae83367-1d33-4c35-990d-e5be58c96f67.png"
+      ]
+    }
   }
 ];
