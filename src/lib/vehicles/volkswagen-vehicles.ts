@@ -122,5 +122,69 @@ export const volkswagenVehicles: Vehicle[] = [
         "/lovable-uploads/5325d4b1-ee09-4a17-ae5a-eb03da0ad00e.png"
       ]
     }
+  },
+  {
+    id: "volkswagen-golf-vii-2017-001",
+    brand: "Volkswagen",
+    model: "Golf VII 1.6 TDI Trendline",
+    year: 2017,
+    price: 3000,
+    mileage: 149000,
+    engineType: "1.6 TDI 115 cv",
+    transmission: "Manuelle",
+    exteriorColor: "Gris Métallisé",
+    interiorColor: "Noir",
+    description: "Volkswagen Golf VII 1.6 TDI Trendline 2017 en excellent état avec historique complet. Véhicule familial fiable avec motorisation diesel économique de 115 cv et boîte manuelle. Design moderne et finition soignée avec équipements de confort. Parfait pour un usage quotidien avec consommation réduite.",
+    features: [
+      "Finition Trendline",
+      "Transmission manuelle",
+      "Moteur diesel 1.6 TDI 115 cv",
+      "Historique d'entretien complet",
+      "Climatisation manuelle",
+      "Système audio avec Bluetooth",
+      "Écran tactile central",
+      "Volant multifonctions",
+      "Jantes alliage",
+      "Feux LED de jour",
+      "Ordinateur de bord",
+      "Direction assistée",
+      "Banquette arrière rabattable",
+      "Coffre spacieux",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Aide au démarrage en côte",
+      "Économie de carburant exceptionnelle"
+    ],
+    mainImage: "/lovable-uploads/845ca1a0-699a-466d-be77-92dd329ebd54.png",
+    images: [
+      "/lovable-uploads/c84c7e36-5f11-439a-8422-f6dde9afbb5d.png",
+      "/lovable-uploads/8319b6d7-8079-49e5-ac3f-05c4ca4cab72.png",
+      "/lovable-uploads/c47d3611-7dab-4b21-9af2-76ec6bccf5c1.png",
+      "/lovable-uploads/a7855f33-cdcb-4364-a82b-6d953ab2d889.png",
+      "/lovable-uploads/6a373d71-1aec-4f90-ba24-0f06967e06a0.png",
+      "/lovable-uploads/e9fa39c5-9404-4ecb-8625-bbd69c836313.png",
+      "/lovable-uploads/d3d6d9f5-4525-448a-b02d-b6c093fdbd45.png",
+      "/lovable-uploads/d28eae29-f930-4ad3-86ed-3af7a4bfbaf6.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/845ca1a0-699a-466d-be77-92dd329ebd54.png",
+        "/lovable-uploads/c84c7e36-5f11-439a-8422-f6dde9afbb5d.png",
+        "/lovable-uploads/8319b6d7-8079-49e5-ac3f-05c4ca4cab72.png",
+        "/lovable-uploads/c47d3611-7dab-4b21-9af2-76ec6bccf5c1.png"
+      ],
+      interior: [
+        "/lovable-uploads/a7855f33-cdcb-4364-a82b-6d953ab2d889.png",
+        "/lovable-uploads/6a373d71-1aec-4f90-ba24-0f06967e06a0.png",
+        "/lovable-uploads/e9fa39c5-9404-4ecb-8625-bbd69c836313.png",
+        "/lovable-uploads/d3d6d9f5-4525-448a-b02d-b6c093fdbd45.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/d28eae29-f930-4ad3-86ed-3af7a4bfbaf6.png"
+      ]
+    }
   }
 ];
