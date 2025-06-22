@@ -50,5 +50,70 @@ export const kiaVehicles: Vehicle[] = [
       engine: [],
       details: []
     }
+  },
+  {
+    id: "kia-picanto-morning-2016-001",
+    brand: "Kia",
+    model: "Picanto Morning",
+    year: 2016,
+    price: 3500,
+    mileage: 93000,
+    engineType: "1.0L Essence 66 CV",
+    transmission: "Manuelle",
+    exteriorColor: "Jaune",
+    interiorColor: "Noir",
+    description: "Kia Picanto Morning 2016, citadine économique et pratique avec motorisation essence 1.0L de 66 CV et transmission manuelle. Parfaite pour la ville avec sa taille compacte et sa consommation réduite. Équipée de Bluetooth, régulateur de vitesse et climatisation pour un confort optimal. Kilométrage certifié de 93 000 km, véhicule bien entretenu et idéal pour les trajets urbains.",
+    features: [
+      "Moteur 1.0L Essence 66 CV",
+      "Transmission manuelle",
+      "Citadine 5 portes",
+      "Bluetooth",
+      "Régulateur de vitesse",
+      "Climatisation",
+      "Direction assistée",
+      "Vitres électriques",
+      "Rétroviseurs électriques",
+      "Verrouillage centralisé",
+      "Radio CD",
+      "Prise AUX/USB",
+      "Ordinateur de bord",
+      "Économique en carburant",
+      "Facile à garer",
+      "Entretien économique",
+      "Kilométrage certifié",
+      "Idéale ville",
+      "Compacte et maniable"
+    ],
+    mainImage: "/lovable-uploads/5594a4a9-c914-4800-8c5c-663554a06b94.png",
+    images: [
+      "/lovable-uploads/1d6768f5-1a43-4ac4-bb2c-0f6a0d8c24a2.png",
+      "/lovable-uploads/2d99dcea-f62d-4176-bcaf-c9959d18356c.png",
+      "/lovable-uploads/6ed7eb9e-1d28-4975-9e90-5b8309291295.png",
+      "/lovable-uploads/aeef5bd2-52a5-4092-89c9-68f0298d261c.png",
+      "/lovable-uploads/e3abb746-9645-4e12-bfc2-7f9b14746cb5.png",
+      "/lovable-uploads/38000d03-aab4-4f5a-ae88-80c4c2f3c416.png",
+      "/lovable-uploads/a051746f-6a8f-49ec-81ba-de925ea32a13.png",
+      "/lovable-uploads/215f8316-3e56-40cc-86a5-220b46f63fd4.png",
+      "/lovable-uploads/74a992e7-4a6b-4d20-8b6e-e49856bd84c2.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/5594a4a9-c914-4800-8c5c-663554a06b94.png",
+        "/lovable-uploads/1d6768f5-1a43-4ac4-bb2c-0f6a0d8c24a2.png",
+        "/lovable-uploads/2d99dcea-f62d-4176-bcaf-c9959d18356c.png",
+        "/lovable-uploads/6ed7eb9e-1d28-4975-9e90-5b8309291295.png",
+        "/lovable-uploads/74a992e7-4a6b-4d20-8b6e-e49856bd84c2.png"
+      ],
+      interior: [
+        "/lovable-uploads/e3abb746-9645-4e12-bfc2-7f9b14746cb5.png",
+        "/lovable-uploads/38000d03-aab4-4f5a-ae88-80c4c2f3c416.png",
+        "/lovable-uploads/a051746f-6a8f-49ec-81ba-de925ea32a13.png",
+        "/lovable-uploads/215f8316-3e56-40cc-86a5-220b46f63fd4.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/aeef5bd2-52a5-4092-89c9-68f0298d261c.png"
+      ]
+    }
   }
 ];
