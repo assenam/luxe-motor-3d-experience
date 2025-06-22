@@ -29,10 +29,10 @@ const VehicleDetailPage = () => {
   }
   
   const handleBuyNow = () => {
-    navigate('/payment', { state: { vehicle: vehicle } });
+    navigate('/payment-new', { state: { vehicle: vehicle } });
     toast({
-      title: "Paiement par virement bancaire",
-      description: "Remplissez le formulaire pour finaliser votre achat."
+      title: "Redirection vers le formulaire",
+      description: "Complétez vos informations pour finaliser votre commande."
     });
   };
   
