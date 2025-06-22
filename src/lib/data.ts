@@ -280,6 +280,64 @@ export const vehicles: Vehicle[] = [
         "/lovable-uploads/fcf5eeb0-bf73-43a5-8696-0b70295b5a0e.png"
       ]
     }
+  },
+  {
+    id: "mercedes-c-class-2015-001",
+    brand: "Mercedes-Benz",
+    model: "Classe C",
+    year: 2015,
+    price: 8500,
+    mileage: 87500,
+    engineType: "180 156 ch",
+    transmission: "Automatique",
+    exteriorColor: "Gris Iridium",
+    interiorColor: "Rouge Bengal",
+    description: "Mercedes-Benz Classe C 180 en excellent état avec intérieur cuir rouge premium. Véhicule élégant et confortable avec motorisation diesel performante de 156 ch et transmission automatique. Finition soignée avec équipements de série complets.",
+    features: [
+      "Transmission automatique",
+      "Intérieur cuir rouge",
+      "Climatisation automatique",
+      "Système de navigation",
+      "Bluetooth",
+      "Jantes alliage",
+      "Feux LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Volant multifonctions",
+      "Sièges électriques",
+      "Système audio premium",
+      "Ordinateur de bord",
+      "Direction assistée"
+    ],
+    mainImage: "/lovable-uploads/7ab52a17-5aa2-4592-ae3f-9835371aa680.png",
+    images: [
+      "/lovable-uploads/b7fdbc6c-e422-42ed-bb30-cfc347b183ce.png",
+      "/lovable-uploads/d3f13caa-8b30-45dc-b133-4bf51cb1137e.png",
+      "/lovable-uploads/51881034-e694-44f4-8404-e7da17a53952.png",
+      "/lovable-uploads/3ac3ab3f-3036-4ccf-8086-20cd570dc68f.png",
+      "/lovable-uploads/120dcd34-70a3-41b4-8c26-87fdb6c285ce.png",
+      "/lovable-uploads/0feafde7-f727-4087-9126-fde310714790.png",
+      "/lovable-uploads/f93f717c-f54d-43b9-bff8-f113e4560fed.png",
+      "/lovable-uploads/ac414bce-4bd7-4a04-98ca-35c0bccb55b8.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/7ab52a17-5aa2-4592-ae3f-9835371aa680.png",
+        "/lovable-uploads/b7fdbc6c-e422-42ed-bb30-cfc347b183ce.png",
+        "/lovable-uploads/d3f13caa-8b30-45dc-b133-4bf51cb1137e.png"
+      ],
+      interior: [
+        "/lovable-uploads/51881034-e694-44f4-8404-e7da17a53952.png",
+        "/lovable-uploads/120dcd34-70a3-41b4-8c26-87fdb6c285ce.png",
+        "/lovable-uploads/f93f717c-f54d-43b9-bff8-f113e4560fed.png",
+        "/lovable-uploads/ac414bce-4bd7-4a04-98ca-35c0bccb55b8.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/3ac3ab3f-3036-4ccf-8086-20cd570dc68f.png",
+        "/lovable-uploads/0feafde7-f727-4087-9126-fde310714790.png"
+      ]
+    }
   }
 ];
 
