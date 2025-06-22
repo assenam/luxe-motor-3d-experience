@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const peugeotVehicles: Vehicle[] = [
@@ -57,6 +56,74 @@ export const peugeotVehicles: Vehicle[] = [
       engine: [],
       details: [
         "/lovable-uploads/0a503912-1bc7-4cb6-92f2-792d886fe44a.png"
+      ]
+    }
+  },
+  {
+    id: "peugeot-5008-2017-001",
+    brand: "Peugeot",
+    model: "5008 1.6 Blue-HDi GT Line",
+    year: 2017,
+    price: 7000,
+    mileage: 146000,
+    engineType: "1.6 Blue-HDi 120 CV",
+    transmission: "Automatique",
+    exteriorColor: "Blanc Nacré",
+    interiorColor: "Noir avec finitions GT Line",
+    description: "Peugeot 5008 1.6 Blue-HDi GT Line 120 CV 7 places de 2017 en excellent état avec historique complet. SUV spacieux et moderne avec finition GT Line, moteur diesel économique et transmission automatique. Design contemporain avec éléments sportifs, parfait pour les familles nombreuses avec 7 places modulables.",
+    features: [
+      "7 places modulables",
+      "Finition GT Line",
+      "Transmission automatique",
+      "Moteur 1.6 Blue-HDi 120 CV",
+      "Historique d'entretien complet",
+      "Climatisation automatique bi-zone",
+      "Système de navigation 3D",
+      "Écran tactile central",
+      "Bluetooth et connectivité",
+      "Régulateur de vitesse adaptatif",
+      "Feux LED avant et arrière",
+      "Jantes alliage GT Line",
+      "Aide au stationnement avant/arrière",
+      "Caméra de recul",
+      "Sièges avant chauffants",
+      "Volant multifonctions",
+      "Ordinateur de bord",
+      "Barres de toit",
+      "Vitres surteintées",
+      "Pack sécurité avancé",
+      "Coffre modulable",
+      "Accès mains libres"
+    ],
+    mainImage: "/lovable-uploads/cc9a679e-37ac-4197-809a-c4da8d520a37.png",
+    images: [
+      "/lovable-uploads/165433da-eb29-4b1e-a417-20273d15726d.png",
+      "/lovable-uploads/664192ba-96bc-4137-9712-105bc3bcda47.png",
+      "/lovable-uploads/531154fc-39f8-4b7a-a115-61e68975a869.png",
+      "/lovable-uploads/0917d9e5-d98b-4b40-ab64-7192be5f0bc7.png",
+      "/lovable-uploads/719e1d01-dfbc-4f78-9389-5205084cc7a5.png",
+      "/lovable-uploads/f202fd1c-e47e-4219-ae5c-7ef43f201819.png",
+      "/lovable-uploads/eef52046-211a-4404-b6c1-2f4a9fd3ae9e.png",
+      "/lovable-uploads/d846e417-30ce-47b5-9987-2aee4af826df.png",
+      "/lovable-uploads/0946756e-f1ff-4001-9818-73b505e3da52.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/cc9a679e-37ac-4197-809a-c4da8d520a37.png",
+        "/lovable-uploads/165433da-eb29-4b1e-a417-20273d15726d.png",
+        "/lovable-uploads/664192ba-96bc-4137-9712-105bc3bcda47.png",
+        "/lovable-uploads/531154fc-39f8-4b7a-a115-61e68975a869.png"
+      ],
+      interior: [
+        "/lovable-uploads/0917d9e5-d98b-4b40-ab64-7192be5f0bc7.png",
+        "/lovable-uploads/f202fd1c-e47e-4219-ae5c-7ef43f201819.png",
+        "/lovable-uploads/eef52046-211a-4404-b6c1-2f4a9fd3ae9e.png",
+        "/lovable-uploads/d846e417-30ce-47b5-9987-2aee4af826df.png",
+        "/lovable-uploads/0946756e-f1ff-4001-9818-73b505e3da52.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/719e1d01-dfbc-4f78-9389-5205084cc7a5.png"
       ]
     }
   }
