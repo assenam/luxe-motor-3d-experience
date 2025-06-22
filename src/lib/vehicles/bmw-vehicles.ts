@@ -263,5 +263,76 @@ export const bmwVehicles: Vehicle[] = [
         "/lovable-uploads/bd90beb0-277e-4798-b380-051942b452e8.png"
       ]
     }
+  },
+  {
+    id: "bmw-x4-m-competition-xdrive-2019-001",
+    brand: "BMW",
+    model: "X4 M Competition xDrive",
+    year: 2019,
+    price: 12000,
+    mileage: 99500,
+    engineType: "3.0L Essence 510 CV",
+    transmission: "Automatique",
+    exteriorColor: "Gris Métallisé",
+    interiorColor: "Noir cuir avec surpiqûres",
+    description: "BMW X4 M Competition xDrive 2019, SUV coupé haute performance avec moteur 3.0L essence de 510 CV. Véhicule sportif d'exception offrant des performances extraordinaires avec traction intégrale xDrive. Design agressif M Competition avec finitions premium et technologies de pointe. Parfait équilibre entre luxe, performance et praticité pour les passionnés de conduite sportive.",
+    features: [
+      "Moteur 3.0L Essence 510 CV",
+      "Transmission automatique M Steptronic",
+      "Traction intégrale xDrive",
+      "Pack M Competition",
+      "5 places",
+      "Émission CO2 239 g/km",
+      "Système de navigation M",
+      "Écran tactile BMW iDrive",
+      "Climatisation automatique tri-zone",
+      "Sièges M Sport chauffants",
+      "Volant M multifonctions",
+      "Système audio premium",
+      "Bluetooth et connectivité",
+      "Jantes alliage M Competition",
+      "Phares LED adaptatifs",
+      "Aide au stationnement 360°",
+      "Régulateur de vitesse adaptatif",
+      "Modes de conduite M",
+      "Différentiel M actif",
+      "Suspension M adaptative",
+      "Freins M haute performance",
+      "Échappement M Sport",
+      "Ordinateur de bord M",
+      "Rétroviseurs électriques",
+      "Entretien BMW certifié"
+    ],
+    mainImage: "/lovable-uploads/81aade00-6e55-43da-8e7f-95b1fd6787f5.png",
+    images: [
+      "/lovable-uploads/30ee3eb3-8654-4d30-a54f-5042646d12a3.png",
+      "/lovable-uploads/fca98bae-1377-4f2b-80b8-141f85c81b2f.png",
+      "/lovable-uploads/7a41253a-a1ad-49ff-accc-e97ed2f2c0ad.png",
+      "/lovable-uploads/ce5b89a0-db3d-4e21-ba9e-c0b0e672b2cb.png",
+      "/lovable-uploads/f35fc85b-c8e1-4cb5-86ce-20f36957cbc5.png",
+      "/lovable-uploads/429a8f5f-3aa4-447e-83dd-ea0d900dafb7.png",
+      "/lovable-uploads/95f6181b-69c7-485f-8641-54ad1464c595.png",
+      "/lovable-uploads/8ed84626-28d9-48de-8676-d3ec99a77bc7.png",
+      "/lovable-uploads/2ebe97b9-1f5f-49a6-864c-7589333f2a02.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/81aade00-6e55-43da-8e7f-95b1fd6787f5.png",
+        "/lovable-uploads/30ee3eb3-8654-4d30-a54f-5042646d12a3.png",
+        "/lovable-uploads/fca98bae-1377-4f2b-80b8-141f85c81b2f.png",
+        "/lovable-uploads/f35fc85b-c8e1-4cb5-86ce-20f36957cbc5.png"
+      ],
+      interior: [
+        "/lovable-uploads/7a41253a-a1ad-49ff-accc-e97ed2f2c0ad.png",
+        "/lovable-uploads/429a8f5f-3aa4-447e-83dd-ea0d900dafb7.png",
+        "/lovable-uploads/95f6181b-69c7-485f-8641-54ad1464c595.png",
+        "/lovable-uploads/8ed84626-28d9-48de-8676-d3ec99a77bc7.png",
+        "/lovable-uploads/2ebe97b9-1f5f-49a6-864c-7589333f2a02.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/ce5b89a0-db3d-4e21-ba9e-c0b0e672b2cb.png"
+      ]
+    }
   }
 ];
