@@ -62,5 +62,71 @@ export const bmwVehicles: Vehicle[] = [
         "/lovable-uploads/8db9f425-59d2-4085-a375-7c66c06c2876.png"
       ]
     }
+  },
+  {
+    id: "bmw-z4-sdrive30i-2022-001",
+    brand: "BMW",
+    model: "Z4 sDrive30i",
+    year: 2022,
+    price: 40500,
+    mileage: 23923,
+    engineType: "2.0L Turbo essence 258 CV",
+    transmission: "Automatique",
+    exteriorColor: "Rouge Métallisé",
+    interiorColor: "Noir avec finitions carbone",
+    description: "BMW Z4 sDrive30i 2022, roadster sportif d'exception avec moteur 2.0L turbo de 258 CV. Véhicule récent avec seulement 23 923 km, offrant des performances exceptionnelles et un design moderne. Transmission automatique pour un confort de conduite optimal. Intérieur premium avec finitions haut de gamme et technologies avancées. Parfait pour les amateurs de conduite sportive et de luxe.",
+    features: [
+      "Moteur 2.0L Turbo essence",
+      "Puissance 258 ch",
+      "Transmission automatique",
+      "Roadster décapotable",
+      "Toit souple électrique",
+      "Système de navigation BMW",
+      "Écran tactile iDrive",
+      "Climatisation automatique",
+      "Sièges sport chauffants",
+      "Volant M Sport",
+      "Système audio Harman Kardon",
+      "Bluetooth et connectivité",
+      "Jantes alliage 19 pouces",
+      "Phares LED adaptatifs",
+      "Aide au stationnement",
+      "Régulateur de vitesse adaptatif",
+      "Mode de conduite Sport+",
+      "Direction assistée variable",
+      "Freins haute performance",
+      "Différentiel autobloquant",
+      "Arceau de sécurité"
+    ],
+    mainImage: "/lovable-uploads/ab16430a-0ac3-4dd6-a84a-9950d590ebe7.png",
+    images: [
+      "/lovable-uploads/7602ceb9-917b-47b1-b928-c1b47fc62bbe.png",
+      "/lovable-uploads/1f4f4d74-b5d6-4ee8-955b-a8cf4d8108f3.png",
+      "/lovable-uploads/d0e2becb-9775-417c-a3ac-f72ef7e5e687.png",
+      "/lovable-uploads/9577e702-99ff-45de-b859-27716667eb1d.png",
+      "/lovable-uploads/e17b972e-03f6-4a93-8810-6254be7a52a3.png",
+      "/lovable-uploads/b719b5ad-772f-44ad-a0e0-2e7b583215ae.png",
+      "/lovable-uploads/e8eeaa9b-9b80-4c58-a6dc-8526f7e81187.png",
+      "/lovable-uploads/59e8cd50-c781-4bb3-b2f6-9419a0705ea7.png",
+      "/lovable-uploads/7b8e185f-8412-45c3-b285-d7bbfc89b7e7.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/ab16430a-0ac3-4dd6-a84a-9950d590ebe7.png",
+        "/lovable-uploads/7602ceb9-917b-47b1-b928-c1b47fc62bbe.png",
+        "/lovable-uploads/1f4f4d74-b5d6-4ee8-955b-a8cf4d8108f3.png",
+        "/lovable-uploads/d0e2becb-9775-417c-a3ac-f72ef7e5e687.png",
+        "/lovable-uploads/9577e702-99ff-45de-b859-27716667eb1d.png",
+        "/lovable-uploads/e17b972e-03f6-4a93-8810-6254be7a52a3.png",
+        "/lovable-uploads/b719b5ad-772f-44ad-a0e0-2e7b583215ae.png"
+      ],
+      interior: [
+        "/lovable-uploads/e8eeaa9b-9b80-4c58-a6dc-8526f7e81187.png",
+        "/lovable-uploads/59e8cd50-c781-4bb3-b2f6-9419a0705ea7.png",
+        "/lovable-uploads/7b8e185f-8412-45c3-b285-d7bbfc89b7e7.png"
+      ],
+      engine: [],
+      details: []
+    }
   }
 ];
