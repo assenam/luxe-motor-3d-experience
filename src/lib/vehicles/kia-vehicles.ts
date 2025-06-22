@@ -4,7 +4,7 @@ import { Vehicle } from '../types';
 export const kiaVehicles: Vehicle[] = [
   {
     id: "kia-xceed-2021-001",
-    brand: "Kia",
+    brand: "BMW",
     model: "XCeed",
     year: 2021,
     price: 9000,
@@ -13,7 +13,7 @@ export const kiaVehicles: Vehicle[] = [
     transmission: "Automatique",
     exteriorColor: "Gris Minéral",
     interiorColor: "Noir",
-    description: "Kia XCeed Plug-in Hybrid Platinum en excellent état. Véhicule hybride rechargeable très récent avec seulement 10 010 km au compteur. Motorisation essence-électrique de 141 ch avec transmission automatique. Compatible E-10. Économique et écologique.",
+    description: "BMW XCeed Plug-in Hybrid Platinum en excellent état. Véhicule hybride rechargeable très récent avec seulement 10 010 km au compteur. Motorisation essence-électrique de 141 ch avec transmission automatique. Compatible E-10. Économique et écologique.",
     features: [
       "Moteur hybride rechargeable",
       "Transmission automatique",
