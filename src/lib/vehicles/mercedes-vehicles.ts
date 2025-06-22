@@ -347,5 +347,78 @@ export const mercedesVehicles: Vehicle[] = [
         "/lovable-uploads/9b742924-8ffa-44a3-8af7-94b64002aaac.png"
       ]
     }
+  },
+  {
+    id: "mercedes-gla-220-cdi-2014-001",
+    brand: "Mercedes-Benz",
+    model: "GLA 220 CDI 4MATIC AMG",
+    year: 2014,
+    price: 9000,
+    mileage: 139500,
+    engineType: "220 CDI 170 ch",
+    transmission: "Automatique",
+    exteriorColor: "Rouge Jupiter Métallisé",
+    interiorColor: "Noir Artico avec surpiqûres rouges",
+    description: "Mercedes-Benz GLA 220 CDI 4MATIC AMG en excellent état. SUV compact sportif avec motorisation diesel performante de 170 ch et transmission intégrale 4MATIC. Finition AMG avec kit carrosserie sportif, jantes alliage et intérieur premium. Véhicule polyvalent alliant confort urbain et capacités tout-terrain avec un design moderne et attractif.",
+    features: [
+      "Transmission 4MATIC intégrale",
+      "Finition AMG",
+      "Kit carrosserie AMG",
+      "Moteur diesel 170 ch",
+      "Transmission automatique",
+      "Jantes alliage AMG",
+      "Phares LED",
+      "Climatisation automatique",
+      "Système de navigation",
+      "Écran tactile multimédia",
+      "Bluetooth et connectivité",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Volant sport AMG multifonctions",
+      "Sièges sport Artico",
+      "Surpiqûres contrastées",
+      "Toit panoramique",
+      "Coffre modulable",
+      "Système audio premium",
+      "Ordinateur de bord",
+      "Direction assistée",
+      "Capteurs de parking",
+      "Rétroviseurs électriques chauffants",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Contrôle de traction 4MATIC",
+      "Mode de conduite sélectionnable"
+    ],
+    mainImage: "/lovable-uploads/21dd8834-2bfe-4b11-a011-0b826bf9c796.png",
+    images: [
+      "/lovable-uploads/9047387b-2710-4329-a130-1cb2a3797949.png",
+      "/lovable-uploads/50d8f625-e870-4a30-a0b6-6dc2a4d69275.png",
+      "/lovable-uploads/32b954cd-26fa-412a-a552-a8788bfe8d61.png",
+      "/lovable-uploads/780c7046-52ba-4787-a50b-42929e11fad2.png",
+      "/lovable-uploads/aff37998-bc95-470e-92ea-001a5afcade1.png",
+      "/lovable-uploads/662dc5ad-8eac-4d0a-aa34-d275c8f98092.png",
+      "/lovable-uploads/8e5430dd-62e4-468f-b346-88f983f98b19.png",
+      "/lovable-uploads/d28985ea-a6ca-485c-8f42-dbc746000190.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/21dd8834-2bfe-4b11-a011-0b826bf9c796.png",
+        "/lovable-uploads/9047387b-2710-4329-a130-1cb2a3797949.png",
+        "/lovable-uploads/50d8f625-e870-4a30-a0b6-6dc2a4d69275.png",
+        "/lovable-uploads/32b954cd-26fa-412a-a552-a8788bfe8d61.png"
+      ],
+      interior: [
+        "/lovable-uploads/780c7046-52ba-4787-a50b-42929e11fad2.png",
+        "/lovable-uploads/aff37998-bc95-470e-92ea-001a5afcade1.png",
+        "/lovable-uploads/662dc5ad-8eac-4d0a-aa34-d275c8f98092.png",
+        "/lovable-uploads/8e5430dd-62e4-468f-b346-88f983f98b19.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/d28985ea-a6ca-485c-8f42-dbc746000190.png"
+      ]
+    }
   }
 ];
