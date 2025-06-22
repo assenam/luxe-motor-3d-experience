@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const volkswagenVehicles: Vehicle[] = [
@@ -184,6 +183,73 @@ export const volkswagenVehicles: Vehicle[] = [
       engine: [],
       details: [
         "/lovable-uploads/d28eae29-f930-4ad3-86ed-3af7a4bfbaf6.png"
+      ]
+    }
+  },
+  {
+    id: "volkswagen-tiguan-allspace-2018-001",
+    brand: "Volkswagen",
+    model: "Tiguan Allspace 2.0 TDi",
+    year: 2018,
+    price: 8800,
+    mileage: 103000,
+    engineType: "2.0 TDi 190 ch",
+    transmission: "Automatique",
+    exteriorColor: "Noir Deep Black",
+    interiorColor: "Noir cuir",
+    description: "Volkswagen Tiguan Allspace 2.0 TDi 2018, SUV familial 7 places avec moteur diesel performant de 190 ch. Véhicule spacieux et polyvalent avec transmission automatique et équipements premium. Design élégant et moderne avec finitions de qualité. Idéal pour les familles nombreuses recherchant confort et praticité. Kilométrage certifié à 103 000 km.",
+    features: [
+      "7 places (Allspace)",
+      "Moteur 2.0 TDi 190 ch",
+      "Transmission automatique",
+      "Kilométrage certifié 103 000 km",
+      "Climatisation automatique tri-zone",
+      "Système de navigation",
+      "Écran tactile multimédia",
+      "Bluetooth et connectivité",
+      "Jantes alliage",
+      "Phares LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Volant multifonctions cuir",
+      "Sièges cuir chauffants",
+      "Banquettes modulables",
+      "Coffre XXL modulable",
+      "Système audio premium",
+      "Ordinateur de bord",
+      "Direction assistée progressive",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Contrôle de stabilité",
+      "Économie de carburant optimisée"
+    ],
+    mainImage: "/lovable-uploads/f3ef2e4c-58cf-4d37-8b0f-f4b26b2ccb95.png",
+    images: [
+      "/lovable-uploads/a5e240ed-d56f-4ce6-8b26-c38b42e0f0aa.png",
+      "/lovable-uploads/e7cec0da-7b38-45bc-9202-3e55527897f1.png",
+      "/lovable-uploads/592d2c6a-7cba-4d75-ae13-a31f38e550fc.png",
+      "/lovable-uploads/933c31ee-091a-4105-8faf-8f79d6cba483.png",
+      "/lovable-uploads/1a91f9c3-9343-4a28-9c49-3429c16519a4.png",
+      "/lovable-uploads/bee3410b-dfcb-4913-b37c-cd3d19e3e756.png",
+      "/lovable-uploads/1068addc-ad75-4bcf-baae-7e33172061ec.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/f3ef2e4c-58cf-4d37-8b0f-f4b26b2ccb95.png",
+        "/lovable-uploads/a5e240ed-d56f-4ce6-8b26-c38b42e0f0aa.png",
+        "/lovable-uploads/1068addc-ad75-4bcf-baae-7e33172061ec.png"
+      ],
+      interior: [
+        "/lovable-uploads/592d2c6a-7cba-4d75-ae13-a31f38e550fc.png",
+        "/lovable-uploads/933c31ee-091a-4105-8faf-8f79d6cba483.png",
+        "/lovable-uploads/1a91f9c3-9343-4a28-9c49-3429c16519a4.png",
+        "/lovable-uploads/bee3410b-dfcb-4913-b37c-cd3d19e3e756.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/e7cec0da-7b38-45bc-9202-3e55527897f1.png"
       ]
     }
   }
