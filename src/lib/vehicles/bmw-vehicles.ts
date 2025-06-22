@@ -334,5 +334,75 @@ export const bmwVehicles: Vehicle[] = [
         "/lovable-uploads/ce5b89a0-db3d-4e21-ba9e-c0b0e672b2cb.png"
       ]
     }
+  },
+  {
+    id: "bmw-x3-xdrive20d-m-sport-2013-001",
+    brand: "BMW",
+    model: "X3 xDrive 20D M-Sport",
+    year: 2013,
+    price: 8000,
+    mileage: 125000,
+    engineType: "2.0L Diesel 163 CV",
+    transmission: "Automatique",
+    exteriorColor: "Gris Métallisé",
+    interiorColor: "Noir cuir",
+    description: "BMW X3 xDrive 20D M-Sport 2013, SUV premium avec motorisation diesel 2.0L de 163 CV et transmission automatique. Équipé du pack M-Sport pour un design sportif et des performances optimisées. Traction intégrale xDrive pour une conduite sûre en toutes conditions. Intérieur cuir noir avec finitions premium et technologies BMW de série. Kilométrage certifié, véhicule bien entretenu.",
+    features: [
+      "Moteur 2.0L Diesel 163 CV",
+      "Transmission automatique",
+      "Traction intégrale xDrive",
+      "Pack M-Sport",
+      "SUV 5 places",
+      "Intérieur cuir noir",
+      "Système de navigation BMW",
+      "Écran iDrive",
+      "Climatisation automatique",
+      "Sièges réglables électriquement",
+      "Volant M-Sport multifonctions",
+      "Bluetooth et connectivité",
+      "Jantes alliage M-Sport",
+      "Phares xénon",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Direction assistée variable",
+      "Ordinateur de bord",
+      "Rétroviseurs électriques chauffants",
+      "Système audio premium",
+      "USB/AUX",
+      "Barres de toit",
+      "Crochet d'attelage",
+      "Kilométrage certifié"
+    ],
+    mainImage: "/lovable-uploads/609b93cf-78f7-477a-a70b-a0734a07d21a.png",
+    images: [
+      "/lovable-uploads/ec125762-c4b6-41d5-9335-4301c131eb0c.png",
+      "/lovable-uploads/a08da841-c863-4772-8693-dbf5cd3ff017.png",
+      "/lovable-uploads/c3081180-470c-49b7-92dc-f6e6760c645e.png",
+      "/lovable-uploads/d26f0677-8741-4f20-9884-e0fe7bc11c06.png",
+      "/lovable-uploads/ebe59bbf-a4b4-41ac-83fa-498b94d74042.png",
+      "/lovable-uploads/000bb6ff-e227-42ae-9f48-5d43b1c10826.png",
+      "/lovable-uploads/e5c66d29-ef87-4f85-a47a-7d07b54a5f95.png",
+      "/lovable-uploads/0030e847-3b71-4f98-a688-35d9efe0e96e.png",
+      "/lovable-uploads/e0fc4381-cd22-4b36-864c-1b1180e617ea.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/609b93cf-78f7-477a-a70b-a0734a07d21a.png",
+        "/lovable-uploads/ec125762-c4b6-41d5-9335-4301c131eb0c.png",
+        "/lovable-uploads/a08da841-c863-4772-8693-dbf5cd3ff017.png",
+        "/lovable-uploads/c3081180-470c-49b7-92dc-f6e6760c645e.png"
+      ],
+      interior: [
+        "/lovable-uploads/d26f0677-8741-4f20-9884-e0fe7bc11c06.png",
+        "/lovable-uploads/ebe59bbf-a4b4-41ac-83fa-498b94d74042.png",
+        "/lovable-uploads/000bb6ff-e227-42ae-9f48-5d43b1c10826.png",
+        "/lovable-uploads/0030e847-3b71-4f98-a688-35d9efe0e96e.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/e5c66d29-ef87-4f85-a47a-7d07b54a5f95.png",
+        "/lovable-uploads/e0fc4381-cd22-4b36-864c-1b1180e617ea.png"
+      ]
+    }
   }
 ];
