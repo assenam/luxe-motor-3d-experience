@@ -1,3 +1,4 @@
+
 import { Vehicle } from '../types';
 
 export const renaultVehicles: Vehicle[] = [
@@ -182,6 +183,76 @@ export const renaultVehicles: Vehicle[] = [
       engine: [],
       details: [
         "/lovable-uploads/05cf959c-c822-4e7f-8e58-6e19da901e42.png"
+      ]
+    }
+  },
+  {
+    id: "renault-talisman-2016-001",
+    brand: "Renault",
+    model: "Talisman 1.6 DCI Initial",
+    year: 2016,
+    price: 4000,
+    mileage: 155000,
+    engineType: "1.6 DCI 160 ch",
+    transmission: "Automatique",
+    exteriorColor: "Gris Métallisé",
+    interiorColor: "Cuir Noir",
+    description: "Renault Talisman 1.6 DCI Initial de mars 2016 en excellent état. Cette berline haut de gamme offre un parfait équilibre entre confort, performance et économie. Motorisation diesel moderne de 160 ch avec transmission automatique pour une conduite raffinée. Finition Initial très bien équipée avec de nombreux équipements premium et technologies avancées.",
+    features: [
+      "Moteur 1.6 DCI 160 ch diesel",
+      "Transmission automatique",
+      "Finition Initial haut de gamme",
+      "Kilométrage certifié 155 000 km",
+      "Mise en circulation 03/2016",
+      "Climatisation automatique bi-zone",
+      "Système multimédia R-Link 2",
+      "Écran tactile 8.7 pouces",
+      "Navigation GPS intégrée",
+      "Bluetooth mains-libres",
+      "Sièges en cuir chauffants",
+      "Réglages électriques sièges",
+      "Volant multifonctions cuir",
+      "Régulateur de vitesse adaptatif",
+      "Aide au stationnement avant/arrière",
+      "Caméra de recul",
+      "Feux LED automatiques",
+      "Jantes alliage 18 pouces",
+      "Toit ouvrant électrique",
+      "Start & Stop",
+      "Ordinateur de bord",
+      "Multi-Sense (5 modes de conduite)",
+      "Excellent état général"
+    ],
+    mainImage: "/lovable-uploads/192deaa0-0538-4220-aa1e-9e21369d088e.png",
+    images: [
+      "/lovable-uploads/a310ce24-e2ea-4e0f-9f4a-cb26fe899c6c.png",
+      "/lovable-uploads/8ea9ae56-4a67-4566-8674-7f9952b7820b.png",
+      "/lovable-uploads/27885084-a65b-4517-9f09-62da8d21ae8f.png",
+      "/lovable-uploads/e24b4783-aa63-4792-80c2-c6ba040be5c9.png",
+      "/lovable-uploads/5b03bd30-51ad-448e-b85f-6002db2a501d.png",
+      "/lovable-uploads/20bf93ec-2fb8-48cf-b139-9eba026c5672.png",
+      "/lovable-uploads/8ae66d3f-d13d-4420-939b-47a891995db1.png",
+      "/lovable-uploads/b2844cfb-5b9e-4ad3-92c7-b323f8cd4e05.png",
+      "/lovable-uploads/f1f294e9-f7bd-4da3-b4fa-a717f37a227d.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/192deaa0-0538-4220-aa1e-9e21369d088e.png",
+        "/lovable-uploads/a310ce24-e2ea-4e0f-9f4a-cb26fe899c6c.png",
+        "/lovable-uploads/8ea9ae56-4a67-4566-8674-7f9952b7820b.png"
+      ],
+      interior: [
+        "/lovable-uploads/27885084-a65b-4517-9f09-62da8d21ae8f.png",
+        "/lovable-uploads/e24b4783-aa63-4792-80c2-c6ba040be5c9.png",
+        "/lovable-uploads/5b03bd30-51ad-448e-b85f-6002db2a501d.png",
+        "/lovable-uploads/f1f294e9-f7bd-4da3-b4fa-a717f37a227d.png"
+      ],
+      engine: [
+        "/lovable-uploads/8ae66d3f-d13d-4420-939b-47a891995db1.png"
+      ],
+      details: [
+        "/lovable-uploads/20bf93ec-2fb8-48cf-b139-9eba026c5672.png",
+        "/lovable-uploads/b2844cfb-5b9e-4ad3-92c7-b323f8cd4e05.png"
       ]
     }
   }
