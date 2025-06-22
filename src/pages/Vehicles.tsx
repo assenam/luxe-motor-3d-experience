@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import VehicleCard from '@/components/VehicleCard';
 import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Vehicles = () => {
   // Using vehicles directly from import rather than a non-existent getAllVehicles function
@@ -122,119 +123,158 @@ const Vehicles = () => {
         
         <section className="py-12 bg-secondary">
           <div className="container-luxe">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-              <div className="mb-4 md:mb-0">
-                <h2 className="text-2xl font-playfair font-semibold">
-                  {filteredVehicles.length} Véhicules disponibles
-                </h2>
+            {vehicles.length === 0 ? (
+              <div className="text-center py-16">
+                <div className="max-w-2xl mx-auto">
+                  <h2 className="text-3xl font-playfair font-semibold mb-6">
+                    Catalogue en Préparation
+                  </h2>
+                  <p className="text-lg text-luxe-lightgray mb-8">
+                    Nous préparons actuellement notre nouvelle collection de véhicules d'exception. 
+                    Notre catalogue est maintenant prêt à accueillir jusqu'à 50 véhicules avec des galeries photo complètes.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+                    <div className="luxury-card p-6 text-center">
+                      <div className="text-3xl font-bold text-luxe-gold mb-2">50</div>
+                      <p className="text-sm">Véhicules maximum</p>
+                    </div>
+                    <div className="luxury-card p-6 text-center">
+                      <div className="text-3xl font-bold text-luxe-gold mb-2">4</div>
+                      <p className="text-sm">Catégories de photos</p>
+                    </div>
+                    <div className="luxury-card p-6 text-center">
+                      <div className="text-3xl font-bold text-luxe-gold mb-2">∞</div>
+                      <p className="text-sm">Images par galerie</p>
+                    </div>
+                    <div className="luxury-card p-6 text-center">
+                      <div className="text-3xl font-bold text-luxe-gold mb-2">🎯</div>
+                      <p className="text-sm">Qualité premium</p>
+                    </div>
+                  </div>
+                  <div className="mt-12">
+                    <Link to="/" className="premium-button">
+                      Retour à l'accueil
+                    </Link>
+                  </div>
+                </div>
               </div>
-              
-              <div className="flex items-center">
-                <Button 
-                  onClick={toggleFilters} 
-                  variant="outline" 
-                  className="flex items-center gap-2"
-                >
-                  <Filter size={18} />
-                  <span>Filtres</span>
-                </Button>
-              </div>
-            </div>
-            
-            {/* Filters */}
-            {showFilters && (
-              <div className="glass-panel p-6 mb-8 rounded-sm animate-in fade-in-50 slide-in-from-top-5">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Affiner votre recherche</h3>
-                  <Button 
-                    onClick={clearFilters} 
-                    variant="ghost" 
-                    className="text-sm"
-                  >
-                    Réinitialiser
-                  </Button>
+            ) : (
+              <>
+                <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+                  <div className="mb-4 md:mb-0">
+                    <h2 className="text-2xl font-playfair font-semibold">
+                      {filteredVehicles.length} Véhicules disponibles
+                    </h2>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <Button 
+                      onClick={toggleFilters} 
+                      variant="outline" 
+                      className="flex items-center gap-2"
+                    >
+                      <Filter size={18} />
+                      <span>Filtres</span>
+                    </Button>
+                  </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Marque</label>
-                    <select 
-                      name="brand" 
-                      value={filters.brand} 
-                      onChange={handleFilterChange}
-                      className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
-                    >
-                      <option value="">Toutes les marques</option>
-                      {brands.map((brand) => (
-                        <option key={brand} value={brand}>{brand}</option>
-                      ))}
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Prix (€)</label>
-                    <div className="flex items-center space-x-2">
-                      <input 
-                        type="number" 
-                        name="priceMin" 
-                        placeholder="Min" 
-                        value={filters.priceMin} 
-                        onChange={handleFilterChange}
-                        className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
-                      />
-                      <span>-</span>
-                      <input 
-                        type="number" 
-                        name="priceMax" 
-                        placeholder="Max" 
-                        value={filters.priceMax} 
-                        onChange={handleFilterChange}
-                        className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
-                      />
+                {/* Filters */}
+                {showFilters && (
+                  <div className="glass-panel p-6 mb-8 rounded-sm animate-in fade-in-50 slide-in-from-top-5">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold">Affiner votre recherche</h3>
+                      <Button 
+                        onClick={clearFilters} 
+                        variant="ghost" 
+                        className="text-sm"
+                      >
+                        Réinitialiser
+                      </Button>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Marque</label>
+                        <select 
+                          name="brand" 
+                          value={filters.brand} 
+                          onChange={handleFilterChange}
+                          className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                        >
+                          <option value="">Toutes les marques</option>
+                          {brands.map((brand) => (
+                            <option key={brand} value={brand}>{brand}</option>
+                          ))}
+                        </select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Prix (€)</label>
+                        <div className="flex items-center space-x-2">
+                          <input 
+                            type="number" 
+                            name="priceMin" 
+                            placeholder="Min" 
+                            value={filters.priceMin} 
+                            onChange={handleFilterChange}
+                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          />
+                          <span>-</span>
+                          <input 
+                            type="number" 
+                            name="priceMax" 
+                            placeholder="Max" 
+                            value={filters.priceMax} 
+                            onChange={handleFilterChange}
+                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Année</label>
+                        <div className="flex items-center space-x-2">
+                          <input 
+                            type="number" 
+                            name="yearMin" 
+                            placeholder="Min" 
+                            value={filters.yearMin} 
+                            onChange={handleFilterChange}
+                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          />
+                          <span>-</span>
+                          <input 
+                            type="number" 
+                            name="yearMax" 
+                            placeholder="Max" 
+                            value={filters.yearMax} 
+                            onChange={handleFilterChange}
+                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Année</label>
-                    <div className="flex items-center space-x-2">
-                      <input 
-                        type="number" 
-                        name="yearMin" 
-                        placeholder="Min" 
-                        value={filters.yearMin} 
-                        onChange={handleFilterChange}
-                        className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
-                      />
-                      <span>-</span>
-                      <input 
-                        type="number" 
-                        name="yearMax" 
-                        placeholder="Max" 
-                        value={filters.yearMax} 
-                        onChange={handleFilterChange}
-                        className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
-                      />
+                )}
+                
+                {/* Vehicle Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredVehicles.length > 0 ? filteredVehicles.map((vehicle, index) => (
+                    <div key={vehicle.id} className="animate-on-scroll">
+                      <VehicleCard vehicle={vehicle} index={index} />
                     </div>
-                  </div>
+                  )) : (
+                    <div className="col-span-full text-center py-16">
+                      <p className="text-xl text-luxe-lightgray mb-4">Aucun véhicule ne correspond à vos critères.</p>
+                      <Button onClick={clearFilters} variant="outline">
+                        Réinitialiser les filtres
+                      </Button>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </>
             )}
-            
-            {/* Vehicle Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredVehicles.length > 0 ? filteredVehicles.map((vehicle, index) => (
-                <div key={vehicle.id} className="animate-on-scroll">
-                  <VehicleCard vehicle={vehicle} index={index} />
-                </div>
-              )) : (
-                <div className="col-span-full text-center py-16">
-                  <p className="text-xl text-luxe-lightgray mb-4">Aucun véhicule ne correspond à vos critères.</p>
-                  <Button onClick={clearFilters} variant="outline">
-                    Réinitialiser les filtres
-                  </Button>
-                </div>
-              )}
-            </div>
           </div>
         </section>
       </main>
