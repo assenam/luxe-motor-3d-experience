@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const mercedesVehicles: Vehicle[] = [
@@ -219,6 +218,70 @@ export const mercedesVehicles: Vehicle[] = [
       ],
       engine: [],
       details: []
+    }
+  },
+  {
+    id: "mercedes-cla-sb-200d-2015-001",
+    brand: "Mercedes-Benz",
+    model: "CLA SB 200d Urbain",
+    year: 2015,
+    price: 6500,
+    mileage: 147000,
+    engineType: "200d 136 CV 7G",
+    transmission: "Automatique",
+    exteriorColor: "Gris Montagne",
+    interiorColor: "Noir avec surpiqûres blanches",
+    description: "Mercedes-Benz CLA Shooting Brake 200d Urbain en excellent état. Véhicule familial élégant avec motorisation diesel économique de 136 CV et transmission automatique 7G-DCT. Design shooting brake alliant style coupé et praticité familiale. Intérieur soigné avec finitions de qualité.",
+    features: [
+      "Transmission automatique 7G-DCT",
+      "Moteur diesel 200d 136 CV",
+      "Finition Urbain",
+      "Climatisation automatique",
+      "Système de navigation",
+      "Écran tactile central",
+      "Bluetooth et connectivité",
+      "Jantes alliage",
+      "Feux LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Volant multifonctions cuir",
+      "Sièges sport avec surpiqûres",
+      "Banquette arrière rabattable",
+      "Coffre modulable",
+      "Système audio premium",
+      "Ordinateur de bord",
+      "Direction assistée progressive",
+      "Capteurs de parking",
+      "Rétroviseurs électriques chauffants"
+    ],
+    mainImage: "/lovable-uploads/605f95f3-12e2-4eae-a4c1-b7a8dc63bc08.png",
+    images: [
+      "/lovable-uploads/012cdae0-bcaa-42a5-b093-5f8a96086643.png",
+      "/lovable-uploads/24211183-c0c1-4eac-8ac0-d8b07ca87421.png",
+      "/lovable-uploads/2fbbce70-5dd5-4755-b017-a4eb6b8dd164.png",
+      "/lovable-uploads/a6b3b842-d13c-46a3-83df-8cc389579b0e.png",
+      "/lovable-uploads/d53004d5-90e5-4af1-b04e-cb820e6ba4bd.png",
+      "/lovable-uploads/40884f3d-c72c-4449-bbad-9d79bf88a4a9.png",
+      "/lovable-uploads/363e846d-36fb-4572-a75f-131c8f3e4e7f.png",
+      "/lovable-uploads/ff95933c-9cf9-4e02-80ef-ee50aa7a427b.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/605f95f3-12e2-4eae-a4c1-b7a8dc63bc08.png",
+        "/lovable-uploads/012cdae0-bcaa-42a5-b093-5f8a96086643.png",
+        "/lovable-uploads/24211183-c0c1-4eac-8ac0-d8b07ca87421.png",
+        "/lovable-uploads/40884f3d-c72c-4449-bbad-9d79bf88a4a9.png"
+      ],
+      interior: [
+        "/lovable-uploads/2fbbce70-5dd5-4755-b017-a4eb6b8dd164.png",
+        "/lovable-uploads/a6b3b842-d13c-46a3-83df-8cc389579b0e.png",
+        "/lovable-uploads/d53004d5-90e5-4af1-b04e-cb820e6ba4bd.png",
+        "/lovable-uploads/ff95933c-9cf9-4e02-80ef-ee50aa7a427b.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/363e846d-36fb-4572-a75f-131c8f3e4e7f.png"
+      ]
     }
   }
 ];
