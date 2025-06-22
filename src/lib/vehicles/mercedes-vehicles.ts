@@ -420,5 +420,82 @@ export const mercedesVehicles: Vehicle[] = [
         "/lovable-uploads/d28985ea-a6ca-485c-8f42-dbc746000190.png"
       ]
     }
+  },
+  {
+    id: "mercedes-gle-coupe-350d-2017-001",
+    brand: "Mercedes-Benz",
+    model: "GLE Coupé AMG",
+    year: 2017,
+    price: 20000,
+    mileage: 89000,
+    engineType: "350d 4MATIC",
+    transmission: "Automatique",
+    exteriorColor: "Rouge Designo Cardinal",
+    interiorColor: "Noir Cuir Premium",
+    description: "Mercedes-Benz GLE Coupé 350d 4MATIC AMG en excellent état. SUV coupé sportif et élégant avec motorisation diesel performante de 350d et transmission intégrale 4MATIC. Finition AMG avec kit carrosserie sportif et équipements premium. Design moderne alliant style coupé et polyvalence SUV, parfait pour un usage quotidien luxueux.",
+    features: [
+      "Transmission intégrale 4MATIC",
+      "Finition AMG",
+      "Kit carrosserie AMG",
+      "Moteur diesel 350d",
+      "Transmission automatique 9G-TRONIC",
+      "Jantes alliage AMG",
+      "Phares LED intelligents",
+      "Feux arrière LED",
+      "Climatisation automatique bi-zone",
+      "Système de navigation COMAND",
+      "Écran tactile multimédia",
+      "Bluetooth et connectivité",
+      "Aide au stationnement",
+      "Régulateur de vitesse adaptatif",
+      "Volant sport AMG multifonctions",
+      "Sièges sport cuir premium",
+      "Sièges électriques avec mémoire",
+      "Système audio surround",
+      "Ordinateur de bord avancé",
+      "Direction assistée progressive",
+      "Capteurs de parking avant/arrière",
+      "Caméra de recul",
+      "Toit panoramique",
+      "Coffre électrique",
+      "Vitres teintées",
+      "Rétroviseurs électriques chauffants",
+      "Verrouillage centralisé",
+      "Airbags multiples",
+      "ABS et ESP",
+      "Contrôle de traction 4MATIC",
+      "Mode de conduite sélectionnable",
+      "Suspension pneumatique",
+      "Freinage d'urgence automatique"
+    ],
+    mainImage: "/lovable-uploads/32edad7f-c12f-4cdb-9323-89856f4deb52.png",
+    images: [
+      "/lovable-uploads/1d13b224-7144-4dc3-839a-54c1d2cb0f99.png",
+      "/lovable-uploads/abe83d37-90bc-4207-82cf-dce481b9cbbc.png",
+      "/lovable-uploads/6064c2d8-78d9-4105-a5ba-4218e91c9133.png",
+      "/lovable-uploads/f2ca1a3a-0943-47a3-a1ff-7c4b3d3222d2.png",
+      "/lovable-uploads/ee366c78-a222-4030-a2ae-e65d45eee075.png",
+      "/lovable-uploads/48f5ad0f-0850-4ca2-9b20-ebdbb42f03e4.png",
+      "/lovable-uploads/014cbfe1-7503-4405-8476-c69fba0060f0.png",
+      "/lovable-uploads/5e8d0df5-b75c-409c-aaa5-22ca3c65a491.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/32edad7f-c12f-4cdb-9323-89856f4deb52.png",
+        "/lovable-uploads/1d13b224-7144-4dc3-839a-54c1d2cb0f99.png",
+        "/lovable-uploads/abe83d37-90bc-4207-82cf-dce481b9cbbc.png",
+        "/lovable-uploads/6064c2d8-78d9-4105-a5ba-4218e91c9133.png",
+        "/lovable-uploads/f2ca1a3a-0943-47a3-a1ff-7c4b3d3222d2.png",
+        "/lovable-uploads/ee366c78-a222-4030-a2ae-e65d45eee075.png"
+      ],
+      interior: [
+        "/lovable-uploads/48f5ad0f-0850-4ca2-9b20-ebdbb42f03e4.png",
+        "/lovable-uploads/014cbfe1-7503-4405-8476-c69fba0060f0.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/5e8d0df5-b75c-409c-aaa5-22ca3c65a491.png"
+      ]
+    }
   }
 ];
