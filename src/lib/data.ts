@@ -1,4 +1,3 @@
-
 export interface Vehicle {
   id: string;
   brand: string;
@@ -178,6 +177,56 @@ export const vehicles: Vehicle[] = [
       ],
       engine: [],
       details: []
+    }
+  },
+  {
+    id: "mercedes-cla-2013-001",
+    brand: "Mercedes-Benz",
+    model: "CLA",
+    year: 2013,
+    price: 7000,
+    mileage: 163000,
+    engineType: "220 CDI 170 ch",
+    transmission: "Automatique",
+    exteriorColor: "Noir Cosmos",
+    interiorColor: "Noir",
+    description: "Mercedes-Benz CLA 220 CDI en excellent état, véhicule élégant et sportif avec finition AMG. Moteur diesel performant et économique avec transmission automatique 7G-DCT. Design coupé 4 portes unique alliant style et praticité.",
+    features: [
+      "Transmission automatique 7G-DCT",
+      "Finition AMG",
+      "Moteur diesel CDI",
+      "Climatisation automatique",
+      "Système de navigation",
+      "Bluetooth",
+      "Jantes alliage AMG",
+      "Feux LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Volant multifonctions",
+      "Sièges sport",
+      "Système audio COMAND"
+    ],
+    mainImage: "/lovable-uploads/a4f312cb-abcc-491b-bfa8-1f730269406b.png",
+    images: [
+      "/lovable-uploads/178e1ae6-81d5-4f08-9420-cf6f01557229.png",
+      "/lovable-uploads/90fb92e8-74f5-4cef-924b-87336a0c7ef1.png",
+      "/lovable-uploads/91a9d441-92bd-41fb-92a3-ab86cec59935.png",
+      "/lovable-uploads/9e4211b5-9ef7-47c3-b9ee-ba5251d9dff6.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/a4f312cb-abcc-491b-bfa8-1f730269406b.png",
+        "/lovable-uploads/178e1ae6-81d5-4f08-9420-cf6f01557229.png",
+        "/lovable-uploads/90fb92e8-74f5-4cef-924b-87336a0c7ef1.png"
+      ],
+      interior: [
+        "/lovable-uploads/91a9d441-92bd-41fb-92a3-ab86cec59935.png",
+        "/lovable-uploads/d45e1c01-b17f-437c-a965-7f030b70e79d.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/9e4211b5-9ef7-47c3-b9ee-ba5251d9dff6.png"
+      ]
     }
   }
 ];
