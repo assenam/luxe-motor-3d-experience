@@ -228,6 +228,58 @@ export const vehicles: Vehicle[] = [
         "/lovable-uploads/9e4211b5-9ef7-47c3-b9ee-ba5251d9dff6.png"
       ]
     }
+  },
+  {
+    id: "mercedes-a-class-2018-001",
+    brand: "Mercedes-Benz",
+    model: "Classe A",
+    year: 2018,
+    price: 8000,
+    mileage: 99950,
+    engineType: "AMG 163 ch",
+    transmission: "Automatique",
+    exteriorColor: "Blanc Polaire",
+    interiorColor: "Noir avec éclairage d'ambiance",
+    description: "Mercedes-Benz Classe A AMG avec toit panoramique en excellent état. Véhicule moderne et sportif avec finition AMG et éclairage d'ambiance. Motorisation essence performante de 163 ch avec transmission automatique. Design dynamique et technologie avancée.",
+    features: [
+      "Finition AMG",
+      "Toit panoramique",
+      "Transmission automatique",
+      "Éclairage d'ambiance",
+      "Écran tactile MBUX",
+      "Système de navigation",
+      "Climatisation automatique",
+      "Jantes alliage AMG",
+      "Feux LED",
+      "Aide au stationnement",
+      "Régulateur de vitesse",
+      "Volant multifonctions",
+      "Sièges sport",
+      "Bluetooth"
+    ],
+    mainImage: "/lovable-uploads/6fc903bf-cd33-4ba9-be59-2880d6485c64.png",
+    images: [
+      "/lovable-uploads/5645abe2-4bbc-4f35-bf14-9cba59643546.png",
+      "/lovable-uploads/a7e3eb0e-2278-47b6-81da-9740cf8762c6.png",
+      "/lovable-uploads/65194684-5b8b-4121-8033-ec31f6b1251e.png",
+      "/lovable-uploads/89388b03-116e-4d95-b253-19a621508b2e.png",
+      "/lovable-uploads/fcf5eeb0-bf73-43a5-8696-0b70295b5a0e.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/6fc903bf-cd33-4ba9-be59-2880d6485c64.png",
+        "/lovable-uploads/5645abe2-4bbc-4f35-bf14-9cba59643546.png",
+        "/lovable-uploads/a7e3eb0e-2278-47b6-81da-9740cf8762c6.png"
+      ],
+      interior: [
+        "/lovable-uploads/65194684-5b8b-4121-8033-ec31f6b1251e.png",
+        "/lovable-uploads/89388b03-116e-4d95-b253-19a621508b2e.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/fcf5eeb0-bf73-43a5-8696-0b70295b5a0e.png"
+      ]
+    }
   }
 ];
 
