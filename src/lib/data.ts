@@ -1,5 +1,3 @@
-
-
 export interface Vehicle {
   id: string;
   brand: string;
@@ -24,7 +22,7 @@ export interface Vehicle {
   modelUrl?: string; // 3D model URL
 }
 
-// Catalogue avec l'Audi Q2 ajoutée
+// Catalogue avec l'Audi Q2 et l'Audi RS3
 export const vehicles: Vehicle[] = [
   {
     id: "audi-q2-2020-001",
@@ -78,6 +76,59 @@ export const vehicles: Vehicle[] = [
         "/lovable-uploads/b7544535-61bd-4c3c-8e39-37ca350030e9.png"
       ]
     }
+  },
+  {
+    id: "audi-rs3-2016-001",
+    brand: "Audi",
+    model: "RS3",
+    year: 2016,
+    price: 9000,
+    mileage: 103500,
+    engineType: "2.5 TFSI 367 ch",
+    transmission: "Automatique",
+    exteriorColor: "Gris Nardo",
+    interiorColor: "Noir avec surpiqûres rouges",
+    description: "Audi RS3 Sportback, version haute performance avec moteur 5 cylindres turbo développant 367 ch. Véhicule sportif d'exception avec transmission automatique S tronic. Finition RS avec éléments de carrosserie spécifiques et jantes alliage performance.",
+    features: [
+      "Moteur 5 cylindres turbo",
+      "Transmission S tronic",
+      "Suspension RS sport",
+      "Freins haute performance",
+      "Jantes alliage RS",
+      "Sièges sport RS",
+      "Différentiel arrière sport",
+      "Échappement RS",
+      "Système audio B&O",
+      "Navigation plus",
+      "Climatisation automatique",
+      "Feux LED Matrix"
+    ],
+    mainImage: "/lovable-uploads/2d4fcbb2-74c5-4245-899d-e84caebba370.png",
+    images: [
+      "/lovable-uploads/98f2656e-9a5b-449b-8151-d864dea70f54.png",
+      "/lovable-uploads/8d1a0baf-1e7f-4c80-9f85-f15243bc42a9.png",
+      "/lovable-uploads/8a060793-673d-4a33-839f-f60fc778b9ab.png",
+      "/lovable-uploads/ce386419-5cf4-42c9-8448-4f96f8e4d877.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/2d4fcbb2-74c5-4245-899d-e84caebba370.png",
+        "/lovable-uploads/98f2656e-9a5b-449b-8151-d864dea70f54.png",
+        "/lovable-uploads/8d1a0baf-1e7f-4c80-9f85-f15243bc42a9.png",
+        "/lovable-uploads/8a060793-673d-4a33-839f-f60fc778b9ab.png"
+      ],
+      interior: [
+        "/lovable-uploads/ce386419-5cf4-42c9-8448-4f96f8e4d877.png",
+        "/lovable-uploads/4888d9ed-7115-4020-9164-2141593131a1.png",
+        "/lovable-uploads/5b15dbec-834c-47a6-979a-97f970713124.png",
+        "/lovable-uploads/e2bcf633-f274-45d3-a754-5bc19055abd8.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/91a1c47f-59db-4ec7-b4a1-2f15b3ef5b04.png",
+        "/lovable-uploads/5e71b3f8-cc36-4ef2-8614-1c63806348d6.png"
+      ]
+    }
   }
 ];
 
@@ -113,4 +164,3 @@ export const getAllVehicleImages = (vehicle: Vehicle): string[] => {
 export const getImagesByCategory = (vehicle: Vehicle, category: keyof Vehicle['gallery']): string[] => {
   return vehicle.gallery[category] || [];
 };
-
