@@ -7,6 +7,7 @@ import { renaultVehicles } from './renault-vehicles';
 import { bmwVehicles } from './bmw-vehicles';
 import { skodaVehicles } from './skoda-vehicles';
 import { peugeotVehicles } from './peugeot-vehicles';
+import { volkswagenVehicles } from './volkswagen-vehicles';
 
 // Catalogue complet avec tous les véhicules organisés par marque
 export const vehicles: Vehicle[] = [
@@ -16,7 +17,8 @@ export const vehicles: Vehicle[] = [
   ...renaultVehicles,
   ...bmwVehicles,
   ...skodaVehicles,
-  ...peugeotVehicles
+  ...peugeotVehicles,
+  ...volkswagenVehicles
 ];
 
 // Export des véhicules par marque pour un accès direct si nécessaire
@@ -27,5 +29,6 @@ export {
   renaultVehicles,
   bmwVehicles,
   skodaVehicles,
-  peugeotVehicles
+  peugeotVehicles,
+  volkswagenVehicles
 };
