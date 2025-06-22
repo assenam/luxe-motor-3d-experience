@@ -283,5 +283,69 @@ export const mercedesVehicles: Vehicle[] = [
         "/lovable-uploads/363e846d-36fb-4572-a75f-131c8f3e4e7f.png"
       ]
     }
+  },
+  {
+    id: "mercedes-c220-bluetec-2014-001",
+    brand: "Mercedes-Benz",
+    model: "Classe C 220 BLUETEC",
+    year: 2014,
+    price: 6000,
+    mileage: 177000,
+    engineType: "220 BLUETEC 2.1-170 D",
+    transmission: "Automatique",
+    exteriorColor: "Noir Obsidienne",
+    interiorColor: "Noir Premium",
+    description: "Mercedes-Benz Classe C 220 BLUETEC 2.1-170 D bien équipée avec toit panoramique. Véhicule certifié en excellent état avec motorisation diesel performante de 170 ch et transmission automatique. Design élégant et équipements de confort haut de gamme, parfait pour les trajets quotidiens et les longs voyages.",
+    features: [
+      "Toit panoramique",
+      "Transmission automatique",
+      "Moteur diesel 170 ch certifié",
+      "Bien équipée",
+      "Kilométrage certifié",
+      "Climatisation automatique",
+      "Système de navigation",
+      "Écran tactile central",
+      "Bluetooth et connectivité",
+      "Régulateur de vitesse",
+      "Feux LED",
+      "Jantes alliage",
+      "Aide au stationnement",
+      "Volant multifonctions cuir",
+      "Sièges confort",
+      "Système audio premium",
+      "Ordinateur de bord",
+      "Direction assistée",
+      "Capteurs de parking",
+      "Rétroviseurs électriques chauffants"
+    ],
+    mainImage: "/lovable-uploads/2c03973d-0e08-4ff2-9df1-fd6c5978113c.png",
+    images: [
+      "/lovable-uploads/f3088801-59f7-4e82-a915-bdd4e5c4f381.png",
+      "/lovable-uploads/0112c7b1-5542-4219-8a2b-10e3cd668ba6.png",
+      "/lovable-uploads/bcab8e85-7abd-4bc3-b447-40a726e71c09.png",
+      "/lovable-uploads/42b68bf9-ef5a-4b90-96bd-3b17ba209aa4.png",
+      "/lovable-uploads/63cd0e6d-9ae5-4da8-92cc-8981ed7cfc69.png",
+      "/lovable-uploads/b4f79491-17e6-4671-9ac4-38ef45241645.png",
+      "/lovable-uploads/9b742924-8ffa-44a3-8af7-94b64002aaac.png",
+      "/lovable-uploads/6df969c4-5cdc-4dfc-bbd6-33cf3991c2af.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/2c03973d-0e08-4ff2-9df1-fd6c5978113c.png",
+        "/lovable-uploads/f3088801-59f7-4e82-a915-bdd4e5c4f381.png",
+        "/lovable-uploads/0112c7b1-5542-4219-8a2b-10e3cd668ba6.png"
+      ],
+      interior: [
+        "/lovable-uploads/bcab8e85-7abd-4bc3-b447-40a726e71c09.png",
+        "/lovable-uploads/42b68bf9-ef5a-4b90-96bd-3b17ba209aa4.png",
+        "/lovable-uploads/63cd0e6d-9ae5-4da8-92cc-8981ed7cfc69.png",
+        "/lovable-uploads/6df969c4-5cdc-4dfc-bbd6-33cf3991c2af.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/b4f79491-17e6-4671-9ac4-38ef45241645.png",
+        "/lovable-uploads/9b742924-8ffa-44a3-8af7-94b64002aaac.png"
+      ]
+    }
   }
 ];
