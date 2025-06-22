@@ -161,5 +161,64 @@ export const mercedesVehicles: Vehicle[] = [
         "/lovable-uploads/0feafde7-f727-4087-9126-fde310714790.png"
       ]
     }
+  },
+  {
+    id: "mercedes-c220d-2017-001",
+    brand: "Mercedes-Benz",
+    model: "Classe C",
+    year: 2017,
+    price: 9500,
+    mileage: 95800,
+    engineType: "220 d 170 ch",
+    transmission: "Automatique",
+    exteriorColor: "Noir Obsidienne",
+    interiorColor: "Noir Premium",
+    description: "Mercedes-Benz C 220 d Premium en excellent état. Véhicule élégant et performant avec motorisation diesel de 170 ch certifiée et transmission automatique. Finition Premium avec équipements haut de gamme et design sportif AMG Line.",
+    features: [
+      "Transmission automatique",
+      "Finition Premium",
+      "Moteur diesel 170 ch",
+      "Climatisation automatique",
+      "Système de navigation avec écran",
+      "Bluetooth et connectivité",
+      "Jantes alliage AMG",
+      "Feux LED intelligents",
+      "Aide au stationnement",
+      "Régulateur de vitesse adaptatif",
+      "Volant multifonctions cuir",
+      "Sièges sport réglables",
+      "Système audio premium",
+      "Ordinateur de bord avancé",
+      "Direction assistée progressive",
+      "Capteurs de parking avant/arrière"
+    ],
+    mainImage: "/lovable-uploads/c6777be6-8e9a-4e23-9b7a-30349d2afc50.png",
+    images: [
+      "/lovable-uploads/535752e2-ca5c-4d90-9f06-86fbbed5c811.png",
+      "/lovable-uploads/32dadc7f-0940-467e-be0c-775b25f93c12.png",
+      "/lovable-uploads/ee0e6010-1d77-4131-b652-5f544a4859a9.png",
+      "/lovable-uploads/eee15af4-af68-44a5-b0ec-af1bf97b40b4.png",
+      "/lovable-uploads/234de958-fae2-4612-923e-d31aae9b598c.png",
+      "/lovable-uploads/d08b5a59-e7e1-4f45-9d83-dbdc4a3b298c.png",
+      "/lovable-uploads/01febd26-dfe8-4907-8509-a406ca30efc6.png",
+      "/lovable-uploads/6e4e2b7f-a1d2-4430-ba53-8444afec75fb.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/c6777be6-8e9a-4e23-9b7a-30349d2afc50.png",
+        "/lovable-uploads/535752e2-ca5c-4d90-9f06-86fbbed5c811.png",
+        "/lovable-uploads/32dadc7f-0940-467e-be0c-775b25f93c12.png",
+        "/lovable-uploads/ee0e6010-1d77-4131-b652-5f544a4859a9.png",
+        "/lovable-uploads/01febd26-dfe8-4907-8509-a406ca30efc6.png",
+        "/lovable-uploads/6e4e2b7f-a1d2-4430-ba53-8444afec75fb.png"
+      ],
+      interior: [
+        "/lovable-uploads/eee15af4-af68-44a5-b0ec-af1bf97b40b4.png",
+        "/lovable-uploads/234de958-fae2-4612-923e-d31aae9b598c.png",
+        "/lovable-uploads/d08b5a59-e7e1-4f45-9d83-dbdc4a3b298c.png"
+      ],
+      engine: [],
+      details: []
+    }
   }
 ];
