@@ -1,6 +1,6 @@
 
 import { Vehicle } from './types';
-import { vehicles } from './vehicles-data';
+import { vehicles } from './vehicles';
 
 export const getVehicleById = (id: string): Vehicle | undefined => {
   return vehicles.find(vehicle => vehicle.id === id);
