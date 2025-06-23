@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Upload, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { submitToFormspree } from '@/services/formspree';
@@ -125,8 +125,8 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       case 1:
         return (
           <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center">Résumé de votre commande</h2>
-            <div className="flex items-center space-x-3 mb-4">
+            <h2 className="text-xl font-playfair font-semibold text-center mb-6">Résumé de votre commande</h2>
+            <div className="flex items-center space-x-3 mb-6">
               <img 
                 src={vehicle.mainImage || vehicle.images[0]} 
                 alt={`${vehicle.brand} ${vehicle.model}`}
@@ -138,14 +138,14 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
               </div>
             </div>
             
-            <div className="space-y-3 border-t pt-4">
+            <div className="space-y-4 border-t pt-4">
               <div className="flex justify-between">
                 <span className="font-medium">Montant total</span>
                 <span className="font-bold">{totalAmount.toLocaleString()} €</span>
               </div>
               <div className="flex justify-between text-green-600">
                 <span className="font-medium">Acompte à payer (20%)</span>
-                <span className="font-bold">{depositAmount.toLocaleString()} €</span>
+                <span className="font-bold text-xl">{depositAmount.toLocaleString()} €</span>
               </div>
             </div>
           </div>
@@ -154,9 +154,9 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       case 2:
         return (
           <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center">Instructions de paiement</h2>
+            <h2 className="text-xl font-playfair font-semibold text-center mb-6">Instructions de paiement</h2>
             
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 p-4 rounded-lg mb-4">
               <p className="text-blue-800 font-medium mb-2">
                 💳 Effectuez le virement de <strong>{depositAmount.toLocaleString()} €</strong>
               </p>
@@ -165,10 +165,10 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
               </p>
             </div>
             
-            <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+            <div className="bg-gray-50 p-4 rounded-lg space-y-3 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Titulaire :</span>
-                <span className="font-medium">AUTO GERMANY EXPORT SARL</span>
+                <span className="font-medium">AUTO GERMANY EXPORT</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">IBAN :</span>
@@ -185,7 +185,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       case 3:
         return (
           <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center">Preuve de paiement</h2>
+            <h2 className="text-xl font-playfair font-semibold text-center mb-6">Preuve de paiement</h2>
             
             <div>
               <label htmlFor="paymentProof" className="block font-medium mb-3">
@@ -222,7 +222,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       case 4:
         return (
           <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center">Confirmation</h2>
+            <h2 className="text-xl font-playfair font-semibold text-center mb-6">Confirmation</h2>
             
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
@@ -239,7 +239,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
               </div>
             </div>
             
-            <div className="bg-blue-50 p-3 rounded-lg">
+            <div className="bg-blue-50 p-3 rounded-lg mt-4">
               <p className="text-blue-800 font-medium text-sm">
                 Votre commande sera traitée dès réception de votre virement de {depositAmount.toLocaleString()} €
               </p>
@@ -253,13 +253,13 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   return (
-    <div className="max-w-md mx-auto h-screen flex flex-col">
-      {/* Indicateur d'étapes - plus compact */}
-      <div className="flex justify-center py-4">
+    <div className="h-screen flex flex-col max-w-md mx-auto">
+      {/* Indicateur d'étapes - fixe en haut */}
+      <div className="flex-shrink-0 flex justify-center py-4 bg-white">
         <div className="flex items-center space-x-3">
           {[1, 2, 3, 4].map((step) => (
             <div key={step} className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                 step <= currentStep 
                   ? 'bg-luxe-gold text-black' 
                   : 'bg-gray-200 text-gray-500'
@@ -276,8 +276,8 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         </div>
       </div>
 
-      {/* Contenu de l'étape - flexible */}
-      <div className="flex-1 overflow-hidden">
+      {/* Contenu de l'étape - flexible, scrollable si nécessaire */}
+      <div className="flex-1 min-h-0">
         <Card className="h-full">
           <CardContent className="p-4 h-full overflow-auto">
             {renderStep()}
@@ -285,8 +285,8 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         </Card>
       </div>
 
-      {/* Boutons de navigation - toujours visibles en bas */}
-      <div className="flex justify-between p-4 bg-white border-t">
+      {/* Boutons de navigation - fixe en bas, toujours visible */}
+      <div className="flex-shrink-0 flex justify-between p-4 bg-white border-t shadow-lg">
         <Button
           onClick={handlePrevious}
           disabled={currentStep === 1}
