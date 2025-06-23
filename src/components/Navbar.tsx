@@ -84,9 +84,17 @@ const Navbar = () => {
     
     const matches = brandMatch || modelMatch || fullNameMatch || yearMatch || colorMatch;
     
-    // Debug spécifique pour BMW
-    if (query === 'bmw' && vehicle.brand.toLowerCase() === 'bmw') {
-      console.log('BMW vehicle found:', vehicle.brand, vehicle.model, vehicle.id);
+    // Debug spécifique pour chaque véhicule trouvé
+    if (matches) {
+      console.log('Vehicle matched for query "' + query + '":', {
+        id: vehicle.id,
+        brand: vehicle.brand,
+        model: vehicle.model,
+        brandMatch,
+        modelMatch,
+        fullNameMatch,
+        mainImage: vehicle.mainImage
+      });
     }
     
     return matches;
@@ -108,6 +116,7 @@ const Navbar = () => {
 
   console.log('Filtered vehicles count:', filteredVehicles.length);
   console.log('Total vehicles found:', totalVehiclesFound);
+  console.log('Filtered vehicles details:', filteredVehicles.map(v => ({ id: v.id, brand: v.brand, model: v.model, mainImage: v.mainImage })));
 
   const handleViewCars = () => {
     setCartOpen(false);
@@ -436,6 +445,10 @@ const Navbar = () => {
                     src={vehicle.mainImage} 
                     alt={`${vehicle.brand} ${vehicle.model}`}
                     className="w-16 h-12 object-cover rounded"
+                    onError={(e) => {
+                      console.error('Image failed to load:', vehicle.mainImage, 'for vehicle:', vehicle.id);
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
                   <div className="flex-1">
                     <div className="font-medium text-base">
