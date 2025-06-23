@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import PaymentFormSimple from '@/components/PaymentFormSimple';
+import PaymentFormNew from '@/components/PaymentFormNew';
 import { ArrowLeft } from "lucide-react";
 import { useToast } from '@/hooks/use-toast';
 import { Vehicle } from '@/lib/data';
@@ -54,7 +54,7 @@ const PaymentPage = () => {
             </p>
           </div>
 
-          <PaymentFormSimple vehicle={vehicle} />
+          <PaymentFormNew vehicle={vehicle} />
         </div>
       </main>
       
