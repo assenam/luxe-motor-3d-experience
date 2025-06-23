@@ -71,11 +71,11 @@ const Navbar = () => {
   console.log('Total vehicles in search:', vehicles.length);
   console.log('Search query:', searchQuery);
 
-  // Filtrer les véhicules selon la recherche
+  // Filtrer les véhicules selon la recherche avec une logique plus robuste
   const filteredVehicles = vehicles.filter(vehicle => {
     if (searchQuery.length === 0) return false;
     
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
     const brandMatch = vehicle.brand.toLowerCase().includes(query);
     const modelMatch = vehicle.model.toLowerCase().includes(query);
     const fullNameMatch = `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query);
@@ -84,17 +84,19 @@ const Navbar = () => {
     
     const matches = brandMatch || modelMatch || fullNameMatch || yearMatch || colorMatch;
     
+    // Debug spécifique pour BMW
     if (query === 'bmw' && vehicle.brand.toLowerCase() === 'bmw') {
       console.log('BMW vehicle found:', vehicle.brand, vehicle.model, vehicle.id);
     }
     
     return matches;
-  }).slice(0, 10); // Augmenter la limite à 10 véhicules affichés
+  }).slice(0, 10); // Limite d'affichage à 10 véhicules
 
+  // Compter le total sans limite pour afficher le nombre correct
   const totalVehiclesFound = vehicles.filter(vehicle => {
     if (searchQuery.length === 0) return false;
     
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
     return (
       vehicle.brand.toLowerCase().includes(query) ||
       vehicle.model.toLowerCase().includes(query) ||
@@ -428,26 +430,26 @@ const Navbar = () => {
                 <CommandItem 
                   key={vehicle.id} 
                   onSelect={() => handleSearchSelect(`/vehicles/${vehicle.id}`)}
-                  className="flex items-center space-x-3"
+                  className="flex items-center space-x-3 py-3"
                 >
                   <img 
                     src={vehicle.mainImage} 
                     alt={`${vehicle.brand} ${vehicle.model}`}
-                    className="w-12 h-8 object-cover rounded"
+                    className="w-16 h-12 object-cover rounded"
                   />
                   <div className="flex-1">
-                    <div className="font-medium">
+                    <div className="font-medium text-base">
                       {vehicle.brand} {vehicle.model}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      {vehicle.year} • {formatCurrency(vehicle.price)}
+                      {vehicle.year} • {formatCurrency(vehicle.price)} • {vehicle.exteriorColor}
                     </div>
                   </div>
                 </CommandItem>
               ))}
               {totalVehiclesFound > 10 && (
                 <CommandItem onSelect={() => handleSearchSelect(`/vehicles?search=${encodeURIComponent(searchQuery)}`)}>
-                  <div className="text-center w-full text-age-red font-medium">
+                  <div className="text-center w-full text-age-red font-medium py-2">
                     Voir tous les résultats ({totalVehiclesFound} véhicules)
                   </div>
                 </CommandItem>
