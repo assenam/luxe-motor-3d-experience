@@ -13,6 +13,13 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -350,38 +357,48 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Dialog de recherche */}
-      <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
-        <CommandInput placeholder="Rechercher..." />
-        <CommandList>
-          <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
-          <CommandGroup heading="Pages">
-            <CommandItem onSelect={() => handleSearchSelect("/")}>
-              Accueil
-            </CommandItem>
-            <CommandItem onSelect={() => handleSearchSelect("/vehicles")}>
-              Véhicules
-            </CommandItem>
-            <CommandItem onSelect={() => handleSearchSelect("/about")}>
-              À Propos
-            </CommandItem>
-            <CommandItem onSelect={() => handleSearchSelect("/contact")}>
-              Contact
-            </CommandItem>
-          </CommandGroup>
-          <CommandGroup heading="Véhicules populaires">
-            <CommandItem onSelect={() => handleSearchSelect("/vehicles/1")}>
-              Mercedes-Benz S-Class
-            </CommandItem>
-            <CommandItem onSelect={() => handleSearchSelect("/vehicles/2")}>
-              BMW Série 7
-            </CommandItem>
-            <CommandItem onSelect={() => handleSearchSelect("/vehicles/3")}>
-              Audi A8
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
+      {/* Dialog de recherche avec titre et description pour l'accessibilité */}
+      <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
+        <DialogContent className="sm:max-w-[425px] bg-white">
+          <DialogHeader>
+            <DialogTitle>Rechercher</DialogTitle>
+            <DialogDescription>
+              Recherchez des pages ou des véhicules dans notre catalogue
+            </DialogDescription>
+          </DialogHeader>
+          <CommandDialog open={false} onOpenChange={() => {}}>
+            <CommandInput placeholder="Tapez votre recherche..." />
+            <CommandList>
+              <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
+              <CommandGroup heading="Pages">
+                <CommandItem onSelect={() => handleSearchSelect("/")}>
+                  Accueil
+                </CommandItem>
+                <CommandItem onSelect={() => handleSearchSelect("/vehicles")}>
+                  Véhicules
+                </CommandItem>
+                <CommandItem onSelect={() => handleSearchSelect("/about")}>
+                  À Propos
+                </CommandItem>
+                <CommandItem onSelect={() => handleSearchSelect("/contact")}>
+                  Contact
+                </CommandItem>
+              </CommandGroup>
+              <CommandGroup heading="Véhicules populaires">
+                <CommandItem onSelect={() => handleSearchSelect("/vehicles/1")}>
+                  Mercedes-Benz S-Class
+                </CommandItem>
+                <CommandItem onSelect={() => handleSearchSelect("/vehicles/2")}>
+                  BMW Série 7
+                </CommandItem>
+                <CommandItem onSelect={() => handleSearchSelect("/vehicles/3")}>
+                  Audi A8
+                </CommandItem>
+              </CommandGroup>
+            </CommandList>
+          </CommandDialog>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };
