@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const landRoverVehicles: Vehicle[] = [
@@ -41,7 +40,7 @@ export const landRoverVehicles: Vehicle[] = [
       "Système de démarrage sans clé",
       "Contrôle de stabilité électronique"
     ],
-    mainImage: "/lovable-uploads/33233469-27a9-479d-a33e-a2949ee9ba99.png",
+    mainImage: "/lovable-uploads/f47c4750-ea66-41dc-b98c-7db1299ad129.png",
     images: [
       "/lovable-uploads/f47c4750-ea66-41dc-b98c-7db1299ad129.png",
       "/lovable-uploads/26af11ae-fdb5-46a6-9926-7a6b3954b0c4.png",
@@ -55,7 +54,6 @@ export const landRoverVehicles: Vehicle[] = [
     ],
     gallery: {
       exterior: [
-        "/lovable-uploads/33233469-27a9-479d-a33e-a2949ee9ba99.png",
         "/lovable-uploads/f47c4750-ea66-41dc-b98c-7db1299ad129.png",
         "/lovable-uploads/26af11ae-fdb5-46a6-9926-7a6b3954b0c4.png",
         "/lovable-uploads/43d012ef-27b3-430d-85a2-500f5f0c2063.png",
