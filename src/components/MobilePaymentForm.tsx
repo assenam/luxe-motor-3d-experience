@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload } from "lucide-react";
+import { Upload, ArrowLeft } from "lucide-react";
 import { submitToFormspree } from '@/services/formspree';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,11 +31,11 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-interface PaymentFormMobileProps {
+interface MobilePaymentFormProps {
   vehicle: Vehicle;
 }
 
-const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
+const MobilePaymentForm = ({ vehicle }: MobilePaymentFormProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -118,21 +118,34 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-lg mx-auto space-y-4">
-        {/* Résumé véhicule */}
-        <Card>
+    <div className="min-h-screen bg-gray-50 overflow-y-auto">
+      <div className="sticky top-0 z-10 bg-white shadow-sm border-b p-4">
+        <div className="flex items-center justify-between">
+          <button 
+            onClick={() => navigate(-1)}
+            className="flex items-center text-gray-600 hover:text-gray-900"
+          >
+            <ArrowLeft size={20} className="mr-2" />
+            <span>Retour</span>
+          </button>
+          <h1 className="text-lg font-semibold">Paiement</h1>
+          <div className="w-16"></div>
+        </div>
+      </div>
+
+      <div className="p-4 pb-8 space-y-4">
+        <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Votre véhicule</CardTitle>
+            <CardTitle className="text-base">Votre véhicule</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-0">
             <div className="flex items-center space-x-3 mb-3">
               <img 
                 src={vehicle.mainImage || vehicle.images[0]} 
                 alt={`${vehicle.brand} ${vehicle.model}`}
-                className="w-16 h-16 object-cover rounded" 
+                className="w-12 h-12 object-cover rounded" 
               />
-              <div>
+              <div className="flex-1">
                 <h3 className="font-medium text-sm">{vehicle.brand} {vehicle.model}</h3>
                 <p className="text-xs text-gray-600">{vehicle.year} • {vehicle.mileage.toLocaleString()} km</p>
               </div>
@@ -140,9 +153,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
             <div className="border-t pt-3 space-y-1">
               <div className="flex justify-between text-sm">
                 <span>Prix total</span>
-                <span>{vehicle.price.toLocaleString()} €</span>
+                <span className="font-medium">{vehicle.price.toLocaleString()} €</span>
               </div>
-              <div className="flex justify-between font-medium text-green-600">
+              <div className="flex justify-between text-green-600 font-medium">
                 <span>Acompte (20%)</span>
                 <span>{depositAmount.toLocaleString()} €</span>
               </div>
@@ -150,12 +163,11 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
           </CardContent>
         </Card>
 
-        {/* Formulaire */}
-        <Card>
+        <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Vos informations</CardTitle>
+            <CardTitle className="text-base">Vos informations</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-0">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
@@ -164,9 +176,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                     name="firstName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm">Prénom</FormLabel>
+                        <FormLabel className="text-sm font-medium">Prénom</FormLabel>
                         <FormControl>
-                          <Input placeholder="Jean" className="h-10" {...field} />
+                          <Input placeholder="Jean" className="h-10 text-base" {...field} />
                         </FormControl>
                         <FormMessage className="text-xs" />
                       </FormItem>
@@ -178,9 +190,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                     name="lastName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm">Nom</FormLabel>
+                        <FormLabel className="text-sm font-medium">Nom</FormLabel>
                         <FormControl>
-                          <Input placeholder="Dupont" className="h-10" {...field} />
+                          <Input placeholder="Dupont" className="h-10 text-base" {...field} />
                         </FormControl>
                         <FormMessage className="text-xs" />
                       </FormItem>
@@ -193,9 +205,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm">Email</FormLabel>
+                      <FormLabel className="text-sm font-medium">Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="jean@email.com" className="h-10" {...field} />
+                        <Input type="email" placeholder="jean@email.com" className="h-10 text-base" {...field} />
                       </FormControl>
                       <FormMessage className="text-xs" />
                     </FormItem>
@@ -207,9 +219,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm">Téléphone</FormLabel>
+                      <FormLabel className="text-sm font-medium">Téléphone</FormLabel>
                       <FormControl>
-                        <Input placeholder="06 12 34 56 78" className="h-10" {...field} />
+                        <Input placeholder="06 12 34 56 78" className="h-10 text-base" {...field} />
                       </FormControl>
                       <FormMessage className="text-xs" />
                     </FormItem>
@@ -221,9 +233,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   name="address"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm">Adresse</FormLabel>
+                      <FormLabel className="text-sm font-medium">Adresse</FormLabel>
                       <FormControl>
-                        <Input placeholder="123 Rue de la Paix" className="h-10" {...field} />
+                        <Input placeholder="123 Rue de la Paix" className="h-10 text-base" {...field} />
                       </FormControl>
                       <FormMessage className="text-xs" />
                     </FormItem>
@@ -236,9 +248,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                     name="city"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm">Ville</FormLabel>
+                        <FormLabel className="text-sm font-medium">Ville</FormLabel>
                         <FormControl>
-                          <Input placeholder="Paris" className="h-10" {...field} />
+                          <Input placeholder="Paris" className="h-10 text-base" {...field} />
                         </FormControl>
                         <FormMessage className="text-xs" />
                       </FormItem>
@@ -250,9 +262,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                     name="postalCode"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm">Code</FormLabel>
+                        <FormLabel className="text-sm font-medium">Code</FormLabel>
                         <FormControl>
-                          <Input placeholder="75001" className="h-10" {...field} />
+                          <Input placeholder="75001" className="h-10 text-base" {...field} />
                         </FormControl>
                         <FormMessage className="text-xs" />
                       </FormItem>
@@ -264,9 +276,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                     name="country"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm">Pays</FormLabel>
+                        <FormLabel className="text-sm font-medium">Pays</FormLabel>
                         <FormControl>
-                          <Input placeholder="France" className="h-10" {...field} />
+                          <Input placeholder="France" className="h-10 text-base" {...field} />
                         </FormControl>
                         <FormMessage className="text-xs" />
                       </FormItem>
@@ -279,9 +291,9 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   name="transferReference"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm">Référence virement</FormLabel>
+                      <FormLabel className="text-sm font-medium">Référence virement</FormLabel>
                       <FormControl>
-                        <Input className="h-10" {...field} />
+                        <Input className="h-10 text-base" {...field} />
                       </FormControl>
                       <FormMessage className="text-xs" />
                     </FormItem>
@@ -293,11 +305,12 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   name="notes"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm">Notes (optionnel)</FormLabel>
+                      <FormLabel className="text-sm font-medium">Notes (optionnel)</FormLabel>
                       <FormControl>
                         <Textarea 
                           placeholder="Commentaires..." 
                           rows={3}
+                          className="text-base resize-none"
                           {...field} 
                         />
                       </FormControl>
@@ -306,17 +319,14 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   )}
                 />
 
-                {/* Upload fichier */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Preuve paiement (optionnel)</label>
-                  <div className="border-2 border-dashed border-gray-300 rounded p-4 text-center">
-                    <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
+                  <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center bg-gray-50">
+                    <Upload className="mx-auto h-6 w-6 text-gray-400 mb-2" />
                     <div className="space-y-1">
-                      <p className="text-xs text-gray-600">
-                        Glissez votre fichier ici
-                      </p>
+                      <p className="text-xs text-gray-600">Glissez votre fichier ici</p>
                       {selectedFile && (
-                        <p className="text-xs text-green-600 font-medium">
+                        <p className="text-xs text-green-600 font-medium truncate">
                           {selectedFile.name}
                         </p>
                       )}
@@ -334,7 +344,7 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                   control={form.control}
                   name="termsAccepted"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                       <FormControl>
                         <Checkbox 
                           checked={field.value} 
@@ -342,8 +352,8 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
-                        <FormLabel className="text-xs">
-                          J'accepte les conditions générales
+                        <FormLabel className="text-sm">
+                          J'accepte les conditions générales de vente
                         </FormLabel>
                         <FormMessage className="text-xs" />
                       </div>
@@ -353,31 +363,39 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-luxe-gold hover:bg-luxe-gold/90 text-black font-medium h-12"
+                  className="w-full bg-luxe-gold hover:bg-luxe-gold/90 text-black font-medium h-12 text-base"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Envoi..." : "Confirmer ma commande"}
+                  {isSubmitting ? "Envoi en cours..." : "Confirmer ma commande"}
                 </Button>
               </form>
             </Form>
           </CardContent>
         </Card>
 
-        {/* Informations bancaires */}
-        <Card>
+        <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Informations bancaires</CardTitle>
+            <CardTitle className="text-base">Informations bancaires</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="bg-gray-50 p-3 rounded space-y-1 text-sm">
-              <p><strong>Titulaire :</strong> AUTO GERMANY EXPORT SARL</p>
-              <p><strong>IBAN :</strong> FR76 XXXX XXXX XXXX XXXX XXXX XXX</p>
-              <p><strong>BIC :</strong> XXXXXXXX</p>
+          <CardContent className="pt-0">
+            <div className="bg-gray-50 p-3 rounded-lg space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Titulaire :</span>
+                <span className="font-medium">AUTO GERMANY EXPORT SARL</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">IBAN :</span>
+                <span className="font-mono text-xs">FR76 XXXX XXXX XXXX XXXX XXXX XXX</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">BIC :</span>
+                <span className="font-mono">XXXXXXXX</span>
+              </div>
             </div>
-            <div className="bg-blue-50 p-3 rounded mt-3">
+            <div className="bg-blue-50 p-3 rounded-lg mt-3">
               <p className="text-xs text-blue-700">
-                Effectuez le virement de {depositAmount.toLocaleString()} € avec la référence fournie. 
-                Nous vous contacterons dès réception.
+                💳 Effectuez le virement de <strong>{depositAmount.toLocaleString()} €</strong> avec la référence fournie. 
+                Nous vous contacterons dès réception du paiement.
               </p>
             </div>
           </CardContent>
@@ -387,4 +405,4 @@ const PaymentFormMobile = ({ vehicle }: PaymentFormMobileProps) => {
   );
 };
 
-export default PaymentFormMobile;
+export default MobilePaymentForm;
