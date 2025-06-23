@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
-import { submitToFormspree } from '@/services/formspree';
+import { sendPaymentConfirmationEmail } from '@/services/paymentEmail';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
 
@@ -108,48 +107,10 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
     setIsSubmitting(true);
     
     try {
-      const submissionData = {
-        _subject: `Nouvelle commande avec acompte - ${vehicle.brand} ${vehicle.model}`,
-        _template: 'table',
-        _cc: customerInfo.email,
-        _replyto: customerInfo.email,
-        type: 'vehicle_purchase_with_deposit',
-        
-        customer_email_subject: `Confirmation de votre commande - ${vehicle.brand} ${vehicle.model}`,
-        customer_message: `
-Bonjour ${customerInfo.firstName} ${customerInfo.lastName},
-
-Nous avons bien reçu votre commande avec acompte pour le véhicule suivant :
-
-🚗 VÉHICULE COMMANDÉ
-- ${vehicle.brand} ${vehicle.model} (${vehicle.year})
-- Prix total : ${totalAmount.toLocaleString()} €
-- Acompte versé : ${depositAmount.toLocaleString()} € (20%)
-- Référence de virement : ${transferReference}
-
-📍 ADRESSE DE LIVRAISON
-${customerInfo.address}
-${customerInfo.postalCode} ${customerInfo.city}
-${customerInfo.country}
-
-⏳ PROCHAINES ÉTAPES
-- Nous vérifions la réception de votre virement
-- Nous préparons votre véhicule pour l'expédition
-- Nous organisons le transport depuis l'Allemagne
-- Nous vous contactons pour planifier la livraison
-
-Notre équipe va maintenant traiter votre commande et vous tiendra informé(e) de chaque étape.
-
-Si vous avez des questions, n'hésitez pas à nous contacter à contact@auto-germany-export.com
-
-Merci de votre confiance,
-L'équipe AUTO GERMANY EXPORT
-        `,
-        
+      const emailData = {
         vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
         vehicle_price: `${totalAmount.toLocaleString()} €`,
         deposit_amount: `${depositAmount.toLocaleString()} €`,
-        deposit_percentage: '20%',
         transfer_reference: transferReference,
         customer_first_name: customerInfo.firstName,
         customer_last_name: customerInfo.lastName,
@@ -159,12 +120,9 @@ L'équipe AUTO GERMANY EXPORT
         customer_postal_code: customerInfo.postalCode,
         customer_city: customerInfo.city,
         customer_country: customerInfo.country,
-        payment_proof_uploaded: 'Oui',
-        payment_proof_name: selectedFile.name,
-        payment_proof_type: selectedFile.type
       };
       
-      const result = await submitToFormspree(submissionData);
+      const result = await sendPaymentConfirmationEmail(emailData);
       
       if (result.ok) {
         removeFromCart(vehicle.id);
