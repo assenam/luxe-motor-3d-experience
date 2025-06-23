@@ -1,30 +1,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Upload, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { submitToFormspree } from '@/services/formspree';
-
-const formSchema = z.object({
-  paymentProof: z.instanceof(File).refine(
-    file => file.size > 0,
-    "Une preuve de paiement est obligatoire"
-  ).refine(
-    file => ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'].includes(file.type),
-    "Format accepté : PDF, JPG, PNG"
-  ),
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 const PaymentForm = () => {
   const location = useLocation();
@@ -33,7 +16,7 @@ const PaymentForm = () => {
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [validationError, setValidationError] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   
   useEffect(() => {
     if (location.state?.vehicle) {
@@ -50,47 +33,38 @@ const PaymentForm = () => {
     window.scrollTo(0, 0);
   }, [location, navigate, toast]);
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      paymentProof: undefined,
-    },
-  });
-
   if (!vehicle) return null;
 
   const totalAmount = vehicle.price;
   const depositAmount = Math.round(totalAmount * 0.2);
+  const transferReference = `AGE-${vehicle.id}-${Date.now().toString().slice(-6)}`;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      form.setValue('paymentProof', file);
-      setValidationError("");
+    setErrorMessage("");
+    
+    if (!file) {
+      setSelectedFile(null);
+      return;
     }
+
+    const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
+    if (!validTypes.includes(file.type)) {
+      setErrorMessage('Format de fichier invalide. Veuillez joindre un PDF ou une image JPG/PNG.');
+      event.target.value = '';
+      setSelectedFile(null);
+      return;
+    }
+
+    setSelectedFile(file);
   };
 
-  const validateBeforeSubmit = (): boolean => {
-    // Validation 1: Vérifier que l'acompte est de 20%
-    const minDeposit = Math.round(totalAmount * 0.2);
-    if (depositAmount < minDeposit) {
-      setValidationError("L'acompte de 20% est obligatoire pour valider la commande.");
-      return false;
-    }
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setErrorMessage("");
 
-    // Validation 2: Vérifier qu'une preuve de paiement est téléchargée
     if (!selectedFile) {
-      setValidationError("Merci d'ajouter une preuve de paiement au format PDF ou image.");
-      return false;
-    }
-
-    setValidationError("");
-    return true;
-  };
-
-  const onSubmit = async (values: FormData) => {
-    if (!validateBeforeSubmit()) {
+      setErrorMessage("Merci d'ajouter une preuve de paiement au format PDF ou image.");
       return;
     }
 
@@ -105,9 +79,10 @@ const PaymentForm = () => {
         vehicle_price: `${totalAmount.toLocaleString()} €`,
         deposit_amount: `${depositAmount.toLocaleString()} €`,
         deposit_percentage: '20%',
+        transfer_reference: transferReference,
         payment_proof_uploaded: 'Oui',
-        payment_proof_name: selectedFile?.name || 'Fichier téléchargé',
-        payment_proof_type: selectedFile?.type || 'Non spécifié'
+        payment_proof_name: selectedFile.name,
+        payment_proof_type: selectedFile.type
       };
       
       const result = await submitToFormspree(submissionData);
@@ -124,7 +99,10 @@ const PaymentForm = () => {
               vehicle, 
               totalAmount,
               depositAmount,
-              paymentProofUploaded: true
+              customerInfo: {
+                paymentProofUploaded: true,
+                transferReference
+              }
             } 
           } 
         });
@@ -141,8 +119,6 @@ const PaymentForm = () => {
       setIsSubmitting(false);
     }
   };
-
-  const isFormValid = selectedFile && !validationError;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -168,7 +144,7 @@ const PaymentForm = () => {
           </div>
 
           <div className="space-y-6">
-            {/* Résumé véhicule et montants */}
+            {/* Résumé véhicule */}
             <Card className="shadow-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="text-xl">Résumé de votre commande</CardTitle>
@@ -210,7 +186,7 @@ const PaymentForm = () => {
                     💳 Effectuez le virement de <strong>{depositAmount.toLocaleString()} €</strong>
                   </p>
                   <p className="text-blue-700 text-sm">
-                    Utilisez la référence : <strong>AGE-{vehicle.id}-{Date.now().toString().slice(-6)}</strong>
+                    Référence obligatoire : <strong>{transferReference}</strong>
                   </p>
                 </div>
                 
@@ -221,82 +197,72 @@ const PaymentForm = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">IBAN :</span>
-                    <span className="font-mono text-xs">FR76 XXXX XXXX XXXX XXXX XXXX XXX</span>
+                    <span className="font-mono text-xs">FR76 1234 5678 9012 3456 7890 123</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">BIC :</span>
-                    <span className="font-mono">XXXXXXXX</span>
+                    <span className="font-mono">ABCDFRPP</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Upload preuve de paiement */}
+            {/* Formulaire de preuve de paiement */}
             <Card className="shadow-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="text-xl">Preuve de paiement</CardTitle>
               </CardHeader>
               <CardContent>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="paymentProof"
-                      render={() => (
-                        <FormItem>
-                          <FormLabel className="text-base font-medium">
-                            Téléchargez votre preuve de paiement *
-                          </FormLabel>
-                          <FormControl>
-                            <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50 hover:bg-gray-100 transition-colors">
-                              <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-                              <div className="space-y-1">
-                                <p className="text-sm text-gray-600">
-                                  Formats acceptés : PDF, JPG, PNG
-                                </p>
-                                <p className="text-xs text-gray-500">
-                                  Cliquez ou glissez votre fichier ici
-                                </p>
-                                {selectedFile && (
-                                  <p className="text-sm text-green-600 font-medium mt-2">
-                                    ✓ {selectedFile.name}
-                                  </p>
-                                )}
-                              </div>
-                              <input
-                                type="file"
-                                accept=".pdf,.jpg,.jpeg,.png"
-                                onChange={handleFileChange}
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                required
-                              />
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {validationError && (
-                      <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-lg">
-                        <AlertCircle size={16} />
-                        <span className="text-sm font-medium">{validationError}</span>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="paymentProof" className="block text-base font-medium mb-2">
+                      Téléchargez votre preuve de paiement <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                      <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
+                      <div className="space-y-1">
+                        <p className="text-sm text-gray-600">
+                          Formats acceptés : PDF, JPG, PNG
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          Cliquez ou glissez votre fichier ici
+                        </p>
+                        {selectedFile && (
+                          <p className="text-sm text-green-600 font-medium mt-2">
+                            ✓ {selectedFile.name}
+                          </p>
+                        )}
                       </div>
-                    )}
+                      <input
+                        id="paymentProof"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        onChange={handleFileChange}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        required
+                      />
+                    </div>
+                  </div>
 
-                    <Button 
-                      type="submit" 
-                      className={`w-full h-12 text-base font-medium ${
-                        isFormValid 
-                          ? 'bg-luxe-gold hover:bg-luxe-gold/90 text-black' 
-                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      }`}
-                      disabled={!isFormValid || isSubmitting}
-                    >
-                      {isSubmitting ? "Validation en cours..." : "Valider ma commande"}
-                    </Button>
-                  </form>
-                </Form>
+                  {errorMessage && (
+                    <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-lg">
+                      <AlertCircle size={16} />
+                      <span className="text-sm font-medium">{errorMessage}</span>
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={!selectedFile || isSubmitting}
+                    className={`w-full h-12 text-base font-medium rounded-md transition-colors ${
+                      selectedFile && !isSubmitting
+                        ? 'bg-luxe-gold hover:bg-luxe-gold/90 text-black' 
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
+                  >
+                    {isSubmitting ? "Validation en cours..." : "Valider ma commande"}
+                  </button>
+                </form>
               </CardContent>
             </Card>
           </div>
