@@ -56,6 +56,49 @@ export const useGoogleTranslate = () => {
     }, 5000);
   };
 
+  const updateURL = (lang: string) => {
+    const currentPath = location.pathname;
+    const currentSearch = location.search;
+    
+    // Si on est sur une route avec préfixe de langue
+    const pathParts = currentPath.split('/');
+    const supportedLangs = ['fr', 'en', 'es', 'it', 'de', 'pt', 'nl', 'da', 'sv', 'no', 'ja', 'zh-CN', 'ru'];
+    
+    let newPath = currentPath;
+    
+    if (pathParts[1] && supportedLangs.includes(pathParts[1])) {
+      // Remplacer la langue existante
+      pathParts[1] = lang;
+      newPath = pathParts.join('/');
+    } else {
+      // Ajouter la langue au début du chemin
+      if (lang !== 'fr') {
+        newPath = `/${lang}${currentPath}`;
+      }
+    }
+    
+    // Pour le français, on n'ajoute pas de préfixe mais on garde les paramètres de recherche
+    if (lang === 'fr' && pathParts[1] && supportedLangs.includes(pathParts[1])) {
+      // Supprimer le préfixe de langue pour le français
+      pathParts.splice(1, 1);
+      newPath = pathParts.join('/') || '/';
+    }
+    
+    // Mettre à jour les paramètres de recherche
+    const params = new URLSearchParams(currentSearch);
+    if (lang !== 'fr') {
+      params.set('lang', lang);
+    } else {
+      params.delete('lang');
+    }
+    
+    const queryString = params.toString();
+    const finalPath = newPath + (queryString ? `?${queryString}` : '');
+    
+    console.log('Navigating to:', finalPath);
+    navigate(finalPath, { replace: true });
+  };
+
   useEffect(() => {
     // Load Google Translate script
     const loadGoogleTranslate = () => {
@@ -109,6 +152,9 @@ export const useGoogleTranslate = () => {
   const changeLanguage = async (newLang: string) => {
     console.log('Changing language to:', newLang);
     setCurrentLang(newLang);
+    
+    // Mettre à jour l'URL immédiatement
+    updateURL(newLang);
 
     if (isLoaded) {
       applyTranslation(newLang);

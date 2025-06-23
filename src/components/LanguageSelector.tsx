@@ -38,32 +38,6 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     
     if (lang) {
       setSelectedLang(lang);
-      
-      // Attendre que Google Translate soit chargé
-      const waitForTranslateCombo = () => {
-        const interval = setInterval(() => {
-          const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-          if (combo) {
-            clearInterval(interval);
-            console.log('Google Translate combo found, changing to:', lang);
-            combo.value = lang;
-            combo.dispatchEvent(new Event('change'));
-            
-            // Met à jour l'URL
-            const url = new URL(window.location.href);
-            url.searchParams.set('lang', lang);
-            window.history.replaceState({}, '', url);
-          }
-        }, 100);
-        
-        // Timeout après 5 secondes
-        setTimeout(() => {
-          clearInterval(interval);
-          console.log('Timeout waiting for Google Translate combo');
-        }, 5000);
-      };
-
-      waitForTranslateCombo();
       onLanguageChange(lang);
     }
   };
