@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { submitToFormspree } from '@/services/formspree';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ const Contact = () => {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   useEffect(() => {
     // Scroll to top when page loads
@@ -46,22 +47,40 @@ const Contact = () => {
     });
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would handle form submission, e.g., send to an API
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
     
-    // Show success message
-    toast.success('Message envoyé avec succès. Nous vous contacterons très rapidement.');
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-    });
+    try {
+      const submissionData = {
+        ...formData,
+        _subject: `Nouveau message de contact - ${formData.subject}`,
+        _template: 'table',
+        type: 'contact'
+      };
+      
+      const result = await submitToFormspree(submissionData);
+      
+      if (result.ok) {
+        toast.success('Message envoyé avec succès. Nous vous contacterons très rapidement.');
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        throw new Error('Échec de l\'envoi');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -161,7 +180,8 @@ const Contact = () => {
                           value={formData.name} 
                           onChange={handleChange} 
                           required 
-                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold disabled:bg-gray-100"
                         />
                       </div>
                       
@@ -174,7 +194,8 @@ const Contact = () => {
                           value={formData.email} 
                           onChange={handleChange} 
                           required 
-                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold disabled:bg-gray-100"
                         />
                       </div>
                     </div>
@@ -188,7 +209,8 @@ const Contact = () => {
                           name="phone" 
                           value={formData.phone} 
                           onChange={handleChange} 
-                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold disabled:bg-gray-100"
                         />
                       </div>
                       
@@ -200,7 +222,8 @@ const Contact = () => {
                           value={formData.subject} 
                           onChange={handleChange} 
                           required 
-                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold disabled:bg-gray-100"
                         >
                           <option value="">Sélectionnez un sujet</option>
                           <option value="information">Demande d'information</option>
@@ -221,13 +244,18 @@ const Contact = () => {
                         onChange={handleChange} 
                         required 
                         rows={5} 
-                        className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                        disabled={isSubmitting}
+                        className="w-full px-4 py-3 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold disabled:bg-gray-100"
                       ></textarea>
                     </div>
                     
                     <div className="text-right">
-                      <Button type="submit" className="premium-button bg-luxe-black hover:bg-luxe-gray">
-                        Envoyer le Message
+                      <Button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="premium-button bg-luxe-black hover:bg-luxe-gray disabled:opacity-50"
+                      >
+                        {isSubmitting ? 'Envoi en cours...' : 'Envoyer le Message'}
                       </Button>
                     </div>
                   </form>

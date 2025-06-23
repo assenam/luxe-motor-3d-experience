@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Upload } from "lucide-react";
+import { submitToFormspree } from '@/services/formspree';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -89,31 +90,47 @@ const PaymentFormSimple = ({ vehicle }: PaymentFormSimpleProps) => {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const submissionData = {
+        ...values,
+        _subject: `Nouvelle commande véhicule - ${vehicle.brand} ${vehicle.model}`,
+        _template: 'table',
+        type: 'vehicle_order',
+        vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
+        vehicle_price: `${vehicle.price.toLocaleString()} €`,
+        deposit_amount: `${depositAmount.toLocaleString()} €`,
+        paymentProofUploaded: selectedFile ? 'Oui' : 'Non',
+        paymentProofName: selectedFile?.name || 'Aucun fichier'
+      };
       
-      const hasPaymentProof = selectedFile !== null;
+      const result = await submitToFormspree(submissionData);
       
-      toast({
-        title: "Commande envoyée avec succès !",
-        description: hasPaymentProof 
-          ? "Nous avons bien reçu votre commande et votre preuve de paiement. Vous recevrez une confirmation par email."
-          : "Nous avons bien reçu votre commande. N'oubliez pas d'effectuer le virement et de nous envoyer la preuve de paiement.",
-      });
+      if (result.ok) {
+        const hasPaymentProof = selectedFile !== null;
+        
+        toast({
+          title: "Commande envoyée avec succès !",
+          description: hasPaymentProof 
+            ? "Nous avons bien reçu votre commande et votre preuve de paiement. Vous recevrez une confirmation par email."
+            : "Nous avons bien reçu votre commande. N'oubliez pas d'effectuer le virement et de nous envoyer la preuve de paiement.",
+        });
 
-      navigate('/payment-confirmation', { 
-        state: { 
-          order: { 
-            vehicle, 
-            customerInfo: {
-              ...values,
-              paymentProofUploaded: hasPaymentProof
-            },
-            depositAmount 
+        navigate('/payment-confirmation', { 
+          state: { 
+            order: { 
+              vehicle, 
+              customerInfo: {
+                ...values,
+                paymentProofUploaded: hasPaymentProof
+              },
+              depositAmount 
+            } 
           } 
-        } 
-      });
+        });
+      } else {
+        throw new Error('Échec de l\'envoi');
+      }
     } catch (error) {
+      console.error('Order submission error:', error);
       toast({
         title: "Erreur",
         description: "Une erreur est survenue lors de l'envoi de votre commande.",

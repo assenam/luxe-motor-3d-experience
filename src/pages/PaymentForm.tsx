@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -17,6 +16,7 @@ import { Vehicle } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { submitToFormspree } from '@/services/formspree';
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "Le prénom doit contenir au moins 2 caractères" }),
@@ -47,6 +47,7 @@ const PaymentForm = () => {
   const [bankInfoOpen, setBankInfoOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [paymentProofFile, setPaymentProofFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const isMobile = useIsMobile();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -95,34 +96,62 @@ const PaymentForm = () => {
     }
   };
   
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log("Form values:", values);
-    console.log("Payment proof:", paymentProofFile);
-    
-    toast({
-      title: "Paiement par virement initié",
-      description: "Nous avons bien reçu vos informations. Votre commande sera confirmée dès réception du virement.",
-    });
-    
-    navigate('/payment-confirmation', { 
-      state: { 
-        order: { 
-          vehicle, 
-          customerInfo: { 
-            ...values, 
-            paymentProofUploaded: !!paymentProofFile 
-          } 
-        } 
-      } 
-    });
-  };
-  
   const copyBankDetails = () => {
     navigator.clipboard.writeText("IBAN: FR76 XXXX XXXX XXXX XXXX XXXX XXX - BIC: XXXXXXXX");
     toast({
       title: "Copié dans le presse-papiers",
       description: "Les coordonnées bancaires ont été copiées.",
     });
+  };
+  
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    
+    try {
+      const submissionData = {
+        ...values,
+        _subject: `Nouvelle commande avec acompte - ${vehicle?.brand} ${vehicle?.model}`,
+        _template: 'table',
+        type: 'vehicle_deposit_order',
+        vehicle_info: `${vehicle?.brand} ${vehicle?.model} (${vehicle?.year})`,
+        vehicle_price: `${vehicle?.price.toLocaleString()} €`,
+        deposit_amount: `${calculateDeposit(vehicle?.price || 0).toLocaleString()} €`,
+        paymentProofUploaded: paymentProofFile ? 'Oui' : 'Non',
+        paymentProofName: paymentProofFile?.name || 'Aucun fichier'
+      };
+      
+      const result = await submitToFormspree(submissionData);
+      
+      if (result.ok) {
+        toast({
+          title: "Paiement par virement initié",
+          description: "Nous avons bien reçu vos informations. Votre commande sera confirmée dès réception du virement.",
+        });
+        
+        navigate('/payment-confirmation', { 
+          state: { 
+            order: { 
+              vehicle, 
+              customerInfo: { 
+                ...values, 
+                paymentProofUploaded: !!paymentProofFile 
+              } 
+            } 
+          } 
+        });
+      } else {
+        throw new Error('Échec de l\'envoi');
+      }
+    } catch (error) {
+      console.error('Payment form submission error:', error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de l'envoi. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   if (!vehicle) return null;
@@ -577,9 +606,10 @@ const PaymentForm = () => {
                             </button>
                             <button
                               type="submit"
-                              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+                              disabled={isSubmitting}
+                              className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black disabled:opacity-50"
                             >
-                              Valider ma commande
+                              {isSubmitting ? "Envoi en cours..." : "Valider ma commande"}
                             </button>
                           </div>
                         </div>
@@ -845,9 +875,10 @@ const PaymentForm = () => {
                         <div className="flex justify-end">
                           <button
                             type="submit"
-                            className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+                            disabled={isSubmitting}
+                            className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black disabled:opacity-50"
                           >
-                            Valider ma commande
+                            {isSubmitting ? "Envoi en cours..." : "Valider ma commande"}
                           </button>
                         </div>
                       </div>
