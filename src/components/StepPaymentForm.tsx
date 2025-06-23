@@ -124,28 +124,26 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-2xl font-playfair font-semibold mb-4">Résumé de votre commande</h2>
-            </div>
-            <div className="flex items-center space-x-4 mb-6">
+          <div className="space-y-4">
+            <h2 className="text-xl font-playfair font-semibold text-center">Résumé de votre commande</h2>
+            <div className="flex items-center space-x-3 mb-4">
               <img 
                 src={vehicle.mainImage || vehicle.images[0]} 
                 alt={`${vehicle.brand} ${vehicle.model}`}
-                className="w-20 h-20 object-cover rounded" 
+                className="w-16 h-16 object-cover rounded" 
               />
               <div>
-                <h3 className="font-semibold text-xl">{vehicle.brand} {vehicle.model}</h3>
-                <p className="text-gray-600">{vehicle.year} • {vehicle.mileage.toLocaleString()} km</p>
+                <h3 className="font-semibold text-lg">{vehicle.brand} {vehicle.model}</h3>
+                <p className="text-gray-600 text-sm">{vehicle.year} • {vehicle.mileage.toLocaleString()} km</p>
               </div>
             </div>
             
-            <div className="space-y-4 border-t pt-6">
-              <div className="flex justify-between text-lg">
+            <div className="space-y-3 border-t pt-4">
+              <div className="flex justify-between">
                 <span className="font-medium">Montant total</span>
                 <span className="font-bold">{totalAmount.toLocaleString()} €</span>
               </div>
-              <div className="flex justify-between text-lg text-green-600">
+              <div className="flex justify-between text-green-600">
                 <span className="font-medium">Acompte à payer (20%)</span>
                 <span className="font-bold">{depositAmount.toLocaleString()} €</span>
               </div>
@@ -155,28 +153,26 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
 
       case 2:
         return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-2xl font-playfair font-semibold mb-4">Instructions de paiement</h2>
-            </div>
+          <div className="space-y-4">
+            <h2 className="text-xl font-playfair font-semibold text-center">Instructions de paiement</h2>
             
-            <div className="bg-blue-50 p-6 rounded-lg mb-6">
-              <p className="text-blue-800 font-medium mb-3 text-lg">
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="text-blue-800 font-medium mb-2">
                 💳 Effectuez le virement de <strong>{depositAmount.toLocaleString()} €</strong>
               </p>
-              <p className="text-blue-700">
+              <p className="text-blue-700 text-sm">
                 Référence obligatoire : <strong>{transferReference}</strong>
               </p>
             </div>
             
-            <div className="bg-gray-50 p-6 rounded-lg space-y-3">
+            <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Titulaire :</span>
                 <span className="font-medium">AUTO GERMANY EXPORT SARL</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">IBAN :</span>
-                <span className="font-mono text-sm">FR76 1234 5678 9012 3456 7890 123</span>
+                <span className="font-mono text-xs">FR76 1234 5678 9012 3456 7890 123</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">BIC :</span>
@@ -188,27 +184,25 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
 
       case 3:
         return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-2xl font-playfair font-semibold mb-4">Preuve de paiement</h2>
-            </div>
+          <div className="space-y-4">
+            <h2 className="text-xl font-playfair font-semibold text-center">Preuve de paiement</h2>
             
             <div>
-              <label htmlFor="paymentProof" className="block text-lg font-medium mb-4">
+              <label htmlFor="paymentProof" className="block font-medium mb-3">
                 Téléchargez votre preuve de paiement <span className="text-red-500">*</span>
               </label>
-              <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors">
-                <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                <div className="space-y-2">
-                  <p className="text-gray-600">
+              <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50">
+                <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
+                <div className="space-y-1">
+                  <p className="text-gray-600 text-sm">
                     Formats acceptés : PDF, JPG, PNG
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-xs text-gray-500">
                     Cliquez ou glissez votre fichier ici
                   </p>
                   {selectedFile && (
-                    <p className="text-green-600 font-medium mt-4 flex items-center justify-center">
-                      <Check size={20} className="mr-2" />
+                    <p className="text-green-600 font-medium mt-3 flex items-center justify-center text-sm">
+                      <Check size={16} className="mr-2" />
                       {selectedFile.name}
                     </p>
                   )}
@@ -227,28 +221,26 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
 
       case 4:
         return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-2xl font-playfair font-semibold mb-4">Confirmation</h2>
+          <div className="space-y-4">
+            <h2 className="text-xl font-playfair font-semibold text-center">Confirmation</h2>
+            
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                <span className="text-sm">Véhicule sélectionné</span>
+                <Check className="text-green-600" size={18} />
+              </div>
+              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                <span className="text-sm">Instructions de paiement vues</span>
+                <Check className="text-green-600" size={18} />
+              </div>
+              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                <span className="text-sm">Preuve de paiement ajoutée</span>
+                {selectedFile ? <Check className="text-green-600" size={18} /> : <span className="text-red-500 text-sm">Manquant</span>}
+              </div>
             </div>
             
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                <span>Véhicule sélectionné</span>
-                <Check className="text-green-600" size={20} />
-              </div>
-              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                <span>Instructions de paiement vues</span>
-                <Check className="text-green-600" size={20} />
-              </div>
-              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                <span>Preuve de paiement ajoutée</span>
-                {selectedFile ? <Check className="text-green-600" size={20} /> : <span className="text-red-500">Manquant</span>}
-              </div>
-            </div>
-            
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <p className="text-blue-800 font-medium">
+            <div className="bg-blue-50 p-3 rounded-lg">
+              <p className="text-blue-800 font-medium text-sm">
                 Votre commande sera traitée dès réception de votre virement de {depositAmount.toLocaleString()} €
               </p>
             </div>
@@ -261,13 +253,13 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      {/* Indicateur d'étapes */}
-      <div className="flex justify-center mb-8">
-        <div className="flex items-center space-x-4">
+    <div className="max-w-md mx-auto h-screen flex flex-col">
+      {/* Indicateur d'étapes - plus compact */}
+      <div className="flex justify-center py-4">
+        <div className="flex items-center space-x-3">
           {[1, 2, 3, 4].map((step) => (
             <div key={step} className="flex items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${
                 step <= currentStep 
                   ? 'bg-luxe-gold text-black' 
                   : 'bg-gray-200 text-gray-500'
@@ -275,7 +267,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
                 {step}
               </div>
               {step < 4 && (
-                <div className={`w-12 h-0.5 ${
+                <div className={`w-8 h-0.5 ${
                   step < currentStep ? 'bg-luxe-gold' : 'bg-gray-200'
                 }`} />
               )}
@@ -284,22 +276,25 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         </div>
       </div>
 
-      {/* Contenu de l'étape */}
-      <Card className="min-h-[400px]">
-        <CardContent className="p-8">
-          {renderStep()}
-        </CardContent>
-      </Card>
+      {/* Contenu de l'étape - flexible */}
+      <div className="flex-1 overflow-hidden">
+        <Card className="h-full">
+          <CardContent className="p-4 h-full overflow-auto">
+            {renderStep()}
+          </CardContent>
+        </Card>
+      </div>
 
-      {/* Boutons de navigation */}
-      <div className="flex justify-between mt-6">
+      {/* Boutons de navigation - toujours visibles en bas */}
+      <div className="flex justify-between p-4 bg-white border-t">
         <Button
           onClick={handlePrevious}
           disabled={currentStep === 1}
           variant="outline"
+          size="sm"
           className="flex items-center"
         >
-          <ArrowLeft size={16} className="mr-2" />
+          <ArrowLeft size={14} className="mr-1" />
           Précédent
         </Button>
 
@@ -307,18 +302,20 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
           <Button
             onClick={handleNext}
             disabled={currentStep === 3 && !selectedFile}
+            size="sm"
             className="flex items-center bg-luxe-gold hover:bg-luxe-gold/90 text-black"
           >
             Suivant
-            <ArrowRight size={16} className="ml-2" />
+            <ArrowRight size={14} className="ml-1" />
           </Button>
         ) : (
           <Button
             onClick={handleSubmit}
             disabled={!selectedFile || isSubmitting}
+            size="sm"
             className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
           >
-            {isSubmitting ? "Validation..." : "Valider la commande"}
+            {isSubmitting ? "Validation..." : "Valider"}
           </Button>
         )}
       </div>

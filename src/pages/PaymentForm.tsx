@@ -7,12 +7,14 @@ import { ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import StepPaymentForm from '@/components/StepPaymentForm';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const PaymentForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (location.state?.vehicle) {
@@ -31,6 +33,35 @@ const PaymentForm = () => {
 
   if (!vehicle) return null;
 
+  if (isMobile) {
+    // Version mobile : plein écran sans navbar/footer
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-white px-4 py-3 flex items-center border-b">
+          <button 
+            onClick={() => navigate(-1)}
+            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors mr-4"
+          >
+            <ArrowLeft size={18} className="mr-1" />
+            <span className="text-sm">Retour</span>
+          </button>
+          
+          <div className="flex-1">
+            <h1 className="text-lg font-playfair font-semibold">
+              Formulaire d'achat
+            </h1>
+            <p className="text-xs text-gray-600">
+              Finalisez votre achat avec un acompte de 20%
+            </p>
+          </div>
+        </div>
+
+        <StepPaymentForm vehicle={vehicle} />
+      </div>
+    );
+  }
+
+  // Version desktop : avec navbar/footer
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
