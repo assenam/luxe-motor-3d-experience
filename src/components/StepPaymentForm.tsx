@@ -82,6 +82,8 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   const handleNext = () => {
+    console.log('Current step:', currentStep);
+    
     if (currentStep === 2 && !validateCustomerInfo()) {
       toast({
         title: "Informations manquantes",
@@ -92,13 +94,18 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
     }
     
     if (currentStep < 5) {
-      setCurrentStep(currentStep + 1);
+      const nextStep = currentStep + 1;
+      console.log('Moving to step:', nextStep);
+      setCurrentStep(nextStep);
     }
   };
 
   const handlePrevious = () => {
+    console.log('Going back from step:', currentStep);
     if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
+      const prevStep = currentStep - 1;
+      console.log('Moving to step:', prevStep);
+      setCurrentStep(prevStep);
     }
   };
 
@@ -174,6 +181,8 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   const renderStep = () => {
+    console.log('Rendering step:', currentStep);
+    
     switch (currentStep) {
       case 1:
         return (
@@ -506,7 +515,24 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         );
 
       default:
-        return null;
+        console.error('Unknown step:', currentStep);
+        return (
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto">
+              <h2 className="text-lg font-playfair font-semibold text-center mb-4">Erreur</h2>
+              <p className="text-center text-red-500">Étape inconnue: {currentStep}</p>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Button
+                onClick={() => setCurrentStep(1)}
+                size="sm"
+                className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              >
+                Recommencer
+              </Button>
+            </div>
+          </div>
+        );
     }
   };
 
