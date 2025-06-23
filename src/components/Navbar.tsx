@@ -89,7 +89,7 @@ const Navbar = () => {
     }
     
     return matches;
-  }).slice(0, 5); // Limiter à 5 résultats
+  }).slice(0, 8); // Augmenter de 5 à 8 pour voir plus de résultats
 
   const totalVehiclesFound = vehicles.filter(vehicle => {
     if (searchQuery.length === 0) return false;
