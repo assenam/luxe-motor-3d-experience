@@ -89,7 +89,7 @@ const Navbar = () => {
     }
     
     return matches;
-  }).slice(0, 8); // Augmenter de 5 à 8 pour voir plus de résultats
+  }).slice(0, 10); // Augmenter la limite à 10 véhicules affichés
 
   const totalVehiclesFound = vehicles.filter(vehicle => {
     if (searchQuery.length === 0) return false;
@@ -445,7 +445,7 @@ const Navbar = () => {
                   </div>
                 </CommandItem>
               ))}
-              {totalVehiclesFound > 5 && (
+              {totalVehiclesFound > 10 && (
                 <CommandItem onSelect={() => handleSearchSelect(`/vehicles?search=${encodeURIComponent(searchQuery)}`)}>
                   <div className="text-center w-full text-age-red font-medium">
                     Voir tous les résultats ({totalVehiclesFound} véhicules)
