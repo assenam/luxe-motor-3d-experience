@@ -50,10 +50,10 @@ export const useGoogleTranslate = () => {
       }
     }, 100);
     
-    // Timeout après 5 secondes
+    // Timeout après 10 secondes (augmenté pour laisser plus de temps)
     setTimeout(() => {
       clearInterval(interval);
-    }, 5000);
+    }, 10000);
   };
 
   const updateURL = (lang: string) => {
@@ -129,12 +129,13 @@ export const useGoogleTranslate = () => {
         setIsLoaded(true);
         console.log('Google Translate initialized successfully');
 
-        // Apply current language after a short delay
+        // Apply current language after initialization if not French
         setTimeout(() => {
           if (currentLang !== 'fr') {
+            console.log('Auto-applying language from URL:', currentLang);
             applyTranslation(currentLang);
           }
-        }, 1000);
+        }, 1500);
       };
     };
 
@@ -145,7 +146,10 @@ export const useGoogleTranslate = () => {
   useEffect(() => {
     if (isLoaded && currentLang !== 'fr') {
       console.log('Applying translation for current language:', currentLang);
-      applyTranslation(currentLang);
+      // Délai supplémentaire pour s'assurer que Google Translate est entièrement prêt
+      setTimeout(() => {
+        applyTranslation(currentLang);
+      }, 500);
     }
   }, [currentLang, isLoaded]);
 
