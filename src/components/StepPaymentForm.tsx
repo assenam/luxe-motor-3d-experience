@@ -124,125 +124,205 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center mb-4">Résumé de votre commande</h2>
-            <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src={vehicle.mainImage || vehicle.images[0]} 
-                alt={`${vehicle.brand} ${vehicle.model}`}
-                className="w-16 h-16 object-cover rounded" 
-              />
-              <div>
-                <h3 className="font-semibold text-lg">{vehicle.brand} {vehicle.model}</h3>
-                <p className="text-gray-600 text-sm">{vehicle.year} • {vehicle.mileage.toLocaleString()} km</p>
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto">
+              <h2 className="text-lg font-playfair font-semibold text-center mb-4">Résumé de votre commande</h2>
+              <div className="flex items-center space-x-3 mb-4">
+                <img 
+                  src={vehicle.mainImage || vehicle.images[0]} 
+                  alt={`${vehicle.brand} ${vehicle.model}`}
+                  className="w-12 h-12 object-cover rounded" 
+                />
+                <div>
+                  <h3 className="font-semibold text-base">{vehicle.brand} {vehicle.model}</h3>
+                  <p className="text-gray-600 text-xs">{vehicle.year} • {vehicle.mileage.toLocaleString()} km</p>
+                </div>
+              </div>
+              
+              <div className="space-y-2 border-t pt-3">
+                <div className="flex justify-between">
+                  <span className="font-medium text-sm">Montant total</span>
+                  <span className="font-bold text-sm">{totalAmount.toLocaleString()} €</span>
+                </div>
+                <div className="flex justify-between text-green-600">
+                  <span className="font-medium text-sm">Acompte à payer (20%)</span>
+                  <span className="font-bold text-lg">{depositAmount.toLocaleString()} €</span>
+                </div>
               </div>
             </div>
             
-            <div className="space-y-3 border-t pt-3">
-              <div className="flex justify-between">
-                <span className="font-medium">Montant total</span>
-                <span className="font-bold">{totalAmount.toLocaleString()} €</span>
-              </div>
-              <div className="flex justify-between text-green-600">
-                <span className="font-medium">Acompte à payer (20%)</span>
-                <span className="font-bold text-xl">{depositAmount.toLocaleString()} €</span>
-              </div>
+            <div className="flex justify-end mt-4">
+              <Button
+                onClick={handleNext}
+                size="sm"
+                className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              >
+                Suivant
+                <ArrowRight size={14} className="ml-1" />
+              </Button>
             </div>
           </div>
         );
 
       case 2:
         return (
-          <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center mb-4">Instructions de paiement</h2>
-            
-            <div className="bg-blue-50 p-3 rounded-lg mb-3">
-              <p className="text-blue-800 font-medium mb-1 text-sm">
-                💳 Effectuez le virement de <strong>{depositAmount.toLocaleString()} €</strong>
-              </p>
-              <p className="text-blue-700 text-xs">
-                Référence obligatoire : <strong>{transferReference}</strong>
-              </p>
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto">
+              <h2 className="text-lg font-playfair font-semibold text-center mb-4">Instructions de paiement</h2>
+              
+              <div className="bg-blue-50 p-3 rounded-lg mb-3">
+                <p className="text-blue-800 font-medium mb-1 text-xs">
+                  💳 Effectuez le virement de <strong>{depositAmount.toLocaleString()} €</strong>
+                </p>
+                <p className="text-blue-700 text-xs">
+                  Référence obligatoire : <strong>{transferReference}</strong>
+                </p>
+              </div>
+              
+              <div className="bg-gray-50 p-3 rounded-lg space-y-2 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Titulaire :</span>
+                  <span className="font-medium">AUTO GERMANY EXPORT</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">IBAN :</span>
+                  <span className="font-mono text-xs">FR76 1234 5678 9012 3456 7890 123</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">BIC :</span>
+                  <span className="font-mono">ABCDFRPP</span>
+                </div>
+              </div>
             </div>
             
-            <div className="bg-gray-50 p-3 rounded-lg space-y-2 text-xs">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Titulaire :</span>
-                <span className="font-medium">AUTO GERMANY EXPORT</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">IBAN :</span>
-                <span className="font-mono text-xs">FR76 1234 5678 9012 3456 7890 123</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">BIC :</span>
-                <span className="font-mono">ABCDFRPP</span>
-              </div>
+            <div className="flex justify-between mt-4">
+              <Button
+                onClick={handlePrevious}
+                variant="outline"
+                size="sm"
+                className="flex items-center"
+              >
+                <ArrowLeft size={14} className="mr-1" />
+                Précédent
+              </Button>
+              <Button
+                onClick={handleNext}
+                size="sm"
+                className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              >
+                Suivant
+                <ArrowRight size={14} className="ml-1" />
+              </Button>
             </div>
           </div>
         );
 
       case 3:
         return (
-          <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center mb-4">Preuve de paiement</h2>
-            
-            <div>
-              <label htmlFor="paymentProof" className="block font-medium mb-2 text-sm">
-                Téléchargez votre preuve de paiement <span className="text-red-500">*</span>
-              </label>
-              <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center bg-gray-50">
-                <Upload className="mx-auto h-6 w-6 text-gray-400 mb-2" />
-                <div className="space-y-1">
-                  <p className="text-gray-600 text-xs">
-                    Formats acceptés : PDF, JPG, PNG
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Cliquez ou glissez votre fichier ici
-                  </p>
-                  {selectedFile && (
-                    <p className="text-green-600 font-medium mt-2 flex items-center justify-center text-xs">
-                      <Check size={14} className="mr-1" />
-                      {selectedFile.name}
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto">
+              <h2 className="text-lg font-playfair font-semibold text-center mb-4">Preuve de paiement</h2>
+              
+              <div>
+                <label htmlFor="paymentProof" className="block font-medium mb-2 text-sm">
+                  Téléchargez votre preuve de paiement <span className="text-red-500">*</span>
+                </label>
+                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-4 text-center bg-gray-50">
+                  <Upload className="mx-auto h-6 w-6 text-gray-400 mb-2" />
+                  <div className="space-y-1">
+                    <p className="text-gray-600 text-xs">
+                      Formats acceptés : PDF, JPG, PNG
                     </p>
-                  )}
+                    <p className="text-xs text-gray-500">
+                      Cliquez ou glissez votre fichier ici
+                    </p>
+                    {selectedFile && (
+                      <p className="text-green-600 font-medium mt-2 flex items-center justify-center text-xs">
+                        <Check size={14} className="mr-1" />
+                        {selectedFile.name}
+                      </p>
+                    )}
+                  </div>
+                  <input
+                    id="paymentProof"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={handleFileChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
                 </div>
-                <input
-                  id="paymentProof"
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={handleFileChange}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
               </div>
+            </div>
+            
+            <div className="flex justify-between mt-4">
+              <Button
+                onClick={handlePrevious}
+                variant="outline"
+                size="sm"
+                className="flex items-center"
+              >
+                <ArrowLeft size={14} className="mr-1" />
+                Précédent
+              </Button>
+              <Button
+                onClick={handleNext}
+                disabled={!selectedFile}
+                size="sm"
+                className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              >
+                Suivant
+                <ArrowRight size={14} className="ml-1" />
+              </Button>
             </div>
           </div>
         );
 
       case 4:
         return (
-          <div className="space-y-4">
-            <h2 className="text-xl font-playfair font-semibold text-center mb-4">Confirmation</h2>
-            
-            <div className="space-y-2">
-              <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
-                <span className="text-xs">Véhicule sélectionné</span>
-                <Check className="text-green-600" size={16} />
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto">
+              <h2 className="text-lg font-playfair font-semibold text-center mb-4">Confirmation</h2>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                  <span className="text-xs">Véhicule sélectionné</span>
+                  <Check className="text-green-600" size={16} />
+                </div>
+                <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                  <span className="text-xs">Instructions de paiement vues</span>
+                  <Check className="text-green-600" size={16} />
+                </div>
+                <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                  <span className="text-xs">Preuve de paiement ajoutée</span>
+                  {selectedFile ? <Check className="text-green-600" size={16} /> : <span className="text-red-500 text-xs">Manquant</span>}
+                </div>
               </div>
-              <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
-                <span className="text-xs">Instructions de paiement vues</span>
-                <Check className="text-green-600" size={16} />
-              </div>
-              <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
-                <span className="text-xs">Preuve de paiement ajoutée</span>
-                {selectedFile ? <Check className="text-green-600" size={16} /> : <span className="text-red-500 text-xs">Manquant</span>}
+              
+              <div className="bg-blue-50 p-2 rounded-lg mt-3">
+                <p className="text-blue-800 font-medium text-xs">
+                  Votre commande sera traitée dès réception de votre virement de {depositAmount.toLocaleString()} €
+                </p>
               </div>
             </div>
             
-            <div className="bg-blue-50 p-2 rounded-lg mt-3">
-              <p className="text-blue-800 font-medium text-xs">
-                Votre commande sera traitée dès réception de votre virement de {depositAmount.toLocaleString()} €
-              </p>
+            <div className="flex justify-between mt-4">
+              <Button
+                onClick={handlePrevious}
+                variant="outline"
+                size="sm"
+                className="flex items-center"
+              >
+                <ArrowLeft size={14} className="mr-1" />
+                Précédent
+              </Button>
+              <Button
+                onClick={handleSubmit}
+                disabled={!selectedFile || isSubmitting}
+                size="sm"
+                className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
+              >
+                {isSubmitting ? "Validation..." : "Valider"}
+              </Button>
             </div>
           </div>
         );
@@ -253,13 +333,13 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   return (
-    <div className="h-screen flex flex-col max-w-md mx-auto bg-white">
-      {/* Indicateur d'étapes - fixe en haut */}
-      <div className="flex-shrink-0 flex justify-center py-3 bg-white border-b">
+    <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg" style={{ height: '520px' }}>
+      {/* Indicateur d'étapes */}
+      <div className="flex justify-center py-4 border-b">
         <div className="flex items-center space-x-2">
           {[1, 2, 3, 4].map((step) => (
             <div key={step} className="flex items-center">
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                 step <= currentStep 
                   ? 'bg-luxe-gold text-black' 
                   : 'bg-gray-200 text-gray-500'
@@ -276,48 +356,9 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         </div>
       </div>
 
-      {/* Contenu de l'étape - avec hauteur contrôlée */}
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full flex flex-col">
-          <div className="flex-1 p-4 overflow-y-auto">
-            {renderStep()}
-          </div>
-          
-          {/* Boutons de navigation - TOUJOURS VISIBLES EN BAS */}
-          <div className="flex-shrink-0 flex justify-between p-4 bg-white border-t">
-            <Button
-              onClick={handlePrevious}
-              disabled={currentStep === 1}
-              variant="outline"
-              size="sm"
-              className="flex items-center"
-            >
-              <ArrowLeft size={14} className="mr-1" />
-              Précédent
-            </Button>
-
-            {currentStep < 4 ? (
-              <Button
-                onClick={handleNext}
-                disabled={currentStep === 3 && !selectedFile}
-                size="sm"
-                className="flex items-center bg-luxe-gold hover:bg-luxe-gold/90 text-black"
-              >
-                Suivant
-                <ArrowRight size={14} className="ml-1" />
-              </Button>
-            ) : (
-              <Button
-                onClick={handleSubmit}
-                disabled={!selectedFile || isSubmitting}
-                size="sm"
-                className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
-              >
-                {isSubmitting ? "Validation..." : "Valider"}
-              </Button>
-            )}
-          </div>
-        </div>
+      {/* Contenu de l'étape avec hauteur fixe */}
+      <div className="p-6" style={{ height: 'calc(520px - 80px)' }}>
+        {renderStep()}
       </div>
     </div>
   );
