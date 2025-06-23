@@ -13,9 +13,7 @@ import { ArrowLeft, Building2, ClipboardCopy, FileText, Info, Upload } from "luc
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from '@/hooks/use-mobile';
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { submitToFormspree } from '@/services/formspree';
 
 const formSchema = z.object({
@@ -36,7 +34,6 @@ const formSchema = z.object({
   }),
 });
 
-// Définir un type pour les noms des champs du formulaire
 type FormFields = keyof z.infer<typeof formSchema>;
 
 const PaymentForm = () => {
@@ -186,7 +183,7 @@ const PaymentForm = () => {
     return (
       <div className="flex items-center justify-center mb-8">
         {[1, 2, 3].map((step) => (
-          <React.Fragment key={step}>
+          <div key={step} className="flex items-center">
             <div 
               className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 currentStep >= step ? 'bg-luxe-gold text-white' : 'bg-gray-200 text-gray-500'
@@ -197,7 +194,7 @@ const PaymentForm = () => {
             {step < 3 && (
               <div className={`h-1 w-16 ${currentStep > step ? 'bg-luxe-gold' : 'bg-gray-200'}`}></div>
             )}
-          </React.Fragment>
+          </div>
         ))}
       </div>
     );
@@ -282,7 +279,7 @@ const PaymentForm = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow page-top-padding bg-gray-50 overflow-y-auto">
+      <main className="flex-grow page-top-padding bg-gray-50">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="mb-6 md:mb-8">
             <button 
@@ -294,10 +291,10 @@ const PaymentForm = () => {
             </button>
             
             <h1 className="text-2xl md:text-3xl font-playfair font-semibold mb-2">
-              Paiement de l'Acompte
+              Pago del depósito
             </h1>
             <p className="text-gray-600">
-              Versez un acompte de 20% pour réserver votre {vehicle.brand} {vehicle.model}
+              Pague un depósito del 20% para reservar su {vehicle.brand} {vehicle.model}
             </p>
           </div>
 
@@ -308,24 +305,24 @@ const PaymentForm = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   {isMobile ? (
-                    <>
+                    <div className="space-y-6">
                       {currentStep === 1 && (
-                        <div className="bg-white p-6 rounded-sm shadow-sm mb-8">
+                        <div className="bg-white p-6 rounded-sm shadow-sm">
                           <div className="flex items-center mb-4">
                             <FileText className="text-luxe-gold mr-3" size={24} />
-                            <h2 className="text-xl font-semibold">Informations personnelles</h2>
+                            <h2 className="text-xl font-semibold">Información personal</h2>
                           </div>
                           
                           <div className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 gap-6">
                               <FormField
                                 control={form.control}
                                 name="firstName"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Prénom</FormLabel>
+                                    <FormLabel>Nombre de pila</FormLabel>
                                     <FormControl>
-                                      <Input placeholder="Jean" {...field} />
+                                      <Input placeholder="Vaqueros" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
@@ -337,7 +334,7 @@ const PaymentForm = () => {
                                 name="lastName"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Nom</FormLabel>
+                                    <FormLabel>Nombre</FormLabel>
                                     <FormControl>
                                       <Input placeholder="Dupont" {...field} />
                                     </FormControl>
@@ -347,15 +344,15 @@ const PaymentForm = () => {
                               />
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 gap-6">
                               <FormField
                                 control={form.control}
                                 name="email"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Correo electrónico</FormLabel>
                                     <FormControl>
-                                      <Input type="email" placeholder="jean.dupont@example.com" {...field} />
+                                      <Input type="email" placeholder="jean.dupont@ejemplo.com" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
@@ -367,7 +364,7 @@ const PaymentForm = () => {
                                 name="phone"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Téléphone</FormLabel>
+                                    <FormLabel>Teléfono</FormLabel>
                                     <FormControl>
                                       <Input placeholder="+33 6 12 34 56 78" {...field} />
                                     </FormControl>
@@ -382,7 +379,7 @@ const PaymentForm = () => {
                               name="address"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Adresse</FormLabel>
+                                  <FormLabel>Dirección</FormLabel>
                                   <FormControl>
                                     <Input placeholder="123 Rue de Paris" {...field} />
                                   </FormControl>
@@ -397,7 +394,7 @@ const PaymentForm = () => {
                                 name="city"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Ville</FormLabel>
+                                    <FormLabel>Ciudad</FormLabel>
                                     <FormControl>
                                       <Input placeholder="Paris" {...field} />
                                     </FormControl>
@@ -411,7 +408,7 @@ const PaymentForm = () => {
                                 name="postalCode"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Code Postal</FormLabel>
+                                    <FormLabel>Código postal</FormLabel>
                                     <FormControl>
                                       <Input placeholder="75000" {...field} />
                                     </FormControl>
@@ -425,7 +422,7 @@ const PaymentForm = () => {
                                 name="country"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Pays</FormLabel>
+                                    <FormLabel>País</FormLabel>
                                     <FormControl>
                                       <Input placeholder="France" {...field} />
                                     </FormControl>
@@ -442,21 +439,21 @@ const PaymentForm = () => {
                               onClick={nextStep}
                               className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
                             >
-                              Continuer
+                              Continuar
                             </button>
                           </div>
                         </div>
                       )}
 
                       {currentStep === 2 && (
-                        <div className="space-y-6 overflow-visible">
+                        <div className="space-y-6">
                           <OrderSummaryCard />
                           <BankInformationCard />
 
                           <div className="bg-white p-6 rounded-sm shadow-sm">
                             <div className="flex items-center mb-4">
                               <Building2 className="text-luxe-gold mr-3" size={24} />
-                              <h2 className="text-xl font-semibold">Informations de paiement</h2>
+                              <h2 className="text-xl font-semibold">Información de pago</h2>
                             </div>
                             
                             <div className="grid grid-cols-1 gap-6">
@@ -465,7 +462,7 @@ const PaymentForm = () => {
                                 name="transferDate"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Date prévue du virement</FormLabel>
+                                    <FormLabel>Fecha prevista de transferencia</FormLabel>
                                     <FormControl>
                                       <Input type="date" {...field} />
                                     </FormControl>
@@ -479,7 +476,7 @@ const PaymentForm = () => {
                                 name="transferReference"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Référence du virement</FormLabel>
+                                    <FormLabel>Referencia de transferencia</FormLabel>
                                     <FormControl>
                                       <Input 
                                         placeholder={`AGE-${vehicle.id}-${new Date().getTime().toString().slice(-6)}`} 
@@ -499,14 +496,14 @@ const PaymentForm = () => {
                               onClick={prevStep}
                               className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
                             >
-                              Retour
+                              Atrás
                             </button>
                             <button
                               type="button"
                               onClick={nextStep}
                               className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black"
                             >
-                              Continuer
+                              Continuar
                             </button>
                           </div>
                         </div>
@@ -516,7 +513,7 @@ const PaymentForm = () => {
                         <div className="bg-white p-6 rounded-sm shadow-sm mb-8">
                           <div className="flex items-center mb-4">
                             <Upload className="text-luxe-gold mr-3" size={24} />
-                            <h2 className="text-xl font-semibold">Preuve de paiement</h2>
+                            <h2 className="text-xl font-semibold">Comprobante de pago</h2>
                           </div>
                           
                           <div className="space-y-6">
@@ -534,10 +531,10 @@ const PaymentForm = () => {
                               >
                                 <Upload className="h-12 w-12 text-gray-400 mb-2" />
                                 <span className="text-sm font-medium text-gray-900">
-                                  {paymentProofFile ? paymentProofFile.name : "Télécharger votre justificatif de virement"}
+                                  {paymentProofFile ? paymentProofFile.name : "Sube tu comprobante de transferencia"}
                                 </span>
                                 <p className="text-xs text-gray-500 mt-1">
-                                  JPG, PNG ou PDF (max. 10 MB)
+                                  JPG, PNG o PDF (máx. 10 MB)
                                 </p>
                               </label>
                             </div>
@@ -547,10 +544,10 @@ const PaymentForm = () => {
                               name="notes"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Notes supplémentaires (optionnel)</FormLabel>
+                                  <FormLabel>Notas adicionales (opcional)</FormLabel>
                                   <FormControl>
                                     <Textarea 
-                                      placeholder="Précisez ici toute information complémentaire concernant votre commande ou votre paiement." 
+                                      placeholder="Especifique aquí cualquier información adicional sobre su pedido o pago." 
                                       {...field} 
                                     />
                                   </FormControl>
@@ -572,21 +569,21 @@ const PaymentForm = () => {
                                   </FormControl>
                                   <div className="space-y-1 leading-none">
                                     <FormLabel className="text-sm font-normal">
-                                      J'accepte les{" "}
+                                      Acepto los{" "}
                                       <a 
                                         href="/terms-of-service" 
                                         target="_blank" 
                                         className="text-luxe-gold hover:underline"
                                       >
-                                        conditions générales de vente
+                                        términos y condiciones de venta
                                       </a>
-                                      {" "}et la{" "}
+                                      {" "}y la{" "}
                                       <a 
                                         href="/privacy-policy" 
                                         target="_blank"
                                         className="text-luxe-gold hover:underline"
                                       >
-                                        politique de confidentialité
+                                        política de privacidad
                                       </a>
                                     </FormLabel>
                                     <FormMessage />
@@ -602,19 +599,19 @@ const PaymentForm = () => {
                               onClick={prevStep}
                               className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
                             >
-                              Retour
+                              Atrás
                             </button>
                             <button
                               type="submit"
                               disabled={isSubmitting}
                               className="premium-button bg-luxe-gold hover:bg-luxe-gold/90 text-black disabled:opacity-50"
                             >
-                              {isSubmitting ? "Envoi en cours..." : "Valider ma commande"}
+                              {isSubmitting ? "Enviando..." : "Validar mi pedido"}
                             </button>
                           </div>
                         </div>
                       )}
-                    </>
+                    </div>
                   ) : (
                     <div className="bg-white p-6 rounded-sm shadow-sm mb-8 overflow-visible">
                       {/* Informations personnelles */}
@@ -903,32 +900,32 @@ const PaymentForm = () => {
       <Dialog open={bankInfoOpen} onOpenChange={setBankInfoOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Informations de paiement</DialogTitle>
+            <DialogTitle>Información de pago</DialogTitle>
             <DialogDescription>
-              Utilisez ces coordonnées bancaires pour effectuer votre virement d'acompte.
+              Utilice estos datos bancarios para realizar su transferencia de depósito.
             </DialogDescription>
           </DialogHeader>
           
           <div className="space-y-4 max-h-[60vh] overflow-y-auto">
             <div>
-              <h3 className="font-medium mb-2">Instructions pour le virement bancaire</h3>
+              <h3 className="font-medium mb-2">Instrucciones para transferencia bancaria</h3>
               <ul className="list-disc pl-5 space-y-2 text-sm">
-                <li>Effectuez le virement depuis votre compte bancaire personnel ou professionnel.</li>
-                <li>Utilisez la référence indiquée pour nous permettre d'identifier votre paiement.</li>
-                <li>L'acompte de 20% couvre la garantie, le transport et les taxes douanières.</li>
-                <li>Le reste à payer pourra être réglé à la livraison ou en mensualités selon vos préférences.</li>
+                <li>Realice la transferencia desde su cuenta bancaria personal o comercial.</li>
+                <li>Utilice la referencia proporcionada para permitirnos identificar su pago.</li>
+                <li>El depósito del 20% cubre la garantía, el transporte y los aranceles aduaneros.</li>
+                <li>El saldo restante se puede pagar al momento de la entrega o en cuotas según sus preferencias.</li>
               </ul>
             </div>
             
             <div className="bg-gray-50 p-4 rounded-sm">
-              <h3 className="font-medium mb-2">Coordonnées bancaires complètes</h3>
+              <h3 className="font-medium mb-2">Datos bancarios completos</h3>
               <div className="space-y-2 text-sm">
                 <div className="grid grid-cols-3">
-                  <span className="font-medium">Banque</span>
+                  <span className="font-medium">Banco</span>
                   <span className="col-span-2">BANQUE XXXX</span>
                 </div>
                 <div className="grid grid-cols-3">
-                  <span className="font-medium">Titulaire</span>
+                  <span className="font-medium">Titular</span>
                   <span className="col-span-2">AUTO GERMANY EXPORT SARL</span>
                 </div>
                 <div className="grid grid-cols-3">
@@ -940,7 +937,7 @@ const PaymentForm = () => {
                   <span className="col-span-2">XXXXXXXX</span>
                 </div>
                 <div className="grid grid-cols-3">
-                  <span className="font-medium">Adresse</span>
+                  <span className="font-medium">Dirección</span>
                   <span className="col-span-2">123 Avenue des Banques, 75000 Paris</span>
                 </div>
               </div>
@@ -953,7 +950,7 @@ const PaymentForm = () => {
               className="premium-button bg-white border border-luxe-black hover:bg-secondary text-luxe-black"
             >
               <ClipboardCopy size={16} className="mr-2" />
-              <span>Copier les coordonnées</span>
+              <span>Copiar coordenadas</span>
             </button>
           </DialogFooter>
         </DialogContent>
