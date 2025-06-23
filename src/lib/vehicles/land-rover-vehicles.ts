@@ -1,3 +1,4 @@
+
 import { Vehicle } from '../types';
 
 export const landRoverVehicles: Vehicle[] = [
@@ -139,6 +140,76 @@ export const landRoverVehicles: Vehicle[] = [
       engine: [],
       details: [
         "/lovable-uploads/09b7b171-bcd2-4934-b73b-451d01d4c6f1.png"
+      ]
+    }
+  },
+  {
+    id: "land-rover-range-rover-velar-2018-001",
+    brand: "Land Rover",
+    model: "Range Rover Velar 2.0 Si4 HSE",
+    year: 2018,
+    price: 17000,
+    mileage: 95298,
+    engineType: "2.0 Si4 250 CV",
+    transmission: "Automatique",
+    exteriorColor: "Noir Métal",
+    interiorColor: "Cuir Beige Premium",
+    description: "Land Rover Range Rover Velar 2.0 Si4 HSE de 2018 en excellent état. SUV de luxe au design révolutionnaire avec motorisation essence turbo de 250 CV et transmission automatique. Finition HSE avec équipements premium et technologies avancées. Véhicule entretenu avec soin, kilométrage de 95 298 km. Design avant-gardiste avec ligne de toit coupé distinctif.",
+    features: [
+      "Finition HSE",
+      "Moteur 2.0 Si4 250 CV essence turbo",
+      "Transmission automatique 8 rapports",
+      "Déplacement 1999cc",
+      "Intérieur cuir premium beige",
+      "Écran tactile Touch Pro Duo",
+      "Système de navigation premium",
+      "Climatisation automatique bi-zone",
+      "Sièges électriques chauffants et ventilés",
+      "Système audio Meridian",
+      "Bluetooth et connectivité",
+      "Jantes alliage 20 pouces",
+      "Feux LED Matrix avec signature lumineuse",
+      "Aide au stationnement 360°",
+      "Caméra de recul haute définition",
+      "Régulateur de vitesse adaptatif",
+      "Suspension pneumatique adaptative",
+      "Modes de conduite Terrain Response",
+      "Volant multifonctions chauffant",
+      "Toit panoramique électrique",
+      "Démarrage sans clé",
+      "Hayon électrique",
+      "Détecteur d'angles morts",
+      "Ordinateur de bord",
+      "Contrôle de stabilité électronique"
+    ],
+    mainImage: "/lovable-uploads/c44b8a9f-484b-4224-9836-c7c88ee80265.png",
+    images: [
+      "/lovable-uploads/a1e49920-b3bb-401e-85bd-ed53a3f67e50.png",
+      "/lovable-uploads/bdc8e5bf-d172-453e-974b-82c5bb62fee5.png",
+      "/lovable-uploads/0fe1ad0c-54a6-49cf-8cb9-4af048adef45.png",
+      "/lovable-uploads/aca54547-f980-443d-bb75-cc5d4003f7af.png",
+      "/lovable-uploads/80d16b1e-cb9d-4dd6-911e-d35c6546a246.png",
+      "/lovable-uploads/90b22ccd-2d47-483d-a4fa-e020e779df9c.png",
+      "/lovable-uploads/b206a8c3-6a47-4f9f-b39a-debdd4d8d322.png",
+      "/lovable-uploads/b9c8161c-ed5f-4ada-8fa2-a5b5cb29f382.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/c44b8a9f-484b-4224-9836-c7c88ee80265.png",
+        "/lovable-uploads/a1e49920-b3bb-401e-85bd-ed53a3f67e50.png",
+        "/lovable-uploads/0fe1ad0c-54a6-49cf-8cb9-4af048adef45.png",
+        "/lovable-uploads/bdc8e5bf-d172-453e-974b-82c5bb62fee5.png"
+      ],
+      interior: [
+        "/lovable-uploads/aca54547-f980-443d-bb75-cc5d4003f7af.png",
+        "/lovable-uploads/80d16b1e-cb9d-4dd6-911e-d35c6546a246.png",
+        "/lovable-uploads/90b22ccd-2d47-483d-a4fa-e020e779df9c.png"
+      ],
+      engine: [
+        "/lovable-uploads/b206a8c3-6a47-4f9f-b39a-debdd4d8d322.png"
+      ],
+      details: [
+        "/lovable-uploads/b9c8161c-ed5f-4ada-8fa2-a5b5cb29f382.png"
       ]
     }
   }
