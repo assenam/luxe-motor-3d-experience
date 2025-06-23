@@ -23,7 +23,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/lib/data';
-import { vehicles } from '@/lib/data';
+import { vehicles } from '@/lib/vehicles';
 import LanguageSelector from './LanguageSelector';
 import { useGoogleTranslate } from '@/hooks/useGoogleTranslate';
 
@@ -46,7 +46,7 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -68,26 +68,44 @@ const Navbar = () => {
     navigate(value);
   };
 
-  // Filtrer les véhicules selon la recherche
-  const filteredVehicles = vehicles.filter(vehicle => 
-    searchQuery.length > 0 && (
-      vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      vehicle.year.toString().includes(searchQuery) ||
-      vehicle.exteriorColor.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  ).slice(0, 5); // Limiter à 5 résultats
+  console.log('Total vehicles in search:', vehicles.length);
+  console.log('Search query:', searchQuery);
 
-  const totalVehiclesFound = vehicles.filter(vehicle => 
-    searchQuery.length > 0 && (
-      vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      vehicle.year.toString().includes(searchQuery) ||
-      vehicle.exteriorColor.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  ).length;
+  // Filtrer les véhicules selon la recherche
+  const filteredVehicles = vehicles.filter(vehicle => {
+    if (searchQuery.length === 0) return false;
+    
+    const query = searchQuery.toLowerCase();
+    const brandMatch = vehicle.brand.toLowerCase().includes(query);
+    const modelMatch = vehicle.model.toLowerCase().includes(query);
+    const fullNameMatch = `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query);
+    const yearMatch = vehicle.year.toString().includes(query);
+    const colorMatch = vehicle.exteriorColor.toLowerCase().includes(query);
+    
+    const matches = brandMatch || modelMatch || fullNameMatch || yearMatch || colorMatch;
+    
+    if (query === 'bmw' && vehicle.brand.toLowerCase() === 'bmw') {
+      console.log('BMW vehicle found:', vehicle.brand, vehicle.model, vehicle.id);
+    }
+    
+    return matches;
+  }).slice(0, 5); // Limiter à 5 résultats
+
+  const totalVehiclesFound = vehicles.filter(vehicle => {
+    if (searchQuery.length === 0) return false;
+    
+    const query = searchQuery.toLowerCase();
+    return (
+      vehicle.brand.toLowerCase().includes(query) ||
+      vehicle.model.toLowerCase().includes(query) ||
+      `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query) ||
+      vehicle.year.toString().includes(query) ||
+      vehicle.exteriorColor.toLowerCase().includes(query)
+    );
+  }).length;
+
+  console.log('Filtered vehicles count:', filteredVehicles.length);
+  console.log('Total vehicles found:', totalVehiclesFound);
 
   const handleViewCars = () => {
     setCartOpen(false);
@@ -118,7 +136,6 @@ const Navbar = () => {
     >
       <div className="container-age">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo et nom de la marque */}
           <Link 
             to="/" 
             className="flex items-center space-x-4 flex-shrink-0"
