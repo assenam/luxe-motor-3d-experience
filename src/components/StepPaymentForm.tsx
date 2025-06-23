@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Vehicle } from '@/lib/data';
 import { submitToFormspree } from '@/services/formspree';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '@/contexts/CartContext';
 
 interface StepPaymentFormProps {
   vehicle: Vehicle;
@@ -40,6 +41,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   });
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { removeFromCart } = useCart();
 
   const totalAmount = vehicle.price;
   const depositAmount = Math.round(totalAmount * 0.2);
@@ -182,6 +184,9 @@ L'équipe AUTO GERMANY EXPORT
       const result = await submitToFormspree(submissionData);
       
       if (result.ok) {
+        // Retirer le véhicule du panier après validation de la commande
+        removeFromCart(vehicle.id);
+        
         toast({
           title: "Commande validée !",
           description: "Votre commande avec acompte a été enregistrée. Un email de confirmation vous a été envoyé.",
