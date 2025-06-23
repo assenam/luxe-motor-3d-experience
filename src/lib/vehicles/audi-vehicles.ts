@@ -1,4 +1,3 @@
-
 import { Vehicle } from '../types';
 
 export const audiVehicles: Vehicle[] = [
@@ -296,6 +295,77 @@ export const audiVehicles: Vehicle[] = [
       engine: [],
       details: [
         "/lovable-uploads/800f306c-2a36-4bb2-b087-6d110851a132.png"
+      ]
+    }
+  },
+  {
+    id: "audi-a3-lim-2015-001",
+    brand: "Audi",
+    model: "A3 Lim 2.0 TDI qu S line",
+    year: 2015,
+    price: 5000,
+    mileage: 71800,
+    engineType: "2.0 TDI 184 ch",
+    transmission: "Automatique",
+    exteriorColor: "Blanc Ibis",
+    interiorColor: "Noir avec finitions S line",
+    description: "Audi A3 Limousine 2.0 TDI Quattro S line de 2015 en excellent état. Berline compacte sportive avec motorisation diesel de 184 ch et transmission automatique. Finition S line avec équipements premium incluant ACC, système audio B&O, éclairage LED et toit panoramique. Véhicule avec jantes 19 pouces et kilométrage certifié de 71 800 km. Design sportif et dynamique avec performances exceptionnelles.",
+    features: [
+      "Finition S line",
+      "Moteur 2.0 TDI 184 ch",
+      "Transmission automatique",
+      "Traction intégrale Quattro",
+      "ACC (Régulateur de vitesse adaptatif)",
+      "Système audio Bang & Olufsen",
+      "Éclairage LED Matrix",
+      "Toit panoramique électrique",
+      "Jantes alliage 19 pouces S line",
+      "Sièges sport S line",
+      "Volant sport multifonctions",
+      "Écran MMI Navigation plus",
+      "Climatisation automatique",
+      "Bluetooth et connectivité",
+      "Aide au stationnement",
+      "Capteurs de stationnement avant/arrière",
+      "Rétroviseurs extérieurs rabattables électriquement",
+      "Vitres électriques",
+      "Verrouillage centralisé",
+      "Ordinateur de bord",
+      "Contrôle de stabilité électronique",
+      "Airbags multiples",
+      "Direction assistée",
+      "Démarrage sans clé",
+      "Coffre spacieux"
+    ],
+    mainImage: "/lovable-uploads/35094bbe-b1e2-4191-9d23-24a1ba169789.png",
+    images: [
+      "/lovable-uploads/977e3931-9546-4f0b-a7dd-6f665e0200f5.png",
+      "/lovable-uploads/b6b69830-5f37-4728-86c6-a9fa44c20528.png",
+      "/lovable-uploads/81c9ea1c-8989-49c7-83f6-666ba5e17b2a.png",
+      "/lovable-uploads/13d8cf4f-2c58-4125-9779-b72f0c612702.png",
+      "/lovable-uploads/ad4e89f2-fea9-4c2a-af2a-805862e7ba28.png",
+      "/lovable-uploads/e05a7471-235d-4a54-8d9b-fb7a75f21a35.png",
+      "/lovable-uploads/9e028a61-c52f-482b-a28b-dbab4d287948.png",
+      "/lovable-uploads/35a2d00a-052b-4330-b374-eb89c6785bf6.png",
+      "/lovable-uploads/0fb91261-031a-488c-a48c-69c4763b6dd7.png"
+    ],
+    gallery: {
+      exterior: [
+        "/lovable-uploads/35094bbe-b1e2-4191-9d23-24a1ba169789.png",
+        "/lovable-uploads/977e3931-9546-4f0b-a7dd-6f665e0200f5.png",
+        "/lovable-uploads/b6b69830-5f37-4728-86c6-a9fa44c20528.png",
+        "/lovable-uploads/81c9ea1c-8989-49c7-83f6-666ba5e17b2a.png",
+        "/lovable-uploads/35a2d00a-052b-4330-b374-eb89c6785bf6.png",
+        "/lovable-uploads/0fb91261-031a-488c-a48c-69c4763b6dd7.png"
+      ],
+      interior: [
+        "/lovable-uploads/13d8cf4f-2c58-4125-9779-b72f0c612702.png",
+        "/lovable-uploads/ad4e89f2-fea9-4c2a-af2a-805862e7ba28.png",
+        "/lovable-uploads/9e028a61-c52f-482b-a28b-dbab4d287948.png"
+      ],
+      engine: [],
+      details: [
+        "/lovable-uploads/e05a7471-235d-4a54-8d9b-fb7a75f21a35.png"
       ]
     }
   }
