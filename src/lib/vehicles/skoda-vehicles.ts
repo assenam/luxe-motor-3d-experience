@@ -30,7 +30,7 @@ export const skodaVehicles: Vehicle[] = [
       "Sièges chauffants",
       "Coffre modulable"
     ],
-    mainImage: "/lovable-uploads/26f67175-75b0-440a-84a6-b21f2690c00a.png",
+    mainImage: "/lovable-uploads/477fee27-770c-4bc0-8845-c2dde45b43ae.png",
     images: [
       "/lovable-uploads/477fee27-770c-4bc0-8845-c2dde45b43ae.png",
       "/lovable-uploads/d6823950-86e8-4f97-b891-9e57fbaffd81.png",
@@ -39,7 +39,6 @@ export const skodaVehicles: Vehicle[] = [
     ],
     gallery: {
       exterior: [
-        "/lovable-uploads/26f67175-75b0-440a-84a6-b21f2690c00a.png",
         "/lovable-uploads/477fee27-770c-4bc0-8845-c2dde45b43ae.png",
         "/lovable-uploads/d6823950-86e8-4f97-b891-9e57fbaffd81.png",
         "/lovable-uploads/5c8999d5-6e40-4e30-9ce7-073ec240a78d.png",
