@@ -433,7 +433,7 @@ const Navbar = () => {
             </CommandGroup>
           )}
           
-          {filteredVehicles.length > 0 && (
+          {searchQuery.length > 0 && filteredVehicles.length > 0 && (
             <CommandGroup heading={`Véhicules trouvés (${totalVehiclesFound})`}>
               {filteredVehicles.map((vehicle) => (
                 <CommandItem 
