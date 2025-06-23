@@ -1,16 +1,9 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, User, Search, ShoppingCart, Trash2 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import {
-  CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-} from '@/components/ui/command';
 import {
   Drawer,
   DrawerClose,
@@ -23,8 +16,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/lib/data';
-import { vehicles } from '@/lib/vehicles';
 import LanguageSelector from './LanguageSelector';
+import SearchDialog from './SearchDialog';
 import { useGoogleTranslate } from '@/hooks/useGoogleTranslate';
 
 const Navbar = () => {
@@ -32,7 +25,6 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useCart();
@@ -53,70 +45,11 @@ const Navbar = () => {
 
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
-    if (!searchOpen) {
-      setSearchQuery('');
-    }
   };
 
   const toggleCart = () => {
     setCartOpen(!cartOpen);
   };
-
-  const handleSearchSelect = (value: string) => {
-    setSearchOpen(false);
-    setSearchQuery('');
-    navigate(value);
-  };
-
-  console.log('Total vehicles in search:', vehicles.length);
-  console.log('Search query:', searchQuery);
-
-  // Filtrer les véhicules selon la recherche avec une logique plus robuste
-  const filteredVehicles = vehicles.filter(vehicle => {
-    if (searchQuery.length === 0) return false;
-    
-    const query = searchQuery.toLowerCase().trim();
-    const brandMatch = vehicle.brand.toLowerCase().includes(query);
-    const modelMatch = vehicle.model.toLowerCase().includes(query);
-    const fullNameMatch = `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query);
-    const yearMatch = vehicle.year.toString().includes(query);
-    const colorMatch = vehicle.exteriorColor.toLowerCase().includes(query);
-    
-    const matches = brandMatch || modelMatch || fullNameMatch || yearMatch || colorMatch;
-    
-    // Debug spécifique pour chaque véhicule trouvé
-    if (matches) {
-      console.log('Vehicle matched for query "' + query + '":', {
-        id: vehicle.id,
-        brand: vehicle.brand,
-        model: vehicle.model,
-        brandMatch,
-        modelMatch,
-        fullNameMatch,
-        mainImage: vehicle.mainImage
-      });
-    }
-    
-    return matches;
-  }).slice(0, 10); // Limite d'affichage à 10 véhicules
-
-  // Compter le total sans limite pour afficher le nombre correct
-  const totalVehiclesFound = vehicles.filter(vehicle => {
-    if (searchQuery.length === 0) return false;
-    
-    const query = searchQuery.toLowerCase().trim();
-    return (
-      vehicle.brand.toLowerCase().includes(query) ||
-      vehicle.model.toLowerCase().includes(query) ||
-      `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query) ||
-      vehicle.year.toString().includes(query) ||
-      vehicle.exteriorColor.toLowerCase().includes(query)
-    );
-  }).length;
-
-  console.log('Filtered vehicles count:', filteredVehicles.length);
-  console.log('Total vehicles found:', totalVehiclesFound);
-  console.log('Filtered vehicles details:', filteredVehicles.map(v => ({ id: v.id, brand: v.brand, model: v.model, mainImage: v.mainImage })));
 
   const handleViewCars = () => {
     setCartOpen(false);
@@ -404,73 +337,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Dialog de recherche avec recherche de véhicules */}
-      <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
-        <CommandInput 
-          placeholder="Rechercher par marque, modèle, année ou couleur..." 
-          value={searchQuery}
-          onValueChange={setSearchQuery}
-        />
-        <CommandList>
-          <CommandEmpty>
-            {searchQuery.length > 0 ? 'Aucun véhicule trouvé pour cette recherche.' : 'Commencez à taper pour rechercher des véhicules...'}
-          </CommandEmpty>
-          
-          {searchQuery.length === 0 && (
-            <CommandGroup heading="Navigation">
-              <CommandItem onSelect={() => handleSearchSelect("/")}>
-                🏠 Accueil
-              </CommandItem>
-              <CommandItem onSelect={() => handleSearchSelect("/vehicles")}>
-                🚗 Tous les véhicules
-              </CommandItem>
-              <CommandItem onSelect={() => handleSearchSelect("/about")}>
-                ℹ️ À Propos
-              </CommandItem>
-              <CommandItem onSelect={() => handleSearchSelect("/contact")}>
-                📧 Contact
-              </CommandItem>
-            </CommandGroup>
-          )}
-          
-          {searchQuery.length > 0 && filteredVehicles.length > 0 && (
-            <CommandGroup heading={`Véhicules trouvés (${totalVehiclesFound})`}>
-              {filteredVehicles.map((vehicle) => (
-                <CommandItem 
-                  key={vehicle.id} 
-                  onSelect={() => handleSearchSelect(`/vehicles/${vehicle.id}`)}
-                  className="flex items-center space-x-3 py-3"
-                >
-                  <img 
-                    src={vehicle.mainImage} 
-                    alt={`${vehicle.brand} ${vehicle.model}`}
-                    className="w-16 h-12 object-cover rounded"
-                    onError={(e) => {
-                      console.error('Image failed to load:', vehicle.mainImage, 'for vehicle:', vehicle.id);
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
-                  <div className="flex-1">
-                    <div className="font-medium text-base">
-                      {vehicle.brand} {vehicle.model}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {vehicle.year} • {formatCurrency(vehicle.price)} • {vehicle.exteriorColor}
-                    </div>
-                  </div>
-                </CommandItem>
-              ))}
-              {totalVehiclesFound > 10 && (
-                <CommandItem onSelect={() => handleSearchSelect(`/vehicles?search=${encodeURIComponent(searchQuery)}`)}>
-                  <div className="text-center w-full text-age-red font-medium py-2">
-                    Voir tous les résultats ({totalVehiclesFound} véhicules)
-                  </div>
-                </CommandItem>
-              )}
-            </CommandGroup>
-          )}
-        </CommandList>
-      </CommandDialog>
+      {/* Dialog de recherche */}
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   );
 };
