@@ -147,9 +147,40 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       const result = await submitToFormspree(submissionData);
       
       if (result.ok) {
+        // Envoyer l'email de confirmation au client
+        try {
+          console.log("Sending confirmation email to customer...");
+          const emailResponse = await fetch(`https://urcsbhdturxsvwksjdru.supabase.co/functions/v1/send-order-confirmation`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              customerInfo,
+              vehicle: {
+                brand: vehicle.brand,
+                model: vehicle.model,
+                year: vehicle.year,
+                price: totalAmount
+              },
+              depositAmount,
+              transferReference
+            })
+          });
+
+          if (emailResponse.ok) {
+            console.log("Confirmation email sent successfully");
+          } else {
+            console.error("Failed to send confirmation email");
+          }
+        } catch (emailError) {
+          console.error("Error sending confirmation email:", emailError);
+          // Ne pas faire échouer la commande si l'email échoue
+        }
+
         toast({
           title: "Commande validée !",
-          description: "Votre commande avec acompte a été enregistrée.",
+          description: "Votre commande avec acompte a été enregistrée. Un email de confirmation vous a été envoyé.",
         });
 
         navigate('/payment-confirmation', { 
