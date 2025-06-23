@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, User, Search, ShoppingCart, Trash2 } from 'lucide-react';
@@ -31,6 +30,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/lib/data';
+import { vehicles } from '@/lib/vehicles';
 import LanguageSelector from './LanguageSelector';
 import { useGoogleTranslate } from '@/hooks/useGoogleTranslate';
 
@@ -39,6 +39,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useCart();
@@ -59,6 +60,9 @@ const Navbar = () => {
 
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
+    if (!searchOpen) {
+      setSearchQuery('');
+    }
   };
 
   const toggleCart = () => {
@@ -67,8 +71,19 @@ const Navbar = () => {
 
   const handleSearchSelect = (value: string) => {
     setSearchOpen(false);
+    setSearchQuery('');
     navigate(value);
   };
+
+  // Filtrer les véhicules selon la recherche
+  const filteredVehicles = vehicles.filter(vehicle => 
+    searchQuery.length > 0 && (
+      vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      vehicle.year.toString().includes(searchQuery)
+    )
+  ).slice(0, 5); // Limiter à 5 résultats
 
   const handleViewCars = () => {
     setCartOpen(false);
@@ -357,44 +372,89 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Dialog de recherche avec titre et description pour l'accessibilité */}
+      {/* Dialog de recherche avec recherche de véhicules */}
       <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
         <DialogContent className="sm:max-w-[425px] bg-white">
           <DialogHeader>
-            <DialogTitle>Rechercher</DialogTitle>
+            <DialogTitle>Rechercher un véhicule</DialogTitle>
             <DialogDescription>
-              Recherchez des pages ou des véhicules dans notre catalogue
+              Trouvez votre véhicule par marque, modèle ou année
             </DialogDescription>
           </DialogHeader>
           <CommandDialog open={false} onOpenChange={() => {}}>
-            <CommandInput placeholder="Tapez votre recherche..." />
+            <CommandInput 
+              placeholder="Tapez votre recherche (ex: Audi A3, BMW 2020)..." 
+              value={searchQuery}
+              onValueChange={setSearchQuery}
+            />
             <CommandList>
-              <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
-              <CommandGroup heading="Pages">
-                <CommandItem onSelect={() => handleSearchSelect("/")}>
-                  Accueil
-                </CommandItem>
-                <CommandItem onSelect={() => handleSearchSelect("/vehicles")}>
-                  Véhicules
-                </CommandItem>
-                <CommandItem onSelect={() => handleSearchSelect("/about")}>
-                  À Propos
-                </CommandItem>
-                <CommandItem onSelect={() => handleSearchSelect("/contact")}>
-                  Contact
-                </CommandItem>
-              </CommandGroup>
-              <CommandGroup heading="Véhicules populaires">
-                <CommandItem onSelect={() => handleSearchSelect("/vehicles/1")}>
-                  Mercedes-Benz S-Class
-                </CommandItem>
-                <CommandItem onSelect={() => handleSearchSelect("/vehicles/2")}>
-                  BMW Série 7
-                </CommandItem>
-                <CommandItem onSelect={() => handleSearchSelect("/vehicles/3")}>
-                  Audi A8
-                </CommandItem>
-              </CommandGroup>
+              <CommandEmpty>
+                {searchQuery.length > 0 ? 'Aucun véhicule trouvé pour cette recherche.' : 'Commencez à taper pour rechercher des véhicules...'}
+              </CommandEmpty>
+              
+              {searchQuery.length === 0 && (
+                <CommandGroup heading="Navigation">
+                  <CommandItem onSelect={() => handleSearchSelect("/")}>
+                    🏠 Accueil
+                  </CommandItem>
+                  <CommandItem onSelect={() => handleSearchSelect("/vehicles")}>
+                    🚗 Tous les véhicules
+                  </CommandItem>
+                  <CommandItem onSelect={() => handleSearchSelect("/about")}>
+                    ℹ️ À Propos
+                  </CommandItem>
+                  <CommandItem onSelect={() => handleSearchSelect("/contact")}>
+                    📧 Contact
+                  </CommandItem>
+                </CommandGroup>
+              )}
+              
+              {filteredVehicles.length > 0 && (
+                <CommandGroup heading={`Véhicules trouvés (${filteredVehicles.length})`}>
+                  {filteredVehicles.map((vehicle) => (
+                    <CommandItem 
+                      key={vehicle.id} 
+                      onSelect={() => handleSearchSelect(`/vehicles/${vehicle.id}`)}
+                      className="flex items-center space-x-3"
+                    >
+                      <img 
+                        src={vehicle.mainImage} 
+                        alt={`${vehicle.brand} ${vehicle.model}`}
+                        className="w-12 h-8 object-cover rounded"
+                      />
+                      <div className="flex-1">
+                        <div className="font-medium">
+                          {vehicle.brand} {vehicle.model}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {vehicle.year} • {formatCurrency(vehicle.price)}
+                        </div>
+                      </div>
+                    </CommandItem>
+                  ))}
+                  {vehicles.filter(vehicle => 
+                    searchQuery.length > 0 && (
+                      vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      vehicle.year.toString().includes(searchQuery)
+                    )
+                  ).length > 5 && (
+                    <CommandItem onSelect={() => handleSearchSelect(`/vehicles?search=${encodeURIComponent(searchQuery)}`)}>
+                      <div className="text-center w-full text-age-red font-medium">
+                        Voir tous les résultats ({vehicles.filter(vehicle => 
+                          searchQuery.length > 0 && (
+                            vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            vehicle.year.toString().includes(searchQuery)
+                          )
+                        ).length} véhicules)
+                      </div>
+                    </CommandItem>
+                  )}
+                </CommandGroup>
+              )}
             </CommandList>
           </CommandDialog>
         </DialogContent>

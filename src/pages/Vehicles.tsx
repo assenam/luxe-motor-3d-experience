@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { vehicles } from '@/lib/data';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,6 +10,9 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const Vehicles = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
+  
   // Using vehicles directly from import rather than a non-existent getAllVehicles function
   const [filteredVehicles, setFilteredVehicles] = useState(vehicles);
   const [showFilters, setShowFilters] = useState(false);
@@ -18,6 +22,7 @@ const Vehicles = () => {
     priceMax: '',
     yearMin: '',
     yearMax: '',
+    search: searchQuery,
   });
   
   useEffect(() => {
@@ -42,10 +47,29 @@ const Vehicles = () => {
     
     return () => window.removeEventListener('scroll', animateOnScroll);
   }, []);
+
+  // Mettre à jour les filtres quand les paramètres URL changent
+  useEffect(() => {
+    if (searchQuery) {
+      setFilters(prev => ({ ...prev, search: searchQuery }));
+      setShowFilters(true);
+    }
+  }, [searchQuery]);
   
   useEffect(() => {
     // Apply filters
     let result = [...vehicles];
+    
+    // Filtrage par recherche textuelle
+    if (filters.search) {
+      result = result.filter(vehicle => 
+        vehicle.brand.toLowerCase().includes(filters.search.toLowerCase()) ||
+        vehicle.model.toLowerCase().includes(filters.search.toLowerCase()) ||
+        `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(filters.search.toLowerCase()) ||
+        vehicle.year.toString().includes(filters.search) ||
+        vehicle.exteriorColor.toLowerCase().includes(filters.search.toLowerCase())
+      );
+    }
     
     if (filters.brand) {
       result = result.filter(vehicle => 
@@ -86,6 +110,11 @@ const Vehicles = () => {
       ...prev,
       [name]: value
     }));
+    
+    // Nettoyer l'URL si on change autre chose que la recherche
+    if (name !== 'search' && searchParams.get('search')) {
+      setSearchParams({});
+    }
   };
   
   const clearFilters = () => {
@@ -95,7 +124,9 @@ const Vehicles = () => {
       priceMax: '',
       yearMin: '',
       yearMax: '',
+      search: '',
     });
+    setSearchParams({});
   };
   
   const toggleFilters = () => {
@@ -118,6 +149,13 @@ const Vehicles = () => {
             <p className="max-w-2xl mx-auto mb-10 text-white/80 text-lg">
               Découvrez notre sélection de véhicules d'exception, soigneusement choisis pour leur qualité, leur histoire et leur caractère unique.
             </p>
+            {searchQuery && (
+              <div className="mt-4 p-4 bg-age-red/20 backdrop-blur-sm rounded-lg inline-block">
+                <p className="text-lg">
+                  Résultats de recherche pour : <span className="font-bold">"{searchQuery}"</span>
+                </p>
+              </div>
+            )}
           </div>
         </section>
         
@@ -163,11 +201,25 @@ const Vehicles = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center mb-8">
                   <div className="mb-4 md:mb-0">
                     <h2 className="text-2xl font-playfair font-semibold">
-                      {filteredVehicles.length} Véhicules disponibles
+                      {filteredVehicles.length} Véhicule{filteredVehicles.length > 1 ? 's' : ''} {searchQuery ? 'trouvé' + (filteredVehicles.length > 1 ? 's' : '') : 'disponible' + (filteredVehicles.length > 1 ? 's' : '')}
                     </h2>
+                    {searchQuery && (
+                      <p className="text-muted-foreground mt-1">
+                        pour la recherche "{searchQuery}"
+                      </p>
+                    )}
                   </div>
                   
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
+                    {searchQuery && (
+                      <Button 
+                        onClick={clearFilters} 
+                        variant="outline"
+                        className="text-sm"
+                      >
+                        Effacer la recherche
+                      </Button>
+                    )}
                     <Button 
                       onClick={toggleFilters} 
                       variant="outline" 
@@ -193,7 +245,19 @@ const Vehicles = () => {
                       </Button>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Recherche libre</label>
+                        <input 
+                          type="text" 
+                          name="search" 
+                          placeholder="Marque, modèle, année..." 
+                          value={filters.search} 
+                          onChange={handleFilterChange}
+                          className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                        />
+                      </div>
+                      
                       <div>
                         <label className="block text-sm font-medium mb-2">Marque</label>
                         <select 
@@ -266,7 +330,9 @@ const Vehicles = () => {
                     </div>
                   )) : (
                     <div className="col-span-full text-center py-16">
-                      <p className="text-xl text-luxe-lightgray mb-4">Aucun véhicule ne correspond à vos critères.</p>
+                      <p className="text-xl text-luxe-lightgray mb-4">
+                        {searchQuery ? `Aucun véhicule ne correspond à votre recherche "${searchQuery}".` : 'Aucun véhicule ne correspond à vos critères.'}
+                      </p>
                       <Button onClick={clearFilters} variant="outline">
                         Réinitialiser les filtres
                       </Button>
