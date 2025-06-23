@@ -150,20 +150,17 @@ export const kiaVehicles: Vehicle[] = [
       "Économique en carburant",
       "Idéal famille"
     ],
-    mainImage: "/lovable-uploads/b7544535-61bd-4c3c-8e39-37ca350030e9.png",
+    mainImage: "/lovable-uploads/6bdf8b71-cdb5-4ebb-af1d-9f7de5a03395.png",
     images: [
-      "/lovable-uploads/33233469-27a9-479d-a33e-a2949ee9ba99.png",
-      "/lovable-uploads/4638466e-bf22-433d-b4ff-844af03883c9.png",
-      "/lovable-uploads/ba97e138-9b47-4ae0-a4b0-8d47e9d84768.png",
-      "/lovable-uploads/26f67175-75b0-440a-84a6-b21f2690c00a.png",
-      "/lovable-uploads/c84c7e36-5f11-439a-8422-f6dde9afbb5d.png",
-      "/lovable-uploads/662dc5ad-8eac-4d0a-aa34-d275c8f98092.png",
-      "/lovable-uploads/8d953a06-55d9-44f4-ae90-404a1b7d6a66.png",
-      "/lovable-uploads/78a6b213-15cf-4748-9281-e48375f3b7e9.png",
-      "/lovable-uploads/aae83367-1d33-4c35-990d-e5be58c96f67.png"
+      "/lovable-uploads/cb3d7a71-cb00-420c-b0db-38eceb6fa5cc.png",
+      "/lovable-uploads/d7c1c956-9057-4e2c-a9da-1f3a933c3707.png",
+      "/lovable-uploads/d16df1e9-d004-41ca-a10e-19e567796b43.png",
+      "/lovable-uploads/6c260a0a-a8ac-4b77-b070-6f0356b80da5.png",
+      "/lovable-uploads/08b2ff0f-b7c2-4ac3-a0f4-7c06e0172ee9.png"
     ],
     gallery: {
       exterior: [
+        "/lovable-uploads/6bdf8b71-cdb5-4ebb-af1d-9f7de5a03395.png",
         "/lovable-uploads/b7544535-61bd-4c3c-8e39-37ca350030e9.png",
         "/lovable-uploads/33233469-27a9-479d-a33e-a2949ee9ba99.png",
         "/lovable-uploads/4638466e-bf22-433d-b4ff-844af03883c9.png",
@@ -171,12 +168,18 @@ export const kiaVehicles: Vehicle[] = [
         "/lovable-uploads/26f67175-75b0-440a-84a6-b21f2690c00a.png"
       ],
       interior: [
+        "/lovable-uploads/d16df1e9-d004-41ca-a10e-19e567796b43.png",
+        "/lovable-uploads/6c260a0a-a8ac-4b77-b070-6f0356b80da5.png",
+        "/lovable-uploads/08b2ff0f-b7c2-4ac3-a0f4-7c06e0172ee9.png",
         "/lovable-uploads/c84c7e36-5f11-439a-8422-f6dde9afbb5d.png",
         "/lovable-uploads/662dc5ad-8eac-4d0a-aa34-d275c8f98092.png",
         "/lovable-uploads/8d953a06-55d9-44f4-ae90-404a1b7d6a66.png"
       ],
-      engine: [],
+      engine: [
+        "/lovable-uploads/cb3d7a71-cb00-420c-b0db-38eceb6fa5cc.png"
+      ],
       details: [
+        "/lovable-uploads/d7c1c956-9057-4e2c-a9da-1f3a933c3707.png",
         "/lovable-uploads/78a6b213-15cf-4748-9281-e48375f3b7e9.png",
         "/lovable-uploads/aae83367-1d33-4c35-990d-e5be58c96f67.png"
       ]
