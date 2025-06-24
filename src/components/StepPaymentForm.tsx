@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { sendPaymentConfirmationEmail } from '@/services/paymentEmail';
@@ -63,6 +64,18 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       return;
     }
 
+    // Vérifier la taille du fichier (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      toast({
+        title: "Fichier trop volumineux",
+        description: "La taille du fichier ne doit pas dépasser 10MB.",
+        variant: "destructive",
+      });
+      event.target.value = '';
+      setSelectedFile(null);
+      return;
+    }
+
     setSelectedFile(file);
   };
 
@@ -120,6 +133,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         customer_postal_code: customerInfo.postalCode,
         customer_city: customerInfo.city,
         customer_country: customerInfo.country,
+        payment_proof_file: selectedFile,
       };
       
       const result = await sendPaymentConfirmationEmail(emailData);

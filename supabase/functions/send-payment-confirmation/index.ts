@@ -22,6 +22,7 @@ interface PaymentConfirmationRequest {
   customer_postal_code: string;
   customer_city: string;
   customer_country: string;
+  payment_proof_url?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -33,7 +34,7 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const data: PaymentConfirmationRequest = await req.json();
 
-    // Email pour l'équipe AUTO GERMANY EXPORT
+    // Email pour l'équipe AUTO GERMANY EXPORT avec lien vers la preuve de paiement
     const teamEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <noreply@auto-germany-export.com>",
       to: ["contact@auto-germany-export.com"],
@@ -64,14 +65,30 @@ const handler = async (req: Request): Promise<Response> => {
             </p>
           </div>
 
+          ${data.payment_proof_url ? `
+          <div style="background-color: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745;">
+            <h3 style="color: #28a745; margin-top: 0;">📎 Preuve de paiement</h3>
+            <p><strong>Le client a fourni une preuve de paiement.</strong></p>
+            <p>
+              <a href="${data.payment_proof_url}" 
+                 style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                📥 Télécharger la preuve de paiement
+              </a>
+            </p>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+              <em>Ce lien expire dans 7 jours pour des raisons de sécurité.</em>
+            </p>
+          </div>
+          ` : ''}
+
           <div style="background-color: #ffe4e1; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6b6b;">
-            <p style="margin: 0;"><strong>⚠️ Action requise :</strong> Vérifier la réception du virement et traiter la commande</p>
+            <p style="margin: 0;"><strong>⚠️ Action requise :</strong> ${data.payment_proof_url ? 'Télécharger et vérifier la preuve de paiement, puis traiter la commande' : 'Vérifier la réception du virement et traiter la commande'}</p>
           </div>
         </div>
       `,
     });
 
-    // Email de confirmation pour le client
+    // Email de confirmation pour le client (inchangé)
     const customerEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <noreply@auto-germany-export.com>",
       to: [data.customer_email],
@@ -102,6 +119,13 @@ const handler = async (req: Request): Promise<Response> => {
               <p style="margin: 5px 0;">${data.customer_postal_code} ${data.customer_city}</p>
               <p style="margin: 5px 0;">${data.customer_country}</p>
             </div>
+
+            ${data.payment_proof_url ? `
+            <div style="background-color: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #28a745; margin-top: 0;">✅ PREUVE DE PAIEMENT REÇUE</h3>
+              <p>Nous avons bien reçu votre preuve de paiement. Notre équipe va maintenant vérifier votre virement et traiter votre commande.</p>
+            </div>
+            ` : ''}
 
             <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #0066cc; margin-top: 0;">⏳ PROCHAINES ÉTAPES</h3>
