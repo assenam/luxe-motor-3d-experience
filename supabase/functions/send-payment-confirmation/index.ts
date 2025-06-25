@@ -32,9 +32,25 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    console.log("=== DÉBUT FONCTION SEND-PAYMENT-CONFIRMATION ===");
+    
+    // Vérifier la clé API Resend
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    if (!resendApiKey) {
+      console.error("❌ RESEND_API_KEY n'est pas configurée");
+      throw new Error("RESEND_API_KEY non configurée");
+    }
+    console.log("✅ RESEND_API_KEY trouvée");
+
     const data: PaymentConfirmationRequest = await req.json();
+    console.log("📧 Données reçues:", {
+      customer_email: data.customer_email,
+      vehicle_info: data.vehicle_info,
+      has_payment_proof: !!data.payment_proof_url
+    });
 
     // Email pour l'équipe AUTO GERMANY EXPORT avec lien vers la preuve de paiement
+    console.log("📤 Envoi email équipe...");
     const teamEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <noreply@auto-germany-export.com>",
       to: ["contact@auto-germany-export.com"],
@@ -79,7 +95,12 @@ const handler = async (req: Request): Promise<Response> => {
               <em>Ce lien expire dans 7 jours pour des raisons de sécurité.</em>
             </p>
           </div>
-          ` : ''}
+          ` : `
+          <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
+            <h3 style="color: #856404; margin-top: 0;">⚠️ Aucune preuve de paiement</h3>
+            <p>Le client n'a pas fourni de preuve de paiement.</p>
+          </div>
+          `}
 
           <div style="background-color: #ffe4e1; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6b6b;">
             <p style="margin: 0;"><strong>⚠️ Action requise :</strong> ${data.payment_proof_url ? 'Télécharger et vérifier la preuve de paiement, puis traiter la commande' : 'Vérifier la réception du virement et traiter la commande'}</p>
@@ -88,7 +109,15 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    // Email de confirmation pour le client (inchangé)
+    console.log("📤 Réponse email équipe:", teamEmailResponse);
+    
+    if (teamEmailResponse.error) {
+      console.error("❌ Erreur email équipe:", teamEmailResponse.error);
+      throw new Error(`Erreur envoi email équipe: ${teamEmailResponse.error.message}`);
+    }
+
+    // Email de confirmation pour le client
+    console.log("📤 Envoi email client...");
     const customerEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <noreply@auto-germany-export.com>",
       to: [data.customer_email],
@@ -125,7 +154,12 @@ const handler = async (req: Request): Promise<Response> => {
               <h3 style="color: #28a745; margin-top: 0;">✅ PREUVE DE PAIEMENT REÇUE</h3>
               <p>Nous avons bien reçu votre preuve de paiement. Notre équipe va maintenant vérifier votre virement et traiter votre commande.</p>
             </div>
-            ` : ''}
+            ` : `
+            <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #856404; margin-top: 0;">📋 INFORMATIONS IMPORTANTES</h3>
+              <p>Nous avons enregistré votre commande. N'oubliez pas d'effectuer votre virement avec la référence indiquée.</p>
+            </div>
+            `}
 
             <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #0066cc; margin-top: 0;">⏳ PROCHAINES ÉTAPES</h3>
@@ -150,7 +184,15 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Emails sent successfully:", { teamEmailResponse, customerEmailResponse });
+    console.log("📤 Réponse email client:", customerEmailResponse);
+    
+    if (customerEmailResponse.error) {
+      console.error("❌ Erreur email client:", customerEmailResponse.error);
+      throw new Error(`Erreur envoi email client: ${customerEmailResponse.error.message}`);
+    }
+
+    console.log("✅ Emails envoyés avec succès");
+    console.log("=== FIN FONCTION SEND-PAYMENT-CONFIRMATION ===");
 
     return new Response(JSON.stringify({ 
       success: true, 
@@ -164,9 +206,10 @@ const handler = async (req: Request): Promise<Response> => {
       },
     });
   } catch (error: any) {
-    console.error("Error in send-payment-confirmation function:", error);
+    console.error("❌ ERREUR DANS send-payment-confirmation:", error);
+    console.error("❌ Stack trace:", error.stack);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error.message, stack: error.stack }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
