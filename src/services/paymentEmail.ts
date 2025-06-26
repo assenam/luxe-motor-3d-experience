@@ -24,33 +24,50 @@ export const uploadPaymentProof = async (file: File, transferReference: string):
   const fileName = `${transferReference}_${Date.now()}.${fileExt}`;
   const filePath = `${transferReference}/${fileName}`;
 
-  const { data, error } = await supabase.storage
-    .from('payment-proofs')
-    .upload(filePath, file);
+  try {
+    const { data, error } = await supabase.storage
+      .from('payment-proofs')
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
 
-  if (error) {
-    console.error('❌ Erreur upload preuve de paiement:', error);
+    if (error) {
+      console.error('❌ Erreur upload preuve de paiement:', error);
+      throw new Error(`Erreur upload: ${error.message}`);
+    }
+
+    console.log('✅ Upload réussi:', data);
+    return filePath;
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'upload:', error);
     throw error;
   }
-
-  console.log('✅ Upload réussi:', data);
-  return filePath;
 };
 
 export const getPaymentProofSignedUrl = async (filePath: string): Promise<string> => {
   console.log('🔗 Création URL signée pour:', filePath);
   
-  const { data, error } = await supabase.storage
-    .from('payment-proofs')
-    .createSignedUrl(filePath, 60 * 60 * 24 * 7); // 7 jours d'accès
+  try {
+    const { data, error } = await supabase.storage
+      .from('payment-proofs')
+      .createSignedUrl(filePath, 60 * 60 * 24 * 7); // 7 jours d'accès
 
-  if (error) {
-    console.error('❌ Erreur création URL signée:', error);
+    if (error) {
+      console.error('❌ Erreur création URL signée:', error);
+      throw new Error(`Erreur URL signée: ${error.message}`);
+    }
+
+    if (!data?.signedUrl) {
+      throw new Error('URL signée non générée');
+    }
+
+    console.log('✅ URL signée créée:', data.signedUrl);
+    return data.signedUrl;
+  } catch (error) {
+    console.error('❌ Erreur lors de la création de l\'URL signée:', error);
     throw error;
   }
-
-  console.log('✅ URL signée créée:', data.signedUrl);
-  return data.signedUrl;
 };
 
 export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
@@ -62,9 +79,15 @@ export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
     // Upload du fichier si présent
     if (data.payment_proof_file) {
       console.log('📎 Upload de la preuve de paiement...');
-      const filePath = await uploadPaymentProof(data.payment_proof_file, data.transfer_reference);
-      paymentProofUrl = await getPaymentProofSignedUrl(filePath);
-      console.log('✅ Preuve de paiement uploadée et URL créée');
+      try {
+        const filePath = await uploadPaymentProof(data.payment_proof_file, data.transfer_reference);
+        paymentProofUrl = await getPaymentProofSignedUrl(filePath);
+        console.log('✅ Preuve de paiement uploadée et URL créée');
+      } catch (uploadError) {
+        console.error('❌ Erreur lors de l\'upload de la preuve:', uploadError);
+        // On continue sans la preuve de paiement plutôt que d'échouer complètement
+        console.log('⚠️ Envoi email sans preuve de paiement');
+      }
     } else {
       console.log('⚠️ Aucune preuve de paiement fournie');
     }
@@ -83,7 +106,7 @@ export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
 
     if (error) {
       console.error('❌ Erreur fonction edge:', error);
-      throw error;
+      throw new Error(`Erreur envoi email: ${error.message}`);
     }
 
     console.log('✅ Réponse fonction edge:', result);

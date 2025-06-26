@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { sendPaymentConfirmationEmail } from '@/services/paymentEmail';
@@ -120,6 +119,8 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
     setIsSubmitting(true);
     
     try {
+      console.log('🚀 Début soumission formulaire');
+      
       const emailData = {
         vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
         vehicle_price: `${totalAmount.toLocaleString()} €`,
@@ -136,9 +137,11 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         payment_proof_file: selectedFile,
       };
       
+      console.log('📤 Envoi des données email...');
       const result = await sendPaymentConfirmationEmail(emailData);
       
       if (result.ok) {
+        console.log('✅ Email envoyé avec succès');
         removeFromCart(vehicle.id);
         
         toast({
@@ -161,12 +164,23 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
           } 
         });
       } else {
-        throw new Error('Échec envoi');
+        throw new Error('Échec envoi email');
       }
     } catch (error) {
+      console.error('❌ Erreur lors de la soumission:', error);
+      let errorMessage = "Erreur lors de l'envoi de la commande.";
+      
+      if (error instanceof Error) {
+        if (error.message.includes('upload')) {
+          errorMessage = "Erreur lors de l'upload de la preuve de paiement. Veuillez réessayer.";
+        } else if (error.message.includes('email')) {
+          errorMessage = "Erreur lors de l'envoi de l'email. Veuillez réessayer.";
+        }
+      }
+      
       toast({
         title: "Erreur",
-        description: "Erreur lors de l'envoi de la commande.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
