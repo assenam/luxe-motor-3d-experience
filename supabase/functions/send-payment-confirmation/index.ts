@@ -52,8 +52,8 @@ const handler = async (req: Request): Promise<Response> => {
     // Email pour l'équipe AUTO GERMANY EXPORT avec lien vers la preuve de paiement
     console.log("📤 Envoi email équipe...");
     const teamEmailResponse = await resend.emails.send({
-      from: "AUTO GERMANY EXPORT <noreply@auto-germany-export.com>",
-      to: ["contact@auto-germany-export.com"],
+      from: "AUTO GERMANY EXPORT <noreply@autogermanyexport.com>",
+      to: ["contact@autogermanyexport.com"],
       subject: `Nouvelle commande avec acompte - ${data.vehicle_info}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -119,7 +119,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Email de confirmation pour le client
     console.log("📤 Envoi email client...");
     const customerEmailResponse = await resend.emails.send({
-      from: "AUTO GERMANY EXPORT <noreply@auto-germany-export.com>",
+      from: "AUTO GERMANY EXPORT <noreply@autogermanyexport.com>",
       to: [data.customer_email],
       subject: `Confirmation de votre commande - ${data.vehicle_info}`,
       html: `
@@ -173,7 +173,7 @@ const handler = async (req: Request): Promise<Response> => {
 
             <p>Notre équipe va maintenant traiter votre commande et vous tiendra informé(e) de chaque étape.</p>
             
-            <p>Si vous avez des questions, n'hésitez pas à nous contacter à <a href="mailto:contact@auto-germany-export.com" style="color: #d4af37;">contact@auto-germany-export.com</a></p>
+            <p>Si vous avez des questions, n'hésitez pas à nous contacter à <a href="mailto:contact@autogermanyexport.com" style="color: #d4af37;">contact@autogermanyexport.com</a></p>
 
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
               <p style="margin: 0; color: #666;">Merci de votre confiance,</p>
