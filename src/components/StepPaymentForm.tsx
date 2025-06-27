@@ -107,19 +107,10 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   const handleSubmit = async () => {
-    if (!selectedFile) {
-      toast({
-        title: "Fichier manquant",
-        description: "Merci d'ajouter une preuve de paiement.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     
     try {
-      console.log('🚀 Début soumission formulaire');
+      console.log('🚀 Début soumission formulaire (version simplifiée)');
       
       const emailData = {
         vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
@@ -146,7 +137,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         
         toast({
           title: "Commande validée !",
-          description: "Votre commande avec acompte a été enregistrée. Un email de confirmation vous a été envoyé.",
+          description: "Votre commande a été enregistrée. Un email de confirmation vous a été envoyé.",
         });
 
         navigate('/payment-confirmation', { 
@@ -157,7 +148,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
               depositAmount,
               customerInfo: {
                 ...customerInfo,
-                paymentProofUploaded: true,
+                paymentProofUploaded: !!selectedFile,
                 transferReference
               }
             } 
@@ -168,19 +159,10 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       }
     } catch (error) {
       console.error('❌ Erreur lors de la soumission:', error);
-      let errorMessage = "Erreur lors de l'envoi de la commande.";
-      
-      if (error instanceof Error) {
-        if (error.message.includes('upload')) {
-          errorMessage = "Erreur lors de l'upload de la preuve de paiement. Veuillez réessayer.";
-        } else if (error.message.includes('email')) {
-          errorMessage = "Erreur lors de l'envoi de l'email. Veuillez réessayer.";
-        }
-      }
       
       toast({
         title: "Erreur",
-        description: errorMessage,
+        description: "Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement.",
         variant: "destructive",
       });
     } finally {

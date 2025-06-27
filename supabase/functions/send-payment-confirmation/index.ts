@@ -32,7 +32,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    console.log("=== DÉBUT FONCTION SEND-PAYMENT-CONFIRMATION ===");
+    console.log("=== DÉBUT FONCTION SEND-PAYMENT-CONFIRMATION (VERSION SIMPLIFIÉE) ===");
     
     // Vérifier la clé API Resend
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
@@ -49,7 +49,7 @@ const handler = async (req: Request): Promise<Response> => {
       has_payment_proof: !!data.payment_proof_url
     });
 
-    // Email pour l'équipe AUTO GERMANY EXPORT avec lien vers la preuve de paiement
+    // Email pour l'équipe AUTO GERMANY EXPORT
     console.log("📤 Envoi email équipe...");
     const teamEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <noreply@autogermanyexport.com>",
@@ -81,29 +81,14 @@ const handler = async (req: Request): Promise<Response> => {
             </p>
           </div>
 
-          ${data.payment_proof_url ? `
-          <div style="background-color: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745;">
-            <h3 style="color: #28a745; margin-top: 0;">📎 Preuve de paiement</h3>
-            <p><strong>Le client a fourni une preuve de paiement.</strong></p>
-            <p>
-              <a href="${data.payment_proof_url}" 
-                 style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
-                📥 Télécharger la preuve de paiement
-              </a>
-            </p>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;">
-              <em>Ce lien expire dans 7 jours pour des raisons de sécurité.</em>
-            </p>
-          </div>
-          ` : `
           <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
-            <h3 style="color: #856404; margin-top: 0;">⚠️ Aucune preuve de paiement</h3>
-            <p>Le client n'a pas fourni de preuve de paiement.</p>
+            <h3 style="color: #856404; margin-top: 0;">📋 NOTE IMPORTANTE</h3>
+            <p>Le client peut envoyer sa preuve de paiement par email à contact@autogermanyexport.com ou l'ajouter lors de la commande.</p>
+            <p><strong>Vérifier la réception du virement avec la référence : ${data.transfer_reference}</strong></p>
           </div>
-          `}
 
           <div style="background-color: #ffe4e1; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6b6b;">
-            <p style="margin: 0;"><strong>⚠️ Action requise :</strong> ${data.payment_proof_url ? 'Télécharger et vérifier la preuve de paiement, puis traiter la commande' : 'Vérifier la réception du virement et traiter la commande'}</p>
+            <p style="margin: 0;"><strong>⚠️ Action requise :</strong> Vérifier la réception du virement et traiter la commande</p>
           </div>
         </div>
       `,
@@ -149,17 +134,14 @@ const handler = async (req: Request): Promise<Response> => {
               <p style="margin: 5px 0;">${data.customer_country}</p>
             </div>
 
-            ${data.payment_proof_url ? `
-            <div style="background-color: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <h3 style="color: #28a745; margin-top: 0;">✅ PREUVE DE PAIEMENT REÇUE</h3>
-              <p>Nous avons bien reçu votre preuve de paiement. Notre équipe va maintenant vérifier votre virement et traiter votre commande.</p>
+            <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #0066cc; margin-top: 0;">📋 PREUVE DE PAIEMENT</h3>
+              <p>Si vous n'avez pas encore envoyé votre preuve de paiement, vous pouvez :</p>
+              <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>L'envoyer par email à <strong>contact@autogermanyexport.com</strong></li>
+                <li>Préciser votre nom et la référence : <strong>${data.transfer_reference}</strong></li>
+              </ul>
             </div>
-            ` : `
-            <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <h3 style="color: #856404; margin-top: 0;">📋 INFORMATIONS IMPORTANTES</h3>
-              <p>Nous avons enregistré votre commande. N'oubliez pas d'effectuer votre virement avec la référence indiquée.</p>
-            </div>
-            `}
 
             <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #0066cc; margin-top: 0;">⏳ PROCHAINES ÉTAPES</h3>
