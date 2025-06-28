@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { sendPaymentConfirmationEmail } from '@/services/paymentEmail';
@@ -110,7 +111,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
     setIsSubmitting(true);
     
     try {
-      console.log('🚀 Début soumission formulaire (version simplifiée)');
+      console.log('🚀 Début soumission formulaire via Formspree');
       
       const emailData = {
         vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
@@ -125,10 +126,10 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         customer_postal_code: customerInfo.postalCode,
         customer_city: customerInfo.city,
         customer_country: customerInfo.country,
-        payment_proof_file: selectedFile,
+        payment_proof_file: selectedFile || undefined,
       };
       
-      console.log('📤 Envoi des données email...');
+      console.log('📤 Envoi des données via Formspree...');
       const result = await sendPaymentConfirmationEmail(emailData);
       
       if (result.ok) {
