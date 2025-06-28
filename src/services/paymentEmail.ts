@@ -19,49 +19,47 @@ export interface PaymentEmailData {
 
 export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
   try {
-    console.log('📧 Envoi email via Formspree');
-    
-    // Préparer les données pour Formspree
-    const formData = new FormData();
-    
-    // Ajouter toutes les données texte
-    formData.append('_subject', `Nouvelle commande avec acompte - ${data.vehicle_info}`);
-    formData.append('type', 'payment_confirmation');
-    formData.append('vehicle_info', data.vehicle_info);
-    formData.append('vehicle_price', data.vehicle_price);
-    formData.append('deposit_amount', data.deposit_amount);
-    formData.append('transfer_reference', data.transfer_reference);
-    formData.append('customer_first_name', data.customer_first_name);
-    formData.append('customer_last_name', data.customer_last_name);
-    formData.append('customer_email', data.customer_email);
-    formData.append('customer_phone', data.customer_phone);
-    formData.append('customer_address', data.customer_address);
-    formData.append('customer_postal_code', data.customer_postal_code);
-    formData.append('customer_city', data.customer_city);
-    formData.append('customer_country', data.customer_country);
-    
-    // Ajouter le fichier de preuve de paiement si présent
-    if (data.payment_proof_file) {
-      formData.append('payment_proof', data.payment_proof_file);
-      console.log('📎 Fichier de preuve de paiement attaché:', data.payment_proof_file.name);
-    }
-
-    // Utiliser fetch directement pour supporter FormData avec fichiers
-    const response = await fetch('https://formspree.io/f/xldnpnoq', {
-      method: 'POST',
-      body: formData
+    console.log('🔍 DÉBUT sendPaymentConfirmationEmail');
+    console.log('📋 Données reçues:', {
+      vehicle_info: data.vehicle_info,
+      customer_email: data.customer_email,
+      has_file: !!data.payment_proof_file
     });
 
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
+    // Test simple d'abord - juste les données texte via submitToFormspree
+    const simpleData = {
+      _subject: `Nouvelle commande avec acompte - ${data.vehicle_info}`,
+      type: 'payment_confirmation',
+      vehicle_info: data.vehicle_info,
+      vehicle_price: data.vehicle_price,
+      deposit_amount: data.deposit_amount,
+      transfer_reference: data.transfer_reference,
+      customer_first_name: data.customer_first_name,
+      customer_last_name: data.customer_last_name,
+      customer_email: data.customer_email,
+      customer_phone: data.customer_phone,
+      customer_address: data.customer_address,
+      customer_postal_code: data.customer_postal_code,
+      customer_city: data.customer_city,
+      customer_country: data.customer_country
+    };
 
-    const result = await response.json();
-    console.log('✅ Email envoyé avec succès via Formspree');
+    console.log('📤 Tentative envoi via submitToFormspree (données simples)');
     
-    return { ok: true, data: result };
+    const result = await submitToFormspree(simpleData);
+    
+    console.log('📬 Réponse submitToFormspree:', result);
+    
+    if (result.ok) {
+      console.log('✅ Email envoyé avec succès !');
+      return { ok: true, data: result };
+    } else {
+      console.error('❌ Échec submitToFormspree:', result);
+      throw new Error('Échec envoi via Formspree');
+    }
   } catch (error) {
-    console.error('❌ Erreur envoi email via Formspree:', error);
+    console.error('💥 ERREUR COMPLÈTE dans sendPaymentConfirmationEmail:', error);
+    console.error('📊 Stack trace:', error instanceof Error ? error.stack : 'Pas de stack trace');
     throw error;
   }
 };

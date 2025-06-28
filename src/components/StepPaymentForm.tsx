@@ -108,10 +108,23 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
   };
 
   const handleSubmit = async () => {
+    console.log('🎯 DÉBUT handleSubmit');
+    console.log('📊 État actuel:', {
+      currentStep,
+      isSubmitting,
+      hasFile: !!selectedFile,
+      customerInfo: customerInfo.firstName + ' ' + customerInfo.lastName
+    });
+
+    if (isSubmitting) {
+      console.log('⏸️ Déjà en cours de soumission, abandon');
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      console.log('🚀 Début soumission formulaire via Formspree');
+      console.log('🚀 Début soumission formulaire - VERSION TEST');
       
       const emailData = {
         vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
@@ -129,11 +142,13 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         payment_proof_file: selectedFile || undefined,
       };
       
-      console.log('📤 Envoi des données via Formspree...');
+      console.log('📤 Appel sendPaymentConfirmationEmail...');
       const result = await sendPaymentConfirmationEmail(emailData);
       
+      console.log('📬 Retour sendPaymentConfirmationEmail:', result);
+      
       if (result.ok) {
-        console.log('✅ Email envoyé avec succès');
+        console.log('✅ Succès total !');
         removeFromCart(vehicle.id);
         
         toast({
@@ -156,10 +171,13 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
           } 
         });
       } else {
-        throw new Error('Échec envoi email');
+        console.error('❌ result.ok est false');
+        throw new Error('Échec envoi email - result.ok false');
       }
     } catch (error) {
-      console.error('❌ Erreur lors de la soumission:', error);
+      console.error('💥 ERREUR DANS handleSubmit:', error);
+      console.error('📊 Type erreur:', typeof error);
+      console.error('📊 Message erreur:', error instanceof Error ? error.message : 'Erreur inconnue');
       
       toast({
         title: "Erreur",
@@ -167,6 +185,7 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
         variant: "destructive",
       });
     } finally {
+      console.log('🏁 Fin handleSubmit (finally)');
       setIsSubmitting(false);
     }
   };
