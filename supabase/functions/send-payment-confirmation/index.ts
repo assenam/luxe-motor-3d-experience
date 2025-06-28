@@ -26,15 +26,13 @@ interface PaymentConfirmationRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    console.log("=== DÉBUT FONCTION SEND-PAYMENT-CONFIRMATION (VERSION SIMPLIFIÉE) ===");
+    console.log("=== DÉBUT FONCTION SEND-PAYMENT-CONFIRMATION ===");
     
-    // Vérifier la clé API Resend
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     if (!resendApiKey) {
       console.error("❌ RESEND_API_KEY n'est pas configurée");
@@ -49,53 +47,50 @@ const handler = async (req: Request): Promise<Response> => {
       has_payment_proof: !!data.payment_proof_url
     });
 
-    // Email pour l'équipe AUTO GERMANY EXPORT
+    // Email pour l'équipe
     console.log("📤 Envoi email équipe...");
     const teamEmailResponse = await resend.emails.send({
-      from: "AUTO GERMANY EXPORT <noreply@autogermanyexport.com>",
+      from: "AUTO GERMANY EXPORT <contact@autogermanyexport.com>",
       to: ["contact@autogermanyexport.com"],
-      subject: `Nouvelle commande avec acompte - ${data.vehicle_info}`,
+      subject: `🚗 Nouvelle commande - ${data.vehicle_info} - ${data.customer_first_name} ${data.customer_last_name}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #333; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">
-            🚗 Nouvelle commande avec acompte
-          </h1>
-          
-          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h2 style="color: #d4af37; margin-top: 0;">Détails du véhicule</h2>
-            <p><strong>Véhicule :</strong> ${data.vehicle_info}</p>
-            <p><strong>Prix total :</strong> ${data.vehicle_price}</p>
-            <p><strong>Acompte versé :</strong> ${data.deposit_amount} (20%)</p>
-            <p><strong>Référence de virement :</strong> ${data.transfer_reference}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
+          <div style="background-color: #d4af37; color: white; padding: 20px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">🚗 NOUVELLE COMMANDE</h1>
+            <p style="margin: 5px 0 0 0; font-size: 16px;">AUTO GERMANY EXPORT</p>
           </div>
 
-          <div style="background-color: #f0f8ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h2 style="color: #333; margin-top: 0;">Informations client</h2>
-            <p><strong>Nom :</strong> ${data.customer_first_name} ${data.customer_last_name}</p>
-            <p><strong>Email :</strong> ${data.customer_email}</p>
-            <p><strong>Téléphone :</strong> ${data.customer_phone}</p>
-            <p><strong>Adresse :</strong><br>
-              ${data.customer_address}<br>
-              ${data.customer_postal_code} ${data.customer_city}<br>
-              ${data.customer_country}
-            </p>
-          </div>
+          <div style="padding: 30px; background-color: white;">
+            <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+              <h2 style="color: #856404; margin-top: 0; font-size: 18px;">📋 INFORMATIONS COMMANDE</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr><td style="padding: 8px 0; font-weight: bold;">Véhicule :</td><td style="padding: 8px 0;">${data.vehicle_info}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Prix total :</td><td style="padding: 8px 0;">${data.vehicle_price}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Acompte versé :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.deposit_amount}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transfer_reference}</td></tr>
+              </table>
+            </div>
 
-          <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
-            <h3 style="color: #856404; margin-top: 0;">📋 NOTE IMPORTANTE</h3>
-            <p>Le client peut envoyer sa preuve de paiement par email à contact@autogermanyexport.com ou l'ajouter lors de la commande.</p>
-            <p><strong>Vérifier la réception du virement avec la référence : ${data.transfer_reference}</strong></p>
-          </div>
+            <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #0066cc;">
+              <h2 style="color: #0066cc; margin-top: 0; font-size: 18px;">👤 INFORMATIONS CLIENT</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr><td style="padding: 8px 0; font-weight: bold;">Nom :</td><td style="padding: 8px 0;">${data.customer_first_name} ${data.customer_last_name}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Email :</td><td style="padding: 8px 0;">${data.customer_email}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Téléphone :</td><td style="padding: 8px 0;">${data.customer_phone}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Adresse :</td><td style="padding: 8px 0;">${data.customer_address}<br>${data.customer_postal_code} ${data.customer_city}<br>${data.customer_country}</td></tr>
+              </table>
+            </div>
 
-          <div style="background-color: #ffe4e1; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6b6b;">
-            <p style="margin: 0;"><strong>⚠️ Action requise :</strong> Vérifier la réception du virement et traiter la commande</p>
+            <div style="background-color: #ffe4e1; padding: 20px; border-radius: 8px; border-left: 4px solid #ff6b6b;">
+              <h3 style="color: #721c24; margin-top: 0;">⚠️ ACTION REQUISE</h3>
+              <p style="margin: 10px 0;"><strong>Vérifier la réception du virement :</strong> ${data.transfer_reference}</p>
+              <p style="margin: 10px 0;"><strong>Preuve de paiement :</strong> ${data.payment_proof_url || 'À recevoir par email'}</p>
+            </div>
           </div>
         </div>
       `,
     });
 
-    console.log("📤 Réponse email équipe:", teamEmailResponse);
-    
     if (teamEmailResponse.error) {
       console.error("❌ Erreur email équipe:", teamEmailResponse.error);
       throw new Error(`Erreur envoi email équipe: ${teamEmailResponse.error.message}`);
@@ -104,58 +99,52 @@ const handler = async (req: Request): Promise<Response> => {
     // Email de confirmation pour le client
     console.log("📤 Envoi email client...");
     const customerEmailResponse = await resend.emails.send({
-      from: "AUTO GERMANY EXPORT <noreply@autogermanyexport.com>",
+      from: "AUTO GERMANY EXPORT <contact@autogermanyexport.com>",
       to: [data.customer_email],
-      subject: `Confirmation de votre commande - ${data.vehicle_info}`,
+      subject: `✅ Confirmation de commande - ${data.vehicle_info} - Réf: ${data.transfer_reference}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="text-align: center; padding: 20px 0; background-color: #d4af37; color: white; border-radius: 8px 8px 0 0;">
-            <h1 style="margin: 0;">AUTO GERMANY EXPORT</h1>
-            <p style="margin: 5px 0 0 0;">Votre spécialiste automobile allemand</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
+          <div style="background-color: #d4af37; color: white; padding: 20px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">AUTO GERMANY EXPORT</h1>
+            <p style="margin: 5px 0 0 0; font-size: 16px;">Votre spécialiste automobile allemand</p>
           </div>
 
-          <div style="padding: 30px; background-color: #fafafa;">
-            <h2 style="color: #333;">Bonjour ${data.customer_first_name} ${data.customer_last_name},</h2>
+          <div style="padding: 30px; background-color: white;">
+            <h2 style="color: #333; margin-top: 0;">Bonjour ${data.customer_first_name} ${data.customer_last_name},</h2>
             
-            <p>Nous avons bien reçu votre commande avec acompte pour le véhicule suivant :</p>
+            <p style="font-size: 16px; line-height: 1.6;">Nous avons bien reçu votre commande avec acompte. Voici le récapitulatif :</p>
 
-            <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #d4af37;">
+            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #d4af37;">
               <h3 style="color: #d4af37; margin-top: 0;">🚗 VÉHICULE COMMANDÉ</h3>
-              <p><strong>Véhicule :</strong> ${data.vehicle_info}</p>
-              <p><strong>Prix total :</strong> ${data.vehicle_price}</p>
-              <p><strong>Acompte versé :</strong> <span style="color: #28a745; font-weight: bold;">${data.deposit_amount} (20%)</span></p>
-              <p><strong>Référence de virement :</strong> ${data.transfer_reference}</p>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr><td style="padding: 8px 0; font-weight: bold;">Véhicule :</td><td style="padding: 8px 0;">${data.vehicle_info}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Prix total :</td><td style="padding: 8px 0;">${data.vehicle_price}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Acompte :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.deposit_amount} (20%)</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transfer_reference}</td></tr>
+              </table>
             </div>
 
-            <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <h3 style="color: #333; margin-top: 0;">📍 ADRESSE DE LIVRAISON</h3>
-              <p style="margin: 5px 0;">${data.customer_address}</p>
-              <p style="margin: 5px 0;">${data.customer_postal_code} ${data.customer_city}</p>
-              <p style="margin: 5px 0;">${data.customer_country}</p>
-            </div>
-
-            <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <h3 style="color: #0066cc; margin-top: 0;">📋 PREUVE DE PAIEMENT</h3>
-              <p>Si vous n'avez pas encore envoyé votre preuve de paiement, vous pouvez :</p>
-              <ul style="margin: 10px 0; padding-left: 20px;">
-                <li>L'envoyer par email à <strong>contact@autogermanyexport.com</strong></li>
-                <li>Préciser votre nom et la référence : <strong>${data.transfer_reference}</strong></li>
-              </ul>
+            <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
+              <h3 style="color: #856404; margin-top: 0;">🏦 INSTRUCTIONS DE VIREMENT</h3>
+              <p style="margin: 10px 0;"><strong>Montant à virer :</strong> ${data.deposit_amount}</p>
+              <p style="margin: 10px 0;"><strong>Référence OBLIGATOIRE :</strong> ${data.transfer_reference}</p>
+              <p style="margin: 10px 0; color: #856404;"><strong>⚠️ Important :</strong> La référence est obligatoire pour identifier votre paiement.</p>
             </div>
 
             <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <h3 style="color: #0066cc; margin-top: 0;">⏳ PROCHAINES ÉTAPES</h3>
-              <ul style="margin: 0; padding-left: 20px;">
-                <li>Nous vérifions la réception de votre virement</li>
-                <li>Nous préparons votre véhicule pour l'expédition</li>
-                <li>Nous organisons le transport depuis l'Allemagne</li>
-                <li>Nous vous contactons pour planifier la livraison</li>
-              </ul>
+              <h3 style="color: #0066cc; margin-top: 0;">📋 PROCHAINES ÉTAPES</h3>
+              <ol style="margin: 0; padding-left: 20px;">
+                <li style="margin: 8px 0;">Effectuer le virement avec la référence : <strong>${data.transfer_reference}</strong></li>
+                <li style="margin: 8px 0;">Envoyer la preuve de paiement à : <strong>contact@autogermanyexport.com</strong></li>
+                <li style="margin: 8px 0;">Notre équipe vérifie la réception du virement</li>
+                <li style="margin: 8px 0;">Préparation et expédition depuis l'Allemagne</li>
+                <li style="margin: 8px 0;">Livraison à votre adresse</li>
+              </ol>
             </div>
 
-            <p>Notre équipe va maintenant traiter votre commande et vous tiendra informé(e) de chaque étape.</p>
-            
-            <p>Si vous avez des questions, n'hésitez pas à nous contacter à <a href="mailto:contact@autogermanyexport.com" style="color: #d4af37;">contact@autogermanyexport.com</a></p>
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+              <p style="margin: 0; text-align: center;"><strong>📞 Contact :</strong> contact@autogermanyexport.com</p>
+            </div>
 
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
               <p style="margin: 0; color: #666;">Merci de votre confiance,</p>
@@ -166,8 +155,6 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("📤 Réponse email client:", customerEmailResponse);
-    
     if (customerEmailResponse.error) {
       console.error("❌ Erreur email client:", customerEmailResponse.error);
       throw new Error(`Erreur envoi email client: ${customerEmailResponse.error.message}`);
@@ -189,9 +176,8 @@ const handler = async (req: Request): Promise<Response> => {
     });
   } catch (error: any) {
     console.error("❌ ERREUR DANS send-payment-confirmation:", error);
-    console.error("❌ Stack trace:", error.stack);
     return new Response(
-      JSON.stringify({ error: error.message, stack: error.stack }),
+      JSON.stringify({ error: error.message }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
