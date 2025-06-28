@@ -19,15 +19,15 @@ export interface PaymentEmailData {
 
 export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
   try {
-    console.log('🔍 DÉBUT sendPaymentConfirmationEmail');
+    console.log('🔍 DÉBUT sendPaymentConfirmationEmail - VERSION SIMPLIFIÉE');
     console.log('📋 Données reçues:', {
       vehicle_info: data.vehicle_info,
       customer_email: data.customer_email,
       has_file: !!data.payment_proof_file
     });
 
-    // Test simple d'abord - juste les données texte via submitToFormspree
-    const simpleData = {
+    // Données simplifiées pour Formspree (SANS fichier)
+    const formData = {
       _subject: `Nouvelle commande avec acompte - ${data.vehicle_info}`,
       type: 'payment_confirmation',
       vehicle_info: data.vehicle_info,
@@ -41,25 +41,26 @@ export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
       customer_address: data.customer_address,
       customer_postal_code: data.customer_postal_code,
       customer_city: data.customer_city,
-      customer_country: data.customer_country
+      customer_country: data.customer_country,
+      payment_proof_status: data.payment_proof_file ? 'Fichier fourni' : 'À envoyer par email'
     };
 
-    console.log('📤 Tentative envoi via submitToFormspree (données simples)');
+    console.log('📤 Envoi via Formspree (données texte uniquement)');
     
-    const result = await submitToFormspree(simpleData);
+    const result = await submitToFormspree(formData);
     
-    console.log('📬 Réponse submitToFormspree:', result);
+    console.log('📬 Réponse Formspree:', result);
     
     if (result.ok) {
-      console.log('✅ Email envoyé avec succès !');
+      console.log('✅ Email envoyé avec succès via Formspree !');
       return { ok: true, data: result };
     } else {
-      console.error('❌ Échec submitToFormspree:', result);
+      console.error('❌ Échec Formspree:', result);
       throw new Error('Échec envoi via Formspree');
     }
   } catch (error) {
-    console.error('💥 ERREUR COMPLÈTE dans sendPaymentConfirmationEmail:', error);
-    console.error('📊 Stack trace:', error instanceof Error ? error.stack : 'Pas de stack trace');
+    console.error('💥 ERREUR dans sendPaymentConfirmationEmail:', error);
+    console.error('📊 Message erreur:', error instanceof Error ? error.message : 'Erreur inconnue');
     throw error;
   }
 };

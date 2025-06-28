@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, Check, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StepProps } from './types';
 
@@ -27,9 +27,21 @@ const ConfirmationStep = ({ selectedFile, depositAmount, onPrevious, onSubmit, i
           </div>
           <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
             <span className="text-xs">Preuve de paiement ajoutée</span>
-            {selectedFile ? <Check className="text-green-600" size={16} /> : <span className="text-red-500 text-xs">Manquant</span>}
+            {selectedFile ? <Check className="text-green-600" size={16} /> : <span className="text-green-600 text-xs">✓</span>}
           </div>
         </div>
+        
+        {!selectedFile && (
+          <div className="bg-blue-50 border border-blue-200 rounded p-3 mt-3">
+            <div className="flex items-start">
+              <AlertTriangle className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
+              <div className="text-xs text-blue-700">
+                <p className="font-medium mb-1">Pas de preuve de paiement :</p>
+                <p>Vous pourrez l'envoyer par email à contact@autogermanyexport.com après validation de votre commande.</p>
+              </div>
+            </div>
+          </div>
+        )}
         
         <div className="bg-blue-50 p-2 rounded-lg mt-3">
           <p className="text-blue-800 font-medium text-xs">
@@ -50,7 +62,7 @@ const ConfirmationStep = ({ selectedFile, depositAmount, onPrevious, onSubmit, i
         </Button>
         <Button
           onClick={onSubmit}
-          disabled={!selectedFile || isSubmitting}
+          disabled={isSubmitting}
           size="sm"
           className="bg-luxe-gold hover:bg-luxe-gold/90 text-black"
         >
