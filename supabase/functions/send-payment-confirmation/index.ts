@@ -126,8 +126,15 @@ const handler = async (req: Request): Promise<Response> => {
 
             <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
               <h3 style="color: #856404; margin-top: 0;">🏦 INSTRUCTIONS DE VIREMENT</h3>
-              <p style="margin: 10px 0;"><strong>Montant à virer :</strong> ${data.deposit_amount}</p>
-              <p style="margin: 10px 0;"><strong>Référence OBLIGATOIRE :</strong> ${data.transfer_reference}</p>
+              <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                <tr><td style="padding: 8px 0; font-weight: bold;">Bénéficiaire :</td><td style="padding: 8px 0;">Matera Marco</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">IBAN :</td><td style="padding: 8px 0; font-family: monospace;">IT43D3608105138269139769151</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">BIC :</td><td style="padding: 8px 0; font-family: monospace;">PPAYITR1XXX</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Type :</td><td style="padding: 8px 0;">BONIFICO ISTANTANEO</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Motif :</td><td style="padding: 8px 0;">REGOLAMENTO DEL SERVIZIO</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Montant :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.deposit_amount}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transfer_reference}</td></tr>
+              </table>
               <p style="margin: 10px 0; color: #856404;"><strong>⚠️ Important :</strong> La référence est obligatoire pour identifier votre paiement.</p>
             </div>
 

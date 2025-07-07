@@ -23,16 +23,24 @@ const PaymentInstructionsStep = ({ depositAmount, transferReference, onNext, onP
         
         <div className="bg-gray-50 p-3 rounded-lg space-y-2 text-xs">
           <div className="flex justify-between">
-            <span className="text-gray-600">Titulaire :</span>
-            <span className="font-medium">AUTO GERMANY EXPORT</span>
+            <span className="text-gray-600">Bénéficiaire :</span>
+            <span className="font-medium">Matera Marco</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-600">IBAN :</span>
-            <span className="font-mono text-xs">FR76 1234 5678 9012 3456 7890 123</span>
+            <span className="font-mono text-xs">IT43D3608105138269139769151</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-600">BIC :</span>
-            <span className="font-mono">ABCDFRPP</span>
+            <span className="font-mono">PPAYITR1XXX</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Type :</span>
+            <span className="font-medium">BONIFICO ISTANTANEO</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Motif :</span>
+            <span className="font-medium">REGOLAMENTO DEL SERVIZIO</span>
           </div>
         </div>
       </div>
