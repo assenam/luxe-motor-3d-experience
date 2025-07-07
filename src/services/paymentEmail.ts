@@ -26,43 +26,106 @@ export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
       has_file: !!data.payment_proof_file
     });
 
-    // Données simplifiées pour Formspree (éviter les messages trop longs)
+    // Préparer les données pour Formspree (retour à la version fonctionnelle)
     const formData = {
-      _subject: `Nouvelle commande - ${data.vehicle_info}`,
-      _replyto: data.customer_email,
-      customer_name: `${data.customer_first_name} ${data.customer_last_name}`,
+      _subject: `🚗 Nouvelle commande - ${data.vehicle_info} - ${data.customer_first_name} ${data.customer_last_name}`,
+      vehicle_info: data.vehicle_info,
+      vehicle_price: data.vehicle_price,
+      deposit_amount: data.deposit_amount,
+      transfer_reference: data.transfer_reference,
+      customer_first_name: data.customer_first_name,
+      customer_last_name: data.customer_last_name,
       customer_email: data.customer_email,
       customer_phone: data.customer_phone,
-      vehicle: data.vehicle_info,
-      price: data.vehicle_price,
-      deposit: data.deposit_amount,
-      reference: data.transfer_reference,
-      address: `${data.customer_address}, ${data.customer_postal_code} ${data.customer_city}, ${data.customer_country}`,
-      payment_proof: data.payment_proof_file ? 'Fichier joint fourni' : 'En attente',
-      banking_info: 'Matera Marco - IT43D3608105138269139769151 - PPAYITR1XXX'
+      customer_address: data.customer_address,
+      customer_postal_code: data.customer_postal_code,
+      customer_city: data.customer_city,
+      customer_country: data.customer_country,
+      payment_proof_status: data.payment_proof_file ? 'Fichier joint fourni' : 'En attente',
+      message: `
+NOUVELLE COMMANDE AUTO GERMANY EXPORT
+
+VÉHICULE:
+- ${data.vehicle_info}
+- Prix total: ${data.vehicle_price}
+- Acompte: ${data.deposit_amount}
+- Référence: ${data.transfer_reference}
+
+CLIENT:
+- Nom: ${data.customer_first_name} ${data.customer_last_name}
+- Email: ${data.customer_email}
+- Téléphone: ${data.customer_phone}
+- Adresse: ${data.customer_address}, ${data.customer_postal_code} ${data.customer_city}, ${data.customer_country}
+
+INSTRUCTIONS BANCAIRES:
+- Bénéficiaire: Matera Marco
+- IBAN: IT43D3608105138269139769151
+- BIC: PPAYITR1XXX
+- Type: BONIFICO ISTANTANEO
+- Motif: REGOLAMENTO DEL SERVIZIO
+- Référence obligatoire: ${data.transfer_reference}
+
+ACTION REQUISE:
+- Vérifier la réception du virement avec la référence: ${data.transfer_reference}
+- Preuve de paiement: ${data.payment_proof_file ? 'Fichier joint fourni' : 'À recevoir par email'}
+      `
     };
 
-    console.log('📤 Envoi via Formspree avec données simplifiées...');
-    console.log('📋 FormData:', formData);
+    console.log('📤 Envoi email professionnel via Formspree...');
     
     const result = await submitToFormspree(formData);
-    console.log('📬 Résultat Formspree:', result);
+    console.log('📬 Résultat:', result);
 
     if (result.ok) {
-      console.log('✅ Email envoyé avec succès via Formspree');
+      console.log('✅ Email professionnel envoyé avec succès');
+      
+      // Maintenant envoyer l'email de confirmation au client
+      console.log('📧 Envoi confirmation au client...');
+      const clientConfirmation = {
+        _subject: `Confirmation de votre commande - ${data.vehicle_info}`,
+        _replyto: 'contact@autogermanyexport.com',
+        email: data.customer_email,
+        message: `
+Bonjour ${data.customer_first_name} ${data.customer_last_name},
+
+Nous avons bien reçu votre commande pour le véhicule suivant :
+
+VÉHICULE COMMANDÉ:
+- ${data.vehicle_info}
+- Prix total: ${data.vehicle_price}
+- Acompte à verser: ${data.deposit_amount}
+
+INSTRUCTIONS DE PAIEMENT:
+- Bénéficiaire: Matera Marco
+- IBAN: IT43D3608105138269139769151
+- BIC: PPAYITR1XXX
+- Type: BONIFICO ISTANTANEO
+- Motif: REGOLAMENTO DEL SERVIZIO
+- Référence obligatoire: ${data.transfer_reference}
+
+PROCHAINES ÉTAPES:
+1. Effectuez le virement de ${data.deposit_amount} avec la référence ${data.transfer_reference}
+2. Nous traiterons votre commande dès réception du paiement
+3. Vous recevrez une confirmation définitive une fois le paiement vérifié
+
+Pour toute question, n'hésitez pas à nous contacter à contact@autogermanyexport.com
+
+Cordialement,
+L'équipe Auto Germany Export
+        `
+      };
+
+      const clientResult = await submitToFormspree(clientConfirmation);
+      console.log('📬 Résultat confirmation client:', clientResult);
+      
       return { ok: true, data: result };
     } else {
-      console.error('❌ Erreur Formspree détaillée:', {
-        ok: result.ok,
-        errors: result.errors,
-        result: result
-      });
-      throw new Error(`Erreur Formspree: ${result.errors?.map(e => e.message).join(', ') || 'Erreur inconnue'}`);
+      console.error('❌ Erreur Formspree:', result.errors);
+      throw new Error('Erreur envoi email via Formspree');
     }
   } catch (error) {
     console.error('💥 ERREUR dans sendPaymentConfirmationEmail:', error);
     console.error('📊 Message erreur:', error instanceof Error ? error.message : 'Erreur inconnue');
-    console.error('📊 Stack trace:', error instanceof Error ? error.stack : 'Pas de stack');
     throw error;
   }
 };
