@@ -26,65 +26,43 @@ export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
       has_file: !!data.payment_proof_file
     });
 
-    // Préparer les données pour Formspree
+    // Données simplifiées pour Formspree (éviter les messages trop longs)
     const formData = {
-      _subject: `🚗 Nouvelle commande - ${data.vehicle_info} - ${data.customer_first_name} ${data.customer_last_name}`,
-      vehicle_info: data.vehicle_info,
-      vehicle_price: data.vehicle_price,
-      deposit_amount: data.deposit_amount,
-      transfer_reference: data.transfer_reference,
-      customer_first_name: data.customer_first_name,
-      customer_last_name: data.customer_last_name,
+      _subject: `Nouvelle commande - ${data.vehicle_info}`,
+      _replyto: data.customer_email,
+      customer_name: `${data.customer_first_name} ${data.customer_last_name}`,
       customer_email: data.customer_email,
       customer_phone: data.customer_phone,
-      customer_address: data.customer_address,
-      customer_postal_code: data.customer_postal_code,
-      customer_city: data.customer_city,
-      customer_country: data.customer_country,
-      payment_proof_status: data.payment_proof_file ? 'Fichier joint fourni' : 'En attente',
-      message: `
-NOUVELLE COMMANDE AUTO GERMANY EXPORT
-
-VÉHICULE:
-- ${data.vehicle_info}
-- Prix total: ${data.vehicle_price}
-- Acompte: ${data.deposit_amount}
-- Référence: ${data.transfer_reference}
-
-CLIENT:
-- Nom: ${data.customer_first_name} ${data.customer_last_name}
-- Email: ${data.customer_email}
-- Téléphone: ${data.customer_phone}
-- Adresse: ${data.customer_address}, ${data.customer_postal_code} ${data.customer_city}, ${data.customer_country}
-
-INSTRUCTIONS BANCAIRES:
-- Bénéficiaire: Matera Marco
-- IBAN: IT43D3608105138269139769151
-- BIC: PPAYITR1XXX
-- Type: BONIFICO ISTANTANEO
-- Motif: REGOLAMENTO DEL SERVIZIO
-- Référence obligatoire: ${data.transfer_reference}
-
-ACTION REQUISE:
-- Vérifier la réception du virement avec la référence: ${data.transfer_reference}
-- Preuve de paiement: ${data.payment_proof_file ? 'Fichier joint fourni' : 'À recevoir par email'}
-      `
+      vehicle: data.vehicle_info,
+      price: data.vehicle_price,
+      deposit: data.deposit_amount,
+      reference: data.transfer_reference,
+      address: `${data.customer_address}, ${data.customer_postal_code} ${data.customer_city}, ${data.customer_country}`,
+      payment_proof: data.payment_proof_file ? 'Fichier joint fourni' : 'En attente',
+      banking_info: 'Matera Marco - IT43D3608105138269139769151 - PPAYITR1XXX'
     };
 
-    console.log('📤 Envoi via Formspree...');
+    console.log('📤 Envoi via Formspree avec données simplifiées...');
+    console.log('📋 FormData:', formData);
     
     const result = await submitToFormspree(formData);
+    console.log('📬 Résultat Formspree:', result);
 
     if (result.ok) {
       console.log('✅ Email envoyé avec succès via Formspree');
       return { ok: true, data: result };
     } else {
-      console.error('❌ Erreur Formspree:', result.errors);
-      throw new Error('Erreur envoi email via Formspree');
+      console.error('❌ Erreur Formspree détaillée:', {
+        ok: result.ok,
+        errors: result.errors,
+        result: result
+      });
+      throw new Error(`Erreur Formspree: ${result.errors?.map(e => e.message).join(', ') || 'Erreur inconnue'}`);
     }
   } catch (error) {
     console.error('💥 ERREUR dans sendPaymentConfirmationEmail:', error);
     console.error('📊 Message erreur:', error instanceof Error ? error.message : 'Erreur inconnue');
+    console.error('📊 Stack trace:', error instanceof Error ? error.stack : 'Pas de stack');
     throw error;
   }
 };
