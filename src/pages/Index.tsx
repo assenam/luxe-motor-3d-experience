@@ -13,6 +13,9 @@ const Index = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
     const animateOnScroll = () => {
       const elements = document.querySelectorAll('.animate-on-scroll');
       
