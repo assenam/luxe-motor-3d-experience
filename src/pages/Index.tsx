@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import HeroSection from '@/components/HeroSection';
 import FeaturedVehicles from '@/components/FeaturedVehicles';
+import ClientTestimonials from '@/components/ClientTestimonials';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useToast } from '@/components/ui/use-toast';
@@ -107,6 +108,8 @@ const Index = () => {
         </section>
         
         <FeaturedVehicles />
+        
+        <ClientTestimonials />
         
         {/* Section Statistiques */}
         <section className="py-20 bg-age-black text-white">
