@@ -20,8 +20,8 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Ahmed Benali",
-    location: "Casablanca, Maroc",
+    name: "Carlos Rodríguez",
+    location: "Madrid, Espagne",
     rating: 5,
     comment: {
       fr: "Service exceptionnel ! J'ai reçu ma BMW en parfait état et dans les délais promis. L'équipe d'Auto Germany Export est très professionnelle.",
@@ -35,8 +35,8 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Fatima El Mansouri",
-    location: "Rabat, Maroc",
+    name: "Sofia Bianchi",
+    location: "Milan, Italie",
     rating: 5,
     comment: {
       fr: "Très satisfaite de mon achat ! La Mercedes était exactement comme décrite. Le processus d'importation s'est déroulé sans problème.",
@@ -50,8 +50,8 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 3,
-    name: "Youssef Alami",
-    location: "Marrakech, Maroc",
+    name: "João Silva",
+    location: "Lisbonne, Portugal",
     rating: 5,
     comment: {
       fr: "Équipe très réactive et transparente. J'ai été informé à chaque étape. Ma Porsche est arrivée en excellent état. Je recommande vivement !",
@@ -65,15 +65,15 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Khadija Ouali",
-    location: "Tanger, Maroc",
+    name: "Isabella Fernández",
+    location: "Barcelone, Espagne",
     rating: 5,
     comment: {
-      fr: "Prix compétitifs et service client remarquable. Mon Audi A4 était moins chère qu'au Maroc avec une qualité supérieure. Merci à toute l'équipe !",
-      en: "Competitive prices and remarkable customer service. My Audi A4 was cheaper than in Morocco with superior quality. Thanks to the whole team!",
-      de: "Wettbewerbsfähige Preise und bemerkenswerten Kundenservice. Mein Audi A4 war billiger als in Marokko mit überlegener Qualität. Danke an das ganze Team!",
-      es: "Precios competitivos y servicio al cliente notable. Mi Audi A4 era más barato que en Marruecos con calidad superior. ¡Gracias a todo el equipo!",
-      ar: "أسعار تنافسية وخدمة عملاء رائعة. كانت سيارتي Audi A4 أرخص من المغرب بجودة أعلى. شكراً لكامل الفريق!"
+      fr: "Prix compétitifs et service client remarquable. Mon Audi A4 était moins chère qu'en Espagne avec une qualité supérieure. Merci à toute l'équipe !",
+      en: "Competitive prices and remarkable customer service. My Audi A4 was cheaper than in Spain with superior quality. Thanks to the whole team!",
+      de: "Wettbewerbsfähige Preise und bemerkenswerten Kundenservice. Mein Audi A4 war billiger als in Spanien mit überlegener Qualität. Danke an das ganze Team!",
+      es: "Precios competitivos y servicio al cliente notable. Mi Audi A4 era más barato que en España con calidad superior. ¡Gracias a todo el equipo!",
+      ar: "أسعار تنافسية وخدمة عملاء رائعة. كانت سيارتي Audi A4 أرخص من إسبانيا بجودة أعلى. شكراً لكامل الفريق!"
     },
     vehicle: "Audi A4 2018",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
