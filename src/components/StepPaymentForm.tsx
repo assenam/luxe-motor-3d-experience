@@ -127,19 +127,19 @@ const StepPaymentForm = ({ vehicle }: StepPaymentFormProps) => {
       console.log('🚀 Début soumission formulaire - VERSION TEST');
       
       const emailData = {
-        vehicle_info: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
-        vehicle_price: `${totalAmount.toLocaleString()} €`,
-        deposit_amount: `${depositAmount.toLocaleString()} €`,
-        transfer_reference: transferReference,
-        customer_first_name: customerInfo.firstName,
-        customer_last_name: customerInfo.lastName,
-        customer_email: customerInfo.email,
-        customer_phone: customerInfo.phone,
-        customer_address: customerInfo.address,
-        customer_postal_code: customerInfo.postalCode,
-        customer_city: customerInfo.city,
-        customer_country: customerInfo.country,
-        payment_proof_file: selectedFile || undefined,
+        vehicleInfo: `${vehicle.brand} ${vehicle.model} (${vehicle.year})`,
+        vehiclePrice: `${totalAmount.toLocaleString()} €`,
+        depositAmount: `${depositAmount.toLocaleString()} €`,
+        transferReference: transferReference,
+        customerFirstName: customerInfo.firstName,
+        customerLastName: customerInfo.lastName,
+        customerEmail: customerInfo.email,
+        customerPhone: customerInfo.phone,
+        customerAddress: customerInfo.address,
+        customerPostalCode: customerInfo.postalCode,
+        customerCity: customerInfo.city,
+        customerCountry: customerInfo.country,
+        hasPaymentProof: !!selectedFile,
       };
       
       console.log('📤 Appel sendPaymentConfirmationEmail...');

@@ -2,45 +2,45 @@
 import { supabase } from '@/integrations/supabase/client';
 
 export interface PaymentEmailData {
-  vehicle_info: string;
-  vehicle_price: string;
-  deposit_amount: string;
-  transfer_reference: string;
-  customer_first_name: string;
-  customer_last_name: string;
-  customer_email: string;
-  customer_phone: string;
-  customer_address: string;
-  customer_postal_code: string;
-  customer_city: string;
-  customer_country: string;
-  payment_proof_file?: File;
+  vehicleInfo: string;
+  vehiclePrice: string;
+  depositAmount: string;
+  transferReference: string;
+  customerFirstName: string;
+  customerLastName: string;
+  customerEmail: string;
+  customerPhone: string;
+  customerAddress: string;
+  customerPostalCode: string;
+  customerCity: string;
+  customerCountry: string;
+  hasPaymentProof: boolean;
 }
 
 export const sendPaymentConfirmationEmail = async (data: PaymentEmailData) => {
   try {
     console.log('🔍 DÉBUT sendPaymentConfirmationEmail via Supabase Edge Function');
     console.log('📋 Données reçues:', {
-      vehicle_info: data.vehicle_info,
-      customer_email: data.customer_email,
-      has_file: !!data.payment_proof_file
+      vehicleInfo: data.vehicleInfo,
+      customerEmail: data.customerEmail,
+      hasPaymentProof: data.hasPaymentProof
     });
 
-    // Préparer les données pour l'edge function
+    // Les données sont déjà dans le bon format pour l'edge function
     const emailData = {
-      vehicleInfo: data.vehicle_info,
-      vehiclePrice: data.vehicle_price,
-      depositAmount: data.deposit_amount,
-      transferReference: data.transfer_reference,
-      customerFirstName: data.customer_first_name,
-      customerLastName: data.customer_last_name,
-      customerEmail: data.customer_email,
-      customerPhone: data.customer_phone,
-      customerAddress: data.customer_address,
-      customerPostalCode: data.customer_postal_code,
-      customerCity: data.customer_city,
-      customerCountry: data.customer_country,
-      hasPaymentProof: !!data.payment_proof_file
+      vehicleInfo: data.vehicleInfo,
+      vehiclePrice: data.vehiclePrice,
+      depositAmount: data.depositAmount,
+      transferReference: data.transferReference,
+      customerFirstName: data.customerFirstName,
+      customerLastName: data.customerLastName,
+      customerEmail: data.customerEmail,
+      customerPhone: data.customerPhone,
+      customerAddress: data.customerAddress,
+      customerPostalCode: data.customerPostalCode,
+      customerCity: data.customerCity,
+      customerCountry: data.customerCountry,
+      hasPaymentProof: data.hasPaymentProof
     };
 
     console.log('📤 Envoi via edge function Supabase...');
