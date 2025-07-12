@@ -10,19 +10,19 @@ const corsHeaders = {
 };
 
 interface PaymentConfirmationRequest {
-  vehicle_info: string;
-  vehicle_price: string;
-  deposit_amount: string;
-  transfer_reference: string;
-  customer_first_name: string;
-  customer_last_name: string;
-  customer_email: string;
-  customer_phone: string;
-  customer_address: string;
-  customer_postal_code: string;
-  customer_city: string;
-  customer_country: string;
-  payment_proof_url?: string;
+  vehicleInfo: string;
+  vehiclePrice: string;
+  depositAmount: string;
+  transferReference: string;
+  customerFirstName: string;
+  customerLastName: string;
+  customerEmail: string;
+  customerPhone: string;
+  customerAddress: string;
+  customerPostalCode: string;
+  customerCity: string;
+  customerCountry: string;
+  hasPaymentProof: boolean;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -42,9 +42,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     const data: PaymentConfirmationRequest = await req.json();
     console.log("📧 Données reçues:", {
-      customer_email: data.customer_email,
-      vehicle_info: data.vehicle_info,
-      has_payment_proof: !!data.payment_proof_url
+      customerEmail: data.customerEmail,
+      vehicleInfo: data.vehicleInfo,
+      hasPaymentProof: data.hasPaymentProof
     });
 
     // Email pour l'équipe
@@ -52,7 +52,7 @@ const handler = async (req: Request): Promise<Response> => {
     const teamEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <contact@autogermanyexport.com>",
       to: ["contact@autogermanyexport.com"],
-      subject: `🚗 Nouvelle commande - ${data.vehicle_info} - ${data.customer_first_name} ${data.customer_last_name}`,
+      subject: `🚗 Nouvelle commande - ${data.vehicleInfo} - ${data.customerFirstName} ${data.customerLastName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
           <div style="background-color: #d4af37; color: white; padding: 20px; text-align: center;">
@@ -64,27 +64,27 @@ const handler = async (req: Request): Promise<Response> => {
             <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
               <h2 style="color: #856404; margin-top: 0; font-size: 18px;">📋 INFORMATIONS COMMANDE</h2>
               <table style="width: 100%; border-collapse: collapse;">
-                <tr><td style="padding: 8px 0; font-weight: bold;">Véhicule :</td><td style="padding: 8px 0;">${data.vehicle_info}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Prix total :</td><td style="padding: 8px 0;">${data.vehicle_price}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Acompte versé :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.deposit_amount}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transfer_reference}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Véhicule :</td><td style="padding: 8px 0;">${data.vehicleInfo}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Prix total :</td><td style="padding: 8px 0;">${data.vehiclePrice}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Acompte versé :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.depositAmount}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transferReference}</td></tr>
               </table>
             </div>
 
             <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #0066cc;">
               <h2 style="color: #0066cc; margin-top: 0; font-size: 18px;">👤 INFORMATIONS CLIENT</h2>
               <table style="width: 100%; border-collapse: collapse;">
-                <tr><td style="padding: 8px 0; font-weight: bold;">Nom :</td><td style="padding: 8px 0;">${data.customer_first_name} ${data.customer_last_name}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Email :</td><td style="padding: 8px 0;">${data.customer_email}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Téléphone :</td><td style="padding: 8px 0;">${data.customer_phone}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Adresse :</td><td style="padding: 8px 0;">${data.customer_address}<br>${data.customer_postal_code} ${data.customer_city}<br>${data.customer_country}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Nom :</td><td style="padding: 8px 0;">${data.customerFirstName} ${data.customerLastName}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Email :</td><td style="padding: 8px 0;">${data.customerEmail}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Téléphone :</td><td style="padding: 8px 0;">${data.customerPhone}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Adresse :</td><td style="padding: 8px 0;">${data.customerAddress}<br>${data.customerPostalCode} ${data.customerCity}<br>${data.customerCountry}</td></tr>
               </table>
             </div>
 
             <div style="background-color: #ffe4e1; padding: 20px; border-radius: 8px; border-left: 4px solid #ff6b6b;">
               <h3 style="color: #721c24; margin-top: 0;">⚠️ ACTION REQUISE</h3>
-              <p style="margin: 10px 0;"><strong>Vérifier la réception du virement :</strong> ${data.transfer_reference}</p>
-              <p style="margin: 10px 0;"><strong>Preuve de paiement :</strong> ${data.payment_proof_url || 'À recevoir par email'}</p>
+              <p style="margin: 10px 0;"><strong>Vérifier la réception du virement :</strong> ${data.transferReference}</p>
+              <p style="margin: 10px 0;"><strong>Preuve de paiement :</strong> ${data.hasPaymentProof ? 'Fournie' : 'À recevoir par email'}</p>
             </div>
           </div>
         </div>
@@ -100,8 +100,8 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("📤 Envoi email client...");
     const customerEmailResponse = await resend.emails.send({
       from: "AUTO GERMANY EXPORT <contact@autogermanyexport.com>",
-      to: [data.customer_email],
-      subject: `✅ Confirmation de commande - ${data.vehicle_info} - Réf: ${data.transfer_reference}`,
+      to: [data.customerEmail],
+      subject: `✅ Confirmation de commande - ${data.vehicleInfo} - Réf: ${data.transferReference}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
           <div style="background-color: #d4af37; color: white; padding: 20px; text-align: center;">
@@ -110,17 +110,17 @@ const handler = async (req: Request): Promise<Response> => {
           </div>
 
           <div style="padding: 30px; background-color: white;">
-            <h2 style="color: #333; margin-top: 0;">Bonjour ${data.customer_first_name} ${data.customer_last_name},</h2>
+            <h2 style="color: #333; margin-top: 0;">Bonjour ${data.customerFirstName} ${data.customerLastName},</h2>
             
             <p style="font-size: 16px; line-height: 1.6;">Nous avons bien reçu votre commande avec acompte. Voici le récapitulatif :</p>
 
             <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #d4af37;">
               <h3 style="color: #d4af37; margin-top: 0;">🚗 VÉHICULE COMMANDÉ</h3>
               <table style="width: 100%; border-collapse: collapse;">
-                <tr><td style="padding: 8px 0; font-weight: bold;">Véhicule :</td><td style="padding: 8px 0;">${data.vehicle_info}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Prix total :</td><td style="padding: 8px 0;">${data.vehicle_price}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Acompte :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.deposit_amount} (20%)</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transfer_reference}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Véhicule :</td><td style="padding: 8px 0;">${data.vehicleInfo}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Prix total :</td><td style="padding: 8px 0;">${data.vehiclePrice}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Acompte :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.depositAmount} (20%)</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transferReference}</td></tr>
               </table>
             </div>
 
@@ -132,8 +132,8 @@ const handler = async (req: Request): Promise<Response> => {
                 <tr><td style="padding: 8px 0; font-weight: bold;">BIC :</td><td style="padding: 8px 0; font-family: monospace;">PPAYITR1XXX</td></tr>
                 <tr><td style="padding: 8px 0; font-weight: bold;">Type :</td><td style="padding: 8px 0;">BONIFICO ISTANTANEO</td></tr>
                 <tr><td style="padding: 8px 0; font-weight: bold;">Motif :</td><td style="padding: 8px 0;">REGOLAMENTO DEL SERVIZIO</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Montant :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.deposit_amount}</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transfer_reference}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Montant :</td><td style="padding: 8px 0; color: #28a745; font-weight: bold;">${data.depositAmount}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">Référence :</td><td style="padding: 8px 0; color: #d4af37; font-weight: bold;">${data.transferReference}</td></tr>
               </table>
               <p style="margin: 10px 0; color: #856404;"><strong>⚠️ Important :</strong> La référence est obligatoire pour identifier votre paiement.</p>
             </div>
@@ -141,7 +141,7 @@ const handler = async (req: Request): Promise<Response> => {
             <div style="background-color: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #0066cc; margin-top: 0;">📋 PROCHAINES ÉTAPES</h3>
               <ol style="margin: 0; padding-left: 20px;">
-                <li style="margin: 8px 0;">Effectuer le virement avec la référence : <strong>${data.transfer_reference}</strong></li>
+                <li style="margin: 8px 0;">Effectuer le virement avec la référence : <strong>${data.transferReference}</strong></li>
                 <li style="margin: 8px 0;">Envoyer la preuve de paiement à : <strong>contact@autogermanyexport.com</strong></li>
                 <li style="margin: 8px 0;">Notre équipe vérifie la réception du virement</li>
                 <li style="margin: 8px 0;">Préparation et expédition depuis l'Allemagne</li>
