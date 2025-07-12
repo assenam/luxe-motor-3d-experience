@@ -53,3 +53,6 @@ enable_confirmations = false
 
 [edge-runtime]
 inspector_port = 8083
+
+[functions.send-payment-confirmation]
+verify_jwt = false
