@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, User, Search, ShoppingCart, Trash2 } from 'lucide-react';
+import { Menu, X, User, Search, ShoppingCart, Trash2, LogOut } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -13,12 +12,20 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/lib/data';
 import LanguageSelector from './LanguageSelector';
 import SearchDialog from './SearchDialog';
 import { useGoogleTranslate } from '@/hooks/useGoogleTranslate';
+import { useAuth } from '@/hooks/useAuth';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -29,6 +36,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useCart();
   const { currentLang, changeLanguage } = useGoogleTranslate();
+  const { user, isAdmin, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +70,23 @@ const Navbar = () => {
       navigate('/payment', { state: { vehicle: cartItems[0] } });
     } else {
       navigate('/payment');
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
+  const handleAccountClick = () => {
+    if (user) {
+      if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/account');
+      }
+    } else {
+      navigate('/auth');
     }
   };
 
@@ -145,12 +170,45 @@ const Navbar = () => {
             </button>
             
             {/* Bouton utilisateur - Desktop uniquement */}
-            <button 
-              className={`hidden lg:block p-2 hover:text-age-red transition-colors duration-300 hover:bg-white/10 rounded-md ${!scrolled ? 'text-white' : 'text-age-black'}`}
-              aria-label="Compte utilisateur"
-            >
-              <User size={20} className="md:w-5 md:h-5" />
-            </button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button 
+                    className={`hidden lg:flex items-center gap-2 p-2 hover:text-age-red transition-colors duration-300 hover:bg-white/10 rounded-md ${!scrolled ? 'text-white' : 'text-age-black'}`}
+                    aria-label="Compte utilisateur"
+                  >
+                    <User size={20} className="md:w-5 md:h-5" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem className="text-sm text-muted-foreground" disabled>
+                    {user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  {isAdmin && (
+                    <DropdownMenuItem onClick={() => navigate('/admin')}>
+                      Administration
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem onClick={() => navigate('/account')}>
+                    Mon compte
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="text-red-600">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Déconnexion
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <button 
+                onClick={() => navigate('/auth')}
+                className={`hidden lg:block p-2 hover:text-age-red transition-colors duration-300 hover:bg-white/10 rounded-md ${!scrolled ? 'text-white' : 'text-age-black'}`}
+                aria-label="Connexion"
+              >
+                <User size={20} className="md:w-5 md:h-5" />
+              </button>
+            )}
             
             {/* Panier */}
             <Drawer open={cartOpen} onOpenChange={setCartOpen}>
@@ -314,10 +372,54 @@ const Navbar = () => {
                           onLanguageChange={changeLanguage} 
                         />
                       </div>
-                      <button className="flex items-center space-x-3 text-lg hover:text-age-red transition-colors py-2 w-full">
-                        <User size={20} />
-                        <span>Compte</span>
-                      </button>
+                      {user ? (
+                        <>
+                          <div className="text-sm text-muted-foreground mb-2">{user.email}</div>
+                          {isAdmin && (
+                            <button 
+                              onClick={() => {
+                                setMobileMenuOpen(false);
+                                navigate('/admin');
+                              }}
+                              className="flex items-center space-x-3 text-lg hover:text-age-red transition-colors py-2 w-full"
+                            >
+                              <User size={20} />
+                              <span>Administration</span>
+                            </button>
+                          )}
+                          <button 
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              navigate('/account');
+                            }}
+                            className="flex items-center space-x-3 text-lg hover:text-age-red transition-colors py-2 w-full"
+                          >
+                            <User size={20} />
+                            <span>Mon compte</span>
+                          </button>
+                          <button 
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              handleSignOut();
+                            }}
+                            className="flex items-center space-x-3 text-lg text-red-600 hover:text-red-700 transition-colors py-2 w-full"
+                          >
+                            <LogOut size={20} />
+                            <span>Déconnexion</span>
+                          </button>
+                        </>
+                      ) : (
+                        <button 
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            navigate('/auth');
+                          }}
+                          className="flex items-center space-x-3 text-lg hover:text-age-red transition-colors py-2 w-full"
+                        >
+                          <User size={20} />
+                          <span>Connexion</span>
+                        </button>
+                      )}
                       <button 
                         onClick={() => {
                           setMobileMenuOpen(false);
