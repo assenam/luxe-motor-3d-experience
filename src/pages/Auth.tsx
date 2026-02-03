@@ -27,16 +27,10 @@ const Auth = () => {
 
   useEffect(() => {
     if (user && !authLoading) {
-      // Check admin status and redirect
-      checkAdminStatus().then((isAdminUser) => {
-        if (isAdminUser) {
-          navigate('/admin');
-        } else {
-          navigate('/');
-        }
-      });
+      // Client auth page - always redirect to home or account
+      navigate('/');
     }
-  }, [user, authLoading, navigate, checkAdminStatus]);
+  }, [user, authLoading, navigate]);
 
   const validateForm = () => {
     try {
