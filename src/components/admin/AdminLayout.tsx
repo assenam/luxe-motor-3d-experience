@@ -27,13 +27,13 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
   useEffect(() => {
     if (!isLoading && (!user || !isAdmin)) {
-      navigate('/auth');
+      navigate('/admin/login');
     }
   }, [user, isAdmin, isLoading, navigate]);
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/auth');
+    navigate('/admin/login');
   };
 
   const navItems = [
