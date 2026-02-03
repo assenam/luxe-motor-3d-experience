@@ -1,11 +1,12 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { vehicles } from '@/lib/vehicles';
+import { supabase } from '@/integrations/supabase/client';
+import { Vehicle } from '@/lib/types';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import VehicleCard from '@/components/VehicleCard';
-import { Filter } from 'lucide-react';
+import { Filter, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -13,8 +14,9 @@ const Vehicles = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
   
-  // Using vehicles directly from import rather than a non-existent getAllVehicles function
-  const [filteredVehicles, setFilteredVehicles] = useState(vehicles);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     brand: '',
@@ -24,6 +26,63 @@ const Vehicles = () => {
     yearMax: '',
     search: searchQuery,
   });
+
+  // Fetch vehicles from Supabase
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('vehicles')
+          .select('*')
+          .eq('is_available', true)
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching vehicles:', error);
+          return;
+        }
+
+        // Transform database format to Vehicle type
+        const transformedVehicles: Vehicle[] = (data || []).map((v) => ({
+          id: v.id,
+          brand: v.brand,
+          model: v.model,
+          year: v.year,
+          price: v.price,
+          mileage: v.mileage,
+          engineType: v.engine_type,
+          transmission: v.transmission,
+          exteriorColor: v.exterior_color || '',
+          interiorColor: v.interior_color || '',
+          description: v.description || '',
+          features: v.features || [],
+          images: v.images || [],
+          mainImage: v.main_image || '',
+          gallery: typeof v.gallery === 'object' && v.gallery !== null ? {
+            exterior: (v.gallery as Record<string, string[]>).exterior || [],
+            interior: (v.gallery as Record<string, string[]>).interior || [],
+            engine: (v.gallery as Record<string, string[]>).engine || [],
+            details: (v.gallery as Record<string, string[]>).details || [],
+          } : {
+            exterior: [],
+            interior: [],
+            engine: [],
+            details: [],
+          },
+        }));
+
+        setVehicles(transformedVehicles);
+        setFilteredVehicles(transformedVehicles);
+      } catch (err) {
+        console.error('Error:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
   
   useEffect(() => {
     // Scroll to top when page loads
@@ -102,7 +161,7 @@ const Vehicles = () => {
     }
     
     setFilteredVehicles(result);
-  }, [filters]);
+  }, [filters, vehicles]);
   
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -161,31 +220,36 @@ const Vehicles = () => {
         
         <section className="py-12 bg-secondary">
           <div className="container-luxe">
-            {vehicles.length === 0 ? (
+            {isLoading ? (
+              <div className="flex items-center justify-center py-16">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <span className="ml-3 text-lg">Chargement des véhicules...</span>
+              </div>
+            ) : vehicles.length === 0 ? (
               <div className="text-center py-16">
                 <div className="max-w-2xl mx-auto">
                   <h2 className="text-3xl font-playfair font-semibold mb-6">
                     Catalogue en Préparation
                   </h2>
-                  <p className="text-lg text-luxe-lightgray mb-8">
+                  <p className="text-lg text-muted-foreground mb-8">
                     Nous préparons actuellement notre nouvelle collection de véhicules d'exception. 
                     Notre catalogue est maintenant prêt à accueillir jusqu'à 50 véhicules avec des galeries photo complètes.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
                     <div className="luxury-card p-6 text-center">
-                      <div className="text-3xl font-bold text-luxe-gold mb-2">50</div>
+                      <div className="text-3xl font-bold text-primary mb-2">50</div>
                       <p className="text-sm">Véhicules maximum</p>
                     </div>
                     <div className="luxury-card p-6 text-center">
-                      <div className="text-3xl font-bold text-luxe-gold mb-2">4</div>
+                      <div className="text-3xl font-bold text-primary mb-2">4</div>
                       <p className="text-sm">Catégories de photos</p>
                     </div>
                     <div className="luxury-card p-6 text-center">
-                      <div className="text-3xl font-bold text-luxe-gold mb-2">∞</div>
+                      <div className="text-3xl font-bold text-primary mb-2">∞</div>
                       <p className="text-sm">Images par galerie</p>
                     </div>
                     <div className="luxury-card p-6 text-center">
-                      <div className="text-3xl font-bold text-luxe-gold mb-2">🎯</div>
+                      <div className="text-3xl font-bold text-primary mb-2">🎯</div>
                       <p className="text-sm">Qualité premium</p>
                     </div>
                   </div>
@@ -254,7 +318,7 @@ const Vehicles = () => {
                           placeholder="Marque, modèle, année..." 
                           value={filters.search} 
                           onChange={handleFilterChange}
-                          className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          className="w-full px-4 py-2 rounded-sm border border-border bg-background focus:outline-none focus:border-primary"
                         />
                       </div>
                       
@@ -264,7 +328,7 @@ const Vehicles = () => {
                           name="brand" 
                           value={filters.brand} 
                           onChange={handleFilterChange}
-                          className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                          className="w-full px-4 py-2 rounded-sm border border-border bg-background focus:outline-none focus:border-primary"
                         >
                           <option value="">Toutes les marques</option>
                           {brands.map((brand) => (
@@ -282,7 +346,7 @@ const Vehicles = () => {
                             placeholder="Min" 
                             value={filters.priceMin} 
                             onChange={handleFilterChange}
-                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                            className="w-full px-4 py-2 rounded-sm border border-border bg-background focus:outline-none focus:border-primary"
                           />
                           <span>-</span>
                           <input 
@@ -291,7 +355,7 @@ const Vehicles = () => {
                             placeholder="Max" 
                             value={filters.priceMax} 
                             onChange={handleFilterChange}
-                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                            className="w-full px-4 py-2 rounded-sm border border-border bg-background focus:outline-none focus:border-primary"
                           />
                         </div>
                       </div>
@@ -305,7 +369,7 @@ const Vehicles = () => {
                             placeholder="Min" 
                             value={filters.yearMin} 
                             onChange={handleFilterChange}
-                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                            className="w-full px-4 py-2 rounded-sm border border-border bg-background focus:outline-none focus:border-primary"
                           />
                           <span>-</span>
                           <input 
@@ -314,7 +378,7 @@ const Vehicles = () => {
                             placeholder="Max" 
                             value={filters.yearMax} 
                             onChange={handleFilterChange}
-                            className="w-full px-4 py-2 rounded-sm border border-gray-300 focus:outline-none focus:border-luxe-gold"
+                            className="w-full px-4 py-2 rounded-sm border border-border bg-background focus:outline-none focus:border-primary"
                           />
                         </div>
                       </div>
@@ -330,7 +394,7 @@ const Vehicles = () => {
                     </div>
                   )) : (
                     <div className="col-span-full text-center py-16">
-                      <p className="text-xl text-luxe-lightgray mb-4">
+                      <p className="text-xl text-muted-foreground mb-4">
                         {searchQuery ? `Aucun véhicule ne correspond à votre recherche "${searchQuery}".` : 'Aucun véhicule ne correspond à vos critères.'}
                       </p>
                       <Button onClick={clearFilters} variant="outline">
