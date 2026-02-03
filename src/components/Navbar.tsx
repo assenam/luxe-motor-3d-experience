@@ -147,6 +147,12 @@ const Navbar = () => {
               >
                 Contact
               </Link>
+              <Link 
+                to={user ? "/account" : "/auth"} 
+                className={`text-sm xl:text-base font-medium hover:text-age-red transition-colors duration-300 py-2 px-1 ${!scrolled ? 'text-white' : 'text-age-black'}`}
+              >
+                Espace client
+              </Link>
             </nav>
           ) : null}
           
@@ -361,6 +367,13 @@ const Navbar = () => {
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Contact
+                      </Link>
+                      <Link 
+                        to={user ? "/account" : "/auth"} 
+                        className="block text-xl font-medium hover:text-age-red transition-colors py-2" 
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Espace client
                       </Link>
                     </div>
                     
