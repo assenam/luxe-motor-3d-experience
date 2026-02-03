@@ -1,11 +1,21 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, X } from 'lucide-react';
+import { Search, X, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { vehicles } from '@/lib/vehicles';
+import { supabase } from '@/integrations/supabase/client';
 import { formatCurrency } from '@/lib/data';
+
+interface SearchVehicle {
+  id: string;
+  brand: string;
+  model: string;
+  year: number;
+  price: number;
+  exterior_color: string | null;
+  main_image: string | null;
+}
 
 interface SearchDialogProps {
   open: boolean;
@@ -14,7 +24,67 @@ interface SearchDialogProps {
 
 const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [vehicles, setVehicles] = useState<SearchVehicle[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Fetch vehicles when search query changes
+  useEffect(() => {
+    const searchVehicles = async () => {
+      if (searchQuery.length === 0) {
+        setVehicles([]);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const query = searchQuery.toLowerCase().trim();
+        
+        const { data, error } = await supabase
+          .from('vehicles')
+          .select('id, brand, model, year, price, exterior_color, main_image')
+          .eq('is_available', true)
+          .or(`brand.ilike.%${query}%,model.ilike.%${query}%,exterior_color.ilike.%${query}%`)
+          .order('created_at', { ascending: false })
+          .limit(20);
+
+        if (error) {
+          console.error('Error searching vehicles:', error);
+          return;
+        }
+
+        // Also filter by year if the query is numeric
+        let filteredData = data || [];
+        if (/^\d+$/.test(query)) {
+          const { data: yearData } = await supabase
+            .from('vehicles')
+            .select('id, brand, model, year, price, exterior_color, main_image')
+            .eq('is_available', true)
+            .eq('year', parseInt(query))
+            .limit(10);
+          
+          if (yearData) {
+            // Merge and deduplicate
+            const existingIds = new Set(filteredData.map(v => v.id));
+            yearData.forEach(v => {
+              if (!existingIds.has(v.id)) {
+                filteredData.push(v);
+              }
+            });
+          }
+        }
+
+        setVehicles(filteredData);
+      } catch (err) {
+        console.error('Search error:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(searchVehicles, 300);
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -32,39 +102,15 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
     navigate(`/vehicles?search=${encodeURIComponent(searchQuery)}`);
   };
 
-  // Filtrer les véhicules
-  const filteredVehicles = searchQuery.length > 0 
-    ? vehicles.filter(vehicle => {
-        const query = searchQuery.toLowerCase().trim();
-        return (
-          vehicle.brand.toLowerCase().includes(query) ||
-          vehicle.model.toLowerCase().includes(query) ||
-          `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query) ||
-          vehicle.year.toString().includes(query) ||
-          vehicle.exteriorColor.toLowerCase().includes(query)
-        );
-      }).slice(0, 8)
-    : [];
-
-  const totalResults = searchQuery.length > 0 
-    ? vehicles.filter(vehicle => {
-        const query = searchQuery.toLowerCase().trim();
-        return (
-          vehicle.brand.toLowerCase().includes(query) ||
-          vehicle.model.toLowerCase().includes(query) ||
-          `${vehicle.brand} ${vehicle.model}`.toLowerCase().includes(query) ||
-          vehicle.year.toString().includes(query) ||
-          vehicle.exteriorColor.toLowerCase().includes(query)
-        );
-      }).length
-    : 0;
+  const displayedVehicles = vehicles.slice(0, 8);
+  const totalResults = vehicles.length;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl p-0">
-        <div className="border-b border-gray-200 p-4">
+        <div className="border-b border-border p-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Rechercher par marque, modèle, année ou couleur..."
               value={searchQuery}
@@ -75,7 +121,7 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground hover:text-foreground"
               >
                 <X size={16} />
               </button>
@@ -86,42 +132,49 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
         <div className="max-h-96 overflow-y-auto">
           {searchQuery.length === 0 && (
             <div className="p-6 text-center">
-              <p className="text-gray-500">Commencez à taper pour rechercher des véhicules...</p>
+              <p className="text-muted-foreground">Commencez à taper pour rechercher des véhicules...</p>
             </div>
           )}
 
-          {searchQuery.length > 0 && filteredVehicles.length === 0 && (
+          {searchQuery.length > 0 && isLoading && (
+            <div className="p-6 flex items-center justify-center">
+              <Loader2 className="h-5 w-5 animate-spin text-primary mr-2" />
+              <span className="text-muted-foreground">Recherche en cours...</span>
+            </div>
+          )}
+
+          {searchQuery.length > 0 && !isLoading && vehicles.length === 0 && (
             <div className="p-6 text-center">
-              <p className="text-gray-500">Aucun véhicule trouvé pour "{searchQuery}"</p>
+              <p className="text-muted-foreground">Aucun véhicule trouvé pour "{searchQuery}"</p>
             </div>
           )}
 
-          {filteredVehicles.length > 0 && (
+          {!isLoading && displayedVehicles.length > 0 && (
             <div className="p-2">
-              <div className="mb-3 px-3 py-2 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium text-gray-700">
+              <div className="mb-3 px-3 py-2 bg-secondary rounded-lg">
+                <p className="text-sm font-medium">
                   {totalResults} véhicule{totalResults > 1 ? 's' : ''} trouvé{totalResults > 1 ? 's' : ''}
                 </p>
               </div>
 
               <div className="space-y-2">
-                {filteredVehicles.map((vehicle) => (
+                {displayedVehicles.map((vehicle) => (
                   <button
                     key={vehicle.id}
                     onClick={() => handleSelectVehicle(vehicle.id)}
-                    className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                    className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-secondary transition-colors text-left"
                   >
                     <img 
-                      src={vehicle.mainImage} 
+                      src={vehicle.main_image || '/placeholder.svg'} 
                       alt={`${vehicle.brand} ${vehicle.model}`}
                       className="w-16 h-12 object-cover rounded"
                     />
                     <div className="flex-1">
-                      <div className="font-medium text-gray-900">
+                      <div className="font-medium">
                         {vehicle.brand} {vehicle.model}
                       </div>
-                      <div className="text-sm text-gray-500">
-                        {vehicle.year} • {formatCurrency(vehicle.price)} • {vehicle.exteriorColor}
+                      <div className="text-sm text-muted-foreground">
+                        {vehicle.year} • {formatCurrency(vehicle.price)} • {vehicle.exterior_color || 'N/A'}
                       </div>
                     </div>
                   </button>
@@ -129,10 +182,10 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
               </div>
 
               {totalResults > 8 && (
-                <div className="mt-4 pt-3 border-t border-gray-200">
+                <div className="mt-4 pt-3 border-t border-border">
                   <button
                     onClick={handleViewAllResults}
-                    className="w-full py-3 px-4 bg-age-red text-white rounded-lg font-medium hover:bg-age-darkred transition-colors"
+                    className="w-full py-3 px-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
                   >
                     Voir tous les résultats ({totalResults} véhicules)
                   </button>
