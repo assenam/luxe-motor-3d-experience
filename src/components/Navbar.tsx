@@ -148,10 +148,10 @@ const Navbar = () => {
                 Contact
               </Link>
               <Link 
-                to={user ? "/account" : "/auth"} 
+                to={isAdmin ? "/admin" : (user ? "/account" : "/auth")} 
                 className={`text-sm xl:text-base font-medium hover:text-age-red transition-colors duration-300 py-2 px-1 ${!scrolled ? 'text-white' : 'text-age-black'}`}
               >
-                Espace client
+                {isAdmin ? "Tableau de bord" : "Espace client"}
               </Link>
             </nav>
           ) : null}
@@ -369,11 +369,11 @@ const Navbar = () => {
                         Contact
                       </Link>
                       <Link 
-                        to={user ? "/account" : "/auth"} 
+                        to={isAdmin ? "/admin" : (user ? "/account" : "/auth")} 
                         className="block text-xl font-medium hover:text-age-red transition-colors py-2" 
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Espace client
+                        {isAdmin ? "Tableau de bord" : "Espace client"}
                       </Link>
                     </div>
                     
