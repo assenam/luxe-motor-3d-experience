@@ -25,6 +25,7 @@ import LegalNotices from "./pages/LegalNotices";
 import PaymentForm from "./pages/PaymentForm";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import Auth from "./pages/Auth";
+import Account from "./pages/Account";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminVehicles from "./pages/admin/AdminVehicles";
 import AdminCustomers from "./pages/admin/AdminCustomers";
@@ -45,6 +46,7 @@ const App = () => (
             <Routes>
               {/* Auth routes */}
               <Route path="/auth" element={<Auth />} />
+              <Route path="/account" element={<Account />} />
               
               {/* Admin routes */}
               <Route path="/admin" element={<AdminDashboard />} />
