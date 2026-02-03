@@ -102,17 +102,17 @@ const Footer = () => {
               <li className="flex items-start">
                 <MapPin size={18} className="text-age-red mr-3 mt-1 flex-shrink-0" />
                 <span className="text-age-lightgray">
-                  KarolinenstraB 6<br />
-                  96049 Bamberg, Hamburg, Germany
+                  Paul-Gossen-Straße 116<br />
+                  91052 Erlangen, Germania
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone size={18} className="text-age-red mr-3 flex-shrink-0" />
-                <span className="text-age-lightgray">+39 350 999 4001</span>
+                <span className="text-age-lightgray">+49 176 25839857</span>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="text-age-red mr-3 flex-shrink-0" />
-                <span className="text-age-lightgray">contact@autogermanyexport.com</span>
+                <span className="text-age-lightgray">autocarsags@gmail.com</span>
               </li>
             </ul>
           </div>
